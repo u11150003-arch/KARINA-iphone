@@ -14,7 +14,6 @@
     :root {
       --bg: #121316;
       --phone-w: min(100vw, calc(100dvh * 0.4605), 414px);
-      --c: calc((var(--phone-w) - 32px) / 4);
       --font-stack: "Montserrat", "Noto Sans TC", "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
     }
     * {
@@ -34,7 +33,7 @@
       color: #fff;
     }
 
-    /* 手機外殼與精緻陰影邊框 */
+    /* 手機外殼與精緻外框 */
     #phone {
       position: relative;
       width: var(--phone-w);
@@ -45,7 +44,7 @@
     }
     @media (min-width: 500px) {
       #phone {
-        border-radius: 50px;
+        border-radius: 52px;
         box-shadow: 0 0 0 11px #1f1f22, 0 0 0 13px #2d2d31, 0 35px 90px rgba(0,0,0,0.85);
       }
     }
@@ -56,7 +55,7 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 46px;
+      height: 48px;
       padding: 0 28px;
       display: flex;
       justify-content: space-between;
@@ -64,7 +63,7 @@
       font-weight: 600;
       font-size: 14.5px;
       z-index: 1000;
-      pointer-events: none; /* 避免擋住點擊 */
+      pointer-events: none;
       color: #fff;
       font-variant-numeric: tabular-nums;
     }
@@ -111,13 +110,13 @@
       border-radius: 24px;
     }
 
-    /* 桌布 */
+    /* 待機/鎖定桌布 (改為你指定的高清照片) */
     .wall {
       position: absolute;
       inset: 0;
       background-color: #0b0c10;
-      background-image: linear-gradient(180deg, rgba(10,12,20,0.1) 0%, rgba(5,6,12,0.65) 100%),
-        url("https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/images/bg.jpg");
+      background-image: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.45) 100%),
+        url("https://lh3.googleusercontent.com/d/1g3HAlT22-USHa9riT2oxtJVG6V0Q1Lcs");
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
@@ -139,7 +138,7 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
-      padding: 75px 24px 42px;
+      padding: 78px 24px 42px;
       text-align: center;
     }
     #lock.off {
@@ -187,13 +186,12 @@
       align-items: center;
       justify-content: center;
       font-size: 20px;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.3);
     }
     #hint {
       font-size: 14.5px;
       font-weight: 500;
       letter-spacing: 0.2px;
-      opacity: 0.88;
+      opacity: 0.9;
       cursor: pointer;
       animation: pulse 2s infinite ease-in-out;
       font-family: "Noto Sans TC", sans-serif;
@@ -203,10 +201,10 @@
       50% { transform: translateY(-4px); opacity: 0.95; }
     }
 
-    /* --- 2. 密碼解鎖頁面 (Passcode) --- */
+    /* --- 2. 密碼解鎖頁面 --- */
     #pass {
       z-index: 210;
-      background: rgba(0, 0, 0, 0.4);
+      background: rgba(0, 0, 0, 0.45);
       backdrop-filter: blur(35px);
       -webkit-backdrop-filter: blur(35px);
       display: flex;
@@ -276,7 +274,7 @@
       opacity: 0.8;
     }
 
-    /* --- 3. 桌面 (Home) --- */
+    /* --- 3. 主畫面 (Home) --- */
     #home {
       z-index: 10;
       padding: 68px 20px 24px;
@@ -323,7 +321,7 @@
       white-space: nowrap;
     }
 
-    /* 底部 Dock */
+    /* 底部 Dock 欄 */
     .dock {
       background: rgba(255, 255, 255, 0.22);
       backdrop-filter: blur(35px);
@@ -336,7 +334,7 @@
       box-shadow: 0 4px 25px rgba(0,0,0,0.3);
     }
 
-    /* --- 4. 滿版 App 容器 (滑出) --- */
+    /* --- 4. App 視窗容器 --- */
     .app-screen {
       position: absolute;
       inset: 0;
@@ -351,32 +349,16 @@
       transform: translateY(0%);
     }
 
-    /* 全域虛擬 Home 條 */
-    .bar {
-      position: absolute;
-      bottom: 8px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 135px;
-      height: 5px;
-      background: #fff;
-      border-radius: 10px;
-      z-index: 2000;
-      cursor: pointer;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.4);
-    }
-
-    /* Playlist 專用 iframe 封裝 */
+    /* 解決頂部字被卡住：增加足夠的安全距離避開動態島 */
     #app-playlist {
-      background: #0d0e12;
-      pointer-events: auto;
+      background: #000;
+      padding-top: 56px; /* 預留下拉高度，字不再卡住 */
     }
     #app-playlist iframe {
       width: 100%;
       height: 100%;
       border: none;
-      padding-top: 44px; /* 避開動態島 */
-      background: transparent;
+      background: #000;
       display: block;
     }
 
@@ -385,7 +367,7 @@
       background: #000;
       color: #fff;
       overflow-y: auto;
-      padding-top: 46px;
+      padding-top: 52px;
     }
     .ig-header {
       display: flex;
@@ -471,6 +453,30 @@
       height: 100%;
       object-fit: cover;
     }
+
+    /* --- 5. 強化手勢底部返回條 (Home Indicator) --- */
+    /* 建立一個 40px 高的感應觸控區，確保向上滑或點擊都能百分之百觸發 */
+    .home-touch-area {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 38px;
+      z-index: 2100;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      touch-action: none; /* 防止滑動手勢被瀏覽器攔截 */
+    }
+    .home-touch-area .bar {
+      width: 138px;
+      height: 5px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+      pointer-events: none;
+    }
   </style>
 </head>
 <body>
@@ -478,7 +484,7 @@
 <div id="phone">
   <!-- 狀態列 (點擊穿透) -->
   <div class="status">
-    <span class="now-time">19:25</span>
+    <span class="now-time">19:40</span>
     <div class="island" id="dynamic-island"></div>
     <div class="icons">
       <span style="font-size: 11px; font-weight:700;">5G</span>
@@ -486,14 +492,14 @@
     </div>
   </div>
 
-  <!-- 桌布背景 -->
+  <!-- 待機/鎖定桌布 (照片已換成指定圖檔) -->
   <div class="wall"></div>
 
   <!-- 1. 鎖定畫面 -->
   <div id="lock" class="scr">
     <div class="lock-top">
       <div class="d" id="lock-date">10月20日 星期二</div>
-      <div class="t now-time">19:25</div>
+      <div class="t now-time">19:40</div>
     </div>
     <div class="lock-widgets">
       <div class="lock-actions">
@@ -504,7 +510,7 @@
     </div>
   </div>
 
-  <!-- 2. PIN 密碼解鎖頁面 (輸入密碼 0411 解鎖或點任意按鈕滿4位解鎖) -->
+  <!-- 2. PIN 密碼解鎖頁面 -->
   <div id="pass" class="scr">
     <div class="pass-title">輸入密碼</div>
     <div class="pass-dots">
@@ -592,7 +598,7 @@
     </div>
   </div>
 
-  <!-- 4. KARINA PLAYLIST App (已放行所有跨域互動與聲音權限) -->
+  <!-- 4. KARINA PLAYLIST App (上緣已預留 56px 避開文字重疊) -->
   <div id="app-playlist" class="app-screen">
     <iframe 
       id="iframe-playlist"
@@ -602,7 +608,7 @@
     ></iframe>
   </div>
 
-  <!-- 5. Instagram App (@katarinabluu) -->
+  <!-- 5. Instagram App -->
   <div id="app-instagram" class="app-screen">
     <div class="ig-header">
       <span>katarinabluu</span>
@@ -642,8 +648,10 @@
     </div>
   </div>
 
-  <!-- 全域虛擬 Home 條 -->
-  <div class="bar" id="home-indicator"></div>
+  <!-- 全域強化版 Home 手勢條（支援點擊 + 向上滑動返回桌面） -->
+  <div class="home-touch-area" id="home-indicator">
+    <div class="bar"></div>
+  </div>
 </div>
 
 <script>
@@ -661,14 +669,14 @@
   setInterval(updateClock, 1000);
   updateClock();
 
-  // 2. 鎖定畫面點擊解鎖 / 呼叫密碼盤
+  // 2. 鎖定畫面點擊提示解鎖
   const lock = document.getElementById('lock');
   const pass = document.getElementById('pass');
   document.getElementById('hint').addEventListener('click', () => {
     pass.classList.add('on');
   });
 
-  // 3. PIN 碼互動邏輯
+  // 3. 密碼鍵盤邏輯
   let code = [];
   const dots = document.querySelectorAll('.p-dot');
   document.querySelectorAll('.k-btn').forEach(btn => {
@@ -683,7 +691,7 @@
           lock.classList.add('off');
           code = [];
           dots.forEach(dot => dot.classList.remove('filled'));
-        }, 200);
+        }, 180);
       }
     });
   });
@@ -694,13 +702,13 @@
     dots.forEach(dot => dot.classList.remove('filled'));
   });
 
-  // 4. 動態島伸縮特效
+  // 4. 動態島伸縮
   const island = document.getElementById('dynamic-island');
   island.addEventListener('click', () => {
     island.classList.toggle('expand');
   });
 
-  // 5. App 切換開啟
+  // 5. 開啟 App 視窗
   const screens = {
     playlist: document.getElementById('app-playlist'),
     instagram: document.getElementById('app-instagram')
@@ -715,10 +723,46 @@
     });
   });
 
-  // 6. Home 條返回桌面 (保持 Playlist 背景播放，不刷新重整)
-  document.getElementById('home-indicator').addEventListener('click', () => {
+  // 6. 返回桌面核心邏輯（關閉 App）
+  function goHome() {
     Object.values(screens).forEach(scr => scr.classList.remove('active'));
     if (island.classList.contains('expand')) island.classList.remove('expand');
+  }
+
+  // 7. 支援「點擊」與「向上滑動（Swipe Up）」手勢返回主畫面
+  const homeBar = document.getElementById('home-indicator');
+  
+  // 點擊返回
+  homeBar.addEventListener('click', goHome);
+
+  // 向上滑動手勢監聽
+  let touchStartY = 0;
+  homeBar.addEventListener('touchstart', (e) => {
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  homeBar.addEventListener('touchend', (e) => {
+    const touchEndY = e.changedTouches[0].clientY;
+    // 只要向上滑動超過 15px 即判定為上滑回主畫面
+    if (touchStartY - touchEndY > 15) {
+      goHome();
+    }
+  }, { passive: true });
+
+  // 桌面端滑鼠拖拽上滑支援
+  let mouseStartY = 0;
+  let isMouseDown = false;
+  homeBar.addEventListener('mousedown', (e) => {
+    mouseStartY = e.clientY;
+    isMouseDown = true;
+  });
+  window.addEventListener('mouseup', (e) => {
+    if (isMouseDown) {
+      if (mouseStartY - e.clientY > 15) {
+        goHome();
+      }
+      isMouseDown = false;
+    }
   });
 </script>
 
