@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+  <title>KARINA iPhone</title>
+
+  <!-- 引入與 KARINA PLAYLIST 一致的中英韓字型 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #121214;
+      --phone-w: min(100vw, calc(100dvh * 0.46), 400px);
+      box-sizing: border-box;
+    }
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: var(--bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      /* 字型回退鏈：英數 Montserrat -> 繁中 Noto Sans TC -> 韓文 Noto Sans KR */
+      font-family: "Montserrat", "Noto Sans TC", "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow: hidden;
+    }
+
+    /* 手機外框容器 */
+    #phone {
+      position: relative;
+      width: var(--phone-w);
+      aspect-ratio: 1260 / 2736;
+      background: #000;
+      overflow: hidden;
+      color: #fff;
+    }
+    @media (min-width: 500px) {
+      #phone {
+        border-radius: 50px;
+        box-shadow: 0 0 0 12px #242426, 0 35px 80px rgba(0,0,0,0.7);
+      }
+    }
+
+    /* 動態島與頂部狀態列 */
+    .status-bar {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48px;
+      padding: 0 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      font-weight: 600;
+      z-index: 100;
+      pointer-events: none;
+      color: #fff;
+    }
+    .island {
+      position: absolute;
+      top: 11px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 105px;
+      height: 28px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 101;
+    }
+
+    /* 底層桌布 */
+    .wall {
+      position: absolute;
+      inset: 0;
+      background-color: #0b0c10;
+      background-image: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%),
+        url("https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/images/bg.jpg");
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      z-index: 1;
+    }
+
+    /* 螢幕共用基礎 */
+    .scr {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1), opacity 0.3s;
+      z-index: 10;
+    }
+
+    /* --- 1. 鎖定畫面 --- */
+    #lock {
+      z-index: 30;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 75px;
+      text-align: center;
+    }
+    #lock.hidden {
+      transform: translateY(-100%);
+      opacity: 0;
+      pointer-events: none;
+    }
+    #lock .d {
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 6px;
+      font-family: "Noto Sans TC", "Noto Sans KR", sans-serif;
+    }
+    #lock .t {
+      font-size: 82px;
+      font-weight: 500;
+      letter-spacing: -2px;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    }
+    #lock .hint {
+      position: absolute;
+      bottom: 45px;
+      font-size: 14px;
+      opacity: 0.8;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      animation: pulse 2s infinite;
+      font-family: "Noto Sans TC", sans-serif;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.4; transform: translateY(0); }
+      50% { opacity: 0.9; transform: translateY(-4px); }
+    }
+
+    /* --- 2. 主畫面 (Home Screen) --- */
+    #home {
+      z-index: 10;
+      padding: 68px 24px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .app-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px 14px;
+      justify-items: center;
+    }
+    .app-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+    }
+    .app-item .icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.3);
+      overflow: hidden;
+      background: #1e1e20;
+    }
+    .app-item .icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .app-item .name {
+      font-size: 11px;
+      font-weight: 500;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      letter-spacing: -0.2px;
+    }
+
+    /* Dock 欄位 */
+    .dock {
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-radius: 32px;
+      padding: 12px 16px;
+      display: flex;
+      justify-content: space-around;
+      margin-bottom: 8px;
+    }
+
+    /* --- 3. App 畫面容器 (滑入視窗) --- */
+    .app-view {
+      position: absolute;
+      inset: 0;
+      background: #000;
+      z-index: 50;
+      transform: translateY(100%);
+      transition: transform 0.35s cubic-bezier(0.32, 0.72, 0, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .app-view.active {
+      transform: translateY(0%);
+    }
+
+    /* 頂部導航/底線手勢條 */
+    .home-indicator {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      height: 5px;
+      background: #fff;
+      border-radius: 10px;
+      z-index: 120;
+      cursor: pointer;
+    }
+
+    /* --- KARINA PLAYLIST App (iframe) --- */
+    #view-playlist iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      padding-top: 44px; /* 避開動態島 */
+    }
+
+    /* --- Instagram 模擬畫面 --- */
+    #view-instagram {
+      background: #000;
+      color: #fff;
+      padding-top: 48px;
+      overflow-y: auto;
+    }
+    .ig-header {
+      padding: 10px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 16px;
+      font-weight: 700;
+      border-bottom: 0.5px solid #222;
+    }
+    .ig-profile {
+      padding: 16px 18px;
+    }
+    .ig-stats-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+    }
+    .ig-avatar {
+      width: 76px;
+      height: 76px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 2px solid #333;
+    }
+    .ig-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .ig-stats {
+      display: flex;
+      gap: 18px;
+      text-align: center;
+    }
+    .ig-stat-num {
+      font-weight: 700;
+      font-size: 15px;
+    }
+    .ig-stat-lbl {
+      font-size: 11px;
+      color: #aaa;
+    }
+    .ig-bio {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+    .ig-bio .name {
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+    .ig-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      margin-top: 16px;
+    }
+    .ig-grid-item {
+      aspect-ratio: 1;
+      background: #1a1a1a;
+      overflow: hidden;
+    }
+    .ig-grid-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+<div id="phone">
+  <!-- 狀態列 -->
+  <div class="status-bar">
+    <span id="clock-status">19:25</span>
+    <div class="island"></div>
+    <span style="font-size: 12px; letter-spacing: 0.5px;">5G 100%</span>
+  </div>
+
+  <!-- 背景桌布 -->
+  <div class="wall"></div>
+
+  <!-- 1. 鎖定螢幕 -->
+  <div id="lock" class="scr">
+    <div class="d" id="lock-date">10月20日 星期二</div>
+    <div class="t" id="lock-time">19:25</div>
+    <div class="hint" id="unlock-btn">點擊或向上輕掃解鎖</div>
+  </div>
+
+  <!-- 2. 主畫面 (Home Screen) -->
+  <div id="home" class="scr">
+    <!-- 桌面 Apps -->
+    <div class="app-grid">
+      <!-- KARINA PLAYLIST (替代原 Spotify) -->
+      <div class="app-item" data-app="playlist">
+        <div class="icon" style="background: #000;">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/images/playlist_cover.jpg" 
+               onerror="this.src='https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?w=120&auto=format&fit=crop&q=80'" 
+               alt="Playlist">
+        </div>
+        <span class="name">PLAYLIST</span>
+      </div>
+
+      <!-- Instagram App -->
+      <div class="app-item" data-app="instagram">
+        <div class="icon" style="background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%);">
+          <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+          </svg>
+        </div>
+        <span class="name">Instagram</span>
+      </div>
+
+      <!-- 照片 -->
+      <div class="app-item">
+        <div class="icon" style="background: #fff;">
+          <svg width="30" height="30" viewBox="0 0 24 24" fill="#fc3d39">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z"/>
+          </svg>
+        </div>
+        <span class="name">照片</span>
+      </div>
+
+      <!-- 備忘錄 -->
+      <div class="app-item">
+        <div class="icon" style="background: #f5c518; color: #fff; font-weight: 700; font-size: 20px;">
+          📝
+        </div>
+        <span class="name">備忘錄</span>
+      </div>
+    </div>
+
+    <!-- 底部 Dock 欄 -->
+    <div class="dock">
+      <div class="app-item">
+        <div class="icon" style="background: #34c759;">📞</div>
+      </div>
+      <div class="app-item">
+        <div class="icon" style="background: #007aff;">💬</div>
+      </div>
+      <div class="app-item">
+        <div class="icon" style="background: #5856d6;">🧭</div>
+      </div>
+      <div class="app-item" data-app="playlist">
+        <div class="icon" style="background: #111;">🎵</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. App 視窗：KARINA PLAYLIST -->
+  <div id="view-playlist" class="app-view">
+    <iframe src="https://karinaplaylist.netlify.app" allow="autoplay; encrypted-media"></iframe>
+  </div>
+
+  <!-- 4. App 視窗：Instagram -->
+  <div id="view-instagram" class="app-view">
+    <div class="ig-header">
+      <span>katarinabluu</span>
+      <span style="font-size: 20px;">≡</span>
+    </div>
+    <div class="ig-profile">
+      <div class="ig-stats-row">
+        <div class="ig-avatar">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/images/avatar.jpg" 
+               onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80'" 
+               alt="Karina Avatar">
+        </div>
+        <div class="ig-stats">
+          <div><div class="ig-stat-num">411</div><div class="ig-stat-lbl">貼文</div></div>
+          <div><div class="ig-stat-num">22.4M</div><div class="ig-stat-lbl">粉絲</div></div>
+          <div><div class="ig-stat-num">4</div><div class="ig-stat-lbl">追蹤中</div></div>
+        </div>
+      </div>
+      <div class="ig-bio">
+        <div class="name">KARINA (유지민)</div>
+        <div>aespa</div>
+        <div style="color: #64b5f6; margin-top: 2px;">youtu.be/aespa_official</div>
+      </div>
+      <div class="ig-grid">
+        <!-- 9宮格照：優先載入 repository 圖片，若未設置則調用預設占位圖 -->
+        <div class="ig-grid-item"><img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/images/post1.jpg" onerror="this.src='https://picsum.photos/300/300?random=1'" alt="post"></div>
+        <div class="ig-grid-item"><img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/images/post2.jpg" onerror="this.src='https://picsum.photos/300/300?random=2'" alt="post"></div>
+        <div class="ig-grid-item"><img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/images/post3.jpg" onerror="this.src='https://picsum.photos/300/300?random=3'" alt="post"></div>
+        <div class="ig-grid-item"><img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/images/post4.jpg" onerror="this.src='https://picsum.photos/300/300?random=4'" alt="post"></div>
+        <div class="ig-grid-item"><img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/images/post5.jpg" onerror="this.src='https://picsum.photos/300/300?random=5'" alt="post"></div>
+        <div class="ig-grid-item"><img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/images/post6.jpg" onerror="this.src='https://picsum.photos/300/300?random=6'" alt="post"></div>
+        <div class="ig-grid-item"><img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/images/post7.jpg" onerror="this.src='https://picsum.photos/300/300?random=7'" alt="post"></div>
+        <div class="ig-grid-item"><img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/images/post8.jpg" onerror="this.src='https://picsum.photos/300/300?random=8'" alt="post"></div>
+        <div class="ig-grid-item"><img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/images/post9.jpg" onerror="this.src='https://picsum.photos/300/300?random=9'" alt="post"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 全域虛擬 Home 條（點擊回到主畫面/桌面） -->
+  <div class="home-indicator" id="home-bar"></div>
+</div>
+
+<script>
+  // 即時時鐘與日期更新 (繁體中文)
+  function updateTime() {
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2, '0');
+    const m = String(now.getMinutes()).padStart(2, '0');
+    const timeStr = `${h}:${m}`;
+    
+    document.getElementById('clock-status').textContent = timeStr;
+    document.getElementById('lock-time').textContent = timeStr;
+
+    // 繁體中文日期格式化（例：10月20日 星期二）
+    const dateOptions = { month: 'long', day: 'numeric', weekday: 'long' };
+    document.getElementById('lock-date').textContent = now.toLocaleDateString('zh-TW', dateOptions);
+  }
+  setInterval(updateTime, 1000);
+  updateTime();
+
+  // 解鎖邏輯
+  const lockScreen = document.getElementById('lock');
+  document.getElementById('unlock-btn').addEventListener('click', () => {
+    lockScreen.classList.add('hidden');
+  });
+
+  // 開啟 App 視窗
+  const appViews = {
+    playlist: document.getElementById('view-playlist'),
+    instagram: document.getElementById('view-instagram')
+  };
+
+  document.querySelectorAll('[data-app]').forEach(item => {
+    item.addEventListener('click', () => {
+      const target = item.getAttribute('data-app');
+      if (appViews[target]) {
+        appViews[target].classList.add('active');
+      }
+    });
+  });
+
+  // 點擊 Home Bar 關閉所有開啟的 App，退回主畫面（保留 iframe 背景音訊）
+  document.getElementById('home-bar').addEventListener('click', () => {
+    Object.values(appViews).forEach(view => view.classList.remove('active'));
+  });
+</script>
+
+</body>
+</html>
