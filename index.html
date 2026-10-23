@@ -12,7 +12,7 @@
 
   <style>
     :root {
-      --bg: #090a0f;
+      --bg: #0b0c10;
       --font-main: "Montserrat", "Noto Sans TC", "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
     }
     * {
@@ -33,7 +33,7 @@
       color: #fff;
     }
 
-    /* 響應式手機機身架構 (手機端滿版無黑框；電腦端保留外殼) */
+    /* 手機機身架構 (手機端滿版貼合螢幕；電腦端保留外框) */
     #phone {
       position: relative;
       width: 100vw;
@@ -145,10 +145,10 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 50px 18px 24px;
+      padding: 44px 18px 24px;
       background-color: #1a1a1e;
       background-image: url("https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/%E4%BF%AEkarina%20(163%E6%B5%AE%E6%B0%B4%E5%8D%B0).jpeg");
-      background-position: center 15%;
+      background-position: center 10%;
       background-size: cover;
       background-repeat: no-repeat;
     }
@@ -158,7 +158,6 @@
       pointer-events: none;
     }
 
-    /* 時鐘玻璃字體上移 */
     .lock-top {
       text-align: center;
       margin-top: 0px;
@@ -171,7 +170,7 @@
       text-shadow: 0 1px 8px rgba(0,0,0,0.6);
     }
     .lock-top .t {
-      font-size: 72px;
+      font-size: 68px;
       font-weight: 300;
       letter-spacing: -2px;
       line-height: 0.9;
@@ -183,7 +182,6 @@
       filter: drop-shadow(0 4px 14px rgba(0,0,0,0.45));
     }
 
-    /* 通知卡片 (縮小微調) */
     .lock-notifs {
       display: flex;
       flex-direction: column;
@@ -346,7 +344,6 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      /* 柔和微冷漸層背景，非全黑 */
       background: radial-gradient(circle at 50% 15%, #2a2b36 0%, #1c1c24 60%, #15151b 100%);
     }
     .widgets-row {
@@ -386,7 +383,6 @@
       border-left: 2.5px solid #d9822b;
       padding-left: 6px;
     }
-    /* Playlist 莫蘭迪低飽和質感綠 */
     .music-widget {
       background: linear-gradient(135deg, #276738 0%, #193822 100%);
       color: #fff;
@@ -459,7 +455,6 @@
       white-space: nowrap;
     }
 
-    /* 底部 Dock 欄位 */
     .dock {
       background: rgba(255, 255, 255, 0.2);
       backdrop-filter: blur(35px);
@@ -507,10 +502,11 @@
       transform-origin: top center;
     }
 
-    /* Instagram (防黑屏配置) */
+    /* Instagram 嵌入 (防全螢幕黑屏) */
     #app-instagram {
       background: #000;
       padding-top: 42px;
+      position: relative;
     }
     #app-instagram iframe {
       width: 100%;
@@ -520,7 +516,149 @@
       display: block;
     }
 
-    /* ================= 5. 備忘錄 App ================= */
+    /* ================= 5. 日曆 App (展示 4月 4/11 KARINA bday) ================= */
+    #app-calendar {
+      background: #fff;
+      color: #000;
+      padding-top: 44px;
+      display: flex;
+      flex-direction: column;
+    }
+    .cal-app-header {
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 0.5px solid #eee;
+    }
+    .cal-app-month {
+      font-size: 26px;
+      font-weight: 700;
+    }
+    .cal-days-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      text-align: center;
+      padding: 10px 14px;
+      gap: 8px;
+    }
+    .cal-day-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: #888;
+    }
+    .cal-date-cell {
+      height: 38px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 50%;
+      position: relative;
+    }
+    .cal-date-cell.special {
+      background: #ff3b30;
+      color: #fff;
+      font-weight: 700;
+    }
+    .cal-event-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #ff3b30;
+      position: absolute;
+      bottom: 2px;
+    }
+    .cal-events-list {
+      flex: 1;
+      background: #f8f8fa;
+      border-top: 0.5px solid #eee;
+      padding: 16px;
+    }
+    .cal-event-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 12px 16px;
+      border-left: 4px solid #ff3b30;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    /* ================= 6. X (Twitter) App 內容串流 ================= */
+    #app-x {
+      background: #000;
+      color: #fff;
+      padding-top: 44px;
+      overflow-y: auto;
+    }
+    .x-app-topbar {
+      display: flex;
+      justify-content: space-around;
+      padding: 12px 0;
+      border-bottom: 0.5px solid #222;
+      font-weight: 700;
+      font-size: 14px;
+    }
+    .x-tweet-card {
+      padding: 14px 16px;
+      border-bottom: 0.5px solid #222;
+      display: flex;
+      gap: 12px;
+    }
+    .x-author-avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .x-author-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .x-tweet-body {
+      flex: 1;
+    }
+    .x-tweet-header {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin-bottom: 4px;
+    }
+    .x-name {
+      font-weight: 700;
+      font-size: 13.5px;
+    }
+    .x-handle {
+      color: #71767b;
+      font-size: 12px;
+    }
+    .x-text {
+      font-size: 13px;
+      line-height: 1.45;
+      margin-bottom: 8px;
+    }
+    .x-tweet-img {
+      border-radius: 14px;
+      overflow: hidden;
+      margin-bottom: 10px;
+    }
+    .x-tweet-img img {
+      width: 100%;
+      display: block;
+    }
+    .x-tweet-actions {
+      display: flex;
+      justify-content: space-between;
+      color: #71767b;
+      font-size: 12px;
+      max-width: 85%;
+    }
+
+    /* ================= 7. 備忘錄 App ================= */
     #app-notes {
       background: #000;
       color: #fff;
@@ -611,7 +749,7 @@
       cursor: pointer;
     }
 
-    /* ================= 6. 設定 App ================= */
+    /* ================= 8. 設定 App ================= */
     #app-settings {
       background: #000;
       color: #fff;
@@ -676,7 +814,7 @@
       filter: saturate(0.65);
     }
 
-    /* ================= 7. KakaoTalk 完整架構 (列表 + 自動打字對話) ================= */
+    /* ================= 9. KakaoTalk 完整架構 ================= */
     #app-chat {
       background: #191919;
       color: #fff;
@@ -693,7 +831,6 @@
       justify-content: space-between;
       align-items: center;
     }
-    /* 聊天成員列表視窗 */
     #kt-list-view {
       flex: 1;
       overflow-y: auto;
@@ -751,7 +888,6 @@
       text-overflow: ellipsis;
     }
 
-    /* 聊天對話室視窗 */
     #kt-room-view {
       position: absolute;
       inset: 0;
@@ -829,7 +965,7 @@
       cursor: pointer;
     }
 
-    /* ================= 8. 電話 App ================= */
+    /* ================= 10. 電話通話 App (訊息式語音對話氣泡) ================= */
     #app-phone {
       background: #000;
       color: #fff;
@@ -885,7 +1021,7 @@
       color: #8e8e93;
     }
 
-    /* ================= 9. 全螢幕來電彈窗 (金旼炡自動來電) ================= */
+    /* 全螢幕來電彈窗 (金旼炡自動來電) */
     #incoming-call-screen {
       position: absolute;
       inset: 0;
@@ -895,20 +1031,15 @@
       flex-direction: column;
       justify-content: space-between;
       align-items: center;
-      padding: 85px 24px 65px;
+      padding: 70px 20px 45px;
       text-align: center;
-      animation: callVibe 1.2s infinite;
-    }
-    @keyframes callVibe {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-3px); }
     }
     .call-head-avatar {
-      width: 90px;
-      height: 90px;
+      width: 82px;
+      height: 82px;
       border-radius: 50%;
       overflow: hidden;
-      margin: 0 auto 14px;
+      margin: 0 auto 12px;
       box-shadow: 0 8px 30px rgba(0,0,0,0.6);
       border: 2px solid rgba(255,255,255,0.2);
     }
@@ -918,14 +1049,47 @@
       object-fit: cover;
     }
     .call-title-name {
-      font-size: 26px;
+      font-size: 24px;
       font-weight: 600;
     }
     .call-subtitle {
-      font-size: 13px;
+      font-size: 12.5px;
       color: rgba(255,255,255,0.65);
       margin-top: 4px;
     }
+
+    /* 通話訊息式對話串流區 (比照 wonbin-phone) */
+    .call-dialogue-box {
+      width: 100%;
+      max-height: 240px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 10px 14px;
+      margin: 15px 0;
+    }
+    .call-speech-bubble {
+      background: rgba(45, 45, 50, 0.85);
+      border-radius: 14px;
+      padding: 8px 12px;
+      text-align: left;
+      font-size: 12.5px;
+      line-height: 1.4;
+      animation: fadeIn 0.3s ease;
+    }
+    .call-speech-bubble.them {
+      border-left: 3px solid #ff9500;
+    }
+    .call-speech-bubble.me {
+      border-left: 3px solid #34c759;
+      background: rgba(30, 45, 35, 0.85);
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
     .call-actions-row {
       width: 100%;
       display: flex;
@@ -933,18 +1097,18 @@
       padding: 0 16px;
     }
     .call-circle-btn {
-      width: 66px;
-      height: 66px;
+      width: 64px;
+      height: 64px;
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 26px;
+      font-size: 24px;
       cursor: pointer;
       box-shadow: 0 6px 20px rgba(0,0,0,0.4);
     }
 
-    /* ================= 10. 相簿 & 相機 ================= */
+    /* ================= 11. 相簿 & 相機 ================= */
     #app-photos {
       background: #000;
       color: #fff;
@@ -1027,7 +1191,7 @@
       background: #fff;
     }
 
-    /* 底部手勢條 */
+    /* 底部手勢細長白條 */
     .home-touch-area {
       position: absolute;
       bottom: 0;
@@ -1057,7 +1221,7 @@
   <!-- 狀態列 -->
   <div class="status">
     <div class="status-left">
-      <span class="now-time" id="clock-status-txt">23:58</span>
+      <span class="now-time" id="clock-status-txt">12:05</span>
       <div class="status-back" id="status-back-btn" onclick="goHome()">
         <span>‹ 主螢幕</span>
       </div>
@@ -1069,11 +1233,11 @@
     </div>
   </div>
 
-  <!-- 1. 鎖定畫面 (修karina (163浮水印).jpeg + 玻璃時鐘上移) -->
+  <!-- 1. 鎖定畫面 (玻璃時鐘上移，不擋眼睛) -->
   <div id="lock" class="scr">
     <div class="lock-top">
       <div class="d" id="lock-date">10月23日週五</div>
-      <div class="t now-time">23:58</div>
+      <div class="t now-time">12:05</div>
     </div>
 
     <!-- 鎖定通知 (縮小調整) -->
@@ -1143,10 +1307,11 @@
     </div>
   </div>
 
-  <!-- 3. 主畫面 (Home 非死黑漸層、低彩度) -->
+  <!-- 3. 主畫面 (Home) -->
   <div id="home" class="scr">
     <div class="widgets-row">
-      <div class="ios-widget cal-widget">
+      <!-- 點擊進入日曆 App -->
+      <div class="ios-widget cal-widget" data-target="calendar">
         <div>
           <div class="day-name">星期五</div>
           <div class="day-num">23</div>
@@ -1156,7 +1321,7 @@
           <div>aespa 專屬回歸彩排</div>
         </div>
       </div>
-      <!-- Playlist 小組件 (低飽和綠色) -->
+      <!-- Playlist 莫蘭迪低飽和質感綠 -->
       <div class="ios-widget music-widget" data-target="playlist">
         <div class="m-top">
           <span style="font-size:11px; font-weight:700;">PLAYLIST</span>
@@ -1234,8 +1399,8 @@
         <span class="name">Instagram</span>
       </div>
 
-      <!-- X -->
-      <div class="icon">
+      <!-- X (Twitter) -->
+      <div class="icon" data-target="x">
         <div class="img" style="background:#111;">
           <svg viewBox="0 0 100 100">
             <path d="M28 26 L46 51 L26 74 H33 L49 55 L63 74 H74 L54 47 L72 26 H65 L51 43 L39 26 Z" fill="#e5e5ea"/>
@@ -1251,9 +1416,18 @@
         </div>
         <span class="name">PLAYLIST</span>
       </div>
+
+      <!-- 日曆 App -->
+      <div class="icon" data-target="calendar">
+        <div class="img" style="background:#fff;">
+          <div style="font-size:9.5px; color:#e0483d; font-weight:700; margin-top:4px;">星期五</div>
+          <div style="font-size:24px; color:#111; font-weight:300; line-height:1;">23</div>
+        </div>
+        <span class="name">日曆</span>
+      </div>
     </div>
 
-    <!-- 底部 Dock 欄位 (電話、訊息、相機) -->
+    <!-- 底部 Dock 欄位 -->
     <div class="dock">
       <div class="icon" data-target="phone-app">
         <div class="img" style="background:#32a852; filter:saturate(0.75);">
@@ -1293,17 +1467,92 @@
     ></iframe>
   </div>
 
-  <!-- 5. Instagram 視窗 -->
+  <!-- 5. Instagram 視窗 (防黑屏配置) -->
   <div id="app-instagram" class="app-screen">
     <iframe 
       id="iframe-instagram"
       src="https://u11150003-arch.github.io/karina_ig/"
-      allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write *"
+      allow="autoplay *; encrypted-media *; clipboard-write *"
       sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
     ></iframe>
   </div>
 
-  <!-- 6. 備忘錄 App -->
+  <!-- 6. 日曆 App (展示 4月 4/11 KARINA bday) -->
+  <div id="app-calendar" class="app-screen">
+    <div class="cal-app-header">
+      <span class="cal-app-month">2026年 4月</span>
+      <span style="font-size:18px; color:#ff3b30; cursor:pointer;">+</span>
+    </div>
+    <div class="cal-days-grid">
+      <div class="cal-day-label">日</div><div class="cal-day-label">一</div><div class="cal-day-label">二</div><div class="cal-day-label">三</div><div class="cal-day-label">四</div><div class="cal-day-label">五</div><div class="cal-day-label">六</div>
+      <!-- 4月日曆格子 -->
+      <div class="cal-date-cell" style="opacity:0.3;">29</div><div class="cal-date-cell" style="opacity:0.3;">30</div><div class="cal-date-cell" style="opacity:0.3;">31</div>
+      <div class="cal-date-cell">1</div><div class="cal-date-cell">2</div><div class="cal-date-cell">3</div><div class="cal-date-cell">4</div>
+      <div class="cal-date-cell">5</div><div class="cal-date-cell">6</div><div class="cal-date-cell">7</div><div class="cal-date-cell">8</div><div class="cal-date-cell">9</div><div class="cal-date-cell">10</div>
+      <!-- 4/11 生日特別標記 -->
+      <div class="cal-date-cell special">11<div class="cal-event-dot"></div></div>
+      <div class="cal-date-cell">12</div><div class="cal-date-cell">13</div><div class="cal-date-cell">14</div><div class="cal-date-cell">15</div><div class="cal-date-cell">16</div><div class="cal-date-cell">17</div><div class="cal-date-cell">18</div>
+      <div class="cal-date-cell">19</div><div class="cal-date-cell">20</div><div class="cal-date-cell">21</div><div class="cal-date-cell">22</div><div class="cal-date-cell">23</div><div class="cal-date-cell">24</div><div class="cal-date-cell">25</div>
+      <div class="cal-date-cell">26</div><div class="cal-date-cell">27</div><div class="cal-date-cell">28</div><div class="cal-date-cell">29</div><div class="cal-date-cell">30</div>
+    </div>
+    <div class="cal-events-list">
+      <div class="cal-event-card">
+        <div style="font-size:12px; color:#ff3b30; font-weight:700;">4月11日 全天</div>
+        <div style="font-size:16px; font-weight:700; margin-top:2px;">🎂 KARINA bday</div>
+        <div style="font-size:12.5px; color:#666; margin-top:2px;">劉知珉生日快樂 🎉 粉絲應援與見面會</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 7. X (Twitter) App 內容展示 -->
+  <div id="app-x" class="app-screen">
+    <div class="x-app-topbar">
+      <span style="border-bottom: 2px solid #fff; padding-bottom: 6px;">為你推薦</span>
+      <span style="color:#71767b;">正在關注</span>
+    </div>
+    <!-- 官方推文 1 -->
+    <div class="x-tweet-card">
+      <div class="x-author-avatar">
+        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="aespa">
+      </div>
+      <div class="x-tweet-body">
+        <div class="x-tweet-header">
+          <span class="x-name">aespa</span>
+          <span class="x-handle">@aespa_official • 1小時</span>
+        </div>
+        <div class="x-text">KARINA 'UP' Special Stage 🖤✨<br>어디서든 빛나는 블루의 순간 💙 #aespa #KARINA #카리나 #UP</div>
+        <div class="x-tweet-img">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/%E4%BF%AEkarina%20(163%E6%B5%AE%E6%B0%B4%E5%8D%B0).jpeg" alt="UP">
+        </div>
+        <div class="x-tweet-actions">
+          <span>💬 1,420</span>
+          <span>🔄 12.8K</span>
+          <span>❤️ 45.2K</span>
+          <span>📊 220K</span>
+        </div>
+      </div>
+    </div>
+    <!-- 粉絲應援推文 2 -->
+    <div class="x-tweet-card">
+      <div class="x-author-avatar" style="background:#333;">
+        <img src="https://picsum.photos/100/100?random=301" alt="fan">
+      </div>
+      <div class="x-tweet-body">
+        <div class="x-tweet-header">
+          <span class="x-name">Karina Archive</span>
+          <span class="x-handle">@karina_archive • 3小時</span>
+        </div>
+        <div class="x-text">今天舞台上的劉知珉美神降臨… 真的太會跳了 😭💙</div>
+        <div class="x-tweet-actions">
+          <span>💬 85</span>
+          <span>🔄 2,109</span>
+          <span>❤️ 8,420</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 8. 備忘錄 App -->
   <div id="app-notes" class="app-screen">
     <div class="notes-header">
       <div class="notes-title">所有 iCloud 備忘錄</div>
@@ -1330,7 +1579,7 @@
     </div>
   </div>
 
-  <!-- 7. 設定 App -->
+  <!-- 9. 設定 App -->
   <div id="app-settings" class="app-screen">
     <div class="settings-title">設定</div>
     <div class="settings-profile-card">
@@ -1368,9 +1617,8 @@
     </div>
   </div>
 
-  <!-- 8. KakaoTalk (成員列表 + 聊天打字自動預設回覆) -->
+  <!-- 10. KakaoTalk (三位成員獨立對話與自動回覆) -->
   <div id="app-chat" class="app-screen">
-    <!-- 聊天室列表畫面 -->
     <div class="kt-header">
       <span>聊天</span>
       <span style="font-size:16px;">🔍 ⚙️</span>
@@ -1400,7 +1648,7 @@
             <span class="kt-user-name">Giselle 🌙</span>
             <span class="kt-user-time">下午 3:12</span>
           </div>
-          <div class="kt-user-preview">照片已經傳到雲端囉！</div>
+          <div class="kt-user-preview">照片已經傳到雲端囉，妳看一下！</div>
         </div>
       </div>
 
@@ -1414,20 +1662,18 @@
             <span class="kt-user-name">Ningning 🦋</span>
             <span class="kt-user-time">昨天</span>
           </div>
-          <div class="kt-user-preview">明天早上彩排幾點出發？</div>
+          <div class="kt-user-preview">明天早上彩排幾點出發？要幫買咖啡嗎</div>
         </div>
       </div>
     </div>
 
-    <!-- 獨立聊天對話室視窗 -->
+    <!-- 獨立對話室 -->
     <div id="kt-room-view">
       <div class="kt-room-header">
         <span class="kt-back-btn" onclick="leaveRoom()">‹</span>
         <span id="kt-target-name">冬冬 🐶</span>
       </div>
-      <div class="kt-messages" id="kt-messages-box">
-        <div class="kt-bubble them">歐膩，今天練完舞一起吃火鍋嗎？🍲</div>
-      </div>
+      <div class="kt-messages" id="kt-messages-box"></div>
       <div class="kt-input-bar">
         <div class="kt-fake-input" id="kt-input-box" onclick="handleAutoChat()">點擊輸入訊息...</div>
         <div class="kt-send-btn" onclick="handleAutoChat()">傳送</div>
@@ -1435,7 +1681,7 @@
     </div>
   </div>
 
-  <!-- 9. 電話 App -->
+  <!-- 11. 電話 App -->
   <div id="app-phone" class="app-screen">
     <div class="phone-header">聯絡人</div>
     <div class="contacts-list">
@@ -1482,7 +1728,7 @@
     </div>
   </div>
 
-  <!-- 10. 金旼炡一分鐘後自動來電全螢幕彈窗 -->
+  <!-- 12. 全螢幕來電彈窗 (金旼炡語音通話 + 訊息氣泡對話) -->
   <div id="incoming-call-screen">
     <div>
       <div class="call-head-avatar">
@@ -1491,15 +1737,17 @@
       <div class="call-title-name" id="incoming-caller-title">金旼炡 🐶</div>
       <div class="call-subtitle" id="incoming-call-status">iPhone 來電...</div>
     </div>
+
+    <!-- 訊息式語音對話串流區 (比照 wonbin-phone) -->
+    <div class="call-dialogue-box" id="call-dialogue-box" style="display:none;"></div>
+
     <div class="call-actions-row">
-      <!-- 拒絕 -->
       <div class="call-circle-btn" style="background:#e0483d;" onclick="declineCall()">📵</div>
-      <!-- 接聽 -->
       <div class="call-circle-btn" style="background:#34c759;" id="accept-call-btn" onclick="acceptCall()">📞</div>
     </div>
   </div>
 
-  <!-- 11. 相簿 & 相機 -->
+  <!-- 13. 相簿 & 相機 -->
   <div id="app-photos" class="app-screen">
     <div class="photos-header">
       <div class="photos-title">圖庫</div>
@@ -1530,7 +1778,7 @@
     </div>
   </div>
 
-  <!-- 底部手勢條 -->
+  <!-- 底部細長白條 -->
   <div class="home-touch-area" id="home-indicator">
     <div class="bar"></div>
   </div>
@@ -1613,6 +1861,8 @@
   const screens = {
     playlist: document.getElementById('app-playlist'),
     instagram: document.getElementById('app-instagram'),
+    calendar: document.getElementById('app-calendar'),
+    x: document.getElementById('app-x'),
     notes: document.getElementById('app-notes'),
     settings: document.getElementById('app-settings'),
     chat: document.getElementById('app-chat'),
@@ -1656,7 +1906,7 @@
     leaveRoom();
   }
 
-  // 左右滑動退出 App
+  // 左右邊緣滑動退出 App
   let touchStartX = 0;
   window.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
@@ -1685,48 +1935,77 @@
     }
   }, { passive: true });
 
-  // 7. KakaoTalk 房間與自動回覆邏輯
-  const roomView = document.getElementById('kt-room-view');
-  const messagesBox = document.getElementById('kt-messages-box');
-  const inputBox = document.getElementById('kt-input-box');
-  let chatStep = 0;
+  // 7. KakaoTalk 三位成員不同劇本與自動回覆邏輯
+  const memberScripts = {
+    '冬冬 🐶': {
+      initial: '歐膩，今天練完舞一起吃火鍋嗎？🍲',
+      flow: [
+        { me: '好啊！等我練完 UP 就過去～', reply: '太棒了！我已經看好那家麻辣鍋了🍲' },
+        { me: '今天排舞辛苦啦！', reply: '歐膩也是～今天 Solo 舞台超帥氣 ✨' },
+        { me: '等等練習室樓下集合喔', reply: '好！我換完衣服就下去等你 🐶' }
+      ]
+    },
+    'Giselle 🌙': {
+      initial: '照片已經傳到雲端囉，妳看一下！',
+      flow: [
+        { me: '收到了！照片調色超漂亮 ✨', reply: '對吧！我就說那套黑色衣服很適合妳 🖤' },
+        { me: '明天去涉谷逛逛嗎？', reply: '好啊，我想去買上次看中的那件外套！' }
+      ]
+    },
+    'Ningning 🦋': {
+      initial: '明天早上彩排幾點出發？要幫買咖啡嗎',
+      flow: [
+        { me: '大概九點半出發，幫我帶一杯燕麥拿鐵～', reply: '沒問題！那我也點一杯冰美式 ☕' },
+        { me: '今天的音響效果好像很棒', reply: '超炸的！明天現場一定超好玩 🦋' }
+      ]
+    }
+  };
+
+  let currentChatMember = '冬冬 🐶';
+  let memberStep = 0;
 
   function enterRoom(name) {
+    currentChatMember = name;
+    memberStep = 0;
     document.getElementById('kt-target-name').textContent = name;
-    roomView.style.display = 'flex';
-  }
-  function leaveRoom() {
-    roomView.style.display = 'none';
+    const msgBox = document.getElementById('kt-messages-box');
+    msgBox.innerHTML = '';
+
+    const script = memberScripts[name] || memberScripts['冬冬 🐶'];
+    const initBubble = document.createElement('div');
+    initBubble.className = 'kt-bubble them';
+    initBubble.textContent = script.initial;
+    msgBox.appendChild(initBubble);
+
+    document.getElementById('kt-room-view').style.display = 'flex';
   }
 
-  // 依序預設自動回覆機制
-  const autoScript = [
-    { me: "好啊！等我練完 UP 就過去～", reply: "太棒了！我已經看好那家麻辣鍋了🍲" },
-    { me: "今天排舞辛苦啦！", reply: "歐膩也是～今天 Solo 舞台超帥氣 ✨" },
-    { me: "等等練習室樓下集合喔", reply: "好！我換完衣服就下去等你 🐶" }
-  ];
+  function leaveRoom() {
+    document.getElementById('kt-room-view').style.display = 'none';
+  }
 
   function handleAutoChat() {
-    if (chatStep < autoScript.length) {
-      const current = autoScript[chatStep];
-      // 插入我的發言
+    const script = memberScripts[currentChatMember] || memberScripts['冬冬 🐶'];
+    if (memberStep < script.flow.length) {
+      const current = script.flow[memberStep];
+      const msgBox = document.getElementById('kt-messages-box');
+
       const meBubble = document.createElement('div');
       meBubble.className = 'kt-bubble me';
       meBubble.textContent = current.me;
-      messagesBox.appendChild(meBubble);
-      messagesBox.scrollTop = messagesBox.scrollHeight;
-      inputBox.textContent = '對方正在輸入...';
+      msgBox.appendChild(meBubble);
+      msgBox.scrollTop = msgBox.scrollHeight;
+      document.getElementById('kt-input-box').textContent = '對方正在輸入...';
 
-      // 模擬對方回覆
       setTimeout(() => {
         const themBubble = document.createElement('div');
         themBubble.className = 'kt-bubble them';
         themBubble.textContent = current.reply;
-        messagesBox.appendChild(themBubble);
-        messagesBox.scrollTop = messagesBox.scrollHeight;
-        inputBox.textContent = '點擊輸入訊息...';
-        chatStep++;
-      }, 1000);
+        msgBox.appendChild(themBubble);
+        msgBox.scrollTop = msgBox.scrollHeight;
+        document.getElementById('kt-input-box').textContent = '點擊輸入訊息...';
+        memberStep++;
+      }, 900);
     }
   }
 
@@ -1753,19 +2032,22 @@
     closeNoteEditor();
   }
 
-  // 9. 一分鐘 (60秒) 後金旼炡自動來電
+  // 9. 一分鐘 (60秒) 後金旼炡自動來電 + 訊息式語音對話
   const callScreen = document.getElementById('incoming-call-screen');
-  let incomingTimer = null;
+  const dialogueBox = document.getElementById('call-dialogue-box');
   let callSecondCounter = null;
+  let callDialogueTimer = null;
 
   setTimeout(() => {
     triggerIncomingCall('金旼炡 🐶');
-  }, 60000); // 60秒後準時跳出來電
+  }, 60000);
 
   function triggerIncomingCall(name) {
     document.getElementById('incoming-caller-title').textContent = name;
     document.getElementById('incoming-call-status').textContent = 'iPhone 來電...';
     document.getElementById('accept-call-btn').style.display = 'flex';
+    dialogueBox.style.display = 'none';
+    dialogueBox.innerHTML = '';
     callScreen.style.display = 'flex';
   }
 
@@ -1773,9 +2055,20 @@
     triggerIncomingCall(name);
   }
 
+  // 接聽後依序跳出對話氣泡 (比照 wonbin-phone 範例)
+  const phoneDialogueScript = [
+    { sender: '冬冬', text: '歐膩，在幹嘛？' },
+    { sender: 'Karina', text: '剛練完舞呢～妳呢？' },
+    { sender: '冬冬', text: '我也是，我有話想跟妳說…' },
+    { sender: 'Karina', text: '嗯？什麼事呀？' },
+    { sender: '冬冬', text: '等等一起去吃好吃的火鍋吧！哈哈哈哈！' }
+  ];
+
   function acceptCall() {
     document.getElementById('accept-call-btn').style.display = 'none';
     document.getElementById('incoming-call-status').textContent = '通話中 00:01';
+    dialogueBox.style.display = 'flex';
+
     let sec = 1;
     clearInterval(callSecondCounter);
     callSecondCounter = setInterval(() => {
@@ -1784,14 +2077,32 @@
       const ss = String(sec % 60).padStart(2, '0');
       document.getElementById('incoming-call-status').textContent = `通話中 ${mm}:${ss}`;
     }, 1000);
+
+    // 依序跳出對話泡泡
+    let diagIdx = 0;
+    clearInterval(callDialogueTimer);
+    callDialogueTimer = setInterval(() => {
+      if (diagIdx < phoneDialogueScript.length) {
+        const item = phoneDialogueScript[diagIdx];
+        const bubble = document.createElement('div');
+        bubble.className = `call-speech-bubble ${item.sender === 'Karina' ? 'me' : 'them'}`;
+        bubble.innerHTML = `<b>${item.sender}：</b>${item.text}`;
+        dialogueBox.appendChild(bubble);
+        dialogueBox.scrollTop = dialogueBox.scrollHeight;
+        diagIdx++;
+      } else {
+        clearInterval(callDialogueTimer);
+      }
+    }, 1800);
   }
 
   function declineCall() {
     clearInterval(callSecondCounter);
+    clearInterval(callDialogueTimer);
     callScreen.style.display = 'none';
   }
 
-  // 10. 相機鏡頭取景
+  // 10. 相機功能
   let currentStream = null;
   let useFacingMode = 'user';
 
@@ -1834,7 +2145,7 @@
     }
   }
 
-  // 手電筒
+  // 手電筒開關
   let flashOn = false;
   document.getElementById('lock-flashlight').addEventListener('click', (e) => {
     flashOn = !flashOn;
