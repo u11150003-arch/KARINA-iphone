@@ -33,7 +33,7 @@
       color: #fff;
     }
 
-    /* 手機機身容器 (手機端滿版；電腦端保留外殼) */
+    /* 手機機身容器 (手機端滿版貼合螢幕；電腦端保留外框) */
     #phone {
       position: relative;
       width: 100vw;
@@ -502,7 +502,7 @@
       transform-origin: top center;
     }
 
-    /* Instagram 嵌入 (徹底修復裁切) */
+    /* Instagram 嵌入 (徹底修復裁切與黑屏) */
     #app-instagram {
       background: #000;
       padding-top: 0;
@@ -513,10 +513,10 @@
       border: none;
       background: #000;
       display: block;
-      padding-top: 40px; /* 留出頂部動態島距離，下方不再被遮擋 */
+      padding-top: 40px;
     }
 
-    /* ================= 5. 日曆 App (2027年 4月、乾淨無下方文字) ================= */
+    /* ================= 5. 日曆 App (2027年 4月、無下方多餘中文字) ================= */
     #app-calendar {
       background: #fff;
       color: #000;
@@ -649,7 +649,7 @@
       max-width: 85%;
     }
 
-    /* ================= 7. 備忘錄 App (新增 Threads 跳轉項目) ================= */
+    /* ================= 7. 備忘錄 App ================= */
     #app-notes {
       background: #000;
       color: #fff;
@@ -812,7 +812,7 @@
       filter: saturate(0.65);
     }
 
-    /* ================= 9. KakaoTalk (指定波妞與AirPods劇情、IMG_5563.jpeg) ================= */
+    /* ================= 9. KakaoTalk (波妞與AirPods劇情、更新成員頭貼) ================= */
     #app-chat {
       background: #191919;
       color: #fff;
@@ -963,7 +963,7 @@
       cursor: pointer;
     }
 
-    /* ================= 10. 電話 App (維持對話) ================= */
+    /* ================= 10. 電話 App (移除劉知珉、維持對話) ================= */
     #app-phone {
       background: #000;
       color: #fff;
@@ -1000,15 +1000,17 @@
       gap: 12px;
     }
     .contact-avatar {
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
       background: #333;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14.5px;
-      font-weight: 700;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .contact-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     .contact-name {
       font-size: 13.5px;
@@ -1227,7 +1229,7 @@
     </div>
   </div>
 
-  <!-- 1. 鎖定畫面 (修karina (163浮水印).jpeg + 玻璃時鐘上移) -->
+  <!-- 1. 鎖定畫面 -->
   <div id="lock" class="scr">
     <div class="lock-top">
       <div class="d" id="lock-date">10月23日週五</div>
@@ -1304,7 +1306,6 @@
   <!-- 3. 主畫面 (Home) -->
   <div id="home" class="scr">
     <div class="widgets-row">
-      <!-- 點擊進入日曆 App -->
       <div class="ios-widget cal-widget" data-target="calendar">
         <div>
           <div class="day-name">星期五</div>
@@ -1315,7 +1316,6 @@
           <div>aespa 專屬回歸彩排</div>
         </div>
       </div>
-      <!-- Playlist 莫蘭迪低飽和質感綠 -->
       <div class="ios-widget music-widget" data-target="playlist">
         <div class="m-top">
           <span style="font-size:11px; font-weight:700;">PLAYLIST</span>
@@ -1411,7 +1411,7 @@
         <span class="name">PLAYLIST</span>
       </div>
 
-      <!-- 日曆 App (更新經典光影 Icon) -->
+      <!-- 日曆 App -->
       <div class="icon" data-target="calendar">
         <div class="img" style="background:#fff; border: 1px solid #e5e5ea;">
           <svg viewBox="0 0 100 100">
@@ -1464,17 +1464,17 @@
     ></iframe>
   </div>
 
-  <!-- 5. Instagram 視窗 (修復頂部與裁切問題) -->
+  <!-- 5. Instagram 視窗 (防黑屏配置) -->
   <div id="app-instagram" class="app-screen">
     <iframe 
       id="iframe-instagram"
       src="https://u11150003-arch.github.io/karina_ig/"
-      allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write *"
+      allow="autoplay; camera; microphone; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
     ></iframe>
   </div>
 
-  <!-- 6. 日曆 App (2027年 4月、無下方多餘中文字) -->
+  <!-- 6. 日曆 App -->
   <div id="app-calendar" class="app-screen">
     <div class="cal-app-header">
       <span class="cal-app-month">2027年 4月</span>
@@ -1482,11 +1482,9 @@
     </div>
     <div class="cal-days-grid">
       <div class="cal-day-label">日</div><div class="cal-day-label">一</div><div class="cal-day-label">二</div><div class="cal-day-label">三</div><div class="cal-day-label">四</div><div class="cal-day-label">五</div><div class="cal-day-label">六</div>
-      <!-- 2027年4月對應星期 (4/1為週四) -->
       <div class="cal-date-cell" style="opacity:0.3;">28</div><div class="cal-date-cell" style="opacity:0.3;">29</div><div class="cal-date-cell" style="opacity:0.3;">30</div><div class="cal-date-cell" style="opacity:0.3;">31</div>
       <div class="cal-date-cell">1</div><div class="cal-date-cell">2</div><div class="cal-date-cell">3</div>
       <div class="cal-date-cell">4</div><div class="cal-date-cell">5</div><div class="cal-date-cell">6</div><div class="cal-date-cell">7</div><div class="cal-date-cell">8</div><div class="cal-date-cell">9</div><div class="cal-date-cell">10</div>
-      <!-- 4/11 生日標記 -->
       <div class="cal-date-cell special">11</div>
       <div class="cal-date-cell">12</div><div class="cal-date-cell">13</div><div class="cal-date-cell">14</div><div class="cal-date-cell">15</div><div class="cal-date-cell">16</div><div class="cal-date-cell">17</div>
       <div class="cal-date-cell">18</div><div class="cal-date-cell">19</div><div class="cal-date-cell">20</div><div class="cal-date-cell">21</div><div class="cal-date-cell">22</div><div class="cal-date-cell">23</div><div class="cal-date-cell">24</div>
@@ -1523,20 +1521,18 @@
           <span>💬 1,420</span>
           <span>🔄 12.8K</span>
           <span>❤️ 45.2K</span>
-          <span>📊 220K</span>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- 8. 備忘錄 App (新增操作不順跳轉 Threads) -->
+  <!-- 8. 備忘錄 App -->
   <div id="app-notes" class="app-screen">
     <div class="notes-header">
       <div class="notes-title">所有 iCloud 備忘錄</div>
       <div class="notes-add-btn" onclick="openNoteEditor()">＋</div>
     </div>
     <div class="notes-list" id="notes-container">
-      <!-- 支援操作不順跳轉項目 -->
       <div class="note-item">
         <div class="note-item-title">⚠️ 系統操作指引</div>
         <div class="note-item-desc">
@@ -1544,7 +1540,6 @@
           <a class="threads-link" href="https://www.threads.com/@kelly_lee_805" target="_blank" rel="noopener noreferrer">@kelly_lee_805</a>
         </div>
       </div>
-
       <div class="note-item">
         <div class="note-item-title">aespa 回歸待辦清單</div>
         <div class="note-item-desc">彩排 UP Solo 舞步編排、練歌確認</div>
@@ -1566,7 +1561,6 @@
     <div class="settings-title">設定</div>
     <div class="settings-profile-card">
       <div class="settings-avatar">
-        <!-- 替換為 IMG_7494.jpeg -->
         <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_7494.jpeg" alt="karina_zy">
       </div>
       <div>
@@ -1600,18 +1594,17 @@
     </div>
   </div>
 
-  <!-- 10. KakaoTalk (波妞顧狗 + AirPods 尋找專屬對話) -->
+  <!-- 10. KakaoTalk (指定波妞與AirPods劇情、更新頭貼) -->
   <div id="app-chat" class="app-screen">
     <div class="kt-header">
       <span>聊天</span>
       <span style="font-size:16px;">🔍 ⚙️</span>
     </div>
     <div id="kt-list-view">
-      <!-- 冬冬 (IMG_5563.jpeg) -->
+      <!-- 冬冬 (IMG_0578.jpeg) -->
       <div class="kt-user-item" onclick="enterRoom('冬冬 🐶')">
         <div class="kt-user-avatar">
-          <!-- 替換為 IMG_5563.jpeg -->
-          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5563.jpeg" alt="冬冬">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_0578.jpeg" alt="冬冬">
         </div>
         <div class="kt-user-content">
           <div class="kt-user-top">
@@ -1622,10 +1615,10 @@
         </div>
       </div>
 
-      <!-- 寧寧 -->
+      <!-- 寧寧 (IMG_8043.jpeg) -->
       <div class="kt-user-item" onclick="enterRoom('Ningning 🦋')">
-        <div class="kt-user-avatar" style="background:#555;">
-          <img src="https://picsum.photos/100/100?random=202" alt="Ningning">
+        <div class="kt-user-avatar">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg" alt="Ningning">
         </div>
         <div class="kt-user-content">
           <div class="kt-user-top">
@@ -1636,10 +1629,10 @@
         </div>
       </div>
 
-      <!-- Giselle -->
+      <!-- Giselle (IMG_8042.png) -->
       <div class="kt-user-item" onclick="enterRoom('Giselle 🌙')">
-        <div class="kt-user-avatar" style="background:#444;">
-          <img src="https://picsum.photos/100/100?random=201" alt="Giselle">
+        <div class="kt-user-avatar">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png" alt="Giselle">
         </div>
         <div class="kt-user-content">
           <div class="kt-user-top">
@@ -1665,13 +1658,16 @@
     </div>
   </div>
 
-  <!-- 11. 電話 App -->
+  <!-- 11. 電話 App (去除劉知珉，全成員頭貼更新) -->
   <div id="app-phone" class="app-screen">
     <div class="phone-header">聯絡人</div>
     <div class="contacts-list">
+      <!-- 冬冬 (IMG_5038.jpeg) -->
       <div class="contact-item" onclick="startCall('金旼炡 (Winter)')">
         <div class="contact-info">
-          <div class="contact-avatar">旼</div>
+          <div class="contact-avatar">
+            <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg" alt="Winter">
+          </div>
           <div>
             <div class="contact-name">金旼炡</div>
             <div class="contact-sub">aespa • 冬冬</div>
@@ -1679,19 +1675,13 @@
         </div>
         <span style="font-size:18px; color:#44b069;">📞</span>
       </div>
-      <div class="contact-item" onclick="startCall('劉知珉 (Karina)')">
-        <div class="contact-info">
-          <div class="contact-avatar">知</div>
-          <div>
-            <div class="contact-name">劉知珉</div>
-            <div class="contact-sub">aespa • KARINA</div>
-          </div>
-        </div>
-        <span style="font-size:18px; color:#44b069;">📞</span>
-      </div>
+
+      <!-- Giselle (IMG_8042.png) -->
       <div class="contact-item" onclick="startCall('內永枝利 (Giselle)')">
         <div class="contact-info">
-          <div class="contact-avatar">枝</div>
+          <div class="contact-avatar">
+            <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png" alt="Giselle">
+          </div>
           <div>
             <div class="contact-name">內永枝利</div>
             <div class="contact-sub">aespa • GISELLE</div>
@@ -1699,9 +1689,13 @@
         </div>
         <span style="font-size:18px; color:#44b069;">📞</span>
       </div>
+
+      <!-- 寧藝卓 (IMG_8043.jpeg) -->
       <div class="contact-item" onclick="startCall('寧藝卓 (Ningning)')">
         <div class="contact-info">
-          <div class="contact-avatar">藝</div>
+          <div class="contact-avatar">
+            <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg" alt="Ningning">
+          </div>
           <div>
             <div class="contact-name">寧藝卓</div>
             <div class="contact-sub">aespa • NINGNING</div>
@@ -1712,18 +1706,16 @@
     </div>
   </div>
 
-  <!-- 12. 全螢幕來電彈窗 (金旼炡語音通話 + 訊息氣泡對話) -->
+  <!-- 12. 全螢幕來電彈窗 (IMG_5038.jpeg) -->
   <div id="incoming-call-screen">
     <div>
       <div class="call-head-avatar">
-        <!-- 替換為 IMG_5563.jpeg -->
-        <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5563.jpeg" alt="金旼炡">
+        <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg" alt="金旼炡">
       </div>
       <div class="call-title-name" id="incoming-caller-title">金旼炡 🐶</div>
       <div class="call-subtitle" id="incoming-call-status">iPhone 來電...</div>
     </div>
 
-    <!-- 訊息式語音對話串流區 -->
     <div class="call-dialogue-box" id="call-dialogue-box" style="display:none;"></div>
 
     <div class="call-actions-row">
