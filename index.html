@@ -5,16 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
   <title>KARINA iPhone</title>
 
-  <!-- Google Fonts: Montserrat (英數) + Noto Sans TC (繁中) + Noto Sans KR (韓文) -->
+  <!-- Google Fonts: 英文數字 Montserrat + 中韓文 Noto Sans -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Noto+Sans+KR:wght@300;400;500;700&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: #090a0f;
-      --phone-w: min(100vw, calc(100dvh * 0.4605), 414px);
-      --font-stack: "Montserrat", "Noto Sans TC", "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
+      --bg: #111215;
+      --font-main: "Montserrat", "Noto Sans TC", "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
     }
     * {
       box-sizing: border-box;
@@ -29,21 +28,23 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-family: var(--font-stack);
+      font-family: var(--font-main);
       overflow: hidden;
       color: #fff;
     }
 
-    /* 手機外殼與精緻 iOS 外框 (修正邊緣不被裁切) */
+    /* 原版 iPhone 1:1 精確比例外框 (防止外框裁切) */
     #phone {
+      --w: min(100vw, calc(100dvh * .4605), 414px);
       position: relative;
-      width: var(--phone-w);
-      max-height: 98dvh;
-      aspect-ratio: 1260 / 2736;
+      width: var(--w);
+      height: calc(var(--w) * (2736 / 1260));
+      max-height: 96dvh;
       background: #000;
       overflow: hidden;
-      box-shadow: 0 0 0 10px #1f1f22, 0 0 0 12px #2d2d31, 0 30px 80px rgba(0,0,0,0.85);
       border-radius: 50px;
+      box-shadow: 0 0 0 11px #1f1f22, 0 0 0 13px #2d2d31, 0 30px 80px rgba(0,0,0,0.85);
+      margin: auto;
     }
 
     /* 頂部狀態列 */
@@ -52,27 +53,47 @@
       top: 0;
       left: 0;
       right: 0;
-      height: 48px;
-      padding: 0 28px;
+      height: 44px;
+      padding: 0 26px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-weight: 600;
-      font-size: 14.5px;
-      z-index: 1000;
+      font-size: 14px;
+      z-index: 1200;
       pointer-events: none;
       color: #fff;
       font-variant-numeric: tabular-nums;
     }
-    .status .icons {
+    .status-left {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      pointer-events: auto;
+    }
+    /* iOS 原生左上角返回鍵（‹ 主螢幕） */
+    .status-back {
+      display: none;
+      align-items: center;
+      gap: 2px;
+      font-size: 13px;
+      font-weight: 500;
+      color: #fff;
+      cursor: pointer;
+      opacity: 0.9;
+    }
+    .status-back:hover {
+      opacity: 1;
+    }
+    .status-right {
       display: flex;
       align-items: center;
       gap: 6px;
     }
     .bat {
       display: inline-block;
-      width: 23px;
-      height: 11.5px;
+      width: 22px;
+      height: 11px;
       border: 1.5px solid currentColor;
       border-radius: 4px;
       position: relative;
@@ -80,8 +101,8 @@
     .bat:after {
       content: "";
       position: absolute;
-      inset: 1.5px;
-      right: 4px;
+      inset: 1px;
+      right: 3px;
       background: currentColor;
       border-radius: 1px;
     }
@@ -92,11 +113,11 @@
       top: 10px;
       left: 50%;
       transform: translateX(-50%);
-      width: 106px;
+      width: 104px;
       height: 28px;
       background: #000;
       border-radius: 20px;
-      z-index: 1001;
+      z-index: 1201;
       pointer-events: auto;
       cursor: pointer;
       transition: width 0.3s cubic-bezier(0.3, 0, 0, 1.3), height 0.3s cubic-bezier(0.3, 0, 0, 1.3);
@@ -107,11 +128,11 @@
       border-radius: 24px;
     }
 
-    /* 螢幕共用切換基礎 */
+    /* 螢幕層共用過渡 */
     .scr {
       position: absolute;
       inset: 0;
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.35s ease;
+      transition: transform 0.38s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.32s ease;
     }
 
     /* ================= 1. 鎖定畫面 ================= */
@@ -120,7 +141,7 @@
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      padding: 68px 20px 32px;
+      padding: 66px 20px 30px;
       background-color: #000;
       background-image: url("https://lh3.googleusercontent.com/d/1g3HAlT22-USHa9riT2oxtJVG6V0Q1Lcs");
       background-position: center 25%;
@@ -134,34 +155,31 @@
     }
     .lock-top {
       text-align: center;
-      margin-top: 6px;
+      margin-top: 4px;
     }
     .lock-top .d {
       font-size: 16px;
       font-weight: 500;
       color: rgba(255, 255, 255, 0.95);
       margin-bottom: 2px;
-      letter-spacing: -0.2px;
       text-shadow: 0 1px 8px rgba(0,0,0,0.5);
     }
     .lock-top .t {
-      font-size: 78px;
+      font-size: 76px;
       font-weight: 500;
-      letter-spacing: -2.5px;
+      letter-spacing: -2px;
       line-height: 0.92;
       font-variant-numeric: tabular-nums;
       text-shadow: 0 3px 18px rgba(0,0,0,0.4);
     }
 
-    /* 鎖定畫面通知 */
     .lock-notifs {
       display: flex;
       flex-direction: column;
       gap: 10px;
       width: 100%;
       margin-top: auto;
-      margin-bottom: 25px;
-      padding: 0 4px;
+      margin-bottom: 22px;
     }
     .notif-card {
       background: rgba(30, 30, 32, 0.72);
@@ -186,20 +204,13 @@
       height: 36px;
       border-radius: 9px;
       overflow: hidden;
-      flex-shrink: 0;
       display: flex;
       align-items: center;
       justify-content: center;
     }
-    .notif-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
     .notif-title {
       font-size: 13.5px;
       font-weight: 700;
-      color: #fff;
     }
     .notif-desc {
       font-size: 12.5px;
@@ -209,21 +220,19 @@
       font-size: 11px;
       color: rgba(255, 255, 255, 0.55);
       align-self: flex-start;
-      margin-top: 2px;
     }
 
-    /* 鎖定底部操作區 */
     .lock-bottom {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 18px;
+      gap: 16px;
     }
     .lock-actions {
       width: 100%;
       display: flex;
       justify-content: space-between;
-      padding: 0 10px;
+      padding: 0 8px;
     }
     .act-btn {
       width: 48px;
@@ -231,19 +240,17 @@
       border-radius: 50%;
       background: rgba(0, 0, 0, 0.45);
       backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 19px;
+      cursor: pointer;
     }
     #hint {
       font-size: 13.5px;
       font-weight: 500;
-      letter-spacing: 0.2px;
-      opacity: 0.88;
+      opacity: 0.9;
       cursor: pointer;
-      text-shadow: 0 1px 8px rgba(0,0,0,0.6);
     }
 
     /* ================= 2. 密碼解鎖頁面 ================= */
@@ -258,23 +265,21 @@
       justify-content: center;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.25s ease, transform 0.25s ease;
-      transform: translateY(20px);
+      transition: opacity 0.25s ease;
     }
     #pass.on {
       opacity: 1;
-      transform: translateY(0);
       pointer-events: auto;
     }
     .pass-title {
       font-size: 19px;
       font-weight: 500;
-      margin-bottom: 22px;
+      margin-bottom: 20px;
     }
     .pass-dots {
       display: flex;
       gap: 18px;
-      margin-bottom: 42px;
+      margin-bottom: 38px;
     }
     .p-dot {
       width: 13px;
@@ -287,13 +292,13 @@
     }
     .keypad {
       display: grid;
-      grid-template-columns: repeat(3, 75px);
-      gap: 15px 22px;
+      grid-template-columns: repeat(3, 72px);
+      gap: 14px 22px;
       justify-items: center;
     }
     .k-btn {
-      width: 75px;
-      height: 75px;
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.16);
       display: flex;
@@ -321,11 +326,11 @@
     /* ================= 3. 主畫面 (Home) ================= */
     #home {
       z-index: 100;
-      padding: 62px 18px 22px;
+      padding: 58px 18px 24px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background-color: #d1b8a5;
+      background-color: #0b0c10;
       background-image: linear-gradient(180deg, rgba(0,0,0,0.12) 0%, rgba(0,0,0,0.38) 100%),
         url("https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/images/bg.jpg");
       background-position: center;
@@ -335,14 +340,13 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
     .ios-widget {
       aspect-ratio: 1;
       border-radius: 22px;
       padding: 14px;
       box-shadow: 0 6px 18px rgba(0,0,0,0.28);
-      position: relative;
       cursor: pointer;
       overflow: hidden;
     }
@@ -394,24 +398,22 @@
     }
     .music-widget .m-info .m-title {
       font-weight: 700;
-      font-size: 14px;
-      margin-bottom: 2px;
+      font-size: 13px;
     }
     .music-widget .m-info .m-sub {
-      font-size: 11px;
+      font-size: 10.5px;
       opacity: 0.85;
     }
 
-    /* 桌面圖示格線 */
     .grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      row-gap: 18px;
+      row-gap: 16px;
       column-gap: 12px;
       justify-items: center;
     }
     .icon {
-      width: 62px;
+      width: 60px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -419,8 +421,8 @@
       cursor: pointer;
     }
     .icon .img {
-      width: 58px;
-      height: 58px;
+      width: 56px;
+      height: 56px;
       border-radius: 14px;
       overflow: hidden;
       display: flex;
@@ -429,14 +431,10 @@
       box-shadow: 0 4px 14px rgba(0,0,0,0.32);
       position: relative;
     }
-    .icon .img svg {
+    .icon .img svg, .icon .img img {
       width: 100%;
       height: 100%;
       display: block;
-    }
-    .icon .img img {
-      width: 100%;
-      height: 100%;
       object-fit: cover;
     }
     .icon .name {
@@ -464,7 +462,7 @@
       border: 1.5px solid #fff;
     }
 
-    /* 底部 Dock 欄位 (修復擠壓，使用平均比例與內距) */
+    /* 底部 Dock 欄位 */
     .dock {
       background: rgba(255, 255, 255, 0.28);
       backdrop-filter: blur(35px);
@@ -472,17 +470,16 @@
       border-radius: 35px;
       padding: 12px 14px;
       display: flex;
-      justify-content: space-between;
+      justify-content: space-around;
       align-items: center;
       box-shadow: 0 4px 25px rgba(0,0,0,0.35);
       border: 0.5px solid rgba(255,255,255,0.25);
     }
     .dock .icon {
-      width: 58px;
-      flex-shrink: 0;
+      width: 56px;
     }
 
-    /* ================= 4. App 視窗容器 ================= */
+    /* ================= 4. App 視窗共用 ================= */
     .app-screen {
       position: absolute;
       inset: 0;
@@ -497,49 +494,26 @@
       transform: translateY(0%);
     }
 
-    /* 實體返回主畫面按鍵 (Header Bar) */
-    .app-navbar-back {
-      position: absolute;
-      top: 50px;
-      left: 14px;
-      z-index: 1500;
-      background: rgba(255, 255, 255, 0.22);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      color: #fff;
-      border: 0.5px solid rgba(255,255,255,0.3);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 12.5px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-      cursor: pointer;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
-    }
-    .app-navbar-back:active {
-      background: rgba(255, 255, 255, 0.4);
-    }
-
-    /* PLAYLIST App */
+    /* PLAYLIST 專屬縮放容器 (解決太滿、愛心與歌名被切) */
     #app-playlist {
-      background: #000;
-      padding-top: 56px;
+      background: #0d0e12;
+      padding-top: 48px;
+      padding-bottom: 24px;
     }
     #app-playlist iframe {
       width: 100%;
       height: 100%;
       border: none;
-      background: #000;
-      display: block;
+      background: transparent;
+      transform: scale(0.96);
+      transform-origin: top center;
     }
 
-    /* ================= 5. Instagram 互動 App ================= */
+    /* ================= 5. Instagram 完全仿真 App ================= */
     #app-instagram {
       background: #000;
       color: #fff;
-      padding-top: 52px;
+      padding-top: 46px;
       display: flex;
       flex-direction: column;
     }
@@ -547,29 +521,41 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 12px 18px;
-      font-size: 16px;
+      padding: 10px 16px;
+      font-size: 17px;
       font-weight: 700;
       border-bottom: 0.5px solid #1f1f22;
       flex-shrink: 0;
     }
+    .ig-header-icons {
+      display: flex;
+      gap: 16px;
+      font-size: 20px;
+      cursor: pointer;
+    }
     .ig-scroll-area {
       flex: 1;
       overflow-y: auto;
-      padding-bottom: 60px;
+      padding-bottom: 56px;
+      display: none;
     }
+    .ig-scroll-area.active {
+      display: block;
+    }
+
+    /* 個人主頁 (Profile Tab) */
     .ig-profile-info {
-      padding: 16px 18px 10px;
+      padding: 14px 16px 8px;
     }
     .ig-stats-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .ig-ring {
-      width: 78px;
-      height: 78px;
+      width: 76px;
+      height: 76px;
       border-radius: 50%;
       padding: 2.5px;
       background: linear-gradient(45deg, #f09433, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
@@ -587,24 +573,9 @@
       height: 100%;
       object-fit: cover;
     }
-    .ig-plus {
-      position: absolute;
-      bottom: 0;
-      right: 0;
-      width: 20px;
-      height: 20px;
-      background: #0095f6;
-      border-radius: 50%;
-      border: 2px solid #000;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 13px;
-      font-weight: 700;
-    }
     .ig-counts {
       display: flex;
-      gap: 24px;
+      gap: 22px;
       text-align: center;
     }
     .ig-counts .n {
@@ -614,7 +585,6 @@
     .ig-counts .l {
       font-size: 11px;
       color: #8e8e93;
-      margin-top: 2px;
     }
     .ig-bio .b-name {
       font-weight: 700;
@@ -622,16 +592,29 @@
     }
     .ig-bio .b-text {
       font-size: 13px;
-      line-height: 1.45;
       color: #efeff1;
       margin-top: 3px;
     }
+    .ig-action-btns {
+      display: flex;
+      gap: 8px;
+      margin-top: 12px;
+    }
+    .ig-btn {
+      flex: 1;
+      background: #262626;
+      border-radius: 8px;
+      padding: 7px 0;
+      font-size: 13px;
+      font-weight: 600;
+      text-align: center;
+      cursor: pointer;
+    }
 
-    /* 精選限動區 */
     .ig-highlights {
       display: flex;
       gap: 14px;
-      padding: 12px 18px;
+      padding: 14px 16px;
       overflow-x: auto;
     }
     .hl-item {
@@ -641,13 +624,11 @@
       gap: 4px;
       font-size: 10.5px;
       color: #ccc;
-      cursor: pointer;
     }
     .hl-circle {
       width: 56px;
       height: 56px;
       border-radius: 50%;
-      padding: 2px;
       border: 1px solid #444;
       display: flex;
       align-items: center;
@@ -657,11 +638,9 @@
     .hl-circle img {
       width: 100%;
       height: 100%;
-      border-radius: 50%;
       object-fit: cover;
     }
 
-    /* 貼文切換分頁 Bar */
     .ig-tab-bar {
       display: flex;
       border-top: 0.5px solid #222;
@@ -680,7 +659,6 @@
       border-bottom: 1.5px solid #fff;
     }
 
-    /* 九宮格照片 (可點擊檢視) */
     .ig-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -691,22 +669,56 @@
       background: #1c1c1e;
       overflow: hidden;
       cursor: pointer;
-      position: relative;
     }
     .ig-cell img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
-    .ig-pin-badge {
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      font-size: 12px;
-      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
+
+    /* 探索分頁 (Explore Tab) */
+    .ig-search-box {
+      background: #262626;
+      border-radius: 10px;
+      padding: 9px 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13.5px;
+      color: #888;
+      margin: 10px 14px;
     }
 
-    /* 底部導覽欄 (真正支援切換切換分頁) */
+    /* 影片分頁 (Reels Tab) */
+    .reels-container {
+      position: relative;
+      height: 100%;
+      display: flex;
+      align-items: flex-end;
+      padding: 20px 16px;
+      background: url("https://lh3.googleusercontent.com/d/1g3HAlT22-USHa9riT2oxtJVG6V0Q1Lcs") center/cover no-repeat;
+    }
+    .reels-info {
+      flex: 1;
+      margin-bottom: 10px;
+    }
+    .reels-side-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .reels-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    /* IG 底部導覽列 (5個切換按鍵) */
     .ig-bottom-bar {
       height: 50px;
       border-top: 0.5px solid #222;
@@ -723,28 +735,11 @@
     .ig-b-btn {
       font-size: 20px;
       cursor: pointer;
-      color: #aaa;
-      padding: 8px 12px;
+      color: #888;
+      padding: 8px 14px;
     }
     .ig-b-btn.active {
       color: #fff;
-    }
-
-    /* 搜尋視窗分頁 (Search Tab) */
-    #ig-tab-search {
-      display: none;
-      padding: 12px;
-    }
-    .ig-search-box {
-      background: #262626;
-      border-radius: 10px;
-      padding: 8px 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-      color: #888;
-      margin-bottom: 12px;
     }
 
     /* 照片點擊全螢幕放大 Modal */
@@ -763,7 +758,6 @@
       max-width: 100%;
       max-height: 80%;
       border-radius: 12px;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.8);
     }
     #ig-modal-close {
       margin-top: 18px;
@@ -775,50 +769,145 @@
       cursor: pointer;
     }
 
-    /* 聊天 App */
-    #app-chat {
-      background: #1c1c1e;
+    /* ================= 6. 相簿 App (Photos) ================= */
+    #app-photos {
+      background: #000;
       color: #fff;
-      padding-top: 50px;
-    }
-    .chat-header {
-      padding: 12px 16px;
-      border-bottom: 0.5px solid rgba(255,255,255,0.15);
-      font-weight: 700;
-      text-align: center;
-    }
-    .chat-list {
-      padding: 16px;
+      padding-top: 48px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
     }
-    .chat-msg {
-      max-width: 75%;
-      padding: 10px 14px;
-      border-radius: 18px;
-      font-size: 14px;
-      line-height: 1.4;
+    .photos-header {
+      padding: 12px 18px;
     }
-    .chat-msg.them {
-      background: #2c2c2e;
-      align-self: flex-start;
-      border-bottom-left-radius: 4px;
+    .photos-title {
+      font-size: 26px;
+      font-weight: 700;
     }
-    .chat-msg.me {
-      background: #007aff;
-      color: #fff;
-      align-self: flex-end;
-      border-bottom-right-radius: 4px;
+    .photos-sub {
+      font-size: 12px;
+      color: #8e8e93;
+      margin-top: 2px;
+    }
+    .photos-grid {
+      flex: 1;
+      overflow-y: auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+      padding-bottom: 50px;
+    }
+    .photos-grid img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      cursor: pointer;
     }
 
-    /* ================= 6. 強化手勢 Home Bar ================= */
+    /* ================= 7. 電話 App (Phone) ================= */
+    #app-phone {
+      background: radial-gradient(circle at 50% 20%, #2c2c2e 0%, #111 80%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 80px 24px 60px;
+      text-align: center;
+    }
+    .call-avatar {
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      overflow: hidden;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .call-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .call-name {
+      font-size: 28px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+    }
+    .call-status {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      margin-top: 4px;
+    }
+    .call-actions {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      padding: 0 20px;
+    }
+    .call-btn {
+      width: 68px;
+      height: 68px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      cursor: pointer;
+    }
+    .call-decline {
+      background: #ff3b30;
+    }
+    .call-accept {
+      background: #34c759;
+    }
+
+    /* ================= 8. 相機 App (Camera) ================= */
+    #app-camera {
+      background: #000;
+      position: relative;
+    }
+    .cam-view {
+      position: absolute;
+      inset: 0;
+      background: url("https://lh3.googleusercontent.com/d/1g3HAlT22-USHa9riT2oxtJVG6V0Q1Lcs") center/cover no-repeat;
+    }
+    .cam-bottom {
+      position: absolute;
+      bottom: 30px;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0 30px;
+    }
+    .shutter {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      border: 4px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .shutter-inner {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform 0.1s;
+    }
+    .shutter:active .shutter-inner {
+      transform: scale(0.9);
+    }
+
+    /* ================= 9. 極簡細長 Home 條 ================= */
     .home-touch-area {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      height: 38px;
+      height: 28px;
       z-index: 2100;
       display: flex;
       align-items: center;
@@ -827,8 +916,8 @@
       touch-action: none;
     }
     .home-touch-area .bar {
-      width: 138px;
-      height: 5px;
+      width: 130px;
+      height: 4px;
       background: #fff;
       border-radius: 10px;
       box-shadow: 0 1px 4px rgba(0,0,0,0.4);
@@ -839,11 +928,16 @@
 <body>
 
 <div id="phone">
-  <!-- 狀態列 -->
+  <!-- 狀態列 (包含原生返回鍵 ‹ 主螢幕) -->
   <div class="status">
-    <span class="now-time">21:12</span>
+    <div class="status-left">
+      <span class="now-time" id="clock-status-txt">19:49</span>
+      <div class="status-back" id="status-back-btn" onclick="goHome()">
+        <span>‹ 主螢幕</span>
+      </div>
+    </div>
     <div class="island" id="dynamic-island"></div>
-    <div class="icons">
+    <div class="status-right">
       <span style="font-size: 11px; font-weight:700;">5G</span>
       <div class="bat"></div>
     </div>
@@ -853,10 +947,9 @@
   <div id="lock" class="scr">
     <div class="lock-top">
       <div class="d" id="lock-date">10月20日 星期二</div>
-      <div class="t now-time">21:12</div>
+      <div class="t now-time">19:49</div>
     </div>
 
-    <!-- 鎖定畫面通知 -->
     <div class="lock-notifs">
       <div class="notif-card" id="notif-ig">
         <div class="notif-left">
@@ -885,11 +978,10 @@
       </div>
     </div>
 
-    <!-- 底部操作區 -->
     <div class="lock-bottom">
       <div class="lock-actions">
         <div class="act-btn">🔦</div>
-        <div class="act-btn">📷</div>
+        <div class="act-btn" onclick="openApp('camera')">📷</div>
       </div>
       <div id="hint">向上輕掃或點擊以解鎖</div>
     </div>
@@ -914,15 +1006,14 @@
       <div class="k-btn" data-k="7"><span class="n">7</span><span class="sub">PQRS</span></div>
       <div class="k-btn" data-k="8"><span class="n">8</span><span class="sub">TUV</span></div>
       <div class="k-btn" data-k="9"><span class="n">9</span><span class="sub">WXYZ</span></div>
-      <div style="width:75px;height:75px;"></div>
+      <div style="width:72px;height:72px;"></div>
       <div class="k-btn" data-k="0"><span class="n">0</span><span class="sub">&nbsp;</span></div>
-      <div style="width:75px;height:75px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;" id="cancel-pass">取消</div>
+      <div style="width:72px;height:72px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;" id="cancel-pass">取消</div>
     </div>
   </div>
 
   <!-- 3. 主畫面 (Home) -->
   <div id="home" class="scr">
-    <!-- 小工具組 -->
     <div class="widgets-row">
       <div class="ios-widget cal-widget">
         <div>
@@ -946,9 +1037,8 @@
       </div>
     </div>
 
-    <!-- 桌面 Apps (全面改用內嵌向量 SVG，杜絕藍色問號) -->
     <div class="grid">
-      <!-- 備忘錄 (原生 SVG) -->
+      <!-- 備忘錄 -->
       <div class="icon">
         <div class="img" style="background:#fff;">
           <svg viewBox="0 0 100 100">
@@ -956,14 +1046,13 @@
             <rect y="24" width="100" height="76" fill="#f4f4f4"/>
             <line x1="16" y1="42" x2="84" y2="42" stroke="#dcdcdc" stroke-width="3"/>
             <line x1="16" y1="58" x2="84" y2="58" stroke="#dcdcdc" stroke-width="3"/>
-            <line x1="16" y1="74" x2="84" y2="74" stroke="#dcdcdc" stroke-width="3"/>
           </svg>
         </div>
         <span class="name">備忘錄</span>
       </div>
 
-      <!-- 照片 (原生花瓣 SVG) -->
-      <div class="icon">
+      <!-- 相簿 -->
+      <div class="icon" data-target="photos">
         <div class="img" style="background:#fff;">
           <svg viewBox="0 0 100 100">
             <circle cx="50" cy="30" r="14" fill="#f43f5e" opacity="0.9"/>
@@ -975,8 +1064,8 @@
         <span class="name">照片</span>
       </div>
 
-      <!-- 相機 (原生鏡頭 SVG) -->
-      <div class="icon">
+      <!-- 相機 -->
+      <div class="icon" data-target="camera">
         <div class="img" style="background:#3a3a3c;">
           <svg viewBox="0 0 100 100">
             <rect x="18" y="28" width="64" height="48" rx="10" fill="#2c2c2e"/>
@@ -989,7 +1078,7 @@
         <span class="name">相機</span>
       </div>
 
-      <!-- 設定 (原生齒輪 SVG) -->
+      <!-- 設定 -->
       <div class="icon">
         <div class="img" style="background:#8e8e93;">
           <svg viewBox="0 0 100 100">
@@ -1035,7 +1124,7 @@
         <span class="name">X</span>
       </div>
 
-      <!-- KARINA PLAYLIST (封面更換為 Sparkle封面.png) -->
+      <!-- KARINA PLAYLIST -->
       <div class="icon" data-target="playlist">
         <div class="img" style="background:#000;">
           <img src="https://lh3.googleusercontent.com/d/1fG9UaD9-esqpRciez-87e-q_ZuTSwoSH" alt="PLAYLIST">
@@ -1044,17 +1133,15 @@
       </div>
     </div>
 
-    <!-- 底部 Dock 欄位 (修復擠壓變形) -->
+    <!-- 底部 Dock 欄位 -->
     <div class="dock">
-      <!-- Phone (通話) -->
-      <div class="icon">
+      <div class="icon" data-target="phone-app">
         <div class="img" style="background:#34c759;">
           <svg viewBox="0 0 100 100">
             <path d="M35 28 C32 28 28 32 28 37 C28 55 45 72 63 72 C68 72 72 68 72 65 L66 54 C64 52 61 52 59 54 L54 58 C46 52 44 48 40 40 L44 35 C46 33 46 30 44 28 Z" fill="#fff"/>
           </svg>
         </div>
       </div>
-      <!-- Safari -->
       <div class="icon">
         <div class="img" style="background:#fff;">
           <svg viewBox="0 0 100 100">
@@ -1065,7 +1152,6 @@
           </svg>
         </div>
       </div>
-      <!-- 訊息 -->
       <div class="icon" data-target="chat">
         <div class="img" style="background:#34c759;">
           <svg viewBox="0 0 100 100">
@@ -1074,7 +1160,6 @@
           </svg>
         </div>
       </div>
-      <!-- PLAYLIST Dock -->
       <div class="icon" data-target="playlist">
         <div class="img" style="background:#000;">
           <img src="https://lh3.googleusercontent.com/d/1fG9UaD9-esqpRciez-87e-q_ZuTSwoSH" alt="Music">
@@ -1085,10 +1170,6 @@
 
   <!-- 4. PLAYLIST 視窗 -->
   <div id="app-playlist" class="app-screen">
-    <!-- 頂部實體返回主畫面鍵 -->
-    <div class="app-navbar-back" onclick="goHome()">
-      <span>‹</span> 主畫面
-    </div>
     <iframe 
       id="iframe-playlist"
       src="https://karinaplaylist.netlify.app"
@@ -1097,124 +1178,169 @@
     ></iframe>
   </div>
 
-  <!-- 5. Instagram 視窗 (還原真實帳號與切換功能) -->
+  <!-- 5. Instagram 完全仿真 App -->
   <div id="app-instagram" class="app-screen">
-    <!-- 頂部實體返回主畫面鍵 -->
-    <div class="app-navbar-back" onclick="goHome()">
-      <span>‹</span> 主畫面
-    </div>
-
-    <div class="ig-header">
-      <span style="display:flex; align-items:center; gap:4px;">🔒 kelly_lee_805 ▾</span>
-      <span style="font-size: 20px; cursor: pointer;">≡</span>
-    </div>
-
-    <!-- 捲動內容區 -->
-    <div class="ig-scroll-area" id="ig-view-profile">
+    <!-- 個人主頁視窗 -->
+    <div class="ig-scroll-area active" id="ig-tab-profile">
+      <div class="ig-header">
+        <span>karina0401 ▾</span>
+        <div class="ig-header-icons">
+          <span>＋</span>
+          <span>≡</span>
+        </div>
+      </div>
       <div class="ig-profile-info">
         <div class="ig-stats-row">
           <div class="ig-ring">
             <div class="ig-avatar">
-              <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/images/avatar.jpg"
-                   onerror="this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=200&auto=format&fit=crop&q=80'"
-                   alt="Avatar">
+              <img src="https://lh3.googleusercontent.com/d/1g3HAlT22-USHa9riT2oxtJVG6V0Q1Lcs" alt="Karina">
             </div>
-            <div class="ig-plus">+</div>
           </div>
           <div class="ig-counts">
-            <div><div class="n">36</div><div class="l">則貼文</div></div>
-            <div><div class="n">230</div><div class="l">位粉絲</div></div>
-            <div><div class="n">197</div><div class="l">追蹤中</div></div>
+            <div><div class="n">36</div><div class="l">貼文</div></div>
+            <div><div class="n">22.4M</div><div class="l">粉絲</div></div>
+            <div><div class="n">4</div><div class="l">追蹤中</div></div>
           </div>
         </div>
         <div class="ig-bio">
-          <div class="b-name">zy</div>
-          <div class="b-text">▷ May the TENDERNESS be with you! (feat. KARINA...)</div>
+          <div class="b-name">KARINA (유지민)</div>
+          <div class="b-text">aespa • May the TENDERNESS be with you!</div>
+        </div>
+        <div class="ig-action-btns">
+          <div class="ig-btn">編輯個人檔案</div>
+          <div class="ig-btn">分享個人檔案</div>
         </div>
       </div>
 
-      <!-- 精選限動 -->
       <div class="ig-highlights">
         <div class="hl-item"><div class="hl-circle"><span style="font-size:20px;">＋</span></div><span>新增</span></div>
-        <div class="hl-item"><div class="hl-circle"><img src="https://picsum.photos/100/100?random=51" alt="hl"></div><span>aespa</span></div>
-        <div class="hl-item"><div class="hl-circle"><img src="https://picsum.photos/100/100?random=52" alt="hl"></div><span>➰</span></div>
-        <div class="hl-item"><div class="hl-circle"><img src="https://picsum.photos/100/100?random=53" alt="hl"></div><span>SNSD</span></div>
+        <div class="hl-item"><div class="hl-circle"><img src="https://picsum.photos/100/100?random=81" alt="hl"></div><span>aespa</span></div>
+        <div class="hl-item"><div class="hl-circle"><img src="https://picsum.photos/100/100?random=82" alt="hl"></div><span>UP</span></div>
+        <div class="hl-item"><div class="hl-circle"><img src="https://picsum.photos/100/100?random=83" alt="hl"></div><span>Concert</span></div>
       </div>
 
-      <!-- 貼文/Reels 切換 Tab -->
       <div class="ig-tab-bar">
         <div class="ig-tab-btn active">▦</div>
         <div class="ig-tab-btn">▷</div>
-        <div class="ig-tab-btn">🔀</div>
         <div class="ig-tab-btn">👤</div>
       </div>
 
-      <!-- 九宮格 (可點擊檢視放大) -->
       <div class="ig-grid">
-        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://lh3.googleusercontent.com/d/1g3HAlT22-USHa9riT2oxtJVG6V0Q1Lcs" alt="p1"><span class="ig-pin-badge">📌</span></div>
-        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=61" alt="p2"><span class="ig-pin-badge">📌</span></div>
-        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=62" alt="p3"><span class="ig-pin-badge">📌</span></div>
-        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=63" alt="p4"></div>
-        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=64" alt="p5"></div>
-        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=65" alt="p6"></div>
-        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=66" alt="p7"></div>
-        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=67" alt="p8"></div>
-        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=68" alt="p9"></div>
+        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://lh3.googleusercontent.com/d/1g3HAlT22-USHa9riT2oxtJVG6V0Q1Lcs" alt="p1"></div>
+        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=84" alt="p2"></div>
+        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=85" alt="p3"></div>
+        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=86" alt="p4"></div>
+        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=87" alt="p5"></div>
+        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=88" alt="p6"></div>
       </div>
     </div>
 
-    <!-- 搜尋探索分頁 (Search Tab) -->
-    <div class="ig-scroll-area" id="ig-view-search" style="display:none;">
+    <!-- 探索/搜尋視窗 -->
+    <div class="ig-scroll-area" id="ig-tab-search">
       <div class="ig-search-box">
         <span>🔍</span> 搜尋 #KARINA, #aespa, 帳號...
       </div>
       <div class="ig-grid">
-        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=71" alt="s1"></div>
-        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=72" alt="s2"></div>
-        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=73" alt="s3"></div>
-        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=74" alt="s4"></div>
-        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=75" alt="s5"></div>
-        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=76" alt="s6"></div>
+        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=89" alt="s1"></div>
+        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=90" alt="s2"></div>
+        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=91" alt="s3"></div>
+        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=92" alt="s4"></div>
+        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=93" alt="s5"></div>
+        <div class="ig-cell" onclick="openPhoto(this)"><img src="https://picsum.photos/400/400?random=94" alt="s6"></div>
       </div>
     </div>
 
-    <!-- IG 底部切換列 (可切換搜尋欄與個人主頁) -->
+    <!-- Reels 視窗 -->
+    <div class="ig-scroll-area" id="ig-tab-reels" style="height:100%;">
+      <div class="reels-container">
+        <div class="reels-info">
+          <div style="font-weight:700; font-size:14px; margin-bottom:4px;">@karina0401</div>
+          <div style="font-size:13px;">UP Solo Dance Practice 🖤✨ #aespa #KARINA</div>
+        </div>
+        <div class="reels-side-actions">
+          <div class="reels-btn"><span>❤️</span><span>1.2M</span></div>
+          <div class="reels-btn"><span>💬</span><span>24.8K</span></div>
+          <div class="reels-btn"><span>✈️</span><span>分享</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- IG 底部切換 Bar -->
     <div class="ig-bottom-bar">
-      <div class="ig-b-btn" onclick="switchIgTab('profile')">🏠</div>
-      <div class="ig-b-btn" onclick="switchIgTab('search')">🔍</div>
-      <div class="ig-b-btn">➕</div>
-      <div class="ig-b-btn">▷</div>
-      <div class="ig-b-btn active" onclick="switchIgTab('profile')">👤</div>
+      <div class="ig-b-btn active" onclick="switchIg('profile', this)">🏠</div>
+      <div class="ig-b-btn" onclick="switchIg('search', this)">🔍</div>
+      <div class="ig-b-btn" onclick="alert('開啟相機膠卷發文')">➕</div>
+      <div class="ig-b-btn" onclick="switchIg('reels', this)">▷</div>
+      <div class="ig-b-btn" onclick="switchIg('profile', this)">👤</div>
     </div>
   </div>
 
-  <!-- 照片點擊放大檢視 Modal -->
+  <!-- 照片放大彈窗 -->
   <div id="ig-modal" onclick="closePhoto()">
     <img id="ig-modal-img" src="" alt="Zoomed">
-    <div id="ig-modal-close">關閉檢視</div>
+    <div id="ig-modal-close">點擊關閉</div>
   </div>
 
-  <!-- 6. 聊天視窗 -->
-  <div id="app-chat" class="app-screen">
-    <div class="app-navbar-back" onclick="goHome()">
-      <span>‹</span> 主畫面
+  <!-- 6. 相簿 App (Photos) -->
+  <div id="app-photos" class="app-screen">
+    <div class="photos-header">
+      <div class="photos-title">圖庫</div>
+      <div class="photos-sub">48 張照片</div>
     </div>
-    <div class="chat-header">冬冬 🐶</div>
-    <div class="chat-list">
-      <div class="chat-msg them">歐膩，今天練完舞一起吃火鍋嗎？</div>
-      <div class="chat-msg them">我已經先看好餐廳了！🍲</div>
-      <div class="chat-msg me">好啊，等我一下，我先聽完這首歌～</div>
+    <div class="photos-grid">
+      <img src="https://lh3.googleusercontent.com/d/1g3HAlT22-USHa9riT2oxtJVG6V0Q1Lcs" onclick="openPhotoSrc(this.src)" alt="p">
+      <img src="https://picsum.photos/400/400?random=101" onclick="openPhotoSrc(this.src)" alt="p">
+      <img src="https://picsum.photos/400/400?random=102" onclick="openPhotoSrc(this.src)" alt="p">
+      <img src="https://picsum.photos/400/400?random=103" onclick="openPhotoSrc(this.src)" alt="p">
+      <img src="https://picsum.photos/400/400?random=104" onclick="openPhotoSrc(this.src)" alt="p">
+      <img src="https://picsum.photos/400/400?random=105" onclick="openPhotoSrc(this.src)" alt="p">
     </div>
   </div>
 
-  <!-- 全域強化版 Home 手勢條 -->
+  <!-- 7. 電話 App (Phone) -->
+  <div id="app-phone" class="app-screen">
+    <div>
+      <div class="call-avatar">
+        <img src="https://lh3.googleusercontent.com/d/1g3HAlT22-USHa9riT2oxtJVG6V0Q1Lcs" alt="Avatar">
+      </div>
+      <div class="call-name">冬冬 🐶</div>
+      <div class="call-status">iPhone 來電...</div>
+    </div>
+    <div class="call-actions">
+      <div class="call-btn call-decline" onclick="goHome()">📵</div>
+      <div class="call-btn call-accept" onclick="alert('通話已接通...')">📞</div>
+    </div>
+  </div>
+
+  <!-- 8. 相機 App (Camera) -->
+  <div id="app-camera" class="app-screen">
+    <div class="cam-view"></div>
+    <div class="cam-bottom">
+      <div style="width:40px;height:40px;border-radius:8px;overflow:hidden;border:2px solid #fff;">
+        <img src="https://lh3.googleusercontent.com/d/1g3HAlT22-USHa9riT2oxtJVG6V0Q1Lcs" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+      <div class="shutter" onclick="flashScreen()"><div class="shutter-inner"></div></div>
+      <div style="font-size:24px;cursor:pointer;">🔄</div>
+    </div>
+  </div>
+
+  <!-- 9. 聊天 App -->
+  <div id="app-chat" class="app-screen" style="background:#1c1c1e; padding-top:50px;">
+    <div style="padding:12px; font-weight:700; text-align:center; border-bottom:0.5px solid #333;">冬冬 🐶</div>
+    <div style="padding:16px; display:flex; flex-direction:column; gap:12px;">
+      <div style="background:#2c2c2e; padding:10px 14px; border-radius:16px; align-self:flex-start; max-width:75%;">歐膩，今天練完舞一起吃火鍋嗎？🍲</div>
+      <div style="background:#007aff; padding:10px 14px; border-radius:16px; align-self:flex-end; max-width:75%;">好啊，我聽完這首 UP 就過去～</div>
+    </div>
+  </div>
+
+  <!-- 底部 Home 條 (支援向上滑動與點擊) -->
   <div class="home-touch-area" id="home-indicator">
     <div class="bar"></div>
   </div>
 </div>
 
 <script>
-  // 1. 即時時鐘與日期更新
+  // 1. 時間更新
   function updateClock() {
     const d = new Date();
     const hh = String(d.getHours()).padStart(2, '0');
@@ -1228,7 +1354,7 @@
   setInterval(updateClock, 1000);
   updateClock();
 
-  // 2. 鎖定畫面點擊/上滑彈出 PIN 密碼
+  // 2. 鎖定畫面點擊/上滑解鎖
   const lock = document.getElementById('lock');
   const pass = document.getElementById('pass');
 
@@ -1244,13 +1370,12 @@
   }, { passive: true });
 
   lock.addEventListener('touchend', (e) => {
-    const lockEndY = e.changedTouches[0].clientY;
-    if (lockStartY - lockEndY > 30) {
+    if (lockStartY - e.changedTouches[0].clientY > 30) {
       openPasscode();
     }
   }, { passive: true });
 
-  // 3. 密碼鍵盤邏輯
+  // 3. 密碼輸入
   let code = [];
   const dots = document.querySelectorAll('.p-dot');
   document.querySelectorAll('.k-btn').forEach(btn => {
@@ -1276,41 +1401,56 @@
     dots.forEach(dot => dot.classList.remove('filled'));
   });
 
-  // 4. 通知點擊直達 App
+  // 4. 通知點擊
   document.getElementById('notif-ig').addEventListener('click', () => {
     lock.classList.add('off');
-    screens.instagram.classList.add('active');
+    openApp('instagram');
   });
-
   document.getElementById('notif-chat').addEventListener('click', () => {
     lock.classList.add('off');
-    screens.chat.classList.add('active');
+    openApp('chat');
   });
 
-  // 5. 開啟 App 視窗
+  // 5. App 視窗管理
   const screens = {
     playlist: document.getElementById('app-playlist'),
     instagram: document.getElementById('app-instagram'),
+    photos: document.getElementById('app-photos'),
+    phone: document.getElementById('app-phone'),
+    camera: document.getElementById('app-camera'),
     chat: document.getElementById('app-chat')
   };
+
+  const backBtn = document.getElementById('status-back-btn');
+  const clockStatusTxt = document.getElementById('clock-status-txt');
+
+  function openApp(appKey) {
+    if (screens[appKey]) {
+      screens[appKey].classList.add('active');
+      // 顯示原生的頂部返回鍵
+      backBtn.style.display = 'flex';
+      clockStatusTxt.style.display = 'none';
+    }
+  }
 
   document.querySelectorAll('[data-target]').forEach(el => {
     el.addEventListener('click', () => {
       const target = el.dataset.target;
-      if (screens[target]) {
-        screens[target].classList.add('active');
-      }
+      if (target === 'phone-app') openApp('phone');
+      else openApp(target);
     });
   });
 
-  // 6. 返回主畫面核心函式
+  // 6. 返回主畫面
   function goHome() {
     Object.values(screens).forEach(scr => scr.classList.remove('active'));
+    backBtn.style.display = 'none';
+    clockStatusTxt.style.display = 'inline';
     const island = document.getElementById('dynamic-island');
     if (island.classList.contains('expand')) island.classList.remove('expand');
   }
 
-  // 底部 Home 條手勢與點擊
+  // 底部 Home 條點擊與上滑
   const homeBar = document.getElementById('home-indicator');
   homeBar.addEventListener('click', goHome);
 
@@ -1320,32 +1460,39 @@
   }, { passive: true });
 
   homeBar.addEventListener('touchend', (e) => {
-    const barEndY = e.changedTouches[0].clientY;
-    if (barStartY - barEndY > 15) {
+    if (barStartY - e.changedTouches[0].clientY > 15) {
       goHome();
     }
   }, { passive: true });
 
-  // 7. Instagram 貼文放大 Modal 與分頁切換
+  // 7. IG 分頁切換
+  function switchIg(tab, btn) {
+    document.querySelectorAll('.ig-scroll-area').forEach(el => el.classList.remove('active'));
+    document.querySelectorAll('.ig-b-btn').forEach(el => el.classList.remove('active'));
+    btn.classList.add('active');
+
+    if (tab === 'profile') document.getElementById('ig-tab-profile').classList.add('active');
+    else if (tab === 'search') document.getElementById('ig-tab-search').classList.add('active');
+    else if (tab === 'reels') document.getElementById('ig-tab-reels').classList.add('active');
+  }
+
+  // 照片放大
   function openPhoto(cell) {
-    const imgUrl = cell.querySelector('img').src;
-    document.getElementById('ig-modal-img').src = imgUrl;
+    openPhotoSrc(cell.querySelector('img').src);
+  }
+  function openPhotoSrc(src) {
+    document.getElementById('ig-modal-img').src = src;
     document.getElementById('ig-modal').style.display = 'flex';
   }
   function closePhoto() {
     document.getElementById('ig-modal').style.display = 'none';
   }
 
-  function switchIgTab(tab) {
-    const profileView = document.getElementById('ig-view-profile');
-    const searchView = document.getElementById('ig-view-search');
-    if (tab === 'search') {
-      profileView.style.display = 'none';
-      searchView.style.display = 'block';
-    } else {
-      searchView.style.display = 'none';
-      profileView.style.display = 'block';
-    }
+  // 相機快門閃爍效果
+  function flashScreen() {
+    const cam = document.getElementById('app-camera');
+    cam.style.opacity = '0.3';
+    setTimeout(() => { cam.style.opacity = '1'; }, 100);
   }
 
   // 動態島伸縮
