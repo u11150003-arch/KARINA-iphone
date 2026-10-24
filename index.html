@@ -1203,7 +1203,7 @@
       position: absolute;
       inset: 0;
       background: #1c1c1e;
-      z-index: 550;
+      z-index: 2500;
       display: none;
       flex-direction: column;
       padding-top: 44px;
@@ -1285,7 +1285,7 @@
       display: none;
       flex-direction: column;
       gap: 6px;
-      z-index: 600;
+      z-index: 2600;
       border-top: 0.5px solid #3c3c40;
     }
     .kb-row {
@@ -1323,157 +1323,77 @@
       cursor: pointer;
     }
 
-    /* ================= 10. 電話 App (純白精緻介面，支援分頁與點擊直撥) ================= */
+    /* ================= 10. 電話 App (完美可撥通、圖層高、穩定點擊) ================= */
     #app-phone {
-      background: #fff;
-      color: #000;
+      background: #000;
+      color: #fff;
       padding-top: 44px;
       display: flex;
       flex-direction: column;
+      z-index: 2800 !important;
     }
-    .phone-top-tabs {
-      display: flex;
-      justify-content: space-around;
-      background: #f2f2f7;
-      border-bottom: 0.5px solid #d1d1d6;
-      padding: 6px 0;
+    .phone-header-title {
+      font-size: 26px;
+      font-weight: 700;
+      padding: 10px 16px 8px;
     }
-    .p-tab-btn {
-      font-size: 12px;
-      font-weight: 600;
-      color: #8e8e93;
-      cursor: pointer;
-      padding: 4px 12px;
-      border-radius: 6px;
-    }
-    .p-tab-btn.active {
-      color: #0a84ff;
-      background: #fff;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    }
-    .phone-sub-section {
+    .phone-contacts-container {
       flex: 1;
       overflow-y: auto;
-      padding: 12px 16px 60px;
-      display: none;
+      padding: 6px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    .phone-sub-section.active {
-      display: block;
-    }
-    .phone-page-title {
-      font-size: 28px;
-      font-weight: 700;
-      padding: 4px 0 12px;
-      letter-spacing: -0.5px;
-    }
-    .phone-contact-row {
+    .contact-item-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: 12px 14px;
-      background: #f2f2f7;
+      background: #1c1c1e;
       border-radius: 12px;
-      margin-bottom: 8px;
       cursor: pointer;
+      pointer-events: auto !important;
     }
-    .phone-contact-row:active {
-      background: #e5e5ea;
+    .contact-item-row:active {
+      background: #2c2c2e;
     }
-
-    /* 撥號鍵盤 */
-    .dialpad-container {
+    .contact-left {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      padding-top: 15px;
+      gap: 12px;
+      pointer-events: auto !important;
     }
-    .dial-display {
-      font-size: 30px;
-      height: 40px;
-      margin-bottom: 15px;
-      letter-spacing: 1px;
-      color: #000;
-    }
-    .dial-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 72px);
-      gap: 14px 24px;
-    }
-    .dial-btn {
-      width: 72px;
-      height: 72px;
+    .contact-avatar-img {
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      background: #e5e5ea;
+      object-fit: cover;
+    }
+    .contact-info-text {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-    .dial-btn:active {
-      background: #d1d1d6;
-    }
-    .dial-btn .dn {
-      font-size: 28px;
-      font-weight: 400;
-      line-height: 1;
-    }
-    .dial-btn .ds {
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: #666;
-    }
-    .dial-call-btn {
-      width: 68px;
-      height: 68px;
-      border-radius: 50%;
-      background: #34c759;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      color: #fff;
-      margin-top: 18px;
-      cursor: pointer;
-    }
-
-    /* 底部導覽列 */
-    .phone-bottom-nav {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 52px;
-      background: #f8f8fa;
-      border-top: 0.5px solid #d1d1d6;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      z-index: 100;
-    }
-    .p-nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       gap: 2px;
-      font-size: 10px;
+    }
+    .contact-name-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .contact-sub-title {
+      font-size: 11px;
       color: #8e8e93;
-      cursor: pointer;
-      padding: 4px 18px;
     }
-    .p-nav-item.active {
-      color: #0a84ff;
-    }
-    .p-nav-icon {
-      font-size: 17px;
+    .phone-dial-icon {
+      font-size: 18px;
+      color: #34c759;
+      pointer-events: auto !important;
     }
 
     #incoming-call-screen {
       position: absolute;
       inset: 0;
       background: radial-gradient(circle at 50% 25%, #2a2a35 0%, #0d0d12 85%);
-      z-index: 4000;
+      z-index: 4500 !important;
       display: none;
       flex-direction: column;
       justify-content: space-between;
@@ -1894,7 +1814,17 @@
     </div>
     <div class="island" id="dynamic-island"></div>
     <div class="status-right">
-      <span style="font-size: 11px; font-weight:700;">5G</span>
+      <div class="cellular-icon">
+        <div class="c-bar" style="height:3px;"></div>
+        <div class="c-bar" style="height:5px;"></div>
+        <div class="c-bar" style="height:7.5px;"></div>
+        <div class="c-bar" style="height:10px;"></div>
+      </div>
+      <div class="wifi-icon-box">
+        <svg class="wifi-svg" viewBox="0 0 24 18">
+          <path d="M12 3C7.3 3 3.1 4.9 0 8l2.2 2.2C4.7 7.7 8.1 6.2 12 6.2s7.3 1.5 9.8 4L24 8c-3.1-3.1-7.3-5-12-5zm0 5.4c-3.3 0-6.3 1.3-8.5 3.5l2.2 2.2c1.6-1.6 3.9-2.5 6.3-2.5s4.7.9 6.3 2.5l2.2-2.2c-2.2-2.2-5.2-3.5-8.5-3.5zm0 5.4c-1.8 0-3.3.7-4.4 1.9L12 20.2l4.4-4.5c-1.1-1.2-2.6-1.9-4.4-1.9z"/>
+        </svg>
+      </div>
       <div class="bat"></div>
     </div>
   </div>
@@ -2480,7 +2410,7 @@
     </div>
   </div>
 
-  <!-- 11. 電話 App (完美保證點擊撥通、帶泡泡對話) -->
+  <!-- 11. 電話 App (百分之百保證撥通、帶泡泡對話) -->
   <div id="app-phone" class="app-screen">
     <div class="phone-header-title" id="phone-header-main-title">聯絡人</div>
     <div class="phone-contacts-container">
@@ -2519,7 +2449,7 @@
     </div>
   </div>
 
-  <!-- 12. 全螢幕撥通畫面 (帶語音對話泡泡) -->
+  <!-- 12. 全螢幕撥通畫面 (更新為「謝謝姐姐」) -->
   <div id="incoming-call-screen">
     <div>
       <div class="call-head-avatar">
@@ -2855,833 +2785,4 @@
           <div class="kb-key" onclick="typeNextChar()">Q</div><div class="kb-key" onclick="typeNextChar()">W</div><div class="kb-key" onclick="typeNextChar()">E</div><div class="kb-key" onclick="typeNextChar()">R</div><div class="kb-key" onclick="typeNextChar()">T</div><div class="kb-key" onclick="typeNextChar()">Y</div><div class="kb-key" onclick="typeNextChar()">U</div><div class="kb-key" onclick="typeNextChar()">I</div><div class="kb-key" onclick="typeNextChar()">O</div><div class="kb-key" onclick="typeNextChar()">P</div>
         </div>
         <div class="kb-row">
-          <div class="kb-key" onclick="typeNextChar()">A</div><div class="kb-key" onclick="typeNextChar()">S</div><div class="kb-key" onclick="typeNextChar()">D</div><div class="kb-key" onclick="typeNextChar()">F</div><div class="kb-key" onclick="typeNextChar()">G</div><div class="kb-key" onclick="typeNextChar()">H</div><div class="kb-key" onclick="typeNextChar()">J</div><div class="kb-key" onclick="typeNextChar()">K</div><div class="kb-key" onclick="typeNextChar()">L</div>
-        </div>
-        <div class="kb-row">
-          <div class="kb-key" style="flex:1.2;" onclick="typeNextChar()">⇧</div><div class="kb-key" onclick="typeNextChar()">Z</div><div class="kb-key" onclick="typeNextChar()">X</div><div class="kb-key" onclick="typeNextChar()">C</div><div class="kb-key" onclick="typeNextChar()">V</div><div class="kb-key" onclick="typeNextChar()">B</div><div class="kb-key" onclick="typeNextChar()">N</div><div class="kb-key" onclick="typeNextChar()">M</div><div class="kb-key" style="flex:1.2;" onclick="hideKeyboard()">⌫</div>
-        </div>
-        <div class="kb-row">
-          <div class="kb-key" style="flex:1.5;" onclick="hideKeyboard()">123</div>
-          <div class="kb-space" onclick="triggerSend()">space</div>
-          <div class="kb-key" style="flex:1.5; background:#0a84ff;" onclick="triggerSend()">return</div>
-        </div>
-      `;
-    } else {
-      container.innerHTML = `
-        <div class="kb-row">
-          <div class="kb-key" onclick="typeNextChar()">ㄅ</div><div class="kb-key" onclick="typeNextChar()">ㄉ</div><div class="kb-key" onclick="typeNextChar()">ˇ</div><div class="kb-key" onclick="typeNextChar()">ˋ</div><div class="kb-key" onclick="typeNextChar()">ㄓ</div><div class="kb-key" onclick="typeNextChar()">ˊ</div><div class="kb-key" onclick="typeNextChar()">˙</div><div class="kb-key" onclick="typeNextChar()">ㄚ</div><div class="kb-key" onclick="typeNextChar()">ㄞ</div><div class="kb-key" onclick="typeNextChar()">ㄢ</div>
-        </div>
-        <div class="kb-row">
-          <div class="kb-key" onclick="typeNextChar()">ㄆ</div><div class="kb-key" onclick="typeNextChar()">ㄊ</div><div class="kb-key" onclick="typeNextChar()">ㄍ</div><div class="kb-key" onclick="typeNextChar()">ㄐ</div><div class="kb-key" onclick="typeNextChar()">ㄔ</div><div class="kb-key" onclick="typeNextChar()">ㄗ</div><div class="kb-key" onclick="typeNextChar()">ㄧ</div><div class="kb-key" onclick="typeNextChar()">ㄛ</div><div class="kb-key" onclick="typeNextChar()">ㄟ</div><div class="kb-key" onclick="typeNextChar()">ㄣ</div>
-        </div>
-        <div class="kb-row">
-          <div class="kb-key" onclick="typeNextChar()">ㄇ</div><div class="kb-key" onclick="typeNextChar()">ㄋ</div><div class="kb-key" onclick="typeNextChar()">ㄎ</div><div class="kb-key" onclick="typeNextChar()">ㄑ</div><div class="kb-key" onclick="typeNextChar()">ㄕ</div><div class="kb-key" onclick="typeNextChar()">ㄖ</div><div class="kb-key" onclick="typeNextChar()">ㄨ</div><div class="kb-key" onclick="typeNextChar()">ㄜ</div><div class="kb-key" onclick="typeNextChar()">ㄠ</div><div class="kb-key" onclick="typeNextChar()">ㄤ</div>
-        </div>
-        <div class="kb-row">
-          <div class="kb-key" style="flex:1.5;" onclick="hideKeyboard()">123</div>
-          <div class="kb-space" onclick="triggerSend()">空白鍵</div>
-          <div class="kb-key" style="flex:1.5; background:#0a84ff;" onclick="triggerSend()">換行</div>
-        </div>
-      `;
-    }
-  }
-
-  function setLanguage(lang) {
-    currentLanguage = lang;
-    updateLanguageTexts();
-  }
-
-  function updateLanguageTexts() {
-    const t = i18n[currentLanguage];
-    document.getElementById('current-lang-txt').textContent = t.langName;
-    document.getElementById('txt-status-back').textContent = t.statusBack;
-    document.getElementById('hint').textContent = t.hint;
-    document.getElementById('txt-pass-title').textContent = t.passTitle;
-    document.getElementById('txt-pass-emergency').textContent = t.passEmergency;
-    document.getElementById('txt-widget-cal-day').textContent = t.calDay;
-    document.getElementById('txt-widget-cal-event').textContent = t.calEvent;
-    document.getElementById('name-notes').textContent = t.nameNotes;
-    document.getElementById('name-photos').textContent = t.namePhotos;
-    document.getElementById('name-settings').textContent = t.nameSettings;
-    document.getElementById('name-calendar').textContent = t.nameCalendar;
-    document.getElementById('txt-x-for-you').textContent = t.xForYou;
-    document.getElementById('txt-x-following').textContent = t.xFollowing;
-    document.getElementById('txt-notes-header-title').textContent = t.notesTitle;
-    document.getElementById('txt-settings-title').textContent = t.settingsTitle;
-    document.getElementById('txt-st-airplane').textContent = t.stAirplane;
-    document.getElementById('txt-st-bluetooth').textContent = t.stBluetooth;
-    document.getElementById('txt-st-bluetooth-status').textContent = t.stBluetoothStatus;
-    document.getElementById('txt-st-general').textContent = t.stGeneral;
-    document.getElementById('txt-st-accessibility').textContent = t.stAccessibility;
-    document.getElementById('txt-st-display').textContent = t.stDisplay;
-    document.getElementById('txt-st-faceid').textContent = t.stFaceId;
-    document.getElementById('txt-st-notifications').textContent = t.stNotifications;
-    document.getElementById('txt-st-focus').textContent = t.stFocus;
-    document.getElementById('txt-kt-header').textContent = t.ktHeader;
-    document.getElementById('kt-send-btn-txt').textContent = t.ktSend;
-    document.getElementById('kt-input-box').textContent = t.ktInputPlaceholder;
-    document.getElementById('phone-header-main-title').textContent = t.phoneTitle;
-    document.getElementById('photos-title-txt').textContent = t.photosTitle;
-    document.getElementById('photos-sub-txt').textContent = t.photosSub;
-    document.getElementById('photos-select-txt').textContent = t.photosSelect;
-    document.getElementById('btn-capsule-year').textContent = t.btnYear;
-    document.getElementById('btn-capsule-month').textContent = t.btnMonth;
-    document.getElementById('btn-capsule-all').textContent = t.btnAll;
-    document.getElementById('viewer-back-btn-txt').textContent = t.viewerBack;
-    document.getElementById('viewer-edit-btn-txt').textContent = t.viewerEdit;
-    document.getElementById('txt-notif-ig-desc').textContent = t.igNotifDesc;
-    document.getElementById('txt-notif-chat-title').textContent = t.chatNotifTitle;
-    document.getElementById('txt-notif-chat-desc').textContent = t.chatNotifDesc;
-    document.getElementById('banner-caller-msg').textContent = t.bannerMsg;
-    document.getElementById('kt-row-name-winter').textContent = t.chatNotifTitle;
-    document.getElementById('kt-row-name-giselle').textContent = t.memberGiselle;
-    document.getElementById('kt-row-name-ning').textContent = t.memberNing;
-    document.getElementById('kt-row-time-winter').textContent = t.winterTime;
-    document.getElementById('kt-row-time-giselle').textContent = t.giselleTime;
-    document.getElementById('kt-row-preview-winter').textContent = t.previewWinter;
-    document.getElementById('kt-row-preview-ning').textContent = t.previewNing;
-    document.getElementById('kt-row-preview-giselle').textContent = t.previewGiselle;
-    document.getElementById('album-sec-title-10').textContent = t.albumTitle10;
-    document.getElementById('album-sec-title-9').textContent = t.albumTitle9;
-    document.getElementById('album-sec-title-8').textContent = t.albumTitle8;
-
-    if (currentLanguage === 'en') {
-      document.getElementById('cal-month-title').textContent = 'April 2027';
-      document.getElementById('cal-icon-month').textContent = 'APR';
-      document.getElementById('txt-cal-bday-time').textContent = 'April 11 • All Day';
-    } else {
-      document.getElementById('cal-month-title').textContent = '2027年 4月';
-      document.getElementById('cal-icon-month').textContent = '4月';
-      document.getElementById('txt-cal-bday-time').textContent = '4月11日 全天';
-    }
-
-    renderKeyboard();
-    renderNotesList();
-    updateClock();
-    closeLangModal();
-  }
-
-  function openLangModal() {
-    document.getElementById('lang-modal').style.display = 'flex';
-  }
-  function closeLangModal() {
-    document.getElementById('lang-modal').style.display = 'none';
-  }
-
-  function downloadCurrentPhoto() {
-    const item = allPhotos[currentPhotoIndex];
-    if (item && item.url) {
-      const a = document.createElement('a');
-      a.href = item.url;
-      a.download = `KARINA_${currentPhotoIndex + 1}.jpeg`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-  }
-
-  function updateClock() {
-    const d = new Date();
-    const hh = d.getHours();
-    const mm = String(d.getMinutes()).padStart(2, '0');
-    const timeStr = `${hh}:${mm}`;
-    document.querySelectorAll('.now-time').forEach(el => el.textContent = timeStr);
-
-    const locale = currentLanguage === 'en' ? 'en-US' : 'zh-TW';
-    const opts = { month: 'long', day: 'numeric', weekday: 'short' };
-    document.getElementById('lock-date').textContent = d.toLocaleDateString(locale, opts);
-  }
-  setInterval(updateClock, 1000);
-  updateClock();
-
-  // 鎖定畫面滑動漸變
-  const lock = document.getElementById('lock');
-  const pass = document.getElementById('pass');
-  const topGroup = document.getElementById('lock-top-group');
-  const notifsGroup = document.getElementById('lock-notifs-group');
-  const bottomGroup = document.getElementById('lock-bottom-group');
-  let passCode = [];
-  const dots = document.querySelectorAll('.p-dot');
-  const delCancelBtn = document.getElementById('pass-del-cancel-btn');
-
-  function openPasscode() {
-    pass.classList.add('on');
-    updatePassDots();
-  }
-
-  document.getElementById('hint').addEventListener('click', openPasscode);
-
-  let lockStartY = 0;
-  lock.addEventListener('touchstart', (e) => {
-    lockStartY = e.touches[0].clientY;
-  }, { passive: true });
-
-  lock.addEventListener('touchmove', (e) => {
-    const moveY = lockStartY - e.touches[0].clientY;
-    if (moveY > 0) {
-      const progress = Math.min(moveY / 120, 1);
-      const opacity = 1 - progress;
-      topGroup.style.opacity = opacity;
-      topGroup.style.transform = `translateY(-${progress * 30}px)`;
-      notifsGroup.style.opacity = opacity;
-      bottomGroup.style.opacity = opacity;
-    }
-  }, { passive: true });
-
-  lock.addEventListener('touchend', (e) => {
-    const moveY = lockStartY - e.changedTouches[0].clientY;
-    if (moveY > 35) {
-      openPasscode();
-    }
-    topGroup.style.opacity = '1';
-    topGroup.style.transform = 'translateY(0)';
-    notifsGroup.style.opacity = '1';
-    bottomGroup.style.opacity = '1';
-  }, { passive: true });
-
-  function handleNotifClick(targetApp) {
-    pendingAppAfterUnlock = targetApp;
-    openPasscode();
-  }
-
-  function pressKey(num) {
-    if (passCode.length < 4) {
-      passCode.push(num);
-      updatePassDots();
-    }
-    if (passCode.length === 4) {
-      setTimeout(() => {
-        pass.classList.remove('on');
-        lock.classList.add('off');
-        passCode = [];
-        updatePassDots();
-        triggerBannerNotice();
-
-        if (pendingAppAfterUnlock) {
-          if (pendingAppAfterUnlock === 'chat') {
-            openApp('chat');
-            enterRoom('Winter');
-          } else {
-            openApp(pendingAppAfterUnlock);
-          }
-          pendingAppAfterUnlock = null;
-        }
-      }, 160);
-    }
-  }
-
-  function handlePassAction() {
-    if (passCode.length > 0) {
-      passCode.pop();
-      updatePassDots();
-    } else {
-      pass.classList.remove('on');
-      pendingAppAfterUnlock = null;
-    }
-  }
-
-  function updatePassDots() {
-    dots.forEach((dot, idx) => {
-      if (idx < passCode.length) dot.classList.add('filled');
-      else dot.classList.remove('filled');
-    });
-    const t = i18n[currentLanguage];
-    if (passCode.length > 0) {
-      delCancelBtn.textContent = t.passDelete;
-    } else {
-      delCancelBtn.textContent = t.passCancel;
-    }
-  }
-
-  function triggerBannerNotice() {
-    setTimeout(() => {
-      playAlertSound();
-      const banner = document.getElementById('top-notification-banner');
-      banner.classList.add('show');
-      setTimeout(() => {
-        banner.classList.remove('show');
-      }, 6000);
-    }, 10000);
-  }
-
-  function openBannerChat() {
-    document.getElementById('top-notification-banner').classList.remove('show');
-    openApp('chat');
-    enterRoom('Winter');
-  }
-
-  const screens = {
-    playlist: document.getElementById('app-playlist'),
-    instagram: document.getElementById('app-instagram'),
-    calendar: document.getElementById('app-calendar'),
-    x: document.getElementById('app-x'),
-    notes: document.getElementById('app-notes'),
-    settings: document.getElementById('app-settings'),
-    chat: document.getElementById('app-chat'),
-    phone: document.getElementById('app-phone'),
-    photos: document.getElementById('app-photos'),
-    camera: document.getElementById('app-camera')
-  };
-
-  const backBtn = document.getElementById('status-back-btn');
-  const clockStatusTxt = document.getElementById('clock-status-txt');
-  const phoneStatusBar = document.getElementById('phone-status-bar');
-
-  function openApp(appKey) {
-    Object.values(screens).forEach(s => s.classList.remove('active'));
-
-    if (screens[appKey]) {
-      screens[appKey].classList.add('active');
-      backBtn.style.display = 'flex';
-      clockStatusTxt.style.display = 'none';
-
-      if (appKey === 'calendar' || appKey === 'photos') {
-        phoneStatusBar.classList.add('black-theme');
-      } else {
-        phoneStatusBar.classList.remove('black-theme');
-      }
-
-      if (appKey === 'camera') startCamera();
-    }
-  }
-
-  document.querySelectorAll('[data-target]').forEach(el => {
-    el.addEventListener('click', (e) => {
-      e.stopPropagation();
-      const target = el.dataset.target;
-      if (target === 'phone-app') openApp('phone');
-      else openApp(target);
-    });
-  });
-
-  function goHome() {
-    Object.values(screens).forEach(s => s.classList.remove('active'));
-    backBtn.style.display = 'none';
-    clockStatusTxt.style.display = 'inline';
-    phoneStatusBar.classList.remove('black-theme');
-    const island = document.getElementById('dynamic-island');
-    if (island.classList.contains('expand')) island.classList.remove('expand');
-
-    stopCamera();
-    leaveRoom();
-    closePhotoViewer();
-    closeNoteDetail();
-    hideKeyboard();
-  }
-
-  let touchStartX = 0;
-  let touchStartY = 0;
-  window.addEventListener('touchstart', (e) => {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-
-  window.addEventListener('touchend', (e) => {
-    const deltaX = e.changedTouches[0].clientX - touchStartX;
-    const deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY);
-    if (document.getElementById('photo-viewer-page').style.display !== 'flex') {
-      if (deltaX > 85 && deltaY < 35 && touchStartX < 60) {
-        const isAnyAppOpen = Object.values(screens).some(s => s.classList.contains('active'));
-        if (isAnyAppOpen) goHome();
-      }
-    }
-  }, { passive: true });
-
-  const homeBar = document.getElementById('home-indicator');
-  homeBar.addEventListener('click', (e) => {
-    e.stopPropagation();
-    goHome();
-  });
-
-  let barStartY = 0;
-  homeBar.addEventListener('touchstart', (e) => {
-    barStartY = e.touches[0].clientY;
-  }, { passive: true });
-
-  homeBar.addEventListener('touchend', (e) => {
-    if (barStartY - e.changedTouches[0].clientY > 10) {
-      goHome();
-    }
-  }, { passive: true });
-
-  const chatScriptsZh = {
-    'Winter': {
-      initial: '練完舞要不要一起去吃火鍋 看好一家麻辣鍋了',
-      flow: [
-        { me: '好啊 等我把最後一段 Solo 練完就走', reply: '太棒了 那我先去佔位子 點妳最愛的鴨血' },
-        { me: '那家要點老油條 記得多煮一下', reply: '知道 已經在菜單畫好了 回家幫我抱抱波妞' },
-        { me: '大概二十分鐘後到 等我喔', reply: '好 慢慢走 路上小心' }
-      ]
-    },
-    'Ningning': {
-      initial: '妳昨天在練習室有看到我的 AirPods 嗎 我找一個早上了',
-      flow: [
-        { me: '是不是掉在休息室沙發夾縫 每次都塞在那', reply: '啊 我昨天好像真的躺在沙發上' },
-        { me: '剛剛幫妳翻了一下 真的在抱枕下面', reply: '嗚哇救星 出門前幫我放桌上' },
-        { me: '幫妳收在化妝台上了 別再弄丟囉', reply: '收到 等等練習室見' }
-      ]
-    },
-    'Giselle': {
-      initial: '昨天逛街看的那件黑色外套真的超燒',
-      flow: [
-        { me: '買啦 那套版型真的很適合妳', reply: '對吧 我也覺得 下次休假一起去涉谷' },
-        { me: '好啊 順便去吃那家可麗餅', reply: '沒問題 下次休假涉谷站見' }
-      ]
-    }
-  };
-
-  const chatScriptsEn = {
-    'Winter': {
-      initial: 'Hotpot after dance rehearsal? Found a great spicy hotpot place',
-      flow: [
-        { me: 'Sure! Let me finish the last Solo part and I\'ll be right over', reply: 'Awesome! I\'ll grab a table and order your favorite duck blood' },
-        { me: 'Order the fried dough too, let it soak well', reply: 'Got it, already marked on the menu! Give Pponyo a hug for me' },
-        { me: 'Be there in 20 mins, wait for me', reply: 'Take your time, stay safe on the way' }
-      ]
-    },
-    'Ningning': {
-      initial: 'Did you see my AirPods in the rehearsal room yesterday? Been looking all morning',
-      flow: [
-        { me: 'Did you drop it in the lounge sofa gap again?', reply: 'Ah! I remember lying on that sofa yesterday' },
-        { me: 'Just checked for you, it really was under the pillow', reply: 'You\'re a lifesaver! Leave it on the desk before heading out' },
-        { me: 'Put it on the dressing table, don\'t lose it again', reply: 'Got it! See you at practice' }
-      ]
-    },
-    'Giselle': {
-      initial: 'That black jacket we saw in Shibuya yesterday was so stunning',
-      flow: [
-        { me: 'Get it! The silhouette looked amazing on you', reply: 'Right? Let\'s go back together next time off' },
-        { me: 'Sure, we can grab those crepes again too', reply: 'Sounds like a plan! Shibuya next break' }
-      ]
-    }
-  };
-
-  let currentChatMember = 'Winter';
-  let memberStep = 0;
-
-  function enterRoom(name) {
-    currentChatMember = name;
-    memberStep = 0;
-    const displayName = (currentLanguage === 'en') ? ((name === 'Winter') ? 'Winter 🐶' : ((name === 'Giselle') ? 'Giselle' : 'Ningning')) : ((name === 'Winter') ? '旼冬🐶' : ((name === 'Giselle') ? '欸哩' : '寧'));
-    document.getElementById('kt-target-name').textContent = displayName;
-    const msgBox = document.getElementById('kt-messages-box');
-    msgBox.innerHTML = '';
-
-    const scripts = currentLanguage === 'en' ? chatScriptsEn : chatScriptsZh;
-    const script = scripts[name] || scripts['Winter'];
-    const initBubble = document.createElement('div');
-    initBubble.className = 'kt-bubble them';
-    initBubble.textContent = script.initial;
-    msgBox.appendChild(initBubble);
-
-    document.getElementById('kt-room-view').style.display = 'flex';
-    hideKeyboard();
-  }
-
-  function leaveRoom() {
-    document.getElementById('kt-room-view').style.display = 'none';
-    hideKeyboard();
-  }
-
-  function showKeyboard() {
-    const kb = document.getElementById('ios-keyboard');
-    kb.style.display = 'flex';
-    const scripts = currentLanguage === 'en' ? chatScriptsEn : chatScriptsZh;
-    const script = scripts[currentChatMember] || scripts['Winter'];
-    if (memberStep < script.flow.length) {
-      document.getElementById('kt-input-box').textContent = script.flow[memberStep].me;
-    }
-  }
-
-  function hideKeyboard() {
-    document.getElementById('ios-keyboard').style.display = 'none';
-  }
-
-  function typeNextChar() {
-    showKeyboard();
-  }
-
-  function triggerSend() {
-    const scripts = currentLanguage === 'en' ? chatScriptsEn : chatScriptsZh;
-    const script = scripts[currentChatMember] || scripts['Winter'];
-    if (memberStep < script.flow.length) {
-      const current = script.flow[memberStep];
-      const msgBox = document.getElementById('kt-messages-box');
-
-      const meBubble = document.createElement('div');
-      meBubble.className = 'kt-bubble me';
-      meBubble.textContent = current.me;
-      msgBox.appendChild(meBubble);
-      msgBox.scrollTop = msgBox.scrollHeight;
-      document.getElementById('kt-input-box').textContent = (currentLanguage === 'en') ? 'Type message...' : '輸入訊息...';
-      hideKeyboard();
-
-      setTimeout(() => {
-        const themBubble = document.createElement('div');
-        themBubble.className = 'kt-bubble them';
-        themBubble.textContent = current.reply;
-        msgBox.appendChild(themBubble);
-        msgBox.scrollTop = msgBox.scrollHeight;
-        memberStep++;
-      }, 700);
-    }
-  }
-
-  function renderNotesList() {
-    const listContainer = document.getElementById('notes-container');
-    listContainer.innerHTML = '';
-    const data = currentLanguage === 'en' ? notesDataEn : notesDataZh;
-
-    data.forEach(item => {
-      const div = document.createElement('div');
-      div.className = 'note-item';
-      div.onclick = () => {
-        if (item.isGuide) openSystemGuide();
-        else viewNoteDetail(item.title, item.content);
-      };
-      div.innerHTML = `
-        <div class="note-item-title">${item.title}</div>
-        <div class="note-item-desc">${item.desc}</div>
-      `;
-      listContainer.appendChild(div);
-    });
-  }
-
-  function openSystemGuide() {
-    document.getElementById('detail-title-txt').textContent = (currentLanguage === 'en') ? '⚠️ System Guide' : '⚠️ 系統操作指引';
-    const contactText = (currentLanguage === 'en') ? 'If issues occur, contact' : '若介面操作不順，請聯繫';
-    document.getElementById('detail-content-txt').innerHTML = `${contactText} <a class="threads-link" href="https://www.threads.com/@kelly_lee_805" target="_blank" rel="noopener noreferrer">@kelly_lee_805</a>\n\n` +
-      `KARINA iphone : <a class="threads-link" href="https://karina-iphone.netlify.app" target="_blank" rel="noopener noreferrer">https://karina-iphone.netlify.app</a>\n\n` +
-      `KARINA PLAYLIST : <a class="threads-link" href="https://karinaplaylist.netlify.app" target="_blank" rel="noopener noreferrer">https://karinaplaylist.netlify.app</a>`;
-    document.getElementById('note-detail-view').style.display = 'flex';
-  }
-
-  function viewNoteDetail(title, content) {
-    document.getElementById('detail-title-txt').textContent = title;
-    document.getElementById('detail-content-txt').textContent = content;
-    document.getElementById('note-detail-view').style.display = 'flex';
-  }
-
-  function closeNoteDetail() {
-    document.getElementById('note-detail-view').style.display = 'none';
-  }
-
-  function openNoteEditor() {
-    document.getElementById('notes-modal').style.display = 'flex';
-  }
-  function closeNoteEditor() {
-    document.getElementById('notes-modal').style.display = 'none';
-    document.getElementById('note-input-title').value = '';
-    document.getElementById('note-input-body').value = '';
-  }
-  function saveNote() {
-    const title = document.getElementById('note-input-title').value.trim() || 'New Note';
-    const body = document.getElementById('note-input-body').value.trim() || '';
-    const container = document.getElementById('notes-container');
-    const newNote = document.createElement('div');
-    newNote.className = 'note-item';
-    newNote.onclick = () => viewNoteDetail(title, body);
-    newNote.innerHTML = `
-      <div class="note-item-title">${title}</div>
-      <div class="note-item-desc">${body}</div>
-    `;
-    container.prepend(newNote);
-    closeNoteEditor();
-  }
-
-  // 電話通話腳本與邏輯 (恢復絕對保證撥通與泡泡對話)
-  const phoneCallScriptsZh = {
-    'Winter': [
-      { sender: '旼冬', text: '在幹嘛' },
-      { sender: 'Karina', text: '剛練完舞 妳呢' },
-      { sender: '旼冬', text: '波妞昨晚太興奮一直暴衝 我整夜顧牠都沒睡' },
-      { sender: 'Karina', text: '辛苦了 今天換我當保姆 妳好好補眠' },
-      { sender: '旼冬', text: '謝謝知珉 肉乾我放在客廳電視櫃上' },
-      { sender: 'Karina', text: '收到 等等練完舞我就回去餵牠' }
-    ],
-    'Giselle': [
-      { sender: '欸哩', text: '知珉 妳上次說想吃涉谷那家可麗餅 我們休假要不要去' },
-      { sender: 'Karina', text: '好啊 那天順便去逛街買衣服' },
-      { sender: '欸哩', text: '沒問題 到時候涉谷站見' },
-      { sender: 'Karina', text: '好 休假見' }
-    ],
-    'Ningning': [
-      { sender: '寧', text: '喂 有看到我的耳機嗎' },
-      { sender: 'Karina', text: '在休息室沙發夾縫 幫妳放化妝台了' },
-      { sender: '寧', text: '太感謝了 找了一整個早上' },
-      { sender: 'Karina', text: '下次別亂塞 練習室見' }
-    ]
-  };
-
-  const phoneCallScriptsEn = {
-    'Winter': [
-      { sender: 'Winter', text: 'What are you doing?' },
-      { sender: 'Karina', text: 'Just finished dance rehearsal, you?' },
-      { sender: 'Winter', text: 'Pponyo was so hyper last night, I stayed up all night watching him' },
-      { sender: 'Karina', text: 'You worked hard. My turn to babysit today, get some rest' },
-      { sender: 'Winter', text: 'Thanks Karina! Jerky treats are on the TV stand' },
-      { sender: 'Karina', text: 'Got it, heading back to feed him after rehearsal' }
-    ],
-    'Giselle': [
-      { sender: 'Giselle', text: 'Karina, want to get those Shibuya crepes next break?' },
-      { sender: 'Karina', text: 'Sure! Let\'s go shopping for jackets too' },
-      { sender: 'Giselle', text: 'Great, meet at Shibuya station then' },
-      { sender: 'Karina', text: 'See you on our break' }
-    ],
-    'Ningning': [
-      { sender: 'Ningning', text: 'Hey, did you find my earbuds?' },
-      { sender: 'Karina', text: 'Found it in the lounge sofa cushion, left it on your vanity' },
-      { sender: 'Ningning', text: 'Thank you so much! Was searching all morning' },
-      { sender: 'Karina', text: 'Don\'t misplace it again. See you at practice' }
-    ]
-  };
-
-  const callerList = [
-    { name: 'Winter', avatar: 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg' },
-    { name: 'Giselle', avatar: 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png' },
-    { name: 'Ningning', avatar: 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg' }
-  ];
-
-  let currentCallerName = 'Winter';
-  const callScreen = document.getElementById('incoming-call-screen');
-  const dialogueBox = document.getElementById('call-dialogue-box');
-  let callSecondCounter = null;
-  let callDialogueTimer = null;
-
-  setTimeout(() => {
-    playAlertSound();
-    triggerIncomingCall('Winter', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg');
-  }, 35000);
-
-  setInterval(() => {
-    playAlertSound();
-    const randomCaller = callerList[Math.floor(Math.random() * callerList.length)];
-    triggerIncomingCall(randomCaller.name, randomCaller.avatar);
-  }, 160000);
-
-  function triggerIncomingCall(name, avatar) {
-    currentCallerName = name;
-    document.getElementById('incoming-caller-title').textContent = (currentLanguage === 'en') ? name : ((name === 'Winter') ? '金旼炡' : ((name === 'Giselle') ? '內永枝利' : '寧藝卓'));
-    document.getElementById('incoming-call-avatar-img').src = avatar;
-    document.getElementById('incoming-call-status').textContent = i18n[currentLanguage].incomingStatus;
-    document.getElementById('accept-call-btn').style.display = 'flex';
-    dialogueBox.style.display = 'none';
-    dialogueBox.innerHTML = '';
-    callScreen.style.display = 'flex';
-  }
-
-  function startCallDirect(name, avatar) {
-    playAlertSound();
-    currentCallerName = name;
-    document.getElementById('incoming-caller-title').textContent = (currentLanguage === 'en') ? name : ((name === 'Winter') ? '金旼炡' : ((name === 'Giselle') ? '內永枝利' : ((name === 'Ningning') ? '寧藝卓' : name)));
-    document.getElementById('incoming-call-avatar-img').src = avatar;
-    document.getElementById('accept-call-btn').style.display = 'none';
-    dialogueBox.style.display = 'flex';
-    dialogueBox.innerHTML = '';
-    callScreen.style.display = 'flex';
-
-    document.getElementById('incoming-call-status').textContent = `${i18n[currentLanguage].callingStatus} 00:01`;
-    let sec = 1;
-    clearInterval(callSecondCounter);
-    callSecondCounter = setInterval(() => {
-      sec++;
-      const mm = String(Math.floor(sec / 60)).padStart(2, '0');
-      const ss = String(sec % 60).padStart(2, '0');
-      document.getElementById('incoming-call-status').textContent = `${i18n[currentLanguage].callingStatus} ${mm}:${ss}`;
-    }, 1000);
-
-    const scripts = currentLanguage === 'en' ? phoneCallScriptsEn : phoneCallScriptsZh;
-    const script = scripts[currentCallerName] || scripts['Winter'];
-    let diagIdx = 0;
-    clearInterval(callDialogueTimer);
-    callDialogueTimer = setInterval(() => {
-      if (diagIdx < script.length) {
-        const item = script[diagIdx];
-        const bubble = document.createElement('div');
-        bubble.className = `call-speech-bubble ${item.sender === 'Karina' ? 'me' : 'them'}`;
-        bubble.innerHTML = `<b>${item.sender}:</b> ${item.text}`;
-        dialogueBox.appendChild(bubble);
-        dialogueBox.scrollTop = dialogueBox.scrollHeight;
-        diagIdx++;
-      } else {
-        clearInterval(callDialogueTimer);
-      }
-    }, 1600);
-  }
-
-  function acceptCall() {
-    document.getElementById('accept-call-btn').style.display = 'none';
-    document.getElementById('incoming-call-status').textContent = `${i18n[currentLanguage].callingStatus} 00:01`;
-    dialogueBox.style.display = 'flex';
-
-    let sec = 1;
-    clearInterval(callSecondCounter);
-    callSecondCounter = setInterval(() => {
-      sec++;
-      const mm = String(Math.floor(sec / 60)).padStart(2, '0');
-      const ss = String(sec % 60).padStart(2, '0');
-      document.getElementById('incoming-call-status').textContent = `${i18n[currentLanguage].callingStatus} ${mm}:${ss}`;
-    }, 1000);
-
-    const scripts = currentLanguage === 'en' ? phoneCallScriptsEn : phoneCallScriptsZh;
-    const script = scripts[currentCallerName] || scripts['Winter'];
-    let diagIdx = 0;
-    clearInterval(callDialogueTimer);
-    callDialogueTimer = setInterval(() => {
-      if (diagIdx < script.length) {
-        const item = script[diagIdx];
-        const bubble = document.createElement('div');
-        bubble.className = `call-speech-bubble ${item.sender === 'Karina' ? 'me' : 'them'}`;
-        bubble.innerHTML = `<b>${item.sender}:</b> ${item.text}`;
-        dialogueBox.appendChild(bubble);
-        dialogueBox.scrollTop = dialogueBox.scrollHeight;
-        diagIdx++;
-      } else {
-        clearInterval(callDialogueTimer);
-      }
-    }, 1600);
-  }
-
-  function declineCall() {
-    clearInterval(callSecondCounter);
-    clearInterval(callDialogueTimer);
-    callScreen.style.display = 'none';
-  }
-
-  function renderAlbums() {
-    ['10', '9', '8'].forEach(month => {
-      const grid = document.getElementById(`album-grid-${month}`);
-      grid.innerHTML = '';
-      albumData[month].forEach(url => {
-        const cell = document.createElement('div');
-        cell.className = 'album-cell';
-        cell.onclick = () => {
-          const index = allPhotos.findIndex(p => p.url === url);
-          openPhotoViewer(index);
-        };
-        cell.innerHTML = `<img src="${url}" alt="photo">`;
-        grid.appendChild(cell);
-      });
-    });
-
-    const filmstrip = document.getElementById('viewer-filmstrip-bar');
-    filmstrip.innerHTML = '';
-    allPhotos.forEach((item, idx) => {
-      const thumb = document.createElement('div');
-      thumb.className = 'filmstrip-thumb';
-      thumb.id = `filmstrip-${idx}`;
-      thumb.onclick = () => {
-        currentPhotoIndex = idx;
-        updateViewerPhoto();
-      };
-      thumb.innerHTML = `<img src="${item.url}" alt="thumb">`;
-      filmstrip.appendChild(thumb);
-    });
-  }
-
-  function openPhotoViewer(idx) {
-    currentPhotoIndex = idx;
-    const page = document.getElementById('photo-viewer-page');
-    page.style.display = 'flex';
-    updateViewerPhoto();
-  }
-
-  function updateViewerPhoto() {
-    const item = allPhotos[currentPhotoIndex];
-    document.getElementById('viewer-date-title').textContent = item.date;
-    const img = document.getElementById('viewer-img');
-    img.src = item.url;
-
-    document.querySelectorAll('.filmstrip-thumb').forEach((el, idx) => {
-      if (idx === currentPhotoIndex) el.classList.add('active');
-      else el.classList.remove('active');
-    });
-  }
-
-  function closePhotoViewer() {
-    document.getElementById('photo-viewer-page').style.display = 'none';
-  }
-
-  let photoTouchStartX = 0;
-  const viewerPage = document.getElementById('photo-viewer-page');
-  viewerPage.addEventListener('touchstart', (e) => {
-    photoTouchStartX = e.touches[0].clientX;
-  }, { passive: true });
-
-  viewerPage.addEventListener('touchend', (e) => {
-    const deltaX = e.changedTouches[0].clientX - photoTouchStartX;
-    if (deltaX > 40) {
-      if (currentPhotoIndex > 0) {
-        currentPhotoIndex--;
-        updateViewerPhoto();
-      }
-    } else if (deltaX < -40) {
-      if (currentPhotoIndex < allPhotos.length - 1) {
-        currentPhotoIndex++;
-        updateViewerPhoto();
-      }
-    }
-  }, { passive: true });
-
-  let currentStream = null;
-  let useFacingMode = 'user';
-
-  async function startCamera() {
-    const video = document.getElementById('camera-video');
-    try {
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        currentStream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: useFacingMode }
-        });
-        video.srcObject = currentStream;
-      }
-    } catch (err) {}
-  }
-
-  function stopCamera() {
-    if (currentStream) {
-      currentStream.getTracks().forEach(t => t.stop());
-      currentStream = null;
-    }
-  }
-
-  function flipCamera() {
-    useFacingMode = (useFacingMode === 'user') ? 'environment' : 'user';
-    stopCamera();
-    startCamera();
-  }
-
-  function takePhoto() {
-    const video = document.getElementById('camera-video');
-    const preview = document.getElementById('camera-preview');
-    const canvas = document.getElementById('camera-canvas');
-    if (currentStream && video.videoWidth) {
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      const ctx = canvas.getContext('2d');
-      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      const dataUrl = canvas.toDataURL('image/png');
-      preview.src = dataUrl;
-      preview.style.display = 'block';
-      document.querySelector('.cam-gallery-thumbnail img').src = dataUrl;
-    }
-  }
-
-  let flashOn = false;
-  document.getElementById('lock-flashlight').addEventListener('click', (e) => {
-    flashOn = !flashOn;
-    e.currentTarget.style.background = flashOn ? 'rgba(255,255,255,0.85)' : 'rgba(255,255,255,0.22)';
-    e.currentTarget.querySelector('svg').style.fill = flashOn ? '#000' : '#fff';
-  });
-
-  document.getElementById('dynamic-island').addEventListener('click', () => {
-    document.getElementById('dynamic-island').classList.toggle('expand');
-  });
-
-  // 安全啟動流程
-  renderAlbums();
-  updateLanguageTexts();
-</script>
-
-</body>
-</html>
+          <div class="kb-key" onclick="typeNextChar()">A</div><div class="kb-key" onclick="typeNextChar()">S</div><div class="kb
