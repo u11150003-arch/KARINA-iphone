@@ -52,7 +52,7 @@
       }
     }
 
-    /* 頂部狀態列 */
+    /* 頂部狀態列 (含 Wi-Fi 圖示) */
     .status {
       position: absolute;
       top: 0;
@@ -93,7 +93,25 @@
     .status-right {
       display: flex;
       align-items: center;
-      gap: 5px;
+      gap: 6px;
+    }
+    /* 蜂窩網絡訊號 4 條線 */
+    .cellular-icon {
+      display: flex;
+      align-items: flex-end;
+      gap: 1.5px;
+      height: 10px;
+    }
+    .c-bar {
+      width: 2.5px;
+      background: #fff;
+      border-radius: 1px;
+    }
+    /* Wi-Fi 原生向量圖示 */
+    .wifi-svg {
+      width: 14px;
+      height: 14px;
+      fill: #fff;
     }
     .bat {
       display: inline-block;
@@ -501,7 +519,7 @@
       transform-origin: top center;
     }
 
-    /* Instagram 嵌入 (全面開放影音硬體加速與點擊穿透) */
+    /* Instagram 嵌入 */
     #app-instagram {
       background: #000;
       padding-top: 0;
@@ -812,7 +830,7 @@
       filter: saturate(0.65);
     }
 
-    /* ================= 9. KakaoTalk ================= */
+    /* ================= 9. KakaoTalk (含彈出式鍵盤、自動打字與多次來回) ================= */
     #app-chat {
       background: #191919;
       color: #fff;
@@ -914,13 +932,13 @@
       padding: 14px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
+      gap: 10px;
     }
     .kt-bubble {
-      max-width: 78%;
-      padding: 9px 13px;
-      border-radius: 16px;
-      font-size: 13px;
+      max-width: 80%;
+      padding: 8px 12px;
+      border-radius: 15px;
+      font-size: 12.5px;
       line-height: 1.4;
     }
     .kt-bubble.them {
@@ -952,6 +970,9 @@
       color: #fff;
       outline: none;
       cursor: pointer;
+      min-height: 32px;
+      display: flex;
+      align-items: center;
     }
     .kt-send-btn {
       background: #fae100;
@@ -960,6 +981,50 @@
       font-size: 11.5px;
       padding: 6px 12px;
       border-radius: 14px;
+      cursor: pointer;
+    }
+
+    /* iOS 擬真彈出鍵盤 (比照 wonbin-phone) */
+    .ios-keyboard {
+      background: #2b2b2e;
+      padding: 8px 6px 20px;
+      display: none;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 600;
+      border-top: 0.5px solid #3c3c40;
+    }
+    .kb-row {
+      display: flex;
+      justify-content: center;
+      gap: 5px;
+    }
+    .kb-key {
+      flex: 1;
+      max-width: 32px;
+      height: 38px;
+      background: #636366;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 1px 0 rgba(0,0,0,0.3);
+    }
+    .kb-key:active {
+      background: #8e8e93;
+    }
+    .kb-space {
+      flex: 4;
+      max-width: 140px;
+      background: #636366;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
       cursor: pointer;
     }
 
@@ -1082,10 +1147,6 @@
       border-left: 3px solid #34c759;
       background: rgba(30, 45, 35, 0.85);
     }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
     .call-actions-row {
       width: 100%;
       display: flex;
@@ -1104,7 +1165,7 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.4);
     }
 
-    /* ================= 11. 相簿 App (照片與影片交叉擺放) ================= */
+    /* ================= 11. 相簿 App (全功能原生相簿檢視模式) ================= */
     #app-photos {
       background: #000;
       color: #fff;
@@ -1152,29 +1213,50 @@
       color: #fff;
     }
 
-    /* 點擊多媒體彈窗預覽 */
-    #media-modal {
+    /* 原生相片全螢幕檢視器 (比照 wonbin-phone 支援左右滑動切換) */
+    #photo-viewer-page {
       position: absolute;
       inset: 0;
-      background: rgba(0,0,0,0.92);
-      z-index: 2600;
+      background: #000;
+      z-index: 2200;
       display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      padding-top: 44px;
+    }
+    .viewer-top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .viewer-back {
+      color: #0a84ff;
+      cursor: pointer;
+    }
+    .viewer-content {
+      flex: 1;
+      display: flex;
       align-items: center;
       justify-content: center;
-      flex-direction: column;
+      overflow: hidden;
+      position: relative;
     }
-    #media-modal img, #media-modal video {
-      max-width: 92%;
-      max-height: 75%;
-      border-radius: 12px;
+    #viewer-img, #viewer-video {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
     }
-    .modal-close-btn {
-      margin-top: 18px;
-      padding: 6px 18px;
-      background: rgba(255,255,255,0.25);
-      border-radius: 16px;
-      font-size: 12px;
-      cursor: pointer;
+    .viewer-bottom-bar {
+      height: 50px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      font-size: 18px;
+      color: #0a84ff;
+      border-top: 0.5px solid #222;
     }
 
     #app-camera {
@@ -1231,17 +1313,18 @@
       background: #fff;
     }
 
-    /* 底部細長手勢條 */
+    /* 底部 Home 條 (限制極小高度防止誤觸閃退) */
     .home-touch-area {
       position: absolute;
       bottom: 0;
       left: 0;
       right: 0;
-      height: 24px;
+      height: 16px;
       z-index: 2100;
       display: flex;
-      align-items: center;
+      align-items: flex-end;
       justify-content: center;
+      padding-bottom: 5px;
       cursor: pointer;
       touch-action: none;
     }
@@ -1258,7 +1341,7 @@
 <body>
 
 <div id="phone">
-  <!-- 頂部狀態列 -->
+  <!-- 頂部狀態列 (含 Wi-Fi 圖示) -->
   <div class="status">
     <div class="status-left">
       <span class="now-time" id="clock-status-txt">12:41</span>
@@ -1268,7 +1351,17 @@
     </div>
     <div class="island" id="dynamic-island"></div>
     <div class="status-right">
-      <span style="font-size: 11px; font-weight:700;">5G</span>
+      <!-- 蜂窩訊號 -->
+      <div class="cellular-icon">
+        <div class="c-bar" style="height:3px;"></div>
+        <div class="c-bar" style="height:5px;"></div>
+        <div class="c-bar" style="height:7.5px;"></div>
+        <div class="c-bar" style="height:10px;"></div>
+      </div>
+      <!-- Wi-Fi 向量圖示 -->
+      <svg class="wifi-svg" viewBox="0 0 24 24">
+        <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21L24 8.98C20.93 5.9 16.69 4 12 4zm0 3.5c3.67 0 7 1.45 9.47 3.84L12 19.34 2.53 11.34C5 8.95 8.33 7.5 12 7.5zm0 4.5c2.35 0 4.47.95 6.03 2.48L12 17.68 5.97 14.48C7.53 12.95 9.65 12 12 12z"/>
+      </svg>
       <div class="bat"></div>
     </div>
   </div>
@@ -1280,7 +1373,7 @@
       <div class="t now-time">12:41</div>
     </div>
 
-    <!-- 鎖定通知 -->
+    <!-- 鎖定通知 (旼冬🐶) -->
     <div class="lock-notifs">
       <div class="notif-card" id="notif-ig">
         <div class="notif-left">
@@ -1347,7 +1440,7 @@
     </div>
   </div>
 
-  <!-- 3. 主畫面 (Home 底色微透淺色漸層) -->
+  <!-- 3. 主畫面 (Home) -->
   <div id="home" class="scr">
     <div class="widgets-row">
       <div class="ios-widget cal-widget" data-target="calendar">
@@ -1387,7 +1480,7 @@
         <span class="name">備忘錄</span>
       </div>
 
-      <!-- 相簿 (更換為範例經典立體花瓣 Icon) -->
+      <!-- 相簿 -->
       <div class="icon" data-target="photos">
         <div class="img" style="background:#fff;">
           <svg viewBox="0 0 100 100">
@@ -1404,7 +1497,7 @@
         <span class="name">照片</span>
       </div>
 
-      <!-- 設定 (簡潔低飽和單層金屬光澤齒輪) -->
+      <!-- 設定 -->
       <div class="icon" data-target="settings">
         <div class="img" style="background:#8e8e93;">
           <svg viewBox="0 0 100 100">
@@ -1489,7 +1582,6 @@
           </svg>
         </div>
       </div>
-      <!-- 相機 (經典黑機身金鏡頭 Icon) -->
       <div class="icon" data-target="camera">
         <div class="img" style="background:#e5e5ea;">
           <svg viewBox="0 0 100 100">
@@ -1520,7 +1612,7 @@
     <iframe 
       id="iframe-instagram"
       src="https://u11150003-arch.github.io/karina_ig/"
-      allow="autoplay *; camera; microphone; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allow="autoplay; camera; microphone; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
     ></iframe>
   </div>
@@ -1645,7 +1737,7 @@
     </div>
   </div>
 
-  <!-- 10. KakaoTalk (隨興短句、無標點、無歐膩) -->
+  <!-- 10. KakaoTalk (含彈出鍵盤與打字自動回覆) -->
   <div id="app-chat" class="app-screen">
     <div class="kt-header">
       <span>聊天</span>
@@ -1695,25 +1787,44 @@
       </div>
     </div>
 
-    <!-- 獨立對話室 -->
+    <!-- 獨立對話室視窗 -->
     <div id="kt-room-view">
       <div class="kt-room-header">
         <span class="kt-back-btn" onclick="leaveRoom()">‹</span>
         <span id="kt-target-name">旼冬🐶</span>
       </div>
       <div class="kt-messages" id="kt-messages-box"></div>
+      
+      <!-- 輸入框 -->
       <div class="kt-input-bar">
-        <div class="kt-fake-input" id="kt-input-box" onclick="handleAutoChat()">點擊輸入訊息...</div>
-        <div class="kt-send-btn" onclick="handleAutoChat()">傳送</div>
+        <div class="kt-fake-input" id="kt-input-box" onclick="showKeyboard()">輸入訊息...</div>
+        <div class="kt-send-btn" onclick="triggerSend()">傳送</div>
+      </div>
+
+      <!-- 彈出式 iOS 擬真鍵盤 (完全比照 wonbin-phone) -->
+      <div class="ios-keyboard" id="ios-keyboard">
+        <div class="kb-row">
+          <div class="kb-key" onclick="typeNextChar()">ㄅ</div><div class="kb-key" onclick="typeNextChar()">ㄉ</div><div class="kb-key" onclick="typeNextChar()">ˇ</div><div class="kb-key" onclick="typeNextChar()">ˋ</div><div class="kb-key" onclick="typeNextChar()">ㄓ</div><div class="kb-key" onclick="typeNextChar()">ˊ</div><div class="kb-key" onclick="typeNextChar()">˙</div><div class="kb-key" onclick="typeNextChar()">ㄚ</div><div class="kb-key" onclick="typeNextChar()">ㄞ</div><div class="kb-key" onclick="typeNextChar()">ㄢ</div>
+        </div>
+        <div class="kb-row">
+          <div class="kb-key" onclick="typeNextChar()">ㄆ</div><div class="kb-key" onclick="typeNextChar()">ㄊ</div><div class="kb-key" onclick="typeNextChar()">ㄍ</div><div class="kb-key" onclick="typeNextChar()">ㄐ</div><div class="kb-key" onclick="typeNextChar()">ㄔ</div><div class="kb-key" onclick="typeNextChar()">ㄗ</div><div class="kb-key" onclick="typeNextChar()">ㄧ</div><div class="kb-key" onclick="typeNextChar()">ㄛ</div><div class="kb-key" onclick="typeNextChar()">ㄟ</div><div class="kb-key" onclick="typeNextChar()">ㄣ</div>
+        </div>
+        <div class="kb-row">
+          <div class="kb-key" onclick="typeNextChar()">ㄇ</div><div class="kb-key" onclick="typeNextChar()">ㄋ</div><div class="kb-key" onclick="typeNextChar()">ㄎ</div><div class="kb-key" onclick="typeNextChar()">ㄑ</div><div class="kb-key" onclick="typeNextChar()">ㄕ</div><div class="kb-key" onclick="typeNextChar()">ㄖ</div><div class="kb-key" onclick="typeNextChar()">ㄨ</div><div class="kb-key" onclick="typeNextChar()">ㄜ</div><div class="kb-key" onclick="typeNextChar()">ㄠ</div><div class="kb-key" onclick="typeNextChar()">ㄤ</div>
+        </div>
+        <div class="kb-row">
+          <div class="kb-key" style="flex:1.5;" onclick="hideKeyboard()">123</div>
+          <div class="kb-space" onclick="triggerSend()">空白鍵</div>
+          <div class="kb-key" style="flex:1.5; background:#0a84ff;" onclick="triggerSend()">換行</div>
+        </div>
       </div>
     </div>
   </div>
 
-  <!-- 11. 電話 App (純名、去掉 aespa) -->
+  <!-- 11. 電話 App -->
   <div id="app-phone" class="app-screen">
     <div class="phone-header">聯絡人</div>
     <div class="contacts-list">
-      <!-- 金旼炡 -->
       <div class="contact-item" onclick="startCall('金旼炡', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg')">
         <div class="contact-info">
           <div class="contact-avatar">
@@ -1727,7 +1838,6 @@
         <span style="font-size:18px; color:#44b069;">📞</span>
       </div>
 
-      <!-- 內永枝利 -->
       <div class="contact-item" onclick="startCall('內永枝利', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png')">
         <div class="contact-info">
           <div class="contact-avatar">
@@ -1741,7 +1851,6 @@
         <span style="font-size:18px; color:#44b069;">📞</span>
       </div>
 
-      <!-- 寧藝卓 -->
       <div class="contact-item" onclick="startCall('寧藝卓', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg')">
         <div class="contact-info">
           <div class="contact-avatar">
@@ -1757,7 +1866,7 @@
     </div>
   </div>
 
-  <!-- 12. 全螢幕來電彈窗 (各成員不同對話氣泡) -->
+  <!-- 12. 全螢幕來電彈窗 -->
   <div id="incoming-call-screen">
     <div>
       <div class="call-head-avatar">
@@ -1775,69 +1884,31 @@
     </div>
   </div>
 
-  <!-- 13. 相簿 App (照片與影片交叉擺放) -->
+  <!-- 13. 相簿 App (照片與影片交叉擺放 + 原生檢視頁面) -->
   <div id="app-photos" class="app-screen">
     <div class="photos-header">
       <div class="photos-title">圖庫</div>
       <div style="font-size:11px; color:#8e8e93;">精選照片與影片</div>
     </div>
-    <div class="photos-grid" id="photos-grid-box">
-      <!-- 1. 照片 (IMG_4810.jpeg) -->
-      <div class="gallery-item" onclick="openMedia('image', 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg')">
-        <img src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg" alt="p1">
-      </div>
-
-      <!-- 2. 影片 (karina_video_blowflower.mp4) -->
-      <div class="gallery-item" onclick="openMedia('video', 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_blowflower.mp4')">
-        <video src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_blowflower.mp4" muted playsinline></video>
-        <div class="video-play-tag">▶ 影片</div>
-      </div>
-
-      <!-- 3. 照片 (IMG_2050.jpeg) -->
-      <div class="gallery-item" onclick="openMedia('image', 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_2050.jpeg')">
-        <img src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_2050.jpeg" alt="p2">
-      </div>
-
-      <!-- 4. 影片 (karina_video_bowl.mp4) -->
-      <div class="gallery-item" onclick="openMedia('video', 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_bowl.mp4')">
-        <video src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_bowl.mp4" muted playsinline></video>
-        <div class="video-play-tag">▶ 影片</div>
-      </div>
-
-      <!-- 5. 照片 (修karina (328).jpeg) -->
-      <div class="gallery-item" onclick="openMedia('image', 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/%E4%BF%AEkarina%20(328).jpeg')">
-        <img src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/%E4%BF%AEkarina%20(328).jpeg" alt="p3">
-      </div>
-
-      <!-- 6. 影片 (karina_video_christmas.mp4) -->
-      <div class="gallery-item" onclick="openMedia('video', 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_christmas.mp4')">
-        <video src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_christmas.mp4" muted playsinline></video>
-        <div class="video-play-tag">▶ 影片</div>
-      </div>
-
-      <!-- 7. 照片 (IMG_6993.jpeg) -->
-      <div class="gallery-item" onclick="openMedia('image', 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_6993.jpeg')">
-        <img src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_6993.jpeg" alt="p4">
-      </div>
-
-      <!-- 8. 影片 (karina_video_japan.mp4) -->
-      <div class="gallery-item" onclick="openMedia('video', 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_japan.mp4')">
-        <video src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_japan.mp4" muted playsinline></video>
-        <div class="video-play-tag">▶ 影片</div>
-      </div>
-
-      <!-- 9. 照片 (IMG_7494.jpeg) -->
-      <div class="gallery-item" onclick="openMedia('image', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_7494.jpeg')">
-        <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_7494.jpeg" alt="p5">
-      </div>
-    </div>
+    <div class="photos-grid" id="photos-grid-box"></div>
   </div>
 
-  <!-- 多媒體放大彈窗 -->
-  <div id="media-modal">
-    <img id="media-modal-img" style="display:none;" alt="Zoomed">
-    <video id="media-modal-video" style="display:none;" controls autoplay playsinline></video>
-    <div class="modal-close-btn" onclick="closeMedia()">點擊關閉</div>
+  <!-- 原生相片全螢幕檢視器 (支援左右滑動切換照片，比照 wonbin-phone) -->
+  <div id="photo-viewer-page">
+    <div class="viewer-top-bar">
+      <span class="viewer-back" onclick="closePhotoViewer()">‹ 圖庫</span>
+      <span id="viewer-date-title">2026年 10月</span>
+      <span style="color:#0a84ff; cursor:pointer;">編輯</span>
+    </div>
+    <div class="viewer-content" id="viewer-content-box">
+      <img id="viewer-img" style="display:none;" alt="view">
+      <video id="viewer-video" style="display:none;" controls autoplay playsinline loop></video>
+    </div>
+    <div class="viewer-bottom-bar">
+      <span>⬆</span>
+      <span>♡</span>
+      <span>🗑</span>
+    </div>
   </div>
 
   <!-- 14. 相機 App -->
@@ -1924,7 +1995,7 @@
     dots.forEach(dot => dot.classList.remove('filled'));
   });
 
-  // 4. 通知點擊直達 App
+  // 4. 通知點擊
   document.getElementById('notif-ig').addEventListener('click', () => {
     lock.classList.add('off');
     openApp('instagram');
@@ -1982,7 +2053,8 @@
 
     stopCamera();
     leaveRoom();
-    closeMedia();
+    closePhotoViewer();
+    hideKeyboard();
   }
 
   // 左右滑動退出 App
@@ -1993,9 +2065,12 @@
 
   window.addEventListener('touchend', (e) => {
     const touchEndX = e.changedTouches[0].clientX;
-    if (touchEndX - touchStartX > 50) {
-      const isAnyAppOpen = Object.values(screens).some(s => s.classList.contains('active'));
-      if (isAnyAppOpen) goHome();
+    // 判斷在非相片滑動檢視器模式下退出
+    if (document.getElementById('photo-viewer-page').style.display !== 'flex') {
+      if (touchEndX - touchStartX > 50) {
+        const isAnyAppOpen = Object.values(screens).some(s => s.classList.contains('active'));
+        if (isAnyAppOpen) goHome();
+      }
     }
   }, { passive: true });
 
@@ -2009,19 +2084,20 @@
   }, { passive: true });
 
   homeBar.addEventListener('touchend', (e) => {
-    if (barStartY - e.changedTouches[0].clientY > 15) {
+    if (barStartY - e.changedTouches[0].clientY > 12) {
       goHome();
     }
   }, { passive: true });
 
-  // 7. KakaoTalk 隨興對話 (無標點符號、移除歐膩)
+  // 7. KakaoTalk (多次來回隨興對話 + 彈出鍵盤自動打字)
   const memberScripts = {
     '旼冬🐶': {
-      initial: '波妞昨晚太興奮了啦 🐶 咬著球一直暴衝 我整夜顧牠都沒睡 😭',
+      initial: '波妞昨晚太興奮了啦 咬著球一直暴衝 我整夜顧牠都沒睡 😭',
       flow: [
         { me: '哈哈哈哈波妞又發瘋了嗎 🐶', reply: '對啊一直要我陪牠玩 真的快睏扁了 今天換妳當波妞保姆 🥹' },
         { me: '好啦辛苦了 今天波妞交給我 妳好好補眠 💖', reply: '哇嗚嗚知珉最好了 肉乾我放在客廳電視櫃上喔 🐕✨' },
-        { me: '收到 等等練完舞我就回去餵牠', reply: '好 那我先去睡了 醒來再跟妳說 🐶' }
+        { me: '收到 等等練完舞我就回去餵牠', reply: '好 那我先去睡了 醒來再跟妳說 🐶' },
+        { me: '快去睡吧 別忘了吃點東西 💖', reply: '嗯嗯 睡醒再打給妳 💤' }
       ]
     },
     '寧': {
@@ -2029,14 +2105,16 @@
       flow: [
         { me: '是不是又掉在客廳沙發夾縫了 每次都塞在那邊 🛋️', reply: '啊 我昨天好像真的躺在沙發上聽歌耶' },
         { me: '幫妳翻了一下 真的在抱枕下面啦 找到囉', reply: '嗚哇救星 出門前幫我放桌上好嗎 ☕' },
-        { me: '放化妝台上了 別再弄丟囉 🦋', reply: '知道啦 等等練習室見 愛妳 💖' }
+        { me: '放化妝台上了 別再弄丟囉 🦋', reply: '知道啦 等等練習室見 愛妳 💖' },
+        { me: '要幫妳帶冰美式嗎', reply: '好啊 一杯冰美式 謝謝姐 ☕✨' }
       ]
     },
     '欸哩': {
       initial: '照片已經傳到雲端囉 妳看一下 ✨',
       flow: [
         { me: '收到了 調色超漂亮 ✨', reply: '對吧 就說那套黑色的很適合妳 🖤' },
-        { me: '明天去涉谷逛街嗎', reply: '好啊 想去買上次看中的那件外套 🛍️' }
+        { me: '明天去涉谷逛街嗎', reply: '好啊 想去買上次看中的那件外套 🛍️' },
+        { me: '下午兩點出發如何', reply: '沒問題 到時候涉谷站見 🖤' }
       ]
     }
   };
@@ -2058,13 +2136,33 @@
     msgBox.appendChild(initBubble);
 
     document.getElementById('kt-room-view').style.display = 'flex';
+    hideKeyboard();
   }
 
   function leaveRoom() {
     document.getElementById('kt-room-view').style.display = 'none';
+    hideKeyboard();
   }
 
-  function handleAutoChat() {
+  function showKeyboard() {
+    const kb = document.getElementById('ios-keyboard');
+    kb.style.display = 'flex';
+    // 自動帶入預設文字
+    const script = memberScripts[currentChatMember] || memberScripts['旼冬🐶'];
+    if (memberStep < script.flow.length) {
+      document.getElementById('kt-input-box').textContent = script.flow[memberStep].me;
+    }
+  }
+
+  function hideKeyboard() {
+    document.getElementById('ios-keyboard').style.display = 'none';
+  }
+
+  function typeNextChar() {
+    showKeyboard();
+  }
+
+  function triggerSend() {
     const script = memberScripts[currentChatMember] || memberScripts['旼冬🐶'];
     if (memberStep < script.flow.length) {
       const current = script.flow[memberStep];
@@ -2075,7 +2173,8 @@
       meBubble.textContent = current.me;
       msgBox.appendChild(meBubble);
       msgBox.scrollTop = msgBox.scrollHeight;
-      document.getElementById('kt-input-box').textContent = '對方正在輸入...';
+      document.getElementById('kt-input-box').textContent = '輸入訊息...';
+      hideKeyboard();
 
       setTimeout(() => {
         const themBubble = document.createElement('div');
@@ -2083,9 +2182,8 @@
         themBubble.textContent = current.reply;
         msgBox.appendChild(themBubble);
         msgBox.scrollTop = msgBox.scrollHeight;
-        document.getElementById('kt-input-box').textContent = '點擊輸入訊息...';
         memberStep++;
-      }, 900);
+      }, 800);
     }
   }
 
@@ -2112,7 +2210,7 @@
     closeNoteEditor();
   }
 
-  // 9. 電話通話管理 (各成員專屬不同對話、隨機輪流來電)
+  // 9. 電話通話管理 (低頻率隨機輪流來電)
   const phoneCallScripts = {
     '金旼炡': [
       { sender: '旼冬', text: '在幹嘛 🐶' },
@@ -2147,11 +2245,11 @@
   let callSecondCounter = null;
   let callDialogueTimer = null;
 
-  // 降低同成員來電頻率：每 180 秒隨機選一位成員來電
+  // 降低同成員來電頻率：每 240 秒輪流來電
   setInterval(() => {
     const randomCaller = callerList[Math.floor(Math.random() * callerList.length)];
     triggerIncomingCall(randomCaller.name, randomCaller.avatar);
-  }, 180000);
+  }, 240000);
 
   function triggerIncomingCall(name, avatar) {
     currentCallerName = name;
@@ -2206,32 +2304,96 @@
     callScreen.style.display = 'none';
   }
 
-  // 10. 相簿多媒體預覽彈窗
-  function openMedia(type, url) {
-    const modal = document.getElementById('media-modal');
-    const modalImg = document.getElementById('media-modal-img');
-    const modalVideo = document.getElementById('media-modal-video');
+  // 10. 相簿清單 (交叉混排照片與影片，支援左右滑動切換)
+  const mediaGallery = [
+    { type: 'image', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg', date: '2026年 10月' },
+    { type: 'video', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_blowflower.mp4', date: '2026年 10月' },
+    { type: 'image', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_2050.jpeg', date: '2026年 9月' },
+    { type: 'video', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_bowl.mp4', date: '2026年 9月' },
+    { type: 'image', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/%E4%BF%AEkarina%20(328).jpeg', date: '2026年 8月' },
+    { type: 'video', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_christmas.mp4', date: '2026年 8月' },
+    { type: 'image', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_6993.jpeg', date: '2026年 7月' },
+    { type: 'video', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_japan.mp4', date: '2026年 7月' },
+    { type: 'image', url: 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_7494.jpeg', date: '2026年 6月' },
+    { type: 'video', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_tamagotchi.mp4', date: '2026年 6月' }
+  ];
 
-    if (type === 'image') {
-      modalVideo.pause();
-      modalVideo.style.display = 'none';
-      modalImg.src = url;
-      modalImg.style.display = 'block';
+  let currentMediaIndex = 0;
+
+  function renderGallery() {
+    const box = document.getElementById('photos-grid-box');
+    box.innerHTML = '';
+    mediaGallery.forEach((item, idx) => {
+      const div = document.createElement('div');
+      div.className = 'gallery-item';
+      div.onclick = () => openPhotoViewer(idx);
+
+      if (item.type === 'image') {
+        div.innerHTML = `<img src="${item.url}" alt="p">`;
+      } else {
+        div.innerHTML = `<video src="${item.url}" muted playsinline></video><div class="video-play-tag">▶ 影片</div>`;
+      }
+      box.appendChild(div);
+    });
+  }
+  renderGallery();
+
+  function openPhotoViewer(index) {
+    currentMediaIndex = index;
+    const page = document.getElementById('photo-viewer-page');
+    page.style.display = 'flex';
+    updateViewerContent();
+  }
+
+  function updateViewerContent() {
+    const item = mediaGallery[currentMediaIndex];
+    document.getElementById('viewer-date-title').textContent = item.date;
+    const imgEl = document.getElementById('viewer-img');
+    const vidEl = document.getElementById('viewer-video');
+
+    if (item.type === 'image') {
+      vidEl.pause();
+      vidEl.style.display = 'none';
+      imgEl.src = item.url;
+      imgEl.style.display = 'block';
     } else {
-      modalImg.style.display = 'none';
-      modalVideo.src = url;
-      modalVideo.style.display = 'block';
-      modalVideo.play();
+      imgEl.style.display = 'none';
+      vidEl.src = item.url;
+      vidEl.style.display = 'block';
+      vidEl.play();
     }
-    modal.style.display = 'flex';
   }
 
-  function closeMedia() {
-    const modal = document.getElementById('media-modal');
-    const modalVideo = document.getElementById('media-modal-video');
-    modalVideo.pause();
-    modal.style.display = 'none';
+  function closePhotoViewer() {
+    const page = document.getElementById('photo-viewer-page');
+    const vidEl = document.getElementById('viewer-video');
+    vidEl.pause();
+    page.style.display = 'none';
   }
+
+  // 相片檢視器左右滑動監聽 (Swipe to Next/Prev)
+  let viewerTouchStartX = 0;
+  const viewerBox = document.getElementById('photo-viewer-page');
+  viewerBox.addEventListener('touchstart', (e) => {
+    viewerTouchStartX = e.touches[0].clientX;
+  }, { passive: true });
+
+  viewerBox.addEventListener('touchend', (e) => {
+    const deltaX = e.changedTouches[0].clientX - viewerTouchStartX;
+    if (deltaX > 40) {
+      // 往右滑：上一張
+      if (currentMediaIndex > 0) {
+        currentMediaIndex--;
+        updateViewerContent();
+      }
+    } else if (deltaX < -40) {
+      // 往左滑：下一張
+      if (currentMediaIndex < mediaGallery.length - 1) {
+        currentMediaIndex++;
+        updateViewerContent();
+      }
+    }
+  }, { passive: true });
 
   // 11. 相機功能
   let currentStream = null;
