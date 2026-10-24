@@ -33,7 +33,7 @@
       color: #fff;
     }
 
-    /* 手機機身容器 (手機端滿版貼合螢幕；電腦端保留外框) */
+    /* 手機機身容器 (手機端滿版；電腦端保留外框) */
     #phone {
       position: relative;
       width: 100vw;
@@ -572,17 +572,17 @@
       width: 52px;
     }
 
-    /* ================= 4. App 視窗通用 (100% 滿版遮蔽底層，絕不露出桌面破綻) ================= */
+    /* ================= 4. App 視窗通用 (完全隔離，預設不顯示) ================= */
     .app-screen {
       position: absolute;
       inset: 0;
       background: #000;
       z-index: 2000;
-      display: none;
+      display: none !important;
       flex-direction: column;
     }
     .app-screen.active {
-      display: flex;
+      display: flex !important;
     }
 
     #app-playlist {
@@ -616,8 +616,6 @@
       background: #fff;
       color: #000;
       padding-top: 44px;
-      display: flex;
-      flex-direction: column;
     }
     .cal-app-header {
       padding: 12px 18px;
@@ -744,13 +742,11 @@
       max-width: 85%;
     }
 
-    /* ================= 7. 備忘錄 App (點擊查看詳細內文) ================= */
+    /* ================= 7. 備忘錄 App ================= */
     #app-notes {
       background: #000;
       color: #fff;
       padding-top: 44px;
-      display: flex;
-      flex-direction: column;
       position: absolute;
       inset: 0;
     }
@@ -958,8 +954,6 @@
       background: #191919;
       color: #fff;
       padding-top: 44px;
-      display: flex;
-      flex-direction: column;
     }
     .kt-header {
       padding: 12px 16px;
@@ -1150,13 +1144,11 @@
       cursor: pointer;
     }
 
-    /* ================= 10. 電話 App (純白主題最近通話) ================= */
+    /* ================= 10. 電話 App ================= */
     #app-phone {
       background: #fff;
       color: #000;
       padding-top: 44px;
-      display: flex;
-      flex-direction: column;
     }
     .phone-top-bar {
       padding: 10px 16px 4px;
@@ -1269,7 +1261,6 @@
       font-size: 16px;
     }
 
-    /* 撥通畫面 (無表情符號、純淨語音文字) */
     #calling-screen {
       position: absolute;
       inset: 0;
@@ -1353,13 +1344,11 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.4);
     }
 
-    /* ================= 11. 相簿 App (含下方照片膠卷縮圖 Bar) ================= */
+    /* ================= 11. 相簿 App (完全隔離預設隱藏) ================= */
     #app-photos {
       background: #fff;
       color: #000;
       padding-top: 44px;
-      display: flex;
-      flex-direction: column;
     }
     .photos-main-scroll {
       flex: 1;
@@ -1440,7 +1429,6 @@
       box-shadow: 0 1px 4px rgba(0,0,0,0.1);
     }
 
-    /* 原生相片單張檢視器 (帶下方膠卷縮圖) */
     #photo-viewer-page {
       position: absolute;
       inset: 0;
@@ -1476,7 +1464,6 @@
       max-height: 100%;
       object-fit: contain;
     }
-    /* 下方相片膠卷縮圖欄 (Filmstrip Thumbnail Bar) */
     .viewer-filmstrip {
       height: 48px;
       background: #111;
@@ -1516,12 +1503,9 @@
       border-top: 0.5px solid #222;
     }
 
-    /* ================= 12. 相機 App ================= */
+    /* ================= 12. 相機 App (完全隔離預設隱藏) ================= */
     #app-camera {
       background: #000;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
       padding-top: 44px;
       position: relative;
     }
@@ -1644,7 +1628,7 @@
       background: #fff;
     }
 
-    /* 底部 Home 條 */
+    /* 底部 Home 條 (限制極小高度防止誤觸閃退) */
     .home-touch-area {
       position: absolute;
       bottom: 0;
@@ -1709,7 +1693,7 @@
     <div class="top-banner-time">現在</div>
   </div>
 
-  <!-- 1. 鎖定畫面 -->
+  <!-- 1. 鎖定畫面 (唯一初始畫面) -->
   <div id="lock" class="scr">
     <div class="lock-top">
       <div class="d" id="lock-date">10月23日週五</div>
@@ -1786,7 +1770,6 @@
   <!-- 3. 主畫面 (Home) -->
   <div id="home" class="scr">
     <div class="widgets-row">
-      <!-- 點擊進入日曆 App (solo彩排) -->
       <div class="ios-widget cal-widget" data-target="calendar">
         <div>
           <div class="day-name">星期五</div>
@@ -1797,7 +1780,6 @@
           <div>solo彩排</div>
         </div>
       </div>
-      <!-- Playlist 莫蘭迪低飽和質感綠 -->
       <div class="ios-widget music-widget" data-target="playlist">
         <div class="m-top">
           <span style="font-size:11px; font-weight:700;">PLAYLIST</span>
@@ -1952,7 +1934,7 @@
     ></iframe>
   </div>
 
-  <!-- 5. Instagram 視窗 (獨立頂層圖層，絕不露出底層破綻) -->
+  <!-- 5. Instagram 視窗 -->
   <div id="app-instagram" class="app-screen">
     <iframe 
       id="iframe-instagram"
@@ -2014,7 +1996,7 @@
     </div>
   </div>
 
-  <!-- 8. 備忘錄 App (支援點擊查看詳細內文) -->
+  <!-- 8. 備忘錄 App -->
   <div id="app-notes" class="app-screen">
     <div class="notes-header">
       <div class="notes-title">所有 iCloud 備忘錄</div>
@@ -2103,7 +2085,7 @@
     </div>
   </div>
 
-  <!-- 10. KakaoTalk (約火鍋、無過度符號、彈出式注音鍵盤) -->
+  <!-- 10. KakaoTalk -->
   <div id="app-chat" class="app-screen">
     <div class="kt-header">
       <span>聊天</span>
@@ -2187,7 +2169,7 @@
     </div>
   </div>
 
-  <!-- 11. 電話 App (純白主題最近通話) -->
+  <!-- 11. 電話 App -->
   <div id="app-phone" class="app-screen">
     <div class="phone-top-bar">
       <span class="phone-edit-btn">編輯</span>
@@ -2245,7 +2227,7 @@
     </div>
   </div>
 
-  <!-- 12. 全螢幕撥通畫面 (無表情符號、純淨通話) -->
+  <!-- 12. 全螢幕撥通畫面 -->
   <div id="incoming-call-screen">
     <div>
       <div class="call-head-avatar">
@@ -2263,7 +2245,7 @@
     </div>
   </div>
 
-  <!-- 13. 相簿 App (純照片無影片、含下方照片膠卷縮圖 Bar) -->
+  <!-- 13. 相簿 App -->
   <div id="app-photos" class="app-screen">
     <div class="photos-main-scroll">
       <div class="photos-top-bar">
@@ -2295,7 +2277,7 @@
     </div>
   </div>
 
-  <!-- 相片單張檢視器 (帶下方膠卷縮圖列，支援左右滑動切換) -->
+  <!-- 相片單張檢視器 (帶下方膠卷縮圖) -->
   <div id="photo-viewer-page">
     <div class="viewer-top-bar">
       <span class="viewer-back" onclick="closePhotoViewer()">‹ 圖庫</span>
@@ -2305,7 +2287,6 @@
     <div class="viewer-content" id="viewer-content-box">
       <img id="viewer-img" alt="view">
     </div>
-    <!-- 下方相片膠卷縮圖欄 -->
     <div class="viewer-filmstrip" id="viewer-filmstrip-bar"></div>
     <div class="viewer-bottom-bar">
       <span>⬆</span>
@@ -2314,7 +2295,7 @@
     </div>
   </div>
 
-  <!-- 14. 相機 App (九宮格白線、變焦標籤、點相簿直接跳轉) -->
+  <!-- 14. 相機 App -->
   <div id="app-camera" class="app-screen">
     <div class="cam-top-controls">
       <span>⚡ 關閉</span>
@@ -2358,7 +2339,7 @@
     </div>
   </div>
 
-  <!-- 底部 Home 條 -->
+  <!-- 底部 Home 條 (限制極小高度防止誤觸閃退) -->
   <div class="home-touch-area" id="home-indicator">
     <div class="bar"></div>
   </div>
@@ -2469,7 +2450,7 @@
     enterRoom('旼冬🐶');
   });
 
-  // 5. App 視窗管理核心 (徹底防透底)
+  // 5. App 視窗管理核心 (切換 class active)
   const screens = {
     playlist: document.getElementById('app-playlist'),
     instagram: document.getElementById('app-instagram'),
@@ -2564,7 +2545,7 @@
     }
   }, { passive: true });
 
-  // 7. KakaoTalk 專屬劇情 (旼冬更親近、欸哩日常隨興)
+  // 7. KakaoTalk 專屬劇情
   const memberScripts = {
     '旼冬🐶': {
       initial: '練完舞要不要一起去吃火鍋 看好一家麻辣鍋了',
@@ -2697,7 +2678,7 @@
     closeNoteEditor();
   }
 
-  // 9. 電話通話管理 (通話全程無表情符號、內容完全區隔)
+  // 9. 電話通話管理
   const phoneCallScripts = {
     '金旼炡': [
       { sender: '旼冬', text: '在幹嘛' },
@@ -2791,7 +2772,7 @@
     callScreen.style.display = 'none';
   }
 
-  // 10. 相簿清單 (含下方真實膠卷縮圖橫條)
+  // 10. 相簿清單 (含下方膠卷縮圖)
   const albumData = {
     '10': [
       'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg',
@@ -2832,7 +2813,6 @@
       });
     });
 
-    // 渲染下方小縮圖膠卷列
     const filmstrip = document.getElementById('viewer-filmstrip-bar');
     filmstrip.innerHTML = '';
     allPhotos.forEach((item, idx) => {
@@ -2863,7 +2843,6 @@
     const img = document.getElementById('viewer-img');
     img.src = item.url;
 
-    // 更新膠卷縮圖高亮
     document.querySelectorAll('.filmstrip-thumb').forEach((el, idx) => {
       if (idx === currentPhotoIndex) el.classList.add('active');
       else el.classList.remove('active');
