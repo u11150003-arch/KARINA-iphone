@@ -62,7 +62,7 @@
       }
     }
 
-    /* 頂部狀態列：全域 pointer-events: none 絕不攔截下層點擊 */
+    /* 頂部狀態列 */
     .status {
       position: absolute;
       top: 0;
@@ -79,9 +79,11 @@
       pointer-events: none !important;
       color: #fff;
       font-variant-numeric: tabular-nums;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
     }
     .status.black-theme {
       color: #000 !important;
+      text-shadow: none !important;
     }
     .status.black-theme .c-bar {
       background: #000 !important;
@@ -115,7 +117,7 @@
       padding: 2px 8px;
       border-radius: 12px;
       backdrop-filter: blur(12px);
-      pointer-events: auto !important; /* 只有返回按鈕允許點擊 */
+      pointer-events: auto !important;
     }
     .status-right {
       display: flex;
@@ -253,7 +255,7 @@
       transition: transform 0.38s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.32s ease;
     }
 
-    /* ================= 1. 鎖定畫面 ================= */
+    /* ================= 1. 鎖定畫面 (加強時間陰影防融合) ================= */
     #lock {
       z-index: 500;
       display: flex;
@@ -266,6 +268,18 @@
       background-size: cover;
       background-repeat: no-repeat;
       pointer-events: auto !important;
+    }
+    #lock::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.22); /* 加上極淡半透明黑幕避免跟背景融在一起 */
+      pointer-events: none;
+      z-index: 1;
+    }
+    #lock > * {
+      position: relative;
+      z-index: 2;
     }
     #lock.off {
       transform: translateY(-100%);
@@ -281,10 +295,10 @@
     }
     .lock-top .d {
       font-size: 14.5px;
-      font-weight: 500;
-      color: rgba(255, 255, 255, 0.95);
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.98);
       margin-bottom: 0px;
-      text-shadow: 0 1px 8px rgba(0,0,0,0.6);
+      text-shadow: 0 2px 10px rgba(0,0,0,0.85);
     }
     .lock-top .t {
       font-size: 68px;
@@ -293,10 +307,8 @@
       line-height: 0.9;
       font-variant-numeric: tabular-nums;
       font-family: "Montserrat", sans-serif;
-      background: linear-gradient(180deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.48) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      filter: drop-shadow(0 4px 14px rgba(0,0,0,0.45));
+      color: #fff;
+      text-shadow: 0 4px 20px rgba(0,0,0,0.9);
     }
 
     /* 鎖定通知 */
@@ -311,7 +323,7 @@
       pointer-events: auto;
     }
     .notif-card {
-      background: rgba(30, 30, 34, 0.78);
+      background: rgba(30, 30, 34, 0.82);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
       border-radius: 16px;
@@ -320,8 +332,8 @@
       align-items: center;
       justify-content: space-between;
       cursor: pointer;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-      border: 0.5px solid rgba(255,255,255,0.12);
+      box-shadow: 0 4px 16px rgba(0,0,0,0.35);
+      border: 0.5px solid rgba(255,255,255,0.15);
       transform: translateY(25px);
       opacity: 0;
       animation: notifSlideUp 0.55s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
@@ -357,7 +369,7 @@
     }
     .notif-desc {
       font-size: 11px;
-      color: rgba(255, 255, 255, 0.82);
+      color: rgba(255, 255, 255, 0.85);
     }
     .notif-time {
       font-size: 9.5px;
@@ -365,7 +377,6 @@
       align-self: flex-start;
     }
 
-    /* 語言按鈕放置在解鎖文字正上方 */
     .lock-bottom {
       display: flex;
       flex-direction: column;
@@ -383,7 +394,7 @@
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.55);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       padding: 4px 14px;
@@ -391,7 +402,7 @@
       font-size: 11.5px;
       color: #fff;
       cursor: pointer;
-      border: 0.5px solid rgba(255,255,255,0.22);
+      border: 0.5px solid rgba(255,255,255,0.25);
       pointer-events: auto;
     }
     .earth-icon-svg {
@@ -431,9 +442,10 @@
     #hint {
       font-size: 11.5px;
       font-weight: 500;
-      opacity: 0.9;
+      opacity: 0.95;
       cursor: pointer;
       pointer-events: auto;
+      text-shadow: 0 1px 4px rgba(0,0,0,0.8);
     }
 
     /* 語言選擇彈窗 */
@@ -1312,13 +1324,11 @@
       cursor: pointer;
     }
 
-    /* ================= 10. 電話 App (還原最初經典全黑、保證直接撥通) ================= */
+    /* ================= 10. 電話 App (還原最初經典全黑、保證撥入播出) ================= */
     #app-phone {
       background: #000;
       color: #fff;
       padding-top: 44px;
-      display: flex;
-      flex-direction: column;
     }
     .phone-header-title {
       font-size: 26px;
@@ -1542,7 +1552,6 @@
       box-shadow: 0 1px 4px rgba(0,0,0,0.1);
     }
 
-    /* 原生相片單張檢視器 */
     #photo-viewer-page {
       position: absolute;
       inset: 0;
@@ -1607,7 +1616,6 @@
       height: 100%;
       object-fit: cover;
     }
-    /* 底部 5 大細線條功能列 */
     .viewer-bottom-bar {
       height: 48px;
       display: flex;
@@ -2397,7 +2405,7 @@
     </div>
   </div>
 
-  <!-- 11. 電話 App -->
+  <!-- 11. 電話 App (全黑介面、保證撥入播出) -->
   <div id="app-phone" class="app-screen">
     <div class="phone-header-title" id="phone-header-main-title">聯絡人</div>
     <div class="phone-contacts-container">
@@ -2566,11 +2574,29 @@
   let currentLanguage = 'zh';
   let pendingAppAfterUnlock = null;
 
+  // Web Audio API 提示音引擎（產生清脆的馬林巴琴提醒聲）
+  function playAlertSound() {
+    try {
+      const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(880, audioCtx.currentTime); // A5
+      osc.frequency.exponentialRampToValueAtTime(1760, audioCtx.currentTime + 0.15); // A6
+      gain.gain.setValueAtTime(0.15, audioCtx.currentTime);
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.3);
+    } catch (e) {}
+  }
+
   const notesDataZh = [
     { title: '⚠️ 系統操作指引', desc: '若介面操作不順，請聯繫 @kelly_lee_805', isGuide: true },
     { title: '《在樹下傳達神諭的貓》青山美智子', desc: '那些猛烈的不甘心與焦躁，跑完後將隨汗水滑落...', content: `[第一片] 朝西\n朝大地用力一蹬，衝破迎面而來的風。我的雙腿愈是用力，視野就以愈快的速度往後飛逝。將眼前的建築、行道樹和人群不斷抛在腦後。過去了，過去了，都過去了。\n那些猛烈的不甘心與焦躁，跑完後將隨汗水滑落，大部分都變得無所謂。如果想過平穩的人生，這種「怎樣都無所謂」的感覺就很重要。\n因為無所謂所以忘得掉。討厭的事對自己而言，多半是怎樣都無所謂的事。\n那些無法讓我擁有幸福心情的事沒有記住的價值。p9\n\n[第六片] 正中間\n柔軟強韌的毛，下面是一層薄薄的肉，再下面有骨頭。我感受著這一團溫暖的生命。貓不會說謊。我沒必要硬逼自己笑。也不用顧慮無謂的事。誠實的貓陪在誠實的我身邊，這件事帶給我非常安詳平靜的心情。p216\n\n[第六片] 正中間\n「會認為道路兩邊是角落的只有人類吧。苔蘚說不定認為自己活在地球的中心。」\n自己所在的地方就是正中間。自己真正認為的事情就是正中間。自己心裡的正中間。那就是這個世界的正中間。p246` },
     { title: '《私人信箱一一○號的郵件》李到禹', desc: '涼爽拂面的風，揚起了真率的髮絲。顯高的秋天天空...', content: `涼爽拂面的風，揚起了真率的髮絲。顯高的秋天天空，蔚藍得耀眼。不見絲毫瑕疵，不禁令人錯覺首爾的天空沒有結界。在這裏生活了十二年，始終認為首爾是異鄉的真率，今天第一次感覺置身首爾天空下的自己，有了容身之處，恰似第二個故鄉一樣。很快，她便領悟，那是因為愛情找上了自己。\n偶爾.…出乎意料的話語，總能戰勝人的意志，浮出水面。真率懷抱內心氾濫的遺憾，注視著建。感受她的目光的建，不以為意地轉頭看著真率。建疑惑地挑眉，真率情不自禁地凝望著他，開口說道：\n「我…有話想說。」\n他只是默不作聲地看著真率，「我……愛你。」\n唉，即使是這種不可置信的瞬間，為什麼山上的空氣依然如此清爽？為什麼風依然如此沁涼？為什麼秋天的氣息依然使人心曠种怡？儘管心臟撲通、撲通地跳，雙手緊緊交扣，真率卻不感畏懼地站在原地。是啊，那是她的真心話。真心話鼓吹著自己告白，真心話影響著自己的生活。無論聽到什麼答案，她都不會後悔。不定，他早就知道了…我的心。\n他靜靜看了看她，淡然地開口：「或許只是轉瞬即逝的風。」\n雖然真率的內心一隅有些灼痛，卻又不氣餒地低聲說道：\n「或許是吧…不過…我想，只有我最清楚自己的心。此刻的我的心…每次面對你的我心…我想，就是愛。」。— p.213-214\n\n「可以多給我一點時間嗎？多一點……整理的時間。我….會好好正視自己的心。」「……好。」\n不發一語點著頭的真率，也將目光轉向下方的街道。數之不盡的念頭，如洶湧波濤在她心底無聲翻湧。即使不形於色，沿著山脊吹拂而下的風，早已陣陣安撫著內在悄然沸騰的情緒。\n對現在她而言，根本無從預測未來會發生什麼事。真率只是在心裏暗自呢喃，無論結果如何，自己再也不會討厭首爾，不會否定這座城市帶給自己的任何回憶。無論是多麼孤單、辛苦時光，這裏始終是認識那個男子的城市，自己絕不會恨它。某個秋日週未的上午，被豔陽輝映得亮白的山城郭前。— p.215\n\n不發一語的建靠著她的額頭，自驚自地陷入沉思。經過片刻，借不自禁的情緒，引領著他親吩眼前不敢大聲呼吸的她的頭頂、額頭.….由上至下的暖和氣息，重新找上了她的雙唇。不過，這次並沒有就此離開。一個甚至能感受嘴唇內側的溫潤觸感，緩慢卻溫柔的吻。終於，真率紅唇微張，他環抱她的雙頰，長驅直入她的口中。她心臟瘋也似跳動，扶著樓梯的手也無意識地開始用力。一股溫熱的觸感，從輕托自己下巴的建的手湧現。\n這是愛嗎？\n真率的心悄悄問著。第二次的吻，是你的愛嗎？如果不是.….難道只是如結界般存在的夜故宮，釀造而成的剎那嗎？\n建緩緩停下親吻，抬起頭。置身連月光也無從感知的漆黑之中，真率噙著疑惑的目光，仰望著他。既清楚現在不是詢問他心意時機，卻又驅逐不了漫溢心底的可悲疑問。建神色凝重地俯視她：\n「..還記得我之前說過話嗎？我啊，如果有了自己愛的人…….一定不會錯過對方，只會使盡全力握緊她的手，牢牢抱在懷裏。對自己的女人，我一定會這麼做。」\n真率似懂非懂地點點頭，「我不是個心存非分之想的傢伙.…今天，我觸摸了妳一整天，在仁寺洞茶館搭妳的肩，在這裹擁抱妳..我的手，總是不由自主朝妳而去。」\n建低聲嘆了一口氣，稍微拉開與真率的距離後，用手指撥撥自己的頭髮。\n「雖然我不知道愛是什麼...如果這不是愛，那是什麼？」— p.229-230` },
-    { title: '《五十人：得到與失去，始終會成為一種平衡》鄭世朗', desc: '[李煥毅] [文宇南] [韓圭翼] 摘錄金句集', content: `[李煥毅]\n煥毅從來沒有如此害怕過，如今他卻感到害怕了，他怕自己是和如此難以理解的人結婚的事實，要是有發明出某種特殊的攝影器材可以拍出尹娜複雜的內心世界，煥毅應該會埋首學習如何操作那台機器，只要能讓他一目瞭然地看穿尹娜內心哪裡受傷、哪裡被摧毀就好……煥毅想著想著，在沙發上睡著了，他睡得很淺，感覺床頭邊隨時會開出邪惡的花朵。\n凌晨醒來時，他發現尹娜傳了簡訊給他。\n煥毅看完簡訊以後準備重新入睡，他下意識地擺動著手指，只為了撫摸尹娜的髮絲。\n看來他的手指忘記了尹娜不在身旁的事實，而任意擺動著。\n最後，他摸到了 X光婚紗照的相框邊角。\n\n[文宇南]\n善美把宇南拉起身，雙腳踩在宇南的腳背上。這已經不是第一次了。宇南覺得善美剛洗完澡還有些濕氣、輕巧、白皙的那雙腳簡直完美無瑕，雖然當初也不是特別因為腳而結婚，但是能夠每天看見對方美麗的部分依然是很偷快的事情。善美踩著宇南的腳背，兩人開始在音樂中漫舞。\n兩名早已熟透的中年人士各自回想著兒時踩在父親腳背上共舞的畫面，並試著去想像對方的童年，有點感傷也有點懷念，所以他們一直跳到善美的腳徹底乾爽沒有濕氣為止。\n宇南親吻了善美的眼角，由於低頭低得太用力，導致耳朵有點拉扯到的感覺。宇南心想，就算哪天善美的雙眼皮變成了五摺或六摺，應該也會美麗依舊。\n\n[韓圭翼]\n今天的豆漿冷麵味道還會和平常一樣嗎？圭翼小心翼翼地嚐了一口，當內心被人用亂刀砍過導致傷痕累累，就連查看狀態都於心不忍時，就必須依賴單純的感覺系統來對自己進行診斷，而現在這碗豆漿冷麵就是圭翼的診斷用藥，他細細咀嚼麵條，然後捧起碗來喝下香醇濃郁的冰涼豆漿。\n嗯，是一樣的味道，這樣就表示自己沒事。` },
+    { title: '《五十人：得到與失去，始終會成為一種平衡》鄭世朗', desc: '[李煥毅] [文宇南] [韓圭翼] 摘錄金句集', content: `[李煥毅]\n煥毅從來沒有如此害怕過，如今他卻感到害怕了，他怕自己是和如此難以理解的人結婚的事實，要是有發明出某種特殊的攝影器材可以拍出尹娜複雜的內心世界，煥毅應該會埋首學習如何操作那台機器，只要能讓他一目瞭然地看穿尹娜內心哪裡受傷、哪裡被摧毀就好……煥毅想著想著，在沙發上睡著了，他睡得很淺，感覺床頭邊隨時會開出邪惡的花朵。\n凌晨醒來時，他發現尹娜傳了簡訊給他。\n煥毅看完簡訊以後準備重新入睡，他下意識地擺動著手指，只為了撫摸尹娜\n的髮絲。\n看來他的手指忘記了尹娜不在身旁的事實，而任意擺動著。\n最後，他摸到了 X光婚紗照的相框邊角。\n\n[文宇南]\n善美把宇南拉起身，雙腳踩在宇南的腳背上。這已經不是第一次了。宇南覺得善美剛洗完澡還有些濕氣、輕巧、白皙的那雙腳簡直完美無瑕，雖然當初也不是特別因為腳而結婚，但是能夠每天看見對方美麗的部分依然是很偷快的事情。善美踩著宇南的腳背，兩人開始在音樂中漫舞。\n兩名早已熟透的中年人士各自回想著兒時踩在父親腳背上共舞的畫面，並試著去想像對方的童年，有點感傷也有點懷念，所以他們一直跳到善美的腳徹底乾爽沒有濕氣為止。\n宇南親吻了善美的眼角，由於低頭低得太用力，導致耳朵有點拉扯到的感覺。宇南心想，就算哪天善美的雙眼皮變成了五摺或六摺，應該也會美麗依舊。\n\n[韓圭翼]\n今天的豆漿冷麵味道還會和平常一樣嗎？圭翼小心翼翼地嚐了一口，當內心被人用亂刀砍過導致傷痕累累，就連查看狀態都於心不忍時，就必須依賴單純的感覺系統來對自己進行診斷，而現在這碗豆漿冷麵就是圭翼的診斷用藥，他細細咀嚼麵條，然後捧起碗來喝下香醇濃郁的冰涼豆漿。\n嗯，是一樣的味道，這樣就表示自己沒事。` },
     { title: 'UP Solo 舞台與 16bit 排舞事項', desc: '開場走位與麥克風音量確認 16bit 碎步點位校正', content: '開場走位與麥克風音量確認\n第二段副歌延伸舞台 16bit 碎步點位校正\n結尾 Pose 聚光燈鎖定' },
     { title: '宿舍採購清單', desc: '波妞飼料 零食肉乾 燕麥奶 卸妝棉', content: '波妞飼料\n零食肉乾\n燕麥奶\n卸妝棉\n維他命C' },
     { title: '跟冬約好吃飯', desc: '排舞結束後出發 去吃麻辣鍋 記得先吃胃藥', content: '排舞結束後出發 去吃麻辣鍋 記得先吃胃藥' }
@@ -2731,6 +2757,48 @@
 
   let currentPhotoIndex = 0;
 
+  function renderKeyboard() {
+    const container = document.getElementById('keyboard-keys-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (currentLanguage === 'en') {
+      container.innerHTML = `
+        <div class="kb-row">
+          <div class="kb-key" onclick="typeNextChar()">Q</div><div class="kb-key" onclick="typeNextChar()">W</div><div class="kb-key" onclick="typeNextChar()">E</div><div class="kb-key" onclick="typeNextChar()">R</div><div class="kb-key" onclick="typeNextChar()">T</div><div class="kb-key" onclick="typeNextChar()">Y</div><div class="kb-key" onclick="typeNextChar()">U</div><div class="kb-key" onclick="typeNextChar()">I</div><div class="kb-key" onclick="typeNextChar()">O</div><div class="kb-key" onclick="typeNextChar()">P</div>
+        </div>
+        <div class="kb-row">
+          <div class="kb-key" onclick="typeNextChar()">A</div><div class="kb-key" onclick="typeNextChar()">S</div><div class="kb-key" onclick="typeNextChar()">D</div><div class="kb-key" onclick="typeNextChar()">F</div><div class="kb-key" onclick="typeNextChar()">G</div><div class="kb-key" onclick="typeNextChar()">H</div><div class="kb-key" onclick="typeNextChar()">J</div><div class="kb-key" onclick="typeNextChar()">K</div><div class="kb-key" onclick="typeNextChar()">L</div>
+        </div>
+        <div class="kb-row">
+          <div class="kb-key" style="flex:1.2;" onclick="typeNextChar()">⇧</div><div class="kb-key" onclick="typeNextChar()">Z</div><div class="kb-key" onclick="typeNextChar()">X</div><div class="kb-key" onclick="typeNextChar()">C</div><div class="kb-key" onclick="typeNextChar()">V</div><div class="kb-key" onclick="typeNextChar()">B</div><div class="kb-key" onclick="typeNextChar()">N</div><div class="kb-key" onclick="typeNextChar()">M</div><div class="kb-key" style="flex:1.2;" onclick="hideKeyboard()">⌫</div>
+        </div>
+        <div class="kb-row">
+          <div class="kb-key" style="flex:1.5;" onclick="hideKeyboard()">123</div>
+          <div class="kb-space" onclick="triggerSend()">space</div>
+          <div class="kb-key" style="flex:1.5; background:#0a84ff;" onclick="triggerSend()">return</div>
+        </div>
+      `;
+    } else {
+      container.innerHTML = `
+        <div class="kb-row">
+          <div class="kb-key" onclick="typeNextChar()">ㄅ</div><div class="kb-key" onclick="typeNextChar()">ㄉ</div><div class="kb-key" onclick="typeNextChar()">ˇ</div><div class="kb-key" onclick="typeNextChar()">ˋ</div><div class="kb-key" onclick="typeNextChar()">ㄓ</div><div class="kb-key" onclick="typeNextChar()">ˊ</div><div class="kb-key" onclick="typeNextChar()">˙</div><div class="kb-key" onclick="typeNextChar()">ㄚ</div><div class="kb-key" onclick="typeNextChar()">ㄞ</div><div class="kb-key" onclick="typeNextChar()">ㄢ</div>
+        </div>
+        <div class="kb-row">
+          <div class="kb-key" onclick="typeNextChar()">ㄆ</div><div class="kb-key" onclick="typeNextChar()">ㄊ</div><div class="kb-key" onclick="typeNextChar()">ㄍ</div><div class="kb-key" onclick="typeNextChar()">ㄐ</div><div class="kb-key" onclick="typeNextChar()">ㄔ</div><div class="kb-key" onclick="typeNextChar()">ㄗ</div><div class="kb-key" onclick="typeNextChar()">ㄧ</div><div class="kb-key" onclick="typeNextChar()">ㄛ</div><div class="kb-key" onclick="typeNextChar()">ㄟ</div><div class="kb-key" onclick="typeNextChar()">ㄣ</div>
+        </div>
+        <div class="kb-row">
+          <div class="kb-key" onclick="typeNextChar()">ㄇ</div><div class="kb-key" onclick="typeNextChar()">ㄋ</div><div class="kb-key" onclick="typeNextChar()">ㄎ</div><div class="kb-key" onclick="typeNextChar()">ㄑ</div><div class="kb-key" onclick="typeNextChar()">ㄕ</div><div class="kb-key" onclick="typeNextChar()">ㄖ</div><div class="kb-key" onclick="typeNextChar()">ㄨ</div><div class="kb-key" onclick="typeNextChar()">ㄜ</div><div class="kb-key" onclick="typeNextChar()">ㄠ</div><div class="kb-key" onclick="typeNextChar()">ㄤ</div>
+        </div>
+        <div class="kb-row">
+          <div class="kb-key" style="flex:1.5;" onclick="hideKeyboard()">123</div>
+          <div class="kb-space" onclick="triggerSend()">空白鍵</div>
+          <div class="kb-key" style="flex:1.5; background:#0a84ff;" onclick="triggerSend()">換行</div>
+        </div>
+      `;
+    }
+  }
+
   function setLanguage(lang) {
     currentLanguage = lang;
     updateLanguageTexts();
@@ -2787,6 +2855,8 @@
     document.getElementById('kt-row-name-winter').textContent = t.chatNotifTitle;
     document.getElementById('kt-row-name-giselle').textContent = t.memberGiselle;
     document.getElementById('kt-row-name-ning').textContent = t.memberNing;
+    document.getElementById('kt-row-time-winter').textContent = t.winterTime;
+    document.getElementById('kt-row-time-giselle').textContent = t.giselleTime;
     document.getElementById('kt-row-preview-winter').textContent = t.previewWinter;
     document.getElementById('kt-row-preview-ning').textContent = t.previewNing;
     document.getElementById('kt-row-preview-giselle').textContent = t.previewGiselle;
@@ -2896,7 +2966,6 @@
     bottomGroup.style.opacity = '1';
   }, { passive: true });
 
-  // 點擊通知時先輸入密碼
   function handleNotifClick(targetApp) {
     pendingAppAfterUnlock = targetApp;
     openPasscode();
@@ -2953,6 +3022,7 @@
 
   function triggerBannerNotice() {
     setTimeout(() => {
+      playAlertSound(); // 播放提示音
       const banner = document.getElementById('top-notification-banner');
       banner.classList.add('show');
       setTimeout(() => {
@@ -3305,10 +3375,12 @@
   let callDialogueTimer = null;
 
   setTimeout(() => {
+    playAlertSound(); // 來電提醒聲
     triggerIncomingCall('Winter', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg');
   }, 35000);
 
   setInterval(() => {
+    playAlertSound(); // 來電提醒聲
     const randomCaller = callerList[Math.floor(Math.random() * callerList.length)];
     triggerIncomingCall(randomCaller.name, randomCaller.avatar);
   }, 160000);
