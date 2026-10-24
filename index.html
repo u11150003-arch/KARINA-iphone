@@ -95,7 +95,6 @@
       align-items: center;
       gap: 6px;
     }
-    /* 蜂窩網絡訊號 4 條線 */
     .cellular-icon {
       display: flex;
       align-items: flex-end;
@@ -107,10 +106,9 @@
       background: #fff;
       border-radius: 1px;
     }
-    /* Wi-Fi 原生向量圖示 */
     .wifi-svg {
-      width: 14px;
-      height: 14px;
+      width: 15px;
+      height: 15px;
       fill: #fff;
     }
     .bat {
@@ -286,7 +284,7 @@
       cursor: pointer;
     }
 
-    /* ================= 2. 密碼解鎖頁面 ================= */
+    /* ================= 2. 密碼解鎖頁面 (含取消與刪除鍵) ================= */
     #pass {
       z-index: 350;
       background: rgba(10, 10, 15, 0.7);
@@ -353,6 +351,16 @@
       letter-spacing: 1px;
       margin-top: 2px;
       opacity: 0.8;
+    }
+    .pass-footer-btn {
+      width: 68px;
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13.5px;
+      cursor: pointer;
+      color: #fff;
     }
 
     /* ================= 3. 主畫面 (Home) ================= */
@@ -519,11 +527,11 @@
       transform-origin: top center;
     }
 
-    /* Instagram 嵌入 */
+    /* Instagram 嵌入 (提升至最高層級防止被遮擋) */
     #app-instagram {
       background: #000;
       padding-top: 0;
-      position: relative;
+      z-index: 1500;
     }
     #app-instagram iframe {
       width: 100%;
@@ -667,7 +675,7 @@
       max-width: 85%;
     }
 
-    /* ================= 7. 備忘錄 App ================= */
+    /* ================= 7. 備忘錄 App (豐富內容) ================= */
     #app-notes {
       background: #000;
       color: #fff;
@@ -830,7 +838,7 @@
       filter: saturate(0.65);
     }
 
-    /* ================= 9. KakaoTalk (含彈出式鍵盤、自動打字與多次來回) ================= */
+    /* ================= 9. KakaoTalk ================= */
     #app-chat {
       background: #191919;
       color: #fff;
@@ -984,7 +992,6 @@
       cursor: pointer;
     }
 
-    /* iOS 擬真彈出鍵盤 (比照 wonbin-phone) */
     .ios-keyboard {
       background: #2b2b2e;
       padding: 8px 6px 20px;
@@ -1147,6 +1154,10 @@
       border-left: 3px solid #34c759;
       background: rgba(30, 45, 35, 0.85);
     }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
     .call-actions-row {
       width: 100%;
       display: flex;
@@ -1165,55 +1176,95 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.4);
     }
 
-    /* ================= 11. 相簿 App (全功能原生相簿檢視模式) ================= */
+    /* ================= 11. 相簿 App (完全還原 wonbin-phone 範例) ================= */
     #app-photos {
-      background: #000;
-      color: #fff;
-      padding-top: 46px;
+      background: #fff;
+      color: #000;
+      padding-top: 44px;
       display: flex;
       flex-direction: column;
     }
-    .photos-header {
-      padding: 8px 16px;
-    }
-    .photos-title {
-      font-size: 22px;
-      font-weight: 700;
-    }
-    .photos-grid {
+    .photos-main-scroll {
       flex: 1;
       overflow-y: auto;
+      padding-bottom: 70px;
+    }
+    .photos-top-bar {
+      padding: 14px 18px 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+    .photos-app-title {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    .photos-app-sub {
+      font-size: 12.5px;
+      color: #8e8e93;
+      margin-top: 2px;
+    }
+    .photos-select-btn {
+      color: #0a84ff;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .album-section-title {
+      font-size: 18px;
+      font-weight: 700;
+      padding: 16px 18px 8px;
+      color: #111;
+    }
+    .album-grid-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2.5px;
-      padding-bottom: 40px;
+      gap: 2px;
     }
-    .gallery-item {
-      position: relative;
-      width: 100%;
+    .album-cell {
       aspect-ratio: 1;
-      background: #111;
+      background: #f2f2f7;
       overflow: hidden;
       cursor: pointer;
     }
-    .gallery-item img, .gallery-item video {
+    .album-cell img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       display: block;
     }
-    .video-play-tag {
+
+    /* 底部磨砂切換膠囊 (年 / 月 / 所有照片) */
+    .album-dock-capsule {
       position: absolute;
-      bottom: 4px;
-      right: 4px;
-      background: rgba(0,0,0,0.6);
-      border-radius: 4px;
-      font-size: 10px;
-      padding: 1px 4px;
-      color: #fff;
+      bottom: 22px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(240, 240, 245, 0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 20px;
+      padding: 3px;
+      display: flex;
+      gap: 4px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
+      z-index: 10;
+    }
+    .capsule-btn {
+      padding: 5px 12px;
+      font-size: 11.5px;
+      font-weight: 600;
+      color: #666;
+      border-radius: 16px;
+      cursor: pointer;
+    }
+    .capsule-btn.active {
+      background: #fff;
+      color: #000;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.1);
     }
 
-    /* 原生相片全螢幕檢視器 (比照 wonbin-phone 支援左右滑動切換) */
+    /* 原生相片單張檢視器 (支援滑動切換) */
     #photo-viewer-page {
       position: absolute;
       inset: 0;
@@ -1244,7 +1295,7 @@
       overflow: hidden;
       position: relative;
     }
-    #viewer-img, #viewer-video {
+    #viewer-img {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
@@ -1259,12 +1310,22 @@
       border-top: 0.5px solid #222;
     }
 
+    /* ================= 12. 相機 App (真實取景框、輔助白線、變焦標籤) ================= */
     #app-camera {
       background: #000;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       padding-top: 44px;
+      position: relative;
+    }
+    .cam-top-controls {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 20px;
+      font-size: 12px;
+      color: #fff;
+      z-index: 2;
     }
     .camera-viewport {
       position: relative;
@@ -1288,17 +1349,85 @@
       position: absolute;
       inset: 0;
     }
+    /* 九宮格輔助白線 */
+    .cam-grid-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+    }
+    .cam-grid-line {
+      border: 0.5px solid rgba(255,255,255,0.18);
+    }
+    /* 變焦切換輪 (.5 1x 2 4 8) */
+    .cam-zoom-row {
+      position: absolute;
+      bottom: 120px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 14px;
+      font-size: 12px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.7);
+      z-index: 2;
+    }
+    .zoom-pill {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+    .zoom-pill.active {
+      color: #ffd60a;
+      background: rgba(0,0,0,0.6);
+    }
+    /* 拍照模式文字滑塊 */
+    .cam-modes-row {
+      display: flex;
+      justify-content: center;
+      gap: 22px;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 0;
+      color: rgba(255,255,255,0.65);
+    }
+    .cam-modes-row span.active {
+      color: #ffd60a;
+    }
     .cam-bottom-bar {
-      height: 95px;
+      height: 90px;
       background: #000;
       display: flex;
       align-items: center;
       justify-content: space-around;
-      padding: 0 20px;
+      padding: 0 24px;
+    }
+    /* 相簿縮圖按鍵：點擊跳至相簿 */
+    .cam-gallery-thumbnail {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1.5px solid #fff;
+      cursor: pointer;
+    }
+    .cam-gallery-thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     .shutter-btn {
-      width: 66px;
-      height: 66px;
+      width: 68px;
+      height: 68px;
       border-radius: 50%;
       border: 4px solid #fff;
       display: flex;
@@ -1307,8 +1436,8 @@
       cursor: pointer;
     }
     .shutter-btn-core {
-      width: 52px;
-      height: 52px;
+      width: 54px;
+      height: 54px;
       border-radius: 50%;
       background: #fff;
     }
@@ -1319,12 +1448,12 @@
       bottom: 0;
       left: 0;
       right: 0;
-      height: 16px;
+      height: 14px;
       z-index: 2100;
       display: flex;
       align-items: flex-end;
       justify-content: center;
-      padding-bottom: 5px;
+      padding-bottom: 4px;
       cursor: pointer;
       touch-action: none;
     }
@@ -1351,7 +1480,7 @@
     </div>
     <div class="island" id="dynamic-island"></div>
     <div class="status-right">
-      <!-- 蜂窩訊號 -->
+      <!-- 蜂窩訊號四格 -->
       <div class="cellular-icon">
         <div class="c-bar" style="height:3px;"></div>
         <div class="c-bar" style="height:5px;"></div>
@@ -1373,7 +1502,7 @@
       <div class="t now-time">12:41</div>
     </div>
 
-    <!-- 鎖定通知 (旼冬🐶) -->
+    <!-- 鎖定通知 -->
     <div class="lock-notifs">
       <div class="notif-card" id="notif-ig">
         <div class="notif-left">
@@ -1395,7 +1524,7 @@
           </div>
           <div class="notif-text">
             <div class="notif-title">旼冬🐶</div>
-            <div class="notif-desc">波妞昨晚太興奮了啦 🐶</div>
+            <div class="notif-desc">練完舞要不要一起去吃火鍋 看好一家麻辣鍋了</div>
           </div>
         </div>
         <div class="notif-time">現在</div>
@@ -1415,7 +1544,7 @@
     </div>
   </div>
 
-  <!-- 2. PIN 密碼解鎖頁面 -->
+  <!-- 2. PIN 密碼解鎖頁面 (包含取消與刪除鍵) -->
   <div id="pass" class="scr">
     <div class="pass-title">輸入密碼</div>
     <div class="pass-dots">
@@ -1425,24 +1554,27 @@
       <div class="p-dot"></div>
     </div>
     <div class="keypad">
-      <div class="k-btn" data-k="1"><span class="n">1</span><span class="sub">&nbsp;</span></div>
-      <div class="k-btn" data-k="2"><span class="n">2</span><span class="sub">ABC</span></div>
-      <div class="k-btn" data-k="3"><span class="n">3</span><span class="sub">DEF</span></div>
-      <div class="k-btn" data-k="4"><span class="n">4</span><span class="sub">GHI</span></div>
-      <div class="k-btn" data-k="5"><span class="n">5</span><span class="sub">JKL</span></div>
-      <div class="k-btn" data-k="6"><span class="n">6</span><span class="sub">MNO</span></div>
-      <div class="k-btn" data-k="7"><span class="n">7</span><span class="sub">PQRS</span></div>
-      <div class="k-btn" data-k="8"><span class="n">8</span><span class="sub">TUV</span></div>
-      <div class="k-btn" data-k="9"><span class="n">9</span><span class="sub">WXYZ</span></div>
-      <div style="width:68px;height:68px;"></div>
-      <div class="k-btn" data-k="0"><span class="n">0</span><span class="sub">&nbsp;</span></div>
-      <div style="width:68px;height:68px;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:13px;" id="cancel-pass">取消</div>
+      <div class="k-btn" onclick="pressKey('1')"><span class="n">1</span><span class="sub">&nbsp;</span></div>
+      <div class="k-btn" onclick="pressKey('2')"><span class="n">2</span><span class="sub">ABC</span></div>
+      <div class="k-btn" onclick="pressKey('3')"><span class="n">3</span><span class="sub">DEF</span></div>
+      <div class="k-btn" onclick="pressKey('4')"><span class="n">4</span><span class="sub">GHI</span></div>
+      <div class="k-btn" onclick="pressKey('5')"><span class="n">5</span><span class="sub">JKL</span></div>
+      <div class="k-btn" onclick="pressKey('6')"><span class="n">6</span><span class="sub">MNO</span></div>
+      <div class="k-btn" onclick="pressKey('7')"><span class="n">7</span><span class="sub">PQRS</span></div>
+      <div class="k-btn" onclick="pressKey('8')"><span class="n">8</span><span class="sub">TUV</span></div>
+      <div class="k-btn" onclick="pressKey('9')"><span class="n">9</span><span class="sub">WXYZ</span></div>
+      <!-- 左下角：緊急服務 -->
+      <div class="pass-footer-btn" style="font-size:12px; opacity:0.8;">緊急服務</div>
+      <div class="k-btn" onclick="pressKey('0')"><span class="n">0</span><span class="sub">&nbsp;</span></div>
+      <!-- 右下角：取消 / 刪除鍵 -->
+      <div class="pass-footer-btn" id="pass-del-cancel-btn" onclick="handlePassAction()">取消</div>
     </div>
   </div>
 
   <!-- 3. 主畫面 (Home) -->
   <div id="home" class="scr">
     <div class="widgets-row">
+      <!-- 點擊進入日曆 App (更新為 solo彩排) -->
       <div class="ios-widget cal-widget" data-target="calendar">
         <div>
           <div class="day-name">星期五</div>
@@ -1450,9 +1582,10 @@
         </div>
         <div class="events">
           <div style="font-weight:700;">上午 10:00</div>
-          <div>aespa 專屬回歸彩排</div>
+          <div>solo彩排</div>
         </div>
       </div>
+      <!-- Playlist 莫蘭迪低飽和質感綠 -->
       <div class="ios-widget music-widget" data-target="playlist">
         <div class="m-top">
           <span style="font-size:11px; font-weight:700;">PLAYLIST</span>
@@ -1480,7 +1613,7 @@
         <span class="name">備忘錄</span>
       </div>
 
-      <!-- 相簿 -->
+      <!-- 相簿 (範例立體花瓣 Icon) -->
       <div class="icon" data-target="photos">
         <div class="img" style="background:#fff;">
           <svg viewBox="0 0 100 100">
@@ -1582,6 +1715,7 @@
           </svg>
         </div>
       </div>
+      <!-- 相機 (經典黑機身金鏡頭 Icon) -->
       <div class="icon" data-target="camera">
         <div class="img" style="background:#e5e5ea;">
           <svg viewBox="0 0 100 100">
@@ -1607,12 +1741,12 @@
     ></iframe>
   </div>
 
-  <!-- 5. Instagram 視窗 -->
+  <!-- 5. Instagram 視窗 (獨立頂層，絕不露出桌面破綻) -->
   <div id="app-instagram" class="app-screen">
     <iframe 
       id="iframe-instagram"
       src="https://u11150003-arch.github.io/karina_ig/"
-      allow="autoplay; camera; microphone; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allow="autoplay *; camera; microphone; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
     ></iframe>
   </div>
@@ -1669,7 +1803,7 @@
     </div>
   </div>
 
-  <!-- 8. 備忘錄 App -->
+  <!-- 8. 備忘錄 App (擴充清單) -->
   <div id="app-notes" class="app-screen">
     <div class="notes-header">
       <div class="notes-title">所有 iCloud 備忘錄</div>
@@ -1684,8 +1818,16 @@
         </div>
       </div>
       <div class="note-item">
-        <div class="note-item-title">aespa 回歸待辦清單</div>
-        <div class="note-item-desc">彩排 UP Solo 舞步編排、練歌確認</div>
+        <div class="note-item-title">UP Solo 舞台確認事項</div>
+        <div class="note-item-desc">開場走位與麥克風音量調整 第二段副歌延伸舞台</div>
+      </div>
+      <div class="note-item">
+        <div class="note-item-title">宿舍採購清單</div>
+        <div class="note-item-desc">波妞飼料 零食肉乾 燕麥奶 卸妝棉</div>
+      </div>
+      <div class="note-item">
+        <div class="note-item-title">冬冬約吃火鍋</div>
+        <div class="note-item-desc">排舞結束後出發 記得帶胃藥</div>
       </div>
     </div>
 
@@ -1737,7 +1879,7 @@
     </div>
   </div>
 
-  <!-- 10. KakaoTalk (含彈出鍵盤與打字自動回覆) -->
+  <!-- 10. KakaoTalk (約火鍋、無過度表情符號、彈出鍵盤打字) -->
   <div id="app-chat" class="app-screen">
     <div class="kt-header">
       <span>聊天</span>
@@ -1754,7 +1896,7 @@
             <span class="kt-user-name">旼冬🐶</span>
             <span class="kt-user-time">剛剛</span>
           </div>
-          <div class="kt-user-preview">波妞昨晚太興奮了啦 🐶</div>
+          <div class="kt-user-preview">練完舞要不要一起去吃火鍋 看好一家麻辣鍋了</div>
         </div>
       </div>
 
@@ -1768,7 +1910,7 @@
             <span class="kt-user-name">寧</span>
             <span class="kt-user-time">上午 11:20</span>
           </div>
-          <div class="kt-user-preview">妳有看到我的 AirPods 嗎 😭</div>
+          <div class="kt-user-preview">妳有看到我的 AirPods 嗎 我找一個早上了</div>
         </div>
       </div>
 
@@ -1782,7 +1924,7 @@
             <span class="kt-user-name">欸哩</span>
             <span class="kt-user-time">昨天</span>
           </div>
-          <div class="kt-user-preview">照片已經傳到雲端囉 妳看一下 ✨</div>
+          <div class="kt-user-preview">照片已經傳到雲端囉 妳看一下</div>
         </div>
       </div>
     </div>
@@ -1801,7 +1943,7 @@
         <div class="kt-send-btn" onclick="triggerSend()">傳送</div>
       </div>
 
-      <!-- 彈出式 iOS 擬真鍵盤 (完全比照 wonbin-phone) -->
+      <!-- iOS 彈出式鍵盤 -->
       <div class="ios-keyboard" id="ios-keyboard">
         <div class="kb-row">
           <div class="kb-key" onclick="typeNextChar()">ㄅ</div><div class="kb-key" onclick="typeNextChar()">ㄉ</div><div class="kb-key" onclick="typeNextChar()">ˇ</div><div class="kb-key" onclick="typeNextChar()">ˋ</div><div class="kb-key" onclick="typeNextChar()">ㄓ</div><div class="kb-key" onclick="typeNextChar()">ˊ</div><div class="kb-key" onclick="typeNextChar()">˙</div><div class="kb-key" onclick="typeNextChar()">ㄚ</div><div class="kb-key" onclick="typeNextChar()">ㄞ</div><div class="kb-key" onclick="typeNextChar()">ㄢ</div>
@@ -1866,7 +2008,7 @@
     </div>
   </div>
 
-  <!-- 12. 全螢幕來電彈窗 -->
+  <!-- 12. 全螢幕來電彈窗 (通話全程無表情符號) -->
   <div id="incoming-call-screen">
     <div>
       <div class="call-head-avatar">
@@ -1884,16 +2026,39 @@
     </div>
   </div>
 
-  <!-- 13. 相簿 App (照片與影片交叉擺放 + 原生檢視頁面) -->
+  <!-- 13. 相簿 App (純照片無影片、含年月分組、比照 wonbin-phone 範例) -->
   <div id="app-photos" class="app-screen">
-    <div class="photos-header">
-      <div class="photos-title">圖庫</div>
-      <div style="font-size:11px; color:#8e8e93;">精選照片與影片</div>
+    <div class="photos-main-scroll">
+      <div class="photos-top-bar">
+        <div>
+          <div class="photos-app-title">圖庫</div>
+          <div class="photos-app-sub">精選照片集</div>
+        </div>
+        <div class="photos-select-btn">選取</div>
+      </div>
+
+      <!-- 2026年10月 -->
+      <div class="album-section-title">2026年10月</div>
+      <div class="album-grid-row" id="album-grid-10"></div>
+
+      <!-- 2026年9月 -->
+      <div class="album-section-title">2026年9月</div>
+      <div class="album-grid-row" id="album-grid-9"></div>
+
+      <!-- 2026年8月 -->
+      <div class="album-section-title">2026年8月</div>
+      <div class="album-grid-row" id="album-grid-8"></div>
     </div>
-    <div class="photos-grid" id="photos-grid-box"></div>
+
+    <!-- 底部切換膠囊 (年 / 月 / 所有照片) -->
+    <div class="album-dock-capsule">
+      <div class="capsule-btn">年</div>
+      <div class="capsule-btn">月</div>
+      <div class="capsule-btn active">所有照片</div>
+    </div>
   </div>
 
-  <!-- 原生相片全螢幕檢視器 (支援左右滑動切換照片，比照 wonbin-phone) -->
+  <!-- 相片單張檢視器 (支援左右滑動切換) -->
   <div id="photo-viewer-page">
     <div class="viewer-top-bar">
       <span class="viewer-back" onclick="closePhotoViewer()">‹ 圖庫</span>
@@ -1901,8 +2066,7 @@
       <span style="color:#0a84ff; cursor:pointer;">編輯</span>
     </div>
     <div class="viewer-content" id="viewer-content-box">
-      <img id="viewer-img" style="display:none;" alt="view">
-      <video id="viewer-video" style="display:none;" controls autoplay playsinline loop></video>
+      <img id="viewer-img" alt="view">
     </div>
     <div class="viewer-bottom-bar">
       <span>⬆</span>
@@ -1911,23 +2075,57 @@
     </div>
   </div>
 
-  <!-- 14. 相機 App -->
+  <!-- 14. 相機 App (真實取景框、輔助白線、變焦標籤、相簿跳轉) -->
   <div id="app-camera" class="app-screen">
+    <!-- 頂部控制列 -->
+    <div class="cam-top-controls">
+      <span>⚡ 關閉</span>
+      <span>Live 關閉</span>
+      <span>RAW 12M</span>
+    </div>
+
     <div class="camera-viewport">
       <video id="camera-video" autoplay playsinline muted></video>
       <img id="camera-preview" alt="Preview">
       <canvas id="camera-canvas" style="display:none;"></canvas>
+      
+      <!-- 九宮格白線 -->
+      <div class="cam-grid-overlay">
+        <div class="cam-grid-line"></div><div class="cam-grid-line"></div><div class="cam-grid-line"></div>
+        <div class="cam-grid-line"></div><div class="cam-grid-line"></div><div class="cam-grid-line"></div>
+        <div class="cam-grid-line"></div><div class="cam-grid-line"></div><div class="cam-grid-line"></div>
+      </div>
+
+      <!-- 變焦按鈕輪 (.5 1x 2 4 8) -->
+      <div class="cam-zoom-row">
+        <div class="zoom-pill">.5</div>
+        <div class="zoom-pill active">1x</div>
+        <div class="zoom-pill">2</div>
+        <div class="zoom-pill">4</div>
+        <div class="zoom-pill">8</div>
+      </div>
     </div>
+
+    <!-- 模式滑塊 -->
+    <div class="cam-modes-row">
+      <span>電影級</span>
+      <span>錄影</span>
+      <span class="active">拍照</span>
+      <span>人像</span>
+    </div>
+
+    <!-- 底部控制列 -->
     <div class="cam-bottom-bar">
-      <div style="width:38px;height:38px;border-radius:8px;overflow:hidden;border:2px solid #fff;">
-        <img src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg" style="width:100%;height:100%;object-fit:cover;">
+      <!-- 點擊相簿縮圖直接進入相簿 App -->
+      <div class="cam-gallery-thumbnail" onclick="openApp('photos')">
+        <img src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg" alt="Gallery">
       </div>
       <div class="shutter-btn" onclick="takePhoto()"><div class="shutter-btn-core"></div></div>
-      <div style="font-size:20px;cursor:pointer;" onclick="flipCamera()">🔄</div>
+      <div style="font-size:22px; cursor:pointer;" onclick="flipCamera()">🔄</div>
     </div>
   </div>
 
-  <!-- 底部細長白條 -->
+  <!-- 底部 Home 條 (限制極小高度防止誤觸閃退) -->
   <div class="home-touch-area" id="home-indicator">
     <div class="bar"></div>
   </div>
@@ -1948,12 +2146,16 @@
   setInterval(updateClock, 1000);
   updateClock();
 
-  // 2. 鎖定畫面點擊/上滑解鎖
+  // 2. 密碼解鎖頁面：取消與刪除鍵
   const lock = document.getElementById('lock');
   const pass = document.getElementById('pass');
+  let passCode = [];
+  const dots = document.querySelectorAll('.p-dot');
+  const delCancelBtn = document.getElementById('pass-del-cancel-btn');
 
   function openPasscode() {
     pass.classList.add('on');
+    updatePassDots();
   }
 
   document.getElementById('hint').addEventListener('click', openPasscode);
@@ -1969,33 +2171,44 @@
     }
   }, { passive: true });
 
-  // 3. 密碼輸入
-  let code = [];
-  const dots = document.querySelectorAll('.p-dot');
-  document.querySelectorAll('.k-btn').forEach(btn => {
-    btn.addEventListener('click', () => {
-      if (code.length < 4) {
-        code.push(btn.dataset.k);
-        dots[code.length - 1].classList.add('filled');
-      }
-      if (code.length === 4) {
-        setTimeout(() => {
-          pass.classList.remove('on');
-          lock.classList.add('off');
-          code = [];
-          dots.forEach(dot => dot.classList.remove('filled'));
-        }, 180);
-      }
+  function pressKey(num) {
+    if (passCode.length < 4) {
+      passCode.push(num);
+      updatePassDots();
+    }
+    if (passCode.length === 4) {
+      setTimeout(() => {
+        pass.classList.remove('on');
+        lock.classList.add('off');
+        passCode = [];
+        updatePassDots();
+      }, 160);
+    }
+  }
+
+  function handlePassAction() {
+    if (passCode.length > 0) {
+      passCode.pop(); // 刪除最後一個數字
+      updatePassDots();
+    } else {
+      pass.classList.remove('on'); // 取消解鎖退回鎖定
+    }
+  }
+
+  function updatePassDots() {
+    dots.forEach((dot, idx) => {
+      if (idx < passCode.length) dot.classList.add('filled');
+      else dot.classList.remove('filled');
     });
-  });
+    // 依據是否有輸入數字切換文字
+    if (passCode.length > 0) {
+      delCancelBtn.textContent = '刪除';
+    } else {
+      delCancelBtn.textContent = '取消';
+    }
+  }
 
-  document.getElementById('cancel-pass').addEventListener('click', () => {
-    pass.classList.remove('on');
-    code = [];
-    dots.forEach(dot => dot.classList.remove('filled'));
-  });
-
-  // 4. 通知點擊
+  // 3. 通知點擊
   document.getElementById('notif-ig').addEventListener('click', () => {
     lock.classList.add('off');
     openApp('instagram');
@@ -2006,7 +2219,7 @@
     enterRoom('旼冬🐶');
   });
 
-  // 5. App 視窗管理核心
+  // 4. App 視窗管理核心
   const screens = {
     playlist: document.getElementById('app-playlist'),
     instagram: document.getElementById('app-instagram'),
@@ -2043,7 +2256,7 @@
     });
   });
 
-  // 6. 返回主畫面
+  // 5. 返回主畫面
   function goHome() {
     Object.values(screens).forEach(s => s.classList.remove('active'));
     backBtn.style.display = 'none';
@@ -2065,7 +2278,6 @@
 
   window.addEventListener('touchend', (e) => {
     const touchEndX = e.changedTouches[0].clientX;
-    // 判斷在非相片滑動檢視器模式下退出
     if (document.getElementById('photo-viewer-page').style.display !== 'flex') {
       if (touchEndX - touchStartX > 50) {
         const isAnyAppOpen = Object.values(screens).some(s => s.classList.contains('active'));
@@ -2076,7 +2288,10 @@
 
   // 底部 Home 條點擊與上滑
   const homeBar = document.getElementById('home-indicator');
-  homeBar.addEventListener('click', goHome);
+  homeBar.addEventListener('click', (e) => {
+    e.stopPropagation();
+    goHome();
+  });
 
   let barStartY = 0;
   homeBar.addEventListener('touchstart', (e) => {
@@ -2089,32 +2304,30 @@
     }
   }, { passive: true });
 
-  // 7. KakaoTalk (多次來回隨興對話 + 彈出鍵盤自動打字)
+  // 6. KakaoTalk：隨興短句、去表情化、冬約吃火鍋
   const memberScripts = {
     '旼冬🐶': {
-      initial: '波妞昨晚太興奮了啦 咬著球一直暴衝 我整夜顧牠都沒睡 😭',
+      initial: '練完舞要不要一起去吃火鍋 看好一家麻辣鍋了',
       flow: [
-        { me: '哈哈哈哈波妞又發瘋了嗎 🐶', reply: '對啊一直要我陪牠玩 真的快睏扁了 今天換妳當波妞保姆 🥹' },
-        { me: '好啦辛苦了 今天波妞交給我 妳好好補眠 💖', reply: '哇嗚嗚知珉最好了 肉乾我放在客廳電視櫃上喔 🐕✨' },
-        { me: '收到 等等練完舞我就回去餵牠', reply: '好 那我先去睡了 醒來再跟妳說 🐶' },
-        { me: '快去睡吧 別忘了吃點東西 💖', reply: '嗯嗯 睡醒再打給妳 💤' }
+        { me: '好啊 等我把最後一段 Solo 練完就走', reply: '太棒了 那我先去佔位子' },
+        { me: '那家要點老油條跟鴨血', reply: '知道 已經在菜單畫好了' },
+        { me: '大概二十分鐘後到', reply: '好 慢慢走' }
       ]
     },
     '寧': {
-      initial: '妳在家有看到我的 AirPods 嗎 😭 我找一個早上了',
+      initial: '妳有看到我的 AirPods 嗎 我找一個早上了',
       flow: [
-        { me: '是不是又掉在客廳沙發夾縫了 每次都塞在那邊 🛋️', reply: '啊 我昨天好像真的躺在沙發上聽歌耶' },
-        { me: '幫妳翻了一下 真的在抱枕下面啦 找到囉', reply: '嗚哇救星 出門前幫我放桌上好嗎 ☕' },
-        { me: '放化妝台上了 別再弄丟囉 🦋', reply: '知道啦 等等練習室見 愛妳 💖' },
-        { me: '要幫妳帶冰美式嗎', reply: '好啊 一杯冰美式 謝謝姐 ☕✨' }
+        { me: '是不是又掉在客廳沙發夾縫了 每次都塞在那', reply: '啊 我昨天好像真的躺在沙發上' },
+        { me: '幫妳翻了一下 真的在抱枕下面', reply: '嗚哇救星 出門前幫我放桌上' },
+        { me: '放化妝台上了 別再弄丟囉', reply: '收到 等等練習室見' }
       ]
     },
     '欸哩': {
-      initial: '照片已經傳到雲端囉 妳看一下 ✨',
+      initial: '照片已經傳到雲端囉 妳看一下',
       flow: [
-        { me: '收到了 調色超漂亮 ✨', reply: '對吧 就說那套黑色的很適合妳 🖤' },
-        { me: '明天去涉谷逛街嗎', reply: '好啊 想去買上次看中的那件外套 🛍️' },
-        { me: '下午兩點出發如何', reply: '沒問題 到時候涉谷站見 🖤' }
+        { me: '收到了 調色很漂亮', reply: '就說那套黑色的很適合妳' },
+        { me: '明天去涉谷逛街嗎', reply: '好 想去買上次看中的那件外套' },
+        { me: '下午兩點涉谷站見', reply: '沒問題 明天見' }
       ]
     }
   };
@@ -2147,7 +2360,6 @@
   function showKeyboard() {
     const kb = document.getElementById('ios-keyboard');
     kb.style.display = 'flex';
-    // 自動帶入預設文字
     const script = memberScripts[currentChatMember] || memberScripts['旼冬🐶'];
     if (memberStep < script.flow.length) {
       document.getElementById('kt-input-box').textContent = script.flow[memberStep].me;
@@ -2183,11 +2395,11 @@
         msgBox.appendChild(themBubble);
         msgBox.scrollTop = msgBox.scrollHeight;
         memberStep++;
-      }, 800);
+      }, 700);
     }
   }
 
-  // 8. 備忘錄新增專案
+  // 7. 備忘錄新增專案
   function openNoteEditor() {
     document.getElementById('notes-modal').style.display = 'flex';
   }
@@ -2210,26 +2422,27 @@
     closeNoteEditor();
   }
 
-  // 9. 電話通話管理 (低頻率隨機輪流來電)
+  // 8. 電話通話管理 (通話全程無表情符號、內容與訊息完全區隔)
   const phoneCallScripts = {
     '金旼炡': [
-      { sender: '旼冬', text: '在幹嘛 🐶' },
-      { sender: 'Karina', text: '剛練完舞呢 妳呢' },
-      { sender: '旼冬', text: '我也是 波妞一直在旁邊咬玩具' },
-      { sender: 'Karina', text: '哈哈哈哈 等等回去餵牠肉乾' },
-      { sender: '旼冬', text: '好 那妳回來路上順便買杯可樂啦' }
+      { sender: '旼冬', text: '在幹嘛' },
+      { sender: 'Karina', text: '剛練完舞 妳呢' },
+      { sender: '旼冬', text: '波妞昨晚太興奮一直暴衝 我整夜顧牠都沒睡' },
+      { sender: 'Karina', text: '辛苦了 今天換我當保姆 妳好好補眠' },
+      { sender: '旼冬', text: '謝謝知珉 肉乾我放在客廳電視櫃上' },
+      { sender: 'Karina', text: '收到 等等練完舞我就回去餵牠' }
     ],
     '內永枝利': [
-      { sender: '欸哩', text: '知珉 昨天的照片雲端收到沒 ✨' },
-      { sender: 'Karina', text: '收到了 調色真的好好看' },
-      { sender: '欸哩', text: '下次去涉谷要穿那件黑色外套喔' },
-      { sender: 'Karina', text: '沒問題 順便去吃可麗餅 🖤' }
+      { sender: '欸哩', text: '知珉 昨晚在涉谷買的那件黑色外套妳覺得怎樣' },
+      { sender: 'Karina', text: '版型很帥 穿在妳身上超好看' },
+      { sender: '欸哩', text: '下次放假再一起去吃那家可麗餅' },
+      { sender: 'Karina', text: '好 下次放假排進去' }
     ],
     '寧藝卓': [
-      { sender: '寧', text: '喂喂喂 找到我耳機了嗎 😭' },
-      { sender: 'Karina', text: '在客廳沙發抱枕下面 幫妳放化妝台了' },
-      { sender: '寧', text: '哇知珉姐最棒了 愛死妳 🦋' },
-      { sender: 'Karina', text: '下次別再亂塞了 練習室見' }
+      { sender: '寧', text: '喂 有看到我的耳機嗎' },
+      { sender: 'Karina', text: '在客廳沙發夾縫 幫妳放化妝台了' },
+      { sender: '寧', text: '太感謝了 找了一整個早上' },
+      { sender: 'Karina', text: '下次別亂塞 練習室見' }
     ]
   };
 
@@ -2245,11 +2458,11 @@
   let callSecondCounter = null;
   let callDialogueTimer = null;
 
-  // 降低同成員來電頻率：每 240 秒輪流來電
+  // 降低來電頻率：每 260 秒輪流隨機選一位來電
   setInterval(() => {
     const randomCaller = callerList[Math.floor(Math.random() * callerList.length)];
     triggerIncomingCall(randomCaller.name, randomCaller.avatar);
-  }, 240000);
+  }, 260000);
 
   function triggerIncomingCall(name, avatar) {
     currentCallerName = name;
@@ -2295,7 +2508,7 @@
       } else {
         clearInterval(callDialogueTimer);
       }
-    }, 1800);
+    }, 1700);
   }
 
   function declineCall() {
@@ -2304,98 +2517,92 @@
     callScreen.style.display = 'none';
   }
 
-  // 10. 相簿清單 (交叉混排照片與影片，支援左右滑動切換)
-  const mediaGallery = [
-    { type: 'image', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg', date: '2026年 10月' },
-    { type: 'video', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_blowflower.mp4', date: '2026年 10月' },
-    { type: 'image', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_2050.jpeg', date: '2026年 9月' },
-    { type: 'video', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_bowl.mp4', date: '2026年 9月' },
-    { type: 'image', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/%E4%BF%AEkarina%20(328).jpeg', date: '2026年 8月' },
-    { type: 'video', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_christmas.mp4', date: '2026年 8月' },
-    { type: 'image', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_6993.jpeg', date: '2026年 7月' },
-    { type: 'video', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_japan.mp4', date: '2026年 7月' },
-    { type: 'image', url: 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_7494.jpeg', date: '2026年 6月' },
-    { type: 'video', url: 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_tamagotchi.mp4', date: '2026年 6月' }
+  // 9. 相簿清單 (純照片無影片、含年月分組、完全比照 wonbin-phone 範例)
+  const albumData = {
+    '10': [
+      'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg',
+      'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_2050.jpeg',
+      'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/%E4%BF%AEkarina%20(328).jpeg'
+    ],
+    '9': [
+      'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_6993.jpeg',
+      'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_7494.jpeg',
+      'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_2802.jpeg'
+    ],
+    '8': [
+      'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_6344.jpeg',
+      'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/%E4%BF%AEkarina%20(163%E6%B5%AE%E6%B0%B4%E5%8D%B0).jpeg',
+      'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_5039.png'
+    ]
+  };
+
+  // 展平成完整相片陣列供單張檢視滑動
+  const allPhotos = [
+    ...albumData['10'].map(url => ({ url, date: '2026年 10月' })),
+    ...albumData['9'].map(url => ({ url, date: '2026年 9月' })),
+    ...albumData['8'].map(url => ({ url, date: '2026年 8月' }))
   ];
 
-  let currentMediaIndex = 0;
-
-  function renderGallery() {
-    const box = document.getElementById('photos-grid-box');
-    box.innerHTML = '';
-    mediaGallery.forEach((item, idx) => {
-      const div = document.createElement('div');
-      div.className = 'gallery-item';
-      div.onclick = () => openPhotoViewer(idx);
-
-      if (item.type === 'image') {
-        div.innerHTML = `<img src="${item.url}" alt="p">`;
-      } else {
-        div.innerHTML = `<video src="${item.url}" muted playsinline></video><div class="video-play-tag">▶ 影片</div>`;
-      }
-      box.appendChild(div);
+  function renderAlbums() {
+    ['10', '9', '8'].forEach(month => {
+      const grid = document.getElementById(`album-grid-${month}`);
+      grid.innerHTML = '';
+      albumData[month].forEach(url => {
+        const cell = document.createElement('div');
+        cell.className = 'album-cell';
+        cell.onclick = () => {
+          const index = allPhotos.findIndex(p => p.url === url);
+          openPhotoViewer(index);
+        };
+        cell.innerHTML = `<img src="${url}" alt="photo">`;
+        grid.appendChild(cell);
+      });
     });
   }
-  renderGallery();
+  renderAlbums();
 
-  function openPhotoViewer(index) {
-    currentMediaIndex = index;
+  let currentPhotoIndex = 0;
+  function openPhotoViewer(idx) {
+    currentPhotoIndex = idx;
     const page = document.getElementById('photo-viewer-page');
     page.style.display = 'flex';
-    updateViewerContent();
+    updateViewerPhoto();
   }
 
-  function updateViewerContent() {
-    const item = mediaGallery[currentMediaIndex];
+  function updateViewerPhoto() {
+    const item = allPhotos[currentPhotoIndex];
     document.getElementById('viewer-date-title').textContent = item.date;
-    const imgEl = document.getElementById('viewer-img');
-    const vidEl = document.getElementById('viewer-video');
-
-    if (item.type === 'image') {
-      vidEl.pause();
-      vidEl.style.display = 'none';
-      imgEl.src = item.url;
-      imgEl.style.display = 'block';
-    } else {
-      imgEl.style.display = 'none';
-      vidEl.src = item.url;
-      vidEl.style.display = 'block';
-      vidEl.play();
-    }
+    const img = document.getElementById('viewer-img');
+    img.src = item.url;
   }
 
   function closePhotoViewer() {
-    const page = document.getElementById('photo-viewer-page');
-    const vidEl = document.getElementById('viewer-video');
-    vidEl.pause();
-    page.style.display = 'none';
+    document.getElementById('photo-viewer-page').style.display = 'none';
   }
 
-  // 相片檢視器左右滑動監聽 (Swipe to Next/Prev)
-  let viewerTouchStartX = 0;
-  const viewerBox = document.getElementById('photo-viewer-page');
-  viewerBox.addEventListener('touchstart', (e) => {
-    viewerTouchStartX = e.touches[0].clientX;
+  // 左右滑動切換相片
+  let photoTouchStartX = 0;
+  const viewerPage = document.getElementById('photo-viewer-page');
+  viewerPage.addEventListener('touchstart', (e) => {
+    photoTouchStartX = e.touches[0].clientX;
   }, { passive: true });
 
-  viewerBox.addEventListener('touchend', (e) => {
-    const deltaX = e.changedTouches[0].clientX - viewerTouchStartX;
+  viewerPage.addEventListener('touchend', (e) => {
+    const deltaX = e.changedTouches[0].clientX - photoTouchStartX;
     if (deltaX > 40) {
-      // 往右滑：上一張
-      if (currentMediaIndex > 0) {
-        currentMediaIndex--;
-        updateViewerContent();
+      if (currentPhotoIndex > 0) {
+        currentPhotoIndex--;
+        updateViewerPhoto();
       }
     } else if (deltaX < -40) {
-      // 往左滑：下一張
-      if (currentMediaIndex < mediaGallery.length - 1) {
-        currentMediaIndex++;
-        updateViewerContent();
+      if (currentPhotoIndex < allPhotos.length - 1) {
+        currentPhotoIndex++;
+        updateViewerPhoto();
       }
     }
   }, { passive: true });
 
-  // 11. 相機功能
+  // 10. 相機功能 (鏡頭取景與拍完自動存入縮圖)
   let currentStream = null;
   let useFacingMode = 'user';
 
@@ -2433,8 +2640,10 @@
       canvas.height = video.videoHeight;
       const ctx = canvas.getContext('2d');
       ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-      preview.src = canvas.toDataURL('image/png');
+      const dataUrl = canvas.toDataURL('image/png');
+      preview.src = dataUrl;
       preview.style.display = 'block';
+      document.querySelector('.cam-gallery-thumbnail img').src = dataUrl;
     }
   }
 
