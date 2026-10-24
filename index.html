@@ -5,7 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
   <title>KARINA iPhone</title>
 
-  <!-- Open Graph 網頁縮圖設定 (IMG_6344.jpeg) -->
+  <!-- iOS 加入主畫面專屬高清縮圖 -->
+  <link rel="apple-touch-icon" href="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_6344.jpeg">
+  <link rel="icon" type="image/jpeg" href="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_6344.jpeg">
+
+  <!-- Open Graph 網頁縮圖設定 -->
   <meta property="og:title" content="KARINA iPhone">
   <meta property="og:description" content="KARINA (유지민) 專屬 iPhone 介面模擬器">
   <meta property="og:image" content="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_6344.jpeg">
@@ -79,14 +83,12 @@
     .status.black-theme {
       color: #000 !important;
     }
-    .status.black-theme .c-bar {
-      background: #000 !important;
-    }
-    .status.black-theme .wifi-arc {
-      border-color: #000 !important;
-    }
+    .status.black-theme .c-bar,
     .status.black-theme .wifi-dot {
       background: #000 !important;
+    }
+    .status.black-theme .wifi-svg path {
+      fill: #000 !important;
     }
     .status.black-theme .bat {
       border-color: #000 !important;
@@ -131,27 +133,15 @@
       background: #fff;
       border-radius: 1px;
     }
-    /* 正確 Wi-Fi 圖示 (無方形黑塊) */
-    .wifi-icon-box {
+    /* 標準原生 Wi-Fi 圖示 */
+    .wifi-svg {
       width: 15px;
       height: 12px;
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
     }
-    .wifi-arc {
-      position: absolute;
-      border: 1.5px solid #fff;
-      border-bottom: none;
-      border-left: none;
-      border-right: none;
-      border-radius: 50%;
+    .wifi-svg path {
+      fill: #fff;
     }
-    .wifi-arc-1 { width: 14px; height: 14px; top: 0px; }
-    .wifi-arc-2 { width: 9px; height: 9px; top: 3.5px; }
-    .wifi-dot { width: 3px; height: 3px; background: #fff; border-radius: 50%; position: absolute; bottom: 0.5px; }
-
     .bat {
       display: inline-block;
       width: 22px;
@@ -190,7 +180,7 @@
       border-radius: 22px;
     }
 
-    /* 頂部下拉橫幅通知 */
+    /* 頂部橫幅通知 */
     #top-notification-banner {
       position: absolute;
       top: -90px;
@@ -695,7 +685,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
-    /* ================= 6. X (Twitter) App ================= */
+    /* ================= 6. X (Twitter) App (更多真實內容) ================= */
     #app-x {
       background: #000;
       color: #fff;
@@ -767,7 +757,7 @@
       max-width: 85%;
     }
 
-    /* ================= 7. 備忘錄 App (含 3 本讀書心得金句與外部跳轉) ================= */
+    /* ================= 7. 備忘錄 App ================= */
     #app-notes {
       background: #000;
       color: #fff;
@@ -908,7 +898,7 @@
       cursor: pointer;
     }
 
-    /* ================= 8. 設定 App ================= */
+    /* ================= 8. 設定 App (豐富選項、低飽和圖示) ================= */
     #app-settings {
       background: #000;
       color: #fff;
@@ -916,7 +906,7 @@
       overflow-y: auto;
     }
     .settings-title {
-      font-size: 22px;
+      font-size: 24px;
       font-weight: 700;
       padding: 6px 18px;
     }
@@ -944,7 +934,7 @@
     .settings-group {
       background: #1c1c1e;
       border-radius: 14px;
-      margin: 14px 16px;
+      margin: 12px 16px;
       overflow: hidden;
     }
     .settings-item {
@@ -953,7 +943,7 @@
       justify-content: space-between;
       padding: 11px 16px;
       border-bottom: 0.5px solid #28282b;
-      font-size: 13px;
+      font-size: 13.5px;
     }
     .settings-item:last-child {
       border-bottom: none;
@@ -1169,7 +1159,7 @@
       cursor: pointer;
     }
 
-    /* ================= 10. 電話 App (純白主題、下排按鍵可切換、無「手機」二字) ================= */
+    /* ================= 10. 電話 App (純白主題、下排按鍵、撥號鍵盤可通話) ================= */
     #app-phone {
       background: #fff;
       color: #000;
@@ -1185,17 +1175,10 @@
       display: block;
     }
 
-    /* 頂部搜尋列與標題 */
-    .phone-top-bar {
-      padding: 10px 16px 4px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
     .phone-page-title {
       font-size: 28px;
       font-weight: 700;
-      padding: 4px 16px 8px;
+      padding: 8px 16px 8px;
       letter-spacing: -0.5px;
     }
     .phone-search-input {
@@ -1213,7 +1196,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 16px;
+      padding: 13px 16px;
       border-bottom: 0.5px solid #e5e5ea;
       cursor: pointer;
     }
@@ -1221,16 +1204,12 @@
       background: #f2f2f7;
     }
     .recent-name {
-      font-size: 15px;
+      font-size: 15.5px;
       font-weight: 600;
       color: #000;
     }
-    .recent-sub {
-      font-size: 11.5px;
-      color: #8e8e93;
-    }
 
-    /* 撥號鍵盤視窗 */
+    /* 撥號鍵盤 */
     .dialpad-container {
       display: flex;
       flex-direction: column;
@@ -1288,7 +1267,7 @@
       cursor: pointer;
     }
 
-    /* 底部導覽列 (保留個人收藏、通訊錄、撥號鍵盤，低飽和灰度) */
+    /* 底部導覽欄 (個人收藏、通訊錄、撥號鍵盤，低飽和灰度) */
     .phone-bottom-nav {
       position: absolute;
       bottom: 0;
@@ -1310,7 +1289,7 @@
       font-size: 10px;
       color: #8e8e93;
       cursor: pointer;
-      padding: 4px 14px;
+      padding: 4px 18px;
     }
     .p-nav-item.active {
       color: #0a84ff;
@@ -1319,7 +1298,6 @@
       font-size: 17px;
     }
 
-    /* 撥通畫面 (無表情符號、純淨通話) */
     #calling-screen {
       position: absolute;
       inset: 0;
@@ -1403,7 +1381,7 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.4);
     }
 
-    /* ================= 11. 相簿 App ================= */
+    /* ================= 11. 相簿 App (低飽和細線條功能列) ================= */
     #app-photos {
       background: #fff;
       color: #000;
@@ -1552,26 +1530,37 @@
       height: 100%;
       object-fit: cover;
     }
+    /* 低飽和度原生細線條功能列 */
     .viewer-bottom-bar {
       height: 46px;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      font-size: 18px;
-      color: #0a84ff;
+      font-size: 17px;
+      color: #b0b0b8;
       border-top: 0.5px solid #222;
     }
+    .viewer-bottom-bar span {
+      cursor: pointer;
+      transition: color 0.15s;
+    }
+    .viewer-bottom-bar span:hover {
+      color: #fff;
+    }
 
-    /* ================= 12. 相機 App ================= */
+    /* ================= 12. 相機 App (無裁切滿版取景) ================= */
     #app-camera {
       background: #000;
-      padding-top: 44px;
-      position: relative;
+      position: absolute;
+      inset: 0;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .cam-top-controls {
       display: flex;
       justify-content: space-between;
-      padding: 10px 20px;
+      padding: 48px 20px 8px;
       font-size: 12px;
       color: #fff;
       z-index: 2;
@@ -1611,7 +1600,7 @@
     }
     .cam-zoom-row {
       position: absolute;
-      bottom: 120px;
+      bottom: 110px;
       left: 0;
       right: 0;
       display: flex;
@@ -1655,7 +1644,7 @@
       display: flex;
       align-items: center;
       justify-content: space-around;
-      padding: 0 24px;
+      padding: 0 24px 10px;
     }
     .cam-gallery-thumbnail {
       width: 44px;
@@ -1687,7 +1676,7 @@
       background: #fff;
     }
 
-    /* 底部 Home 條 (限制極小高度防止誤觸閃退) */
+    /* 底部 Home 條 */
     .home-touch-area {
       position: absolute;
       bottom: 0;
@@ -1715,7 +1704,7 @@
 <body>
 
 <div id="phone">
-  <!-- 頂部狀態列 -->
+  <!-- 頂部狀態列 (標準 Wi-Fi 圖示) -->
   <div class="status" id="phone-status-bar">
     <div class="status-left">
       <span class="now-time" id="clock-status-txt">12:41</span>
@@ -1731,11 +1720,11 @@
         <div class="c-bar" style="height:7.5px;"></div>
         <div class="c-bar" style="height:10px;"></div>
       </div>
-      <!-- 重新設計的乾淨 Wi-Fi 向量弧度 -->
+      <!-- 乾淨三段弧形 Wi-Fi -->
       <div class="wifi-icon-box">
-        <div class="wifi-arc wifi-arc-1"></div>
-        <div class="wifi-arc wifi-arc-2"></div>
-        <div class="wifi-dot"></div>
+        <svg class="wifi-svg" viewBox="0 0 24 18">
+          <path d="M12 3C7.3 3 3.1 4.9 0 8l2.2 2.2C4.7 7.7 8.1 6.2 12 6.2s7.3 1.5 9.8 4L24 8c-3.1-3.1-7.3-5-12-5zm0 5.4c-3.3 0-6.3 1.3-8.5 3.5l2.2 2.2c1.6-1.6 3.9-2.5 6.3-2.5s4.7.9 6.3 2.5l2.2-2.2c-2.2-2.2-5.2-3.5-8.5-3.5zm0 5.4c-1.8 0-3.3.7-4.4 1.9L12 20.2l4.4-4.5c-1.1-1.2-2.6-1.9-4.4-1.9z"/>
+        </svg>
       </div>
       <div class="bat"></div>
     </div>
@@ -1804,7 +1793,7 @@
     </div>
   </div>
 
-  <!-- 2. PIN 密碼解鎖頁面 (包含取消與刪除實時反應) -->
+  <!-- 2. PIN 密碼解鎖頁面 -->
   <div id="pass" class="scr">
     <div class="pass-title">輸入密碼</div>
     <div class="pass-dots">
@@ -1871,7 +1860,7 @@
         <span class="name">備忘錄</span>
       </div>
 
-      <!-- 相簿 (範例經典立體花瓣 Icon) -->
+      <!-- 相簿 -->
       <div class="icon" data-target="photos">
         <div class="img" style="background:#fff;">
           <svg viewBox="0 0 100 100">
@@ -1973,6 +1962,7 @@
           </svg>
         </div>
       </div>
+      <!-- 相機 (經典黑機身金鏡頭 Icon) -->
       <div class="icon" data-target="camera">
         <div class="img" style="background:#e5e5ea;">
           <svg viewBox="0 0 100 100">
@@ -2060,35 +2050,46 @@
     </div>
   </div>
 
-  <!-- 8. 備忘錄 App (完整讀書心得與金句) -->
+  <!-- 8. 備忘錄 App (完整讀書心得與金句收錄) -->
   <div id="app-notes" class="app-screen">
     <div class="notes-header">
       <div class="notes-title">所有 iCloud 備忘錄</div>
       <div class="notes-add-btn" onclick="openNoteEditor()">＋</div>
     </div>
     <div class="notes-list" id="notes-container">
-      <!-- 系統操作指引 -->
       <div class="note-item" onclick="openSystemGuide()">
         <div class="note-item-title">⚠️ 系統操作指引</div>
         <div class="note-item-desc">若介面操作不順，請聯繫 @kelly_lee_805</div>
       </div>
 
-      <!-- 書籍 1 -->
       <div class="note-item" onclick="openBook1()">
         <div class="note-item-title">《在樹下傳達神諭的貓》青山美智子</div>
         <div class="note-item-desc">那些猛烈的不甘心與焦躁，跑完後將隨汗水滑落...</div>
       </div>
 
-      <!-- 書籍 2 -->
       <div class="note-item" onclick="openBook2()">
         <div class="note-item-title">《私人信箱一一○號的郵件》李到禹</div>
         <div class="note-item-desc">涼爽拂面的風，揚起了真率的髮絲。顯高的秋天天空...</div>
       </div>
 
-      <!-- 書籍 3 -->
       <div class="note-item" onclick="openBook3()">
         <div class="note-item-title">《五十人：得到與失去，始終會成為一種平衡》鄭世朗</div>
         <div class="note-item-desc">[李煥毅] [文宇南] [韓圭翼] 摘錄金句集</div>
+      </div>
+
+      <div class="note-item" onclick="viewNoteDetail('UP Solo 舞台與 16bit 排舞事項', '開場走位與麥克風音量確認\n第二段副歌延伸舞台 16bit 碎步點位校正\n結尾 Pose 聚光燈鎖定')">
+        <div class="note-item-title">UP Solo 舞台與 16bit 排舞事項</div>
+        <div class="note-item-desc">開場走位與麥克風音量確認 16bit 碎步點位校正</div>
+      </div>
+
+      <div class="note-item" onclick="viewNoteDetail('宿舍採購清單', '波妞飼料\n零食肉乾\n燕麥奶\n卸妝棉\n維他命C')">
+        <div class="note-item-title">宿舍採購清單</div>
+        <div class="note-item-desc">波妞飼料 零食肉乾 燕麥奶 卸妝棉</div>
+      </div>
+
+      <div class="note-item" onclick="viewNoteDetail('跟冬約好吃飯', '排舞結束後出發 去吃麻辣鍋 記得先吃胃藥')">
+        <div class="note-item-title">跟冬約好吃飯</div>
+        <div class="note-item-desc">排舞結束後出發 去吃麻辣鍋 記得先吃胃藥</div>
       </div>
     </div>
 
@@ -2114,7 +2115,7 @@
     </div>
   </div>
 
-  <!-- 9. 設定 App -->
+  <!-- 9. 設定 App (豐富詳細設定、低飽和圖示) -->
   <div id="app-settings" class="app-screen">
     <div class="settings-title">設定</div>
     <div class="settings-profile-card">
@@ -2127,6 +2128,7 @@
       </div>
     </div>
 
+    <!-- 設定群組 1 -->
     <div class="settings-group">
       <div class="settings-item">
         <div class="settings-item-left">
@@ -2148,6 +2150,56 @@
           <span>藍牙</span>
         </div>
         <span style="color:#8e8e93; font-size:12px;">開啟 ›</span>
+      </div>
+    </div>
+
+    <!-- 設定群組 2 (新增內容) -->
+    <div class="settings-group">
+      <div class="settings-item">
+        <div class="settings-item-left">
+          <div class="settings-icon" style="background:#8e8e93;">⚙️</div>
+          <span>一般</span>
+        </div>
+        <span style="color:#8e8e93; font-size:12px;">›</span>
+      </div>
+      <div class="settings-item">
+        <div class="settings-item-left">
+          <div class="settings-icon" style="background:#4078c0;">♿</div>
+          <span>輔助使用</span>
+        </div>
+        <span style="color:#8e8e93; font-size:12px;">›</span>
+      </div>
+      <div class="settings-item">
+        <div class="settings-item-left">
+          <div class="settings-icon" style="background:#4078c0;">🔆</div>
+          <span>螢幕顯示與亮度</span>
+        </div>
+        <span style="color:#8e8e93; font-size:12px;">›</span>
+      </div>
+      <div class="settings-item">
+        <div class="settings-item-left">
+          <div class="settings-icon" style="background:#34c759;">🟢</div>
+          <span>Face ID 與密碼</span>
+        </div>
+        <span style="color:#8e8e93; font-size:12px;">›</span>
+      </div>
+    </div>
+
+    <!-- 設定群組 3 -->
+    <div class="settings-group">
+      <div class="settings-item">
+        <div class="settings-item-left">
+          <div class="settings-icon" style="background:#c94d42;">🔔</div>
+          <span>通知</span>
+        </div>
+        <span style="color:#8e8e93; font-size:12px;">›</span>
+      </div>
+      <div class="settings-item">
+        <div class="settings-item-left">
+          <div class="settings-icon" style="background:#6a5996;">🌙</div>
+          <span>專注模式</span>
+        </div>
+        <span style="color:#8e8e93; font-size:12px;">›</span>
       </div>
     </div>
   </div>
@@ -2236,68 +2288,40 @@
     </div>
   </div>
 
-  <!-- 11. 電話 App (純白主題、下排按鍵可切換、無「手機」二字) -->
+  <!-- 11. 電話 App (純白主題、無「手機」二字、撥號鍵盤可通話) -->
   <div id="app-phone" class="app-screen">
-    <!-- 子頁面 1：最近通話 -->
+    <!-- 最近通話 -->
     <div class="phone-subpage" id="phone-sub-recents" style="display:block;">
-      <div class="phone-top-bar">
-        <span class="phone-edit-btn">編輯</span>
-        <div class="phone-switch-tab">
-          <span class="phone-tab-btn active">全部</span>
-          <span class="phone-tab-btn">未接來電</span>
-        </div>
-      </div>
-      <div class="phone-page-title">最近通話</div>
+      <div class="phone-page-title" style="padding-top:14px;">最近通話</div>
       <div class="phone-search-input">🔍 搜尋</div>
       <div class="recents-list">
         <div class="recent-row" onclick="startCall('金旼炡', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg', event)">
-          <div class="recent-left">
-            <span class="recent-name">金旼炡</span>
-            <span class="recent-sub">旼冬</span>
-          </div>
-          <div class="recent-right">
-            <span>昨天</span>
-            <span style="color:#0a84ff;">ⓘ</span>
-          </div>
+          <div class="recent-name">金旼炡</div>
+          <div style="font-size:12px; color:#8e8e93;">昨天 <span style="color:#0a84ff;">ⓘ</span></div>
         </div>
         <div class="recent-row" onclick="startCall('內永枝利', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png', event)">
-          <div class="recent-left">
-            <span class="recent-name">內永枝利</span>
-            <span class="recent-sub">欸哩</span>
-          </div>
-          <div class="recent-right">
-            <span>星期五</span>
-            <span style="color:#0a84ff;">ⓘ</span>
-          </div>
+          <div class="recent-name">內永枝利</div>
+          <div style="font-size:12px; color:#8e8e93;">星期五 <span style="color:#0a84ff;">ⓘ</span></div>
         </div>
         <div class="recent-row" onclick="startCall('寧藝卓', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg', event)">
-          <div class="recent-left">
-            <span class="recent-name">寧藝卓</span>
-            <span class="recent-sub">寧</span>
-          </div>
-          <div class="recent-right">
-            <span>星期四</span>
-            <span style="color:#0a84ff;">ⓘ</span>
-          </div>
+          <div class="recent-name">寧藝卓</div>
+          <div style="font-size:12px; color:#8e8e93;">星期四 <span style="color:#0a84ff;">ⓘ</span></div>
         </div>
       </div>
     </div>
 
-    <!-- 子頁面 2：個人收藏 (金旼炡) -->
+    <!-- 個人收藏 (金旼炡) -->
     <div class="phone-subpage" id="phone-sub-favorites">
       <div class="phone-page-title" style="padding-top:20px;">個人收藏</div>
       <div class="recents-list">
         <div class="recent-row" onclick="startCall('金旼炡', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg', event)">
-          <div class="recent-left">
-            <span class="recent-name">金旼炡</span>
-            <span class="recent-sub">旼冬</span>
-          </div>
-          <div class="recent-right"><span style="color:#0a84ff;">★</span></div>
+          <div class="recent-name">金旼炡</div>
+          <span style="color:#0a84ff; font-size:16px;">★</span>
         </div>
       </div>
     </div>
 
-    <!-- 子頁面 3：通訊錄 (三位成員) -->
+    <!-- 通訊錄 (三位成員) -->
     <div class="phone-subpage" id="phone-sub-contacts">
       <div class="phone-page-title" style="padding-top:20px;">通訊錄</div>
       <div class="recents-list">
@@ -2313,7 +2337,7 @@
       </div>
     </div>
 
-    <!-- 子頁面 4：撥號鍵盤 (真實輸入與撥出) -->
+    <!-- 撥號鍵盤 (真實撥號通話) -->
     <div class="phone-subpage" id="phone-sub-keypad">
       <div class="dialpad-container">
         <div class="dial-display" id="dial-num-display"></div>
@@ -2335,7 +2359,7 @@
       </div>
     </div>
 
-    <!-- 底部導覽列 -->
+    <!-- 底部導覽列 (保留個人收藏、通訊錄、撥號鍵盤) -->
     <div class="phone-bottom-nav">
       <div class="p-nav-item" onclick="switchPhoneTab('favorites', this)"><span class="p-nav-icon">★</span><span>個人收藏</span></div>
       <div class="p-nav-item active" onclick="switchPhoneTab('recents', this)"><span class="p-nav-icon">🕒</span><span>最近通話</span></div>
@@ -2362,7 +2386,7 @@
     </div>
   </div>
 
-  <!-- 13. 相簿 App (純照片無影片、年月分組) -->
+  <!-- 13. 相簿 App (純照片、年月分組) -->
   <div id="app-photos" class="app-screen">
     <div class="photos-main-scroll">
       <div class="photos-top-bar">
@@ -2401,14 +2425,17 @@
       <img id="viewer-img" alt="view">
     </div>
     <div class="viewer-filmstrip" id="viewer-filmstrip-bar"></div>
+    <!-- 低飽和細線條功能列 (分享、愛心、垃圾桶) -->
     <div class="viewer-bottom-bar">
       <span>⬆</span>
       <span>♡</span>
+      <span>ⓘ</span>
+      <span>⚙</span>
       <span>🗑</span>
     </div>
   </div>
 
-  <!-- 14. 相機 App -->
+  <!-- 14. 相機 App (無裁切滿版取景) -->
   <div id="app-camera" class="app-screen">
     <div class="cam-top-controls">
       <span>⚡ 關閉</span>
@@ -2452,7 +2479,7 @@
     </div>
   </div>
 
-  <!-- 底部 Home 條 (限制極小高度防止誤觸閃退) -->
+  <!-- 底部 Home 條 -->
   <div class="home-touch-area" id="home-indicator">
     <div class="bar"></div>
   </div>
@@ -2624,7 +2651,7 @@
     hideKeyboard();
   }
 
-  // 左右邊緣滑動退出 App
+  // 左右滑動退出
   let touchStartX = 0;
   window.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
@@ -2658,7 +2685,7 @@
     }
   }, { passive: true });
 
-  // 7. KakaoTalk：對話完全符合生活背景
+  // 7. KakaoTalk
   const memberScripts = {
     '旼冬🐶': {
       initial: '練完舞要不要一起去吃火鍋 看好一家麻辣鍋了',
@@ -2752,7 +2779,7 @@
     }
   }
 
-  // 8. 備忘錄詳細檢視與金句收錄
+  // 8. 備忘錄詳細檢視
   function openSystemGuide() {
     document.getElementById('detail-title-txt').textContent = '⚠️ 系統操作指引';
     document.getElementById('detail-content-txt').innerHTML = `若介面操作不順，請聯繫 <a class="threads-link" href="https://www.threads.com/@kelly_lee_805" target="_blank" rel="noopener noreferrer">@kelly_lee_805</a>\n\n` +
@@ -2821,6 +2848,12 @@
     document.getElementById('note-detail-view').style.display = 'flex';
   }
 
+  function viewNoteDetail(title, content) {
+    document.getElementById('detail-title-txt').textContent = title;
+    document.getElementById('detail-content-txt').textContent = content;
+    document.getElementById('note-detail-view').style.display = 'flex';
+  }
+
   function closeNoteDetail() {
     document.getElementById('note-detail-view').style.display = 'none';
   }
@@ -2839,11 +2872,7 @@
     const container = document.getElementById('notes-container');
     const newNote = document.createElement('div');
     newNote.className = 'note-item';
-    newNote.onclick = () => {
-      document.getElementById('detail-title-txt').textContent = title;
-      document.getElementById('detail-content-txt').textContent = body;
-      document.getElementById('note-detail-view').style.display = 'flex';
-    };
+    newNote.onclick = () => viewNoteDetail(title, body);
     newNote.innerHTML = `
       <div class="note-item-title">${title}</div>
       <div class="note-item-desc">${body}</div>
@@ -2852,7 +2881,7 @@
     closeNoteEditor();
   }
 
-  // 9. 電話通話管理 (切換分頁、撥號鍵盤、無表情符號對話)
+  // 9. 電話 App 功能與撥號鍵盤通話
   function switchPhoneTab(tab, el) {
     document.querySelectorAll('.phone-subpage').forEach(p => p.style.display = 'none');
     document.querySelectorAll('.p-nav-item').forEach(i => i.classList.remove('active'));
@@ -2915,11 +2944,11 @@
   let callSecondCounter = null;
   let callDialogueTimer = null;
 
-  // 降低來電頻率：每 300 秒隨機選一位成員來電
+  // 降低頻率：每 320 秒隨機選一位成員來電
   setInterval(() => {
     const randomCaller = callerList[Math.floor(Math.random() * callerList.length)];
     triggerIncomingCall(randomCaller.name, randomCaller.avatar);
-  }, 300000);
+  }, 320000);
 
   function triggerIncomingCall(name, avatar) {
     currentCallerName = name;
@@ -2975,7 +3004,7 @@
     callScreen.style.display = 'none';
   }
 
-  // 10. 相簿清單 (純照片無影片、含年月分組)
+  // 10. 相簿清單 (純照片無影片、年月分組)
   const albumData = {
     '10': [
       'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg',
