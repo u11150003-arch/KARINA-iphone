@@ -251,7 +251,7 @@
       transition: transform 0.38s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.32s ease;
     }
 
-    /* ================= 1. 鎖定畫面 ================= */
+    /* ================= 1. 鎖定畫面 (支援漸變與語言切換) ================= */
     #lock {
       z-index: 500;
       display: flex;
@@ -273,6 +273,7 @@
     .lock-top {
       text-align: center;
       margin-top: 0px;
+      transition: opacity 0.2s ease, transform 0.2s ease;
     }
     .lock-top .d {
       font-size: 14.5px;
@@ -294,6 +295,22 @@
       filter: drop-shadow(0 4px 14px rgba(0,0,0,0.45));
     }
 
+    /* 語言切換按鈕 (如範例) */
+    .lang-pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(12px);
+      padding: 3px 10px;
+      border-radius: 14px;
+      font-size: 11.5px;
+      color: #fff;
+      margin-top: 6px;
+      cursor: pointer;
+      border: 0.5px solid rgba(255,255,255,0.15);
+    }
+
     .lock-notifs {
       display: flex;
       flex-direction: column;
@@ -301,6 +318,7 @@
       width: 100%;
       margin-top: auto;
       margin-bottom: 16px;
+      transition: opacity 0.2s ease, transform 0.2s ease;
     }
     .notif-card {
       background: rgba(30, 30, 34, 0.78);
@@ -314,6 +332,15 @@
       cursor: pointer;
       box-shadow: 0 4px 16px rgba(0,0,0,0.25);
       border: 0.5px solid rgba(255,255,255,0.12);
+      transform: translateY(20px);
+      opacity: 0;
+      animation: notifSlideIn 0.5s ease forwards;
+    }
+    .notif-card:nth-child(2) {
+      animation-delay: 0.2s;
+    }
+    @keyframes notifSlideIn {
+      to { transform: translateY(0); opacity: 1; }
     }
     .notif-left {
       display: flex;
@@ -349,6 +376,7 @@
       flex-direction: column;
       align-items: center;
       gap: 12px;
+      transition: opacity 0.2s ease;
     }
     .lock-actions {
       width: 100%;
@@ -377,6 +405,51 @@
       font-size: 11.5px;
       font-weight: 500;
       opacity: 0.9;
+      cursor: pointer;
+    }
+
+    /* 語言選單彈窗 (如範例) */
+    #lang-modal {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      backdrop-filter: blur(10px);
+      z-index: 3800;
+      display: none;
+      align-items: center;
+      justify-content: center;
+    }
+    .lang-dialog {
+      width: 260px;
+      background: #f2f2f7;
+      border-radius: 14px;
+      overflow: hidden;
+      color: #000;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    }
+    .lang-dialog-title {
+      padding: 14px 10px 10px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #666;
+      border-bottom: 0.5px solid #d1d1d6;
+    }
+    .lang-item {
+      padding: 12px 16px;
+      font-size: 15px;
+      font-weight: 500;
+      border-bottom: 0.5px solid #d1d1d6;
+      cursor: pointer;
+    }
+    .lang-item:active {
+      background: #e5e5ea;
+    }
+    .lang-cancel {
+      padding: 12px 16px;
+      font-size: 15px;
+      font-weight: 700;
+      color: #0a84ff;
       cursor: pointer;
     }
 
@@ -690,7 +763,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
-    /* ================= 6. X (Twitter) App ================= */
+    /* ================= 6. X (Twitter) App (簡潔 X Icon 與更新推文) ================= */
     #app-x {
       background: #000;
       color: #fff;
@@ -904,7 +977,7 @@
       cursor: pointer;
     }
 
-    /* ================= 8. 設定 App (修復裁切、極簡圖示) ================= */
+    /* ================= 8. 設定 App ================= */
     #app-settings {
       background: #000;
       color: #fff;
@@ -1167,7 +1240,7 @@
       cursor: pointer;
     }
 
-    /* ================= 10. 電話 App (保證可撥出、保留三大標籤) ================= */
+    /* ================= 10. 電話 App ================= */
     #app-phone {
       background: #fff;
       color: #000;
@@ -1389,7 +1462,7 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.4);
     }
 
-    /* ================= 11. 相簿 App ================= */
+    /* ================= 11. 相簿 App (已移除 ⬆️ 🗑️ 與設定按鈕) ================= */
     #app-photos {
       background: #fff;
       color: #000;
@@ -1538,12 +1611,13 @@
       height: 100%;
       object-fit: cover;
     }
+    /* 底部功能列已移除 ⬆️ 🗑️ 與設定，純淨居中愛心收藏 */
     .viewer-bottom-bar {
       height: 46px;
       display: flex;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
-      font-size: 17px;
+      font-size: 20px;
       color: #b0b0b8;
       border-top: 0.5px solid #222;
     }
@@ -1555,7 +1629,7 @@
       color: #fff;
     }
 
-    /* ================= 12. 相機 App (無裁切滿版取景) ================= */
+    /* ================= 12. 相機 App ================= */
     #app-camera {
       background: #000;
       position: absolute;
@@ -1716,7 +1790,7 @@
     <div class="status-left">
       <span class="now-time" id="clock-status-txt">12:41</span>
       <div class="status-back" id="status-back-btn" onclick="goHome()">
-        <span>‹ 主螢幕</span>
+        <span id="txt-status-back">‹ 主螢幕</span>
       </div>
     </div>
     <div class="island" id="dynamic-island"></div>
@@ -1740,25 +1814,31 @@
   <div id="top-notification-banner" onclick="openBannerChat()">
     <div class="top-banner-left">
       <div class="top-banner-avatar">
-        <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_0578.jpeg" alt="旼冬">
+        <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_0578.jpeg" alt="Winter">
       </div>
       <div class="top-banner-text">
-        <div class="top-banner-title">旼冬🐶</div>
-        <div class="top-banner-msg">練完舞要不要一起去吃火鍋 看好一家麻辣鍋了</div>
+        <div class="top-banner-title" id="banner-caller-name">旼冬🐶</div>
+        <div class="top-banner-msg" id="banner-caller-msg">練完舞要不要一起去吃火鍋 看好一家麻辣鍋了</div>
       </div>
     </div>
-    <div class="top-banner-time">現在</div>
+    <div class="top-banner-time" id="banner-caller-time">現在</div>
   </div>
 
-  <!-- 1. 鎖定畫面 -->
+  <!-- 1. 鎖定畫面 (含漸變與語言切換) -->
   <div id="lock" class="scr">
-    <div class="lock-top">
+    <div class="lock-top" id="lock-top-group">
       <div class="d" id="lock-date">10月23日週五</div>
       <div class="t now-time">12:41</div>
+      <!-- 語言切換選單按鈕 (如範例) -->
+      <div>
+        <div class="lang-pill-btn" onclick="openLangModal()">
+          <span>🌐</span> <span id="current-lang-txt">繁體中文</span>
+        </div>
+      </div>
     </div>
 
-    <!-- 鎖定通知 -->
-    <div class="lock-notifs">
+    <!-- 鎖定通知 (帶跳出動畫) -->
+    <div class="lock-notifs" id="lock-notifs-group">
       <div class="notif-card" id="notif-ig">
         <div class="notif-left">
           <div class="notif-icon" style="background: radial-gradient(circle at 30% 107%, #c9c394 0%, #b86259 45%, #9c3f80 60%, #465b91 90%);">
@@ -1766,10 +1846,10 @@
           </div>
           <div class="notif-text">
             <div class="notif-title">Instagram</div>
-            <div class="notif-desc">imwinter 和其他人在你的貼文說讚</div>
+            <div class="notif-desc" id="txt-notif-ig-desc">imwinter 和其他人在你的貼文說讚</div>
           </div>
         </div>
-        <div class="notif-time">現在</div>
+        <div class="notif-time" id="txt-notif-time-1">現在</div>
       </div>
 
       <div class="notif-card" id="notif-chat">
@@ -1778,15 +1858,15 @@
             TALK
           </div>
           <div class="notif-text">
-            <div class="notif-title">旼冬🐶</div>
-            <div class="notif-desc">練完舞要不要一起去吃火鍋 看好一家麻辣鍋了</div>
+            <div class="notif-title" id="txt-notif-chat-title">旼冬🐶</div>
+            <div class="notif-desc" id="txt-notif-chat-desc">練完舞要不要一起去吃火鍋 看好一家麻辣鍋了</div>
           </div>
         </div>
-        <div class="notif-time">現在</div>
+        <div class="notif-time" id="txt-notif-time-2">現在</div>
       </div>
     </div>
 
-    <div class="lock-bottom">
+    <div class="lock-bottom" id="lock-bottom-group">
       <div class="lock-actions">
         <div class="act-btn" id="lock-flashlight">
           <svg viewBox="0 0 24 24"><path d="M6 2h12v3l-4 4v11a2 2 0 0 1-2 2h-2a2 2 0 0 1-2-2V9L6 5V2zm2 2v1l3 3v12h2V8l3-3V4H8z"/></svg>
@@ -1799,9 +1879,19 @@
     </div>
   </div>
 
+  <!-- 語言選擇彈窗 -->
+  <div id="lang-modal">
+    <div class="lang-dialog">
+      <div class="lang-dialog-title">Language • 語言</div>
+      <div class="lang-item" onclick="setLanguage('zh')">繁體中文</div>
+      <div class="lang-item" onclick="setLanguage('en')">English</div>
+      <div class="lang-cancel" onclick="closeLangModal()">取消</div>
+    </div>
+  </div>
+
   <!-- 2. PIN 密碼解鎖頁面 -->
   <div id="pass" class="scr">
-    <div class="pass-title">輸入密碼</div>
+    <div class="pass-title" id="txt-pass-title">輸入密碼</div>
     <div class="pass-dots">
       <div class="p-dot"></div>
       <div class="p-dot"></div>
@@ -1818,7 +1908,7 @@
       <div class="k-btn" onclick="pressKey('7')"><span class="n">7</span><span class="sub">PQRS</span></div>
       <div class="k-btn" onclick="pressKey('8')"><span class="n">8</span><span class="sub">TUV</span></div>
       <div class="k-btn" onclick="pressKey('9')"><span class="n">9</span><span class="sub">WXYZ</span></div>
-      <div class="pass-footer-btn" style="font-size:12px; opacity:0.8;">緊急情況</div>
+      <div class="pass-footer-btn" style="font-size:12px; opacity:0.8;" id="txt-pass-emergency">緊急情況</div>
       <div class="k-btn" onclick="pressKey('0')"><span class="n">0</span><span class="sub">&nbsp;</span></div>
       <div class="pass-footer-btn" id="pass-del-cancel-btn" onclick="handlePassAction()">取消</div>
     </div>
@@ -1829,12 +1919,12 @@
     <div class="widgets-row">
       <div class="ios-widget cal-widget" data-target="calendar">
         <div>
-          <div class="day-name">星期五</div>
+          <div class="day-name" id="txt-widget-cal-day">星期五</div>
           <div class="day-num">23</div>
         </div>
         <div class="events">
-          <div style="font-weight:700;">上午 10:00</div>
-          <div>solo彩排</div>
+          <div style="font-weight:700;">10:00 AM</div>
+          <div id="txt-widget-cal-event">solo彩排</div>
         </div>
       </div>
       <div class="ios-widget music-widget" data-target="playlist">
@@ -1861,7 +1951,7 @@
             <line x1="16" y1="58" x2="84" y2="58" stroke="#ccc" stroke-width="3"/>
           </svg>
         </div>
-        <span class="name">備忘錄</span>
+        <span class="name" id="name-notes">備忘錄</span>
       </div>
 
       <!-- 相簿 -->
@@ -1878,7 +1968,7 @@
             <ellipse cx="34" cy="35" rx="10" ry="17" fill="#ff2d55" opacity="0.85" transform="rotate(135 34 35)"/>
           </svg>
         </div>
-        <span class="name">照片</span>
+        <span class="name" id="name-photos">照片</span>
       </div>
 
       <!-- 設定 -->
@@ -1890,7 +1980,7 @@
             <circle cx="50" cy="50" r="5" fill="#444"/>
           </svg>
         </div>
-        <span class="name">設定</span>
+        <span class="name" id="name-settings">設定</span>
       </div>
 
       <!-- KakaoTalk -->
@@ -1917,11 +2007,11 @@
         <span class="name">Instagram</span>
       </div>
 
-      <!-- X (Twitter) -->
+      <!-- X (Twitter) - 更新為範例極簡斜角 X -->
       <div class="icon" data-target="x">
-        <div class="img" style="background:#111;">
-          <svg viewBox="0 0 100 100">
-            <path d="M28 26 L46 51 L26 74 H33 L49 55 L63 74 H74 L54 47 L72 26 H65 L51 43 L39 26 Z" fill="#e5e5ea"/>
+        <div class="img" style="background:#000;">
+          <svg viewBox="0 0 24 24" style="width:58%; height:58%; fill:#fff;">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
           </svg>
         </div>
         <span class="name">X</span>
@@ -1940,11 +2030,11 @@
         <div class="img" style="background:#fff; border: 1px solid #e5e5ea;">
           <svg viewBox="0 0 100 100">
             <rect width="100" height="26" fill="#ff3b30"/>
-            <text x="50" y="18" fill="#fff" font-family="'Noto Sans TC', sans-serif" font-weight="700" font-size="12" text-anchor="middle">4月</text>
+            <text x="50" y="18" fill="#fff" font-family="'Noto Sans TC', sans-serif" font-weight="700" font-size="12" text-anchor="middle" id="cal-icon-month">4月</text>
             <text x="50" y="74" fill="#1c1c1e" font-family="'Montserrat', sans-serif" font-weight="300" font-size="44" text-anchor="middle">11</text>
           </svg>
         </div>
-        <span class="name">日曆</span>
+        <span class="name" id="name-calendar">日曆</span>
       </div>
     </div>
 
@@ -2005,10 +2095,10 @@
   <!-- 6. 日曆 App -->
   <div id="app-calendar" class="app-screen">
     <div class="cal-app-header">
-      <span class="cal-app-month">2027年 4月</span>
+      <span class="cal-app-month" id="cal-month-title">2027年 4月</span>
       <span style="font-size:18px; color:#ff3b30; cursor:pointer;">+</span>
     </div>
-    <div class="cal-days-grid">
+    <div class="cal-days-grid" id="cal-grid-labels">
       <div class="cal-day-label">日</div><div class="cal-day-label">一</div><div class="cal-day-label">二</div><div class="cal-day-label">三</div><div class="cal-day-label">四</div><div class="cal-day-label">五</div><div class="cal-day-label">六</div>
       <div class="cal-date-cell" style="opacity:0.3;">28</div><div class="cal-date-cell" style="opacity:0.3;">29</div><div class="cal-date-cell" style="opacity:0.3;">30</div><div class="cal-date-cell" style="opacity:0.3;">31</div>
       <div class="cal-date-cell">1</div><div class="cal-date-cell">2</div><div class="cal-date-cell">3</div>
@@ -2020,17 +2110,17 @@
     </div>
     <div class="cal-events-list">
       <div class="cal-event-card">
-        <div style="font-size:12px; color:#ff3b30; font-weight:700;">4月11日 全天</div>
+        <div style="font-size:12px; color:#ff3b30; font-weight:700;" id="txt-cal-bday-time">4月11日 全天</div>
         <div style="font-size:16px; font-weight:700; margin-top:3px;">🎂 KARINA bday</div>
       </div>
     </div>
   </div>
 
-  <!-- 7. X (Twitter) App (貼文 1 & 2 正確對齊發文頭貼與文案) -->
+  <!-- 7. X (Twitter) App -->
   <div id="app-x" class="app-screen">
     <div class="x-app-topbar">
-      <span style="border-bottom: 2px solid #fff; padding-bottom: 6px;">為你推薦</span>
-      <span style="color:#71767b;">正在關注</span>
+      <span style="border-bottom: 2px solid #fff; padding-bottom: 6px;" id="txt-x-for-you">為你推薦</span>
+      <span style="color:#71767b;" id="txt-x-following">正在關注</span>
     </div>
 
     <!-- 貼文 1 -->
@@ -2041,7 +2131,7 @@
       <div class="x-tweet-body">
         <div class="x-tweet-header">
           <span class="x-name">aespa</span>
-          <span class="x-handle">@aespa_official • 1小時</span>
+          <span class="x-handle">@aespa_official • 1h</span>
         </div>
         <div class="x-text">KARINA B-day PARTY MEMORY BOX
 260324
@@ -2057,7 +2147,7 @@
       </div>
     </div>
 
-    <!-- 貼文 2 (修正文案與相同官方頭貼) -->
+    <!-- 貼文 2 -->
     <div class="x-tweet-card">
       <div class="x-author-avatar">
         <img src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg" alt="aespa">
@@ -2065,7 +2155,7 @@
       <div class="x-tweet-body">
         <div class="x-tweet-header">
           <span class="x-name">aespa</span>
-          <span class="x-handle">@aespa_official • 3小時</span>
+          <span class="x-handle">@aespa_official • 3h</span>
         </div>
         <div class="x-text">MY WORLD
 #aespa #KARINA #카리나</div>
@@ -2081,10 +2171,10 @@
     </div>
   </div>
 
-  <!-- 8. 備忘錄 App -->
+  <!-- 8. 備忘錄 App (完整讀書心得與金句收錄) -->
   <div id="app-notes" class="app-screen">
     <div class="notes-header">
-      <div class="notes-title">所有 iCloud 備忘錄</div>
+      <div class="notes-title" id="txt-notes-header-title">所有 iCloud 備忘錄</div>
       <div class="notes-add-btn" onclick="openNoteEditor()">＋</div>
     </div>
     <div class="notes-list" id="notes-container">
@@ -2146,9 +2236,9 @@
     </div>
   </div>
 
-  <!-- 9. 設定 App (修復 Wi-Fi 藍牙裁切、極簡圖示) -->
+  <!-- 9. 設定 App -->
   <div id="app-settings" class="app-screen">
-    <div class="settings-title">設定</div>
+    <div class="settings-title" id="txt-settings-title">設定</div>
     <div class="settings-profile-card">
       <div class="settings-avatar">
         <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_7494.jpeg" alt="karina_zy">
@@ -2164,7 +2254,7 @@
       <div class="settings-item">
         <div class="settings-item-left">
           <div class="settings-icon-simple">✈</div>
-          <span>飛航模式</span>
+          <span id="txt-st-airplane">飛航模式</span>
         </div>
         <input type="checkbox" style="transform:scale(1.15);">
       </div>
@@ -2178,9 +2268,9 @@
       <div class="settings-item">
         <div class="settings-item-left">
           <div class="settings-icon-simple">🎧</div>
-          <span>藍牙</span>
+          <span id="txt-st-bluetooth">藍牙</span>
         </div>
-        <span style="color:#8e8e93; font-size:12px;">開啟 ›</span>
+        <span style="color:#8e8e93; font-size:12px;" id="txt-st-bluetooth-status">開啟 ›</span>
       </div>
     </div>
 
@@ -2189,28 +2279,28 @@
       <div class="settings-item">
         <div class="settings-item-left">
           <div class="settings-icon-simple">⚙</div>
-          <span>一般</span>
+          <span id="txt-st-general">一般</span>
         </div>
         <span style="color:#8e8e93; font-size:12px;">›</span>
       </div>
       <div class="settings-item">
         <div class="settings-item-left">
           <div class="settings-icon-simple">♿</div>
-          <span>輔助使用</span>
+          <span id="txt-st-accessibility">輔助使用</span>
         </div>
         <span style="color:#8e8e93; font-size:12px;">›</span>
       </div>
       <div class="settings-item">
         <div class="settings-item-left">
           <div class="settings-icon-simple">🔆</div>
-          <span>螢幕顯示與亮度</span>
+          <span id="txt-st-display">螢幕顯示與亮度</span>
         </div>
         <span style="color:#8e8e93; font-size:12px;">›</span>
       </div>
       <div class="settings-item">
         <div class="settings-item-left">
           <div class="settings-icon-simple">🔒</div>
-          <span>Face ID 與密碼</span>
+          <span id="txt-st-faceid">Face ID 與密碼</span>
         </div>
         <span style="color:#8e8e93; font-size:12px;">›</span>
       </div>
@@ -2221,14 +2311,14 @@
       <div class="settings-item">
         <div class="settings-item-left">
           <div class="settings-icon-simple">🔔</div>
-          <span>通知</span>
+          <span id="txt-st-notifications">通知</span>
         </div>
         <span style="color:#8e8e93; font-size:12px;">›</span>
       </div>
       <div class="settings-item">
         <div class="settings-item-left">
           <div class="settings-icon-simple">🌙</div>
-          <span>專注模式</span>
+          <span id="txt-st-focus">專注模式</span>
         </div>
         <span style="color:#8e8e93; font-size:12px;">›</span>
       </div>
@@ -2238,49 +2328,49 @@
   <!-- 10. KakaoTalk -->
   <div id="app-chat" class="app-screen">
     <div class="kt-header">
-      <span>聊天</span>
+      <span id="txt-kt-header">聊天</span>
       <span style="font-size:16px;">🔍 ⚙️</span>
     </div>
     <div id="kt-list-view">
       <!-- 旼冬🐶 -->
       <div class="kt-user-item" onclick="enterRoom('旼冬🐶')">
         <div class="kt-user-avatar">
-          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_0578.jpeg" alt="旼冬">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_0578.jpeg" alt="Winter">
         </div>
         <div class="kt-user-content">
           <div class="kt-user-top">
-            <span class="kt-user-name">旼冬🐶</span>
-            <span class="kt-user-time">剛剛</span>
+            <span class="kt-user-name" id="kt-row-name-winter">旼冬🐶</span>
+            <span class="kt-user-time" id="kt-row-time-winter">剛剛</span>
           </div>
-          <div class="kt-user-preview">練完舞要不要一起去吃火鍋 看好一家麻辣鍋了</div>
+          <div class="kt-user-preview" id="kt-row-preview-winter">練完舞要不要一起去吃火鍋 看好一家麻辣鍋了</div>
         </div>
       </div>
 
       <!-- 寧 -->
       <div class="kt-user-item" onclick="enterRoom('寧')">
         <div class="kt-user-avatar">
-          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg" alt="寧">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg" alt="Ningning">
         </div>
         <div class="kt-user-content">
           <div class="kt-user-top">
-            <span class="kt-user-name">寧</span>
-            <span class="kt-user-time">上午 11:20</span>
+            <span class="kt-user-name" id="kt-row-name-ning">寧</span>
+            <span class="kt-user-time">11:20 AM</span>
           </div>
-          <div class="kt-user-preview">妳昨天在練習室有看到我的 AirPods 嗎</div>
+          <div class="kt-user-preview" id="kt-row-preview-ning">妳昨天在練習室有看到我的 AirPods 嗎</div>
         </div>
       </div>
 
       <!-- 欸哩 -->
       <div class="kt-user-item" onclick="enterRoom('欸哩')">
         <div class="kt-user-avatar">
-          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png" alt="欸哩">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png" alt="Giselle">
         </div>
         <div class="kt-user-content">
           <div class="kt-user-top">
-            <span class="kt-user-name">欸哩</span>
-            <span class="kt-user-time">昨天</span>
+            <span class="kt-user-name" id="kt-row-name-giselle">欸哩</span>
+            <span class="kt-user-time" id="kt-row-time-giselle">昨天</span>
           </div>
-          <div class="kt-user-preview">昨天逛街看的那件黑色外套真的超燒</div>
+          <div class="kt-user-preview" id="kt-row-preview-giselle">昨天逛街看的那件黑色外套真的超燒</div>
         </div>
       </div>
     </div>
@@ -2296,7 +2386,7 @@
       <!-- 輸入框 -->
       <div class="kt-input-bar">
         <div class="kt-fake-input" id="kt-input-box" onclick="showKeyboard()">輸入訊息...</div>
-        <div class="kt-send-btn" onclick="triggerSend()">傳送</div>
+        <div class="kt-send-btn" id="kt-send-btn-txt" onclick="triggerSend()">傳送</div>
       </div>
 
       <!-- iOS 彈出式鍵盤 -->
@@ -2319,34 +2409,34 @@
     </div>
   </div>
 
-  <!-- 11. 電話 App (純白主題、保證直接撥通) -->
+  <!-- 11. 電話 App -->
   <div id="app-phone" class="app-screen">
     <!-- 最近通話 -->
     <div class="phone-subpage" id="phone-sub-recents" style="display:block;">
-      <div class="phone-page-title" style="padding-top:14px;">最近通話</div>
-      <div class="phone-search-input">🔍 搜尋</div>
+      <div class="phone-page-title" style="padding-top:14px;" id="phone-recents-title">最近通話</div>
+      <div class="phone-search-input" id="phone-search-txt">🔍 搜尋</div>
       <div class="recents-list">
-        <div class="recent-row" onclick="startCallDirect('金旼炡', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg')">
-          <div class="recent-name">金旼炡</div>
-          <div style="font-size:12px; color:#8e8e93;">昨天 <span style="color:#0a84ff;">ⓘ</span></div>
+        <div class="recent-row" onclick="startCallDirect('Winter', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg')">
+          <div class="recent-name" id="rec-name-winter">金旼炡</div>
+          <div style="font-size:12px; color:#8e8e93;"><span id="rec-time-winter">昨天</span> <span style="color:#0a84ff;">ⓘ</span></div>
         </div>
-        <div class="recent-row" onclick="startCallDirect('內永枝利', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png')">
-          <div class="recent-name">內永枝利</div>
-          <div style="font-size:12px; color:#8e8e93;">星期五 <span style="color:#0a84ff;">ⓘ</span></div>
+        <div class="recent-row" onclick="startCallDirect('Giselle', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png')">
+          <div class="recent-name" id="rec-name-giselle">內永枝利</div>
+          <div style="font-size:12px; color:#8e8e93;"><span id="rec-time-giselle">星期五</span> <span style="color:#0a84ff;">ⓘ</span></div>
         </div>
-        <div class="recent-row" onclick="startCallDirect('寧藝卓', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg')">
-          <div class="recent-name">寧藝卓</div>
-          <div style="font-size:12px; color:#8e8e93;">星期四 <span style="color:#0a84ff;">ⓘ</span></div>
+        <div class="recent-row" onclick="startCallDirect('Ningning', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg')">
+          <div class="recent-name" id="rec-name-ning">寧藝卓</div>
+          <div style="font-size:12px; color:#8e8e93;"><span id="rec-time-ning">星期四</span> <span style="color:#0a84ff;">ⓘ</span></div>
         </div>
       </div>
     </div>
 
     <!-- 個人收藏 -->
     <div class="phone-subpage" id="phone-sub-favorites">
-      <div class="phone-page-title" style="padding-top:20px;">個人收藏</div>
+      <div class="phone-page-title" style="padding-top:20px;" id="phone-favs-title">個人收藏</div>
       <div class="recents-list">
-        <div class="recent-row" onclick="startCallDirect('金旼炡', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg')">
-          <div class="recent-name">金旼炡</div>
+        <div class="recent-row" onclick="startCallDirect('Winter', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg')">
+          <div class="recent-name" id="fav-name-winter">金旼炡</div>
           <span style="color:#0a84ff; font-size:16px;">★</span>
         </div>
       </div>
@@ -2354,16 +2444,16 @@
 
     <!-- 通訊錄 -->
     <div class="phone-subpage" id="phone-sub-contacts">
-      <div class="phone-page-title" style="padding-top:20px;">通訊錄</div>
+      <div class="phone-page-title" style="padding-top:20px;" id="phone-contacts-title">通訊錄</div>
       <div class="recents-list">
-        <div class="recent-row" onclick="startCallDirect('金旼炡', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg')">
-          <div class="recent-name">金旼炡</div>
+        <div class="recent-row" onclick="startCallDirect('Winter', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg')">
+          <div class="recent-name" id="cont-name-winter">金旼炡</div>
         </div>
-        <div class="recent-row" onclick="startCallDirect('內永枝利', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png')">
-          <div class="recent-name">內永枝利</div>
+        <div class="recent-row" onclick="startCallDirect('Giselle', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png')">
+          <div class="recent-name" id="cont-name-giselle">內永枝利</div>
         </div>
-        <div class="recent-row" onclick="startCallDirect('寧藝卓', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg')">
-          <div class="recent-name">寧藝卓</div>
+        <div class="recent-row" onclick="startCallDirect('Ningning', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg')">
+          <div class="recent-name" id="cont-name-ning">寧藝卓</div>
         </div>
       </div>
     </div>
@@ -2392,10 +2482,10 @@
 
     <!-- 底部導覽列 -->
     <div class="phone-bottom-nav">
-      <div class="p-nav-item" onclick="switchPhoneTab('favorites', this)"><span class="p-nav-icon">★</span><span>個人收藏</span></div>
-      <div class="p-nav-item active" onclick="switchPhoneTab('recents', this)"><span class="p-nav-icon">🕒</span><span>最近通話</span></div>
-      <div class="p-nav-item" onclick="switchPhoneTab('contacts', this)"><span class="p-nav-icon">👤</span><span>通訊錄</span></div>
-      <div class="p-nav-item" onclick="switchPhoneTab('keypad', this)"><span class="p-nav-icon">ⵌ</span><span>撥號鍵盤</span></div>
+      <div class="p-nav-item" onclick="switchPhoneTab('favorites', this)"><span class="p-nav-icon">★</span><span id="tab-favs">個人收藏</span></div>
+      <div class="p-nav-item active" onclick="switchPhoneTab('recents', this)"><span class="p-nav-icon">🕒</span><span id="tab-recents">最近通話</span></div>
+      <div class="p-nav-item" onclick="switchPhoneTab('contacts', this)"><span class="p-nav-icon">👤</span><span id="tab-contacts">通訊錄</span></div>
+      <div class="p-nav-item" onclick="switchPhoneTab('keypad', this)"><span class="p-nav-icon">ⵌ</span><span id="tab-keypad">撥號鍵盤</span></div>
     </div>
   </div>
 
@@ -2405,7 +2495,7 @@
       <div class="call-head-avatar">
         <img id="incoming-call-avatar-img" src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg" alt="Caller">
       </div>
-      <div class="call-title-name" id="incoming-caller-title">金旼炡</div>
+      <div class="call-title-name" id="incoming-caller-title">Winter</div>
       <div class="call-subtitle" id="incoming-call-status">iPhone 來電...</div>
     </div>
 
@@ -2417,15 +2507,15 @@
     </div>
   </div>
 
-  <!-- 13. 相簿 App -->
+  <!-- 13. 相簿 App (已移除 ⬆️ 🗑️ 與設定按鈕) -->
   <div id="app-photos" class="app-screen">
     <div class="photos-main-scroll">
       <div class="photos-top-bar">
         <div>
-          <div class="photos-app-title">圖庫</div>
-          <div class="photos-app-sub">精選照片集</div>
+          <div class="photos-app-title" id="photos-title-txt">圖庫</div>
+          <div class="photos-app-sub" id="photos-sub-txt">精選照片集</div>
         </div>
-        <div class="photos-select-btn">選取</div>
+        <div class="photos-select-btn" id="photos-select-txt">選取</div>
       </div>
 
       <div class="album-section-title">2026年10月</div>
@@ -2439,29 +2529,26 @@
     </div>
 
     <div class="album-dock-capsule">
-      <div class="capsule-btn">年</div>
-      <div class="capsule-btn">月</div>
-      <div class="capsule-btn active">所有照片</div>
+      <div class="capsule-btn" id="btn-capsule-year">年</div>
+      <div class="capsule-btn" id="btn-capsule-month">月</div>
+      <div class="capsule-btn active" id="btn-capsule-all">所有照片</div>
     </div>
   </div>
 
-  <!-- 相片單張檢視器 -->
+  <!-- 相片單張檢視器 (純淨愛心居中) -->
   <div id="photo-viewer-page">
     <div class="viewer-top-bar">
-      <span class="viewer-back" onclick="closePhotoViewer()">‹ 圖庫</span>
+      <span class="viewer-back" onclick="closePhotoViewer()" id="viewer-back-btn-txt">‹ 圖庫</span>
       <span id="viewer-date-title">2026年 10月</span>
-      <span style="color:#0a84ff; cursor:pointer;">編輯</span>
+      <span style="color:#0a84ff; cursor:pointer;" id="viewer-edit-btn-txt">編輯</span>
     </div>
     <div class="viewer-content" id="viewer-content-box">
       <img id="viewer-img" alt="view">
     </div>
     <div class="viewer-filmstrip" id="viewer-filmstrip-bar"></div>
+    <!-- 僅保留愛心居中 -->
     <div class="viewer-bottom-bar">
-      <span>⬆</span>
       <span>♡</span>
-      <span>ⓘ</span>
-      <span>⚙</span>
-      <span>🗑</span>
     </div>
   </div>
 
@@ -2516,6 +2603,199 @@
 </div>
 
 <script>
+  // 語言字典 (繁體中文 / English)
+  let currentLanguage = 'zh';
+  const i18n = {
+    zh: {
+      langName: "繁體中文",
+      statusBack: "‹ 主螢幕",
+      hint: "向上輕掃或點擊以解鎖",
+      passTitle: "輸入密碼",
+      passEmergency: "緊急情況",
+      passCancel: "取消",
+      passDelete: "刪除",
+      calDay: "星期五",
+      calEvent: "solo彩排",
+      nameNotes: "備忘錄",
+      namePhotos: "照片",
+      nameSettings: "設定",
+      nameCalendar: "日曆",
+      xForYou: "為你推薦",
+      xFollowing: "正在關注",
+      notesTitle: "所有 iCloud 備忘錄",
+      settingsTitle: "設定",
+      stAirplane: "飛航模式",
+      stBluetooth: "藍牙",
+      stBluetoothStatus: "開啟 ›",
+      stGeneral: "一般",
+      stAccessibility: "輔助使用",
+      stDisplay: "螢幕顯示與亮度",
+      stFaceId: "Face ID 與密碼",
+      stNotifications: "通知",
+      stFocus: "專注模式",
+      ktHeader: "聊天",
+      ktSend: "傳送",
+      phoneRecents: "最近通話",
+      phoneFavs: "個人收藏",
+      phoneContacts: "通訊錄",
+      phoneKeypad: "撥號鍵盤",
+      phoneSearch: "🔍 搜尋",
+      tabFavs: "個人收藏",
+      tabRecents: "最近通話",
+      tabContacts: "通訊錄",
+      tabKeypad: "撥號鍵盤",
+      photosTitle: "圖庫",
+      photosSub: "精選照片集",
+      photosSelect: "選取",
+      btnYear: "年",
+      btnMonth: "月",
+      btnAll: "所有照片",
+      viewerBack: "‹ 圖庫",
+      viewerEdit: "編輯",
+      callingStatus: "通話中",
+      incomingStatus: "iPhone 來電...",
+      memberWinter: "金旼炡",
+      memberGiselle: "內永枝利",
+      memberNing: "寧藝卓",
+      winterTime: "昨天",
+      giselleTime: "星期五",
+      ningTime: "星期四",
+      igNotifDesc: "imwinter 和其他人在你的貼文說讚",
+      chatNotifTitle: "旼冬🐶",
+      chatNotifDesc: "練完舞要不要一起去吃火鍋 看好一家麻辣鍋了",
+      bannerMsg: "練完舞要不要一起去吃火鍋 看好一家麻辣鍋了"
+    },
+    en: {
+      langName: "English",
+      statusBack: "‹ Home",
+      hint: "Swipe up or click to unlock",
+      passTitle: "Enter Passcode",
+      passEmergency: "Emergency",
+      passCancel: "Cancel",
+      passDelete: "Delete",
+      calDay: "Friday",
+      calEvent: "Solo Rehearsal",
+      nameNotes: "Notes",
+      namePhotos: "Photos",
+      nameSettings: "Settings",
+      nameCalendar: "Calendar",
+      xForYou: "For You",
+      xFollowing: "Following",
+      notesTitle: "All iCloud Notes",
+      settingsTitle: "Settings",
+      stAirplane: "Airplane Mode",
+      stBluetooth: "Bluetooth",
+      stBluetoothStatus: "On ›",
+      stGeneral: "General",
+      stAccessibility: "Accessibility",
+      stDisplay: "Display & Brightness",
+      stFaceId: "Face ID & Passcode",
+      stNotifications: "Notifications",
+      stFocus: "Focus",
+      ktHeader: "Chats",
+      ktSend: "Send",
+      phoneRecents: "Recents",
+      phoneFavs: "Favorites",
+      phoneContacts: "Contacts",
+      phoneKeypad: "Keypad",
+      phoneSearch: "🔍 Search",
+      tabFavs: "Favorites",
+      tabRecents: "Recents",
+      tabContacts: "Contacts",
+      tabKeypad: "Keypad",
+      photosTitle: "Library",
+      photosSub: "Featured Photos",
+      photosSelect: "Select",
+      btnYear: "Years",
+      btnMonth: "Months",
+      btnAll: "All Photos",
+      viewerBack: "‹ Library",
+      viewerEdit: "Edit",
+      callingStatus: "Connected",
+      incomingStatus: "iPhone Call...",
+      memberWinter: "Winter",
+      memberGiselle: "Giselle",
+      memberNing: "Ningning",
+      winterTime: "Yesterday",
+      giselleTime: "Friday",
+      ningTime: "Thursday",
+      igNotifDesc: "imwinter and others liked your post",
+      chatNotifTitle: "Winter 🐶",
+      chatNotifDesc: "Hotpot after dance rehearsal? Found a great place",
+      bannerMsg: "Hotpot after dance rehearsal? Found a great place"
+    }
+  };
+
+  function setLanguage(lang) {
+    currentLanguage = lang;
+    const t = i18n[lang];
+    document.getElementById('current-lang-txt').textContent = t.langName;
+    document.getElementById('txt-status-back').textContent = t.statusBack;
+    document.getElementById('hint').textContent = t.hint;
+    document.getElementById('txt-pass-title').textContent = t.passTitle;
+    document.getElementById('txt-pass-emergency').textContent = t.passEmergency;
+    document.getElementById('txt-widget-cal-day').textContent = t.calDay;
+    document.getElementById('txt-widget-cal-event').textContent = t.calEvent;
+    document.getElementById('name-notes').textContent = t.nameNotes;
+    document.getElementById('name-photos').textContent = t.namePhotos;
+    document.getElementById('name-settings').textContent = t.nameSettings;
+    document.getElementById('name-calendar').textContent = t.nameCalendar;
+    document.getElementById('txt-x-for-you').textContent = t.xForYou;
+    document.getElementById('txt-x-following').textContent = t.xFollowing;
+    document.getElementById('txt-notes-header-title').textContent = t.notesTitle;
+    document.getElementById('txt-settings-title').textContent = t.settingsTitle;
+    document.getElementById('txt-st-airplane').textContent = t.stAirplane;
+    document.getElementById('txt-st-bluetooth').textContent = t.stBluetooth;
+    document.getElementById('txt-st-bluetooth-status').textContent = t.stBluetoothStatus;
+    document.getElementById('txt-st-general').textContent = t.stGeneral;
+    document.getElementById('txt-st-accessibility').textContent = t.stAccessibility;
+    document.getElementById('txt-st-display').textContent = t.stDisplay;
+    document.getElementById('txt-st-faceid').textContent = t.stFaceId;
+    document.getElementById('txt-st-notifications').textContent = t.stNotifications;
+    document.getElementById('txt-st-focus').textContent = t.stFocus;
+    document.getElementById('txt-kt-header').textContent = t.ktHeader;
+    document.getElementById('kt-send-btn-txt').textContent = t.ktSend;
+    document.getElementById('phone-recents-title').textContent = t.phoneRecents;
+    document.getElementById('phone-favs-title').textContent = t.phoneFavs;
+    document.getElementById('phone-contacts-title').textContent = t.phoneContacts;
+    document.getElementById('phone-search-txt').textContent = t.phoneSearch;
+    document.getElementById('tab-favs').textContent = t.tabFavs;
+    document.getElementById('tab-recents').textContent = t.tabRecents;
+    document.getElementById('tab-contacts').textContent = t.tabContacts;
+    document.getElementById('tab-keypad').textContent = t.tabKeypad;
+    document.getElementById('photos-title-txt').textContent = t.photosTitle;
+    document.getElementById('photos-sub-txt').textContent = t.photosSub;
+    document.getElementById('photos-select-txt').textContent = t.photosSelect;
+    document.getElementById('btn-capsule-year').textContent = t.btnYear;
+    document.getElementById('btn-capsule-month').textContent = t.btnMonth;
+    document.getElementById('btn-capsule-all').textContent = t.btnAll;
+    document.getElementById('viewer-back-btn-txt').textContent = t.viewerBack;
+    document.getElementById('viewer-edit-btn-txt').textContent = t.viewerEdit;
+    document.getElementById('rec-name-winter').textContent = t.memberWinter;
+    document.getElementById('rec-name-giselle').textContent = t.memberGiselle;
+    document.getElementById('rec-name-ning').textContent = t.memberNing;
+    document.getElementById('fav-name-winter').textContent = t.memberWinter;
+    document.getElementById('cont-name-winter').textContent = t.memberWinter;
+    document.getElementById('cont-name-giselle').textContent = t.memberGiselle;
+    document.getElementById('cont-name-ning').textContent = t.memberNing;
+    document.getElementById('rec-time-winter').textContent = t.winterTime;
+    document.getElementById('rec-time-giselle').textContent = t.giselleTime;
+    document.getElementById('rec-time-ning').textContent = t.ningTime;
+    document.getElementById('txt-notif-ig-desc').textContent = t.igNotifDesc;
+    document.getElementById('txt-notif-chat-title').textContent = t.chatNotifTitle;
+    document.getElementById('txt-notif-chat-desc').textContent = t.chatNotifDesc;
+    document.getElementById('banner-caller-msg').textContent = t.bannerMsg;
+    updateClock();
+    closeLangModal();
+  }
+
+  function openLangModal() {
+    document.getElementById('lang-modal').style.display = 'flex';
+  }
+  function closeLangModal() {
+    document.getElementById('lang-modal').style.display = 'none';
+  }
+
   // 1. 時間更新
   function updateClock() {
     const d = new Date();
@@ -2524,15 +2804,19 @@
     const timeStr = `${hh}:${mm}`;
     document.querySelectorAll('.now-time').forEach(el => el.textContent = timeStr);
 
+    const locale = currentLanguage === 'en' ? 'en-US' : 'zh-TW';
     const opts = { month: 'long', day: 'numeric', weekday: 'short' };
-    document.getElementById('lock-date').textContent = d.toLocaleDateString('zh-TW', opts);
+    document.getElementById('lock-date').textContent = d.toLocaleDateString(locale, opts);
   }
   setInterval(updateClock, 1000);
   updateClock();
 
-  // 2. 密碼解鎖頁面：取消與刪除實時反應
+  // 2. 鎖定畫面：向上滑動漸變與密碼盤喚出 (如範例)
   const lock = document.getElementById('lock');
   const pass = document.getElementById('pass');
+  const topGroup = document.getElementById('lock-top-group');
+  const notifsGroup = document.getElementById('lock-notifs-group');
+  const bottomGroup = document.getElementById('lock-bottom-group');
   let passCode = [];
   const dots = document.querySelectorAll('.p-dot');
   const delCancelBtn = document.getElementById('pass-del-cancel-btn');
@@ -2549,10 +2833,27 @@
     lockStartY = e.touches[0].clientY;
   }, { passive: true });
 
+  lock.addEventListener('touchmove', (e) => {
+    const moveY = lockStartY - e.touches[0].clientY;
+    if (moveY > 0) {
+      const progress = Math.min(moveY / 120, 1);
+      const opacity = 1 - progress;
+      topGroup.style.opacity = opacity;
+      topGroup.style.transform = `translateY(-${progress * 30}px)`;
+      notifsGroup.style.opacity = opacity;
+      bottomGroup.style.opacity = opacity;
+    }
+  }, { passive: true });
+
   lock.addEventListener('touchend', (e) => {
-    if (lockStartY - e.changedTouches[0].clientY > 20) {
+    const moveY = lockStartY - e.changedTouches[0].clientY;
+    if (moveY > 40) {
       openPasscode();
     }
+    topGroup.style.opacity = '1';
+    topGroup.style.transform = 'translateY(0)';
+    notifsGroup.style.opacity = '1';
+    bottomGroup.style.opacity = '1';
   }, { passive: true });
 
   function pressKey(num) {
@@ -2585,10 +2886,11 @@
       if (idx < passCode.length) dot.classList.add('filled');
       else dot.classList.remove('filled');
     });
+    const t = i18n[currentLanguage];
     if (passCode.length > 0) {
-      delCancelBtn.textContent = '刪除';
+      delCancelBtn.textContent = t.passDelete;
     } else {
-      delCancelBtn.textContent = '取消';
+      delCancelBtn.textContent = t.passCancel;
     }
   }
 
@@ -2681,7 +2983,6 @@
     hideKeyboard();
   }
 
-  // 左右滑動退出
   let touchStartX = 0;
   window.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
@@ -2697,7 +2998,6 @@
     }
   }, { passive: true });
 
-  // 底部 Home 條點擊與上滑
   const homeBar = document.getElementById('home-indicator');
   homeBar.addEventListener('click', (e) => {
     e.stopPropagation();
@@ -2715,7 +3015,7 @@
     }
   }, { passive: true });
 
-  // 7. KakaoTalk
+  // 7. KakaoTalk 劇情
   const memberScripts = {
     '旼冬🐶': {
       initial: '練完舞要不要一起去吃火鍋 看好一家麻辣鍋了',
@@ -2940,35 +3240,35 @@
   }
 
   const phoneCallScripts = {
-    '金旼炡': [
-      { sender: '旼冬', text: '在幹嘛' },
+    'Winter': [
+      { sender: 'Winter', text: '在幹嘛' },
       { sender: 'Karina', text: '剛練完舞 妳呢' },
-      { sender: '旼冬', text: '波妞昨晚太興奮一直暴衝 我整夜顧牠都沒睡' },
+      { sender: 'Winter', text: '波妞昨晚太興奮一直暴衝 我整夜顧牠都沒睡' },
       { sender: 'Karina', text: '辛苦了 今天換我當保姆 妳好好補眠' },
-      { sender: '旼冬', text: '謝謝知珉 肉乾我放在客廳電視櫃上' },
+      { sender: 'Winter', text: '謝謝知珉 肉乾我放在客廳電視櫃上' },
       { sender: 'Karina', text: '收到 等等練完舞我就回去餵牠' }
     ],
-    '內永枝利': [
-      { sender: '欸哩', text: '知珉 妳上次說想吃涉谷那家可麗餅 我們休假要不要去' },
+    'Giselle': [
+      { sender: 'Giselle', text: '知珉 妳上次說想吃涉谷那家可麗餅 我們休假要不要去' },
       { sender: 'Karina', text: '好啊 那天順便去逛街買衣服' },
-      { sender: '欸哩', text: '沒問題 到時候涉谷站見' },
+      { sender: 'Giselle', text: '沒問題 到時候涉谷站見' },
       { sender: 'Karina', text: '好 休假見' }
     ],
-    '寧藝卓': [
-      { sender: '寧', text: '喂 有看到我的耳機嗎' },
+    'Ningning': [
+      { sender: 'Ningning', text: '喂 有看到我的耳機嗎' },
       { sender: 'Karina', text: '在休息室沙發夾縫 幫妳放化妝台了' },
-      { sender: '寧', text: '太感謝了 找了一整個早上' },
+      { sender: 'Ningning', text: '太感謝了 找了一整個早上' },
       { sender: 'Karina', text: '下次別亂塞 練習室見' }
     ]
   };
 
   const callerList = [
-    { name: '金旼炡', avatar: 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg' },
-    { name: '內永枝利', avatar: 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png' },
-    { name: '寧藝卓', avatar: 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg' }
+    { name: 'Winter', avatar: 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg' },
+    { name: 'Giselle', avatar: 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png' },
+    { name: 'Ningning', avatar: 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg' }
   ];
 
-  let currentCallerName = '金旼炡';
+  let currentCallerName = 'Winter';
   const callScreen = document.getElementById('incoming-call-screen');
   const dialogueBox = document.getElementById('call-dialogue-box');
   let callSecondCounter = null;
@@ -2976,7 +3276,7 @@
 
   // 35秒後啟動第一次來電，之後每 160 秒隨機撥入
   setTimeout(() => {
-    triggerIncomingCall('金旼炡', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg');
+    triggerIncomingCall('Winter', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg');
   }, 35000);
 
   setInterval(() => {
@@ -2986,35 +3286,36 @@
 
   function triggerIncomingCall(name, avatar) {
     currentCallerName = name;
-    document.getElementById('incoming-caller-title').textContent = name;
+    document.getElementById('incoming-caller-title').textContent = (currentLanguage === 'en') ? name : ((name === 'Winter') ? '金旼炡' : ((name === 'Giselle') ? '內永枝利' : '寧藝卓'));
     document.getElementById('incoming-call-avatar-img').src = avatar;
-    document.getElementById('incoming-call-status').textContent = 'iPhone 來電...';
+    document.getElementById('incoming-call-status').textContent = i18n[currentLanguage].incomingStatus;
     document.getElementById('accept-call-btn').style.display = 'flex';
     dialogueBox.style.display = 'none';
     dialogueBox.innerHTML = '';
     callScreen.style.display = 'flex';
   }
 
-  function startCallDirect(name, avatar) {
+  function startCallDirect(name, avatar, event) {
+    if (event) event.stopPropagation();
     currentCallerName = name;
-    document.getElementById('incoming-caller-title').textContent = name;
+    document.getElementById('incoming-caller-title').textContent = (currentLanguage === 'en') ? name : ((name === 'Winter') ? '金旼炡' : ((name === 'Giselle') ? '內永枝利' : ((name === 'Ningning') ? '寧藝卓' : name)));
     document.getElementById('incoming-call-avatar-img').src = avatar;
     document.getElementById('accept-call-btn').style.display = 'none';
     dialogueBox.style.display = 'flex';
     dialogueBox.innerHTML = '';
     callScreen.style.display = 'flex';
 
-    document.getElementById('incoming-call-status').textContent = '通話中 00:01';
+    document.getElementById('incoming-call-status').textContent = `${i18n[currentLanguage].callingStatus} 00:01`;
     let sec = 1;
     clearInterval(callSecondCounter);
     callSecondCounter = setInterval(() => {
       sec++;
       const mm = String(Math.floor(sec / 60)).padStart(2, '0');
       const ss = String(sec % 60).padStart(2, '0');
-      document.getElementById('incoming-call-status').textContent = `通話中 ${mm}:${ss}`;
+      document.getElementById('incoming-call-status').textContent = `${i18n[currentLanguage].callingStatus} ${mm}:${ss}`;
     }, 1000);
 
-    const script = phoneCallScripts[currentCallerName] || phoneCallScripts['金旼炡'];
+    const script = phoneCallScripts[currentCallerName] || phoneCallScripts['Winter'];
     let diagIdx = 0;
     clearInterval(callDialogueTimer);
     callDialogueTimer = setInterval(() => {
@@ -3034,7 +3335,7 @@
 
   function acceptCall() {
     document.getElementById('accept-call-btn').style.display = 'none';
-    document.getElementById('incoming-call-status').textContent = '通話中 00:01';
+    document.getElementById('incoming-call-status').textContent = `${i18n[currentLanguage].callingStatus} 00:01`;
     dialogueBox.style.display = 'flex';
 
     let sec = 1;
@@ -3043,10 +3344,10 @@
       sec++;
       const mm = String(Math.floor(sec / 60)).padStart(2, '0');
       const ss = String(sec % 60).padStart(2, '0');
-      document.getElementById('incoming-call-status').textContent = `通話中 ${mm}:${ss}`;
+      document.getElementById('incoming-call-status').textContent = `${i18n[currentLanguage].callingStatus} ${mm}:${ss}`;
     }, 1000);
 
-    const script = phoneCallScripts[currentCallerName] || phoneCallScripts['金旼炡'];
+    const script = phoneCallScripts[currentCallerName] || phoneCallScripts['Winter'];
     let diagIdx = 0;
     clearInterval(callDialogueTimer);
     callDialogueTimer = setInterval(() => {
