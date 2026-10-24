@@ -1361,6 +1361,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
+      pointer-events: auto !important;
     }
     .contact-avatar-img {
       width: 42px;
@@ -2104,7 +2105,7 @@
     ></iframe>
   </div>
 
-  <!-- 5. Instagram 視窗 (修復聲音媒體權限) -->
+  <!-- 5. Instagram 視窗 -->
   <div id="app-instagram" class="app-screen">
     <iframe 
       id="iframe-instagram"
@@ -2408,46 +2409,46 @@
     </div>
   </div>
 
-  <!-- 11. 電話 App (百分之百保證撥通、拔除任何點擊干擾) -->
-  <div id="app-phone" class="app-screen" style="background:#000; color:#fff; padding-top:44px; display:flex; flex-direction:column;">
+  <!-- 11. 電話 App (完美保證點擊撥通、帶泡泡對話) -->
+  <div id="app-phone" class="app-screen">
     <div class="phone-header-title" id="phone-header-main-title">聯絡人</div>
-    <div style="flex:1; overflow-y:auto; padding:6px 16px; display:flex; flex-direction:column; gap:8px;">
-      <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:#1c1c1e; border-radius:12px; cursor:pointer;" onclick="startCallDirect('Winter', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg')">
-        <div style="display:flex; align-items:center; gap:12px;">
-          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg" style="width:42px; height:42px; border-radius:50%; object-fit:cover;" alt="Winter">
-          <div style="display:flex; flex-direction:column; gap:2px;">
-            <div style="font-size:15px; font-weight:600;" id="p-name-winter">金旼炡</div>
-            <div style="font-size:11px; color:#8e8e93;" id="p-sub-winter">旼冬</div>
+    <div class="phone-contacts-container">
+      <div class="contact-item-row" onclick="startCallDirect('Winter', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg')">
+        <div class="contact-left">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg" class="contact-avatar-img" alt="Winter">
+          <div class="contact-info-text">
+            <div class="contact-name-title" id="p-name-winter">金旼炡</div>
+            <div class="contact-sub-title" id="p-sub-winter">旼冬</div>
           </div>
         </div>
-        <div style="font-size:18px; color:#34c759;">📞</div>
+        <div class="phone-dial-icon">📞</div>
       </div>
 
-      <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:#1c1c1e; border-radius:12px; cursor:pointer;" onclick="startCallDirect('Giselle', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png')">
-        <div style="display:flex; align-items:center; gap:12px;">
-          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png" style="width:42px; height:42px; border-radius:50%; object-fit:cover;" alt="Giselle">
-          <div style="display:flex; flex-direction:column; gap:2px;">
-            <div style="font-size:15px; font-weight:600;" id="p-name-giselle">內永枝利</div>
-            <div style="font-size:11px; color:#8e8e93;" id="p-sub-giselle">欸哩</div>
+      <div class="contact-item-row" onclick="startCallDirect('Giselle', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png')">
+        <div class="contact-left">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png" class="contact-avatar-img" alt="Giselle">
+          <div class="contact-info-text">
+            <div class="contact-name-title" id="p-name-giselle">內永枝利</div>
+            <div class="contact-sub-title" id="p-sub-giselle">欸哩</div>
           </div>
         </div>
-        <div style="font-size:18px; color:#34c759;">📞</div>
+        <div class="phone-dial-icon">📞</div>
       </div>
 
-      <div style="display:flex; align-items:center; justify-content:space-between; padding:12px 14px; background:#1c1c1e; border-radius:12px; cursor:pointer;" onclick="startCallDirect('Ningning', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg')">
-        <div style="display:flex; align-items:center; gap:12px;">
-          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg" style="width:42px; height:42px; border-radius:50%; object-fit:cover;" alt="Ningning">
-          <div style="display:flex; flex-direction:column; gap:2px;">
-            <div style="font-size:15px; font-weight:600;" id="p-name-ning">寧藝卓</div>
-            <div style="font-size:11px; color:#8e8e93;" id="p-sub-ning">寧</div>
+      <div class="contact-item-row" onclick="startCallDirect('Ningning', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg')">
+        <div class="contact-left">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg" class="contact-avatar-img" alt="Ningning">
+          <div class="contact-info-text">
+            <div class="contact-name-title" id="p-name-ning">寧藝卓</div>
+            <div class="contact-sub-title" id="p-sub-ning">寧</div>
           </div>
         </div>
-        <div style="font-size:18px; color:#34c759;">📞</div>
+        <div class="phone-dial-icon">📞</div>
       </div>
     </div>
   </div>
 
-  <!-- 12. 全螢幕撥通畫面 -->
+  <!-- 12. 全螢幕撥通畫面 (帶語音對話泡泡) -->
   <div id="incoming-call-screen">
     <div>
       <div class="call-head-avatar">
@@ -2515,7 +2516,7 @@
         <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
       </div>
       <div class="viewer-bar-btn">
-        <svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="20" y1="21" x2="20" y2="16"></line><line x1="20" y1="12" x2="20" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
+        <svg viewBox="0 0 24 24"><line x1="4" y1="21" x2="4" y2="14"></line><line x1="4" y1="10" x2="4" y2="3"></line><line x1="12" y1="21" x2="12" y2="12"></line><line x1="12" y1="8" x2="12" y2="3"></line><line x1="1" y1="14" x2="7" y2="14"></line><line x1="9" y1="8" x2="15" y2="8"></line><line x1="17" y1="16" x2="23" y2="16"></line></svg>
       </div>
       <div class="viewer-bar-btn">
         <svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
@@ -2582,7 +2583,7 @@
   let currentLanguage = 'zh';
   let pendingAppAfterUnlock = null;
 
-  // Web Audio API 提示音與強制真實震動
+  // Web Audio API 提示音與裝置震動引擎
   function playAlertSound() {
     try {
       if (navigator.vibrate) {
@@ -3333,7 +3334,7 @@
     closeNoteEditor();
   }
 
-  // 電話通話腳本與邏輯 (回歸直接撥通與震動提示音)
+  // 電話通話腳本與邏輯 (百分之百保證撥通)
   const phoneCallScriptsZh = {
     'Winter': [
       { sender: '旼冬', text: '在幹嘛' },
