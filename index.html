@@ -62,7 +62,7 @@
       }
     }
 
-    /* 頂部狀態列：全域加入陰影避免與桌布融合 */
+    /* 頂部狀態列：柔和陰影 */
     .status {
       position: absolute;
       top: 0;
@@ -79,8 +79,8 @@
       pointer-events: none !important;
       color: #fff;
       font-variant-numeric: tabular-nums;
-      text-shadow: 0 1px 5px rgba(0,0,0,0.85);
-      filter: drop-shadow(0 1px 3px rgba(0,0,0,0.7));
+      text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4));
     }
     .status.black-theme {
       color: #000 !important;
@@ -137,7 +137,7 @@
       width: 2.5px;
       background: #fff;
       border-radius: 1px;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.5);
     }
     .wifi-icon-box {
       width: 15px;
@@ -153,7 +153,7 @@
     }
     .wifi-svg path {
       fill: #fff;
-      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.8));
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.5));
     }
     .bat {
       display: inline-block;
@@ -162,7 +162,7 @@
       border: 1.5px solid currentColor;
       border-radius: 4px;
       position: relative;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.5);
     }
     .bat:after {
       content: "";
@@ -278,7 +278,7 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgba(0, 0, 0, 0.22);
+      background: rgba(0, 0, 0, 0.18);
       pointer-events: none;
       z-index: 1;
     }
@@ -303,7 +303,7 @@
       font-weight: 600;
       color: rgba(255, 255, 255, 0.98);
       margin-bottom: 0px;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.85);
+      text-shadow: 0 2px 8px rgba(0,0,0,0.8);
     }
     .lock-top .t {
       font-size: 68px;
@@ -313,7 +313,7 @@
       font-variant-numeric: tabular-nums;
       font-family: "Montserrat", sans-serif;
       color: #fff;
-      text-shadow: 0 4px 20px rgba(0,0,0,0.9);
+      text-shadow: 0 4px 16px rgba(0,0,0,0.85);
     }
 
     .lock-notifs {
@@ -1328,172 +1328,66 @@
       cursor: pointer;
     }
 
-    /* ================= 10. 電話 App (純白主題、保證直接撥通) ================= */
+    /* ================= 10. 電話 App (全黑介面、保證直接撥入與撥出) ================= */
     #app-phone {
-      background: #fff;
-      color: #000;
+      background: #000;
+      color: #fff;
       padding-top: 44px;
       display: flex;
       flex-direction: column;
     }
-    .phone-top-bar {
-      padding: 10px 16px 4px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .phone-edit-btn {
-      color: #0a84ff;
-      font-size: 14px;
-      font-weight: 500;
-    }
-    .phone-switch-tab {
-      background: #e5e5ea;
-      border-radius: 8px;
-      padding: 2px;
-      display: flex;
-    }
-    .phone-tab-btn {
-      padding: 3px 12px;
-      font-size: 11.5px;
-      font-weight: 600;
-      border-radius: 6px;
-      color: #000;
-    }
-    .phone-tab-btn.active {
-      background: #fff;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
-    }
-    .phone-page-title {
-      font-size: 28px;
+    .phone-header-title {
+      font-size: 26px;
       font-weight: 700;
-      padding: 4px 16px 8px;
-      letter-spacing: -0.5px;
+      padding: 10px 16px 8px;
     }
-    .phone-search-input {
-      background: #e3e3e8;
-      border-radius: 10px;
-      padding: 7px 12px;
-      margin: 0 16px 10px;
-      font-size: 13px;
-      color: #8e8e93;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .recents-list {
+    .phone-contacts-container {
       flex: 1;
       overflow-y: auto;
-      padding-bottom: 60px;
+      padding: 6px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    .recent-row {
+    .contact-item-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 13px 16px;
-      border-bottom: 0.5px solid #e5e5ea;
+      padding: 12px 14px;
+      background: #1c1c1e;
+      border-radius: 12px;
       cursor: pointer;
     }
-    .recent-row:active {
-      background: #f2f2f7;
+    .contact-item-row:active {
+      background: #2c2c2e;
     }
-    .recent-name {
-      font-size: 15.5px;
-      font-weight: 600;
-      color: #000;
-    }
-    .recent-sub {
-      font-size: 11.5px;
-      color: #8e8e93;
-    }
-
-    /* 撥號鍵盤 */
-    .dialpad-container {
+    .contact-left {
       display: flex;
-      flex-direction: column;
       align-items: center;
-      padding-top: 15px;
+      gap: 12px;
     }
-    .dial-display {
-      font-size: 30px;
-      height: 40px;
-      margin-bottom: 15px;
-      letter-spacing: 1px;
-      color: #000;
-    }
-    .dial-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 72px);
-      gap: 14px 24px;
-    }
-    .dial-btn {
-      width: 72px;
-      height: 72px;
+    .contact-avatar-img {
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      background: #e5e5ea;
+      object-fit: cover;
+    }
+    .contact-info-text {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-    }
-    .dial-btn:active {
-      background: #d1d1d6;
-    }
-    .dial-btn .dn {
-      font-size: 28px;
-      font-weight: 400;
-      line-height: 1;
-    }
-    .dial-btn .ds {
-      font-size: 9px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      color: #666;
-    }
-    .dial-call-btn {
-      width: 68px;
-      height: 68px;
-      border-radius: 50%;
-      background: #34c759;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 28px;
-      color: #fff;
-      margin-top: 18px;
-      cursor: pointer;
-    }
-
-    /* 底部導覽列 */
-    .phone-bottom-nav {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      height: 52px;
-      background: #f8f8fa;
-      border-top: 0.5px solid #d1d1d6;
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      z-index: 100;
-    }
-    .p-nav-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
       gap: 2px;
-      font-size: 10px;
+    }
+    .contact-name-title {
+      font-size: 15px;
+      font-weight: 600;
+    }
+    .contact-sub-title {
+      font-size: 11px;
       color: #8e8e93;
-      cursor: pointer;
-      padding: 4px 18px;
     }
-    .p-nav-item.active {
-      color: #0a84ff;
-    }
-    .p-nav-icon {
-      font-size: 17px;
+    .phone-dial-icon {
+      font-size: 18px;
+      color: #34c759;
     }
 
     #calling-screen {
@@ -1755,7 +1649,7 @@
       stroke: #fff;
     }
 
-    /* ================= 12. 相機 App ================= */
+    /* ================= 12. 相機 App (精準焦距位置、向量閃光燈與切換鏡頭) ================= */
     #app-camera {
       background: #000;
       position: absolute;
@@ -1767,6 +1661,7 @@
     .cam-top-controls {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 48px 20px 8px;
       font-size: 12px;
       color: #fff;
@@ -1805,19 +1700,20 @@
     .cam-grid-line {
       border: 0.5px solid rgba(255,255,255,0.18);
     }
+    /* 焦距切換列貼近快門上方 */
     .cam-zoom-row {
       position: absolute;
-      bottom: 110px;
+      bottom: 24px;
       left: 0;
       right: 0;
       display: flex;
       justify-content: center;
       align-items: center;
-      gap: 14px;
+      gap: 16px;
       font-size: 12px;
       font-weight: 600;
       color: rgba(255,255,255,0.7);
-      z-index: 2;
+      z-index: 3;
     }
     .zoom-pill {
       width: 28px;
@@ -1839,7 +1735,7 @@
       gap: 22px;
       font-size: 13px;
       font-weight: 600;
-      padding: 10px 0;
+      padding: 6px 0 2px;
       color: rgba(255,255,255,0.65);
     }
     .cam-modes-row span.active {
@@ -1852,6 +1748,8 @@
       align-items: center;
       justify-content: space-around;
       padding: 0 24px 10px;
+      position: relative;
+      z-index: 4;
     }
     .cam-gallery-thumbnail {
       width: 44px;
@@ -1957,7 +1855,7 @@
       <div class="t now-time">12:41</div>
     </div>
 
-    <!-- 鎖定通知 (點擊需先解鎖) -->
+    <!-- 鎖定通知 -->
     <div class="lock-notifs" id="lock-notifs-group">
       <div class="notif-card" id="notif-ig" onclick="handleNotifClick('instagram')">
         <div class="notif-left">
@@ -1986,7 +1884,7 @@
       </div>
     </div>
 
-    <!-- 語言膠囊按鈕放置在「向上輕掃以解鎖」正上方 -->
+    <!-- 語言膠囊按鈕放置在解鎖文字正上方 -->
     <div class="lock-bottom" id="lock-bottom-group">
       <div class="lang-pill-container" id="lang-pill-wrapper">
         <div class="lang-pill-btn" onclick="openLangModal()">
@@ -2517,7 +2415,7 @@
     </div>
   </div>
 
-  <!-- 11. 電話 App (全黑介面、保證直接撥入與撥出) -->
+  <!-- 11. 電話 App (還原最早穩定可撥通介面) -->
   <div id="app-phone" class="app-screen">
     <div class="phone-header-title" id="phone-header-main-title">聯絡人</div>
     <div class="phone-contacts-container">
@@ -2563,7 +2461,7 @@
         <img id="incoming-call-avatar-img" src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg" alt="Caller">
       </div>
       <div class="call-title-name" id="incoming-caller-title">Winter</div>
-      <div class="call-subtitle" id="incoming-caller-status">iPhone 來電...</div>
+      <div class="call-subtitle" id="incoming-call-status">iPhone 來電...</div>
     </div>
 
     <div class="call-dialogue-box" id="call-dialogue-box" style="display:none;"></div>
@@ -2632,15 +2530,15 @@
     </div>
   </div>
 
-  <!-- 14. 相機 App (閃電與前後鏡頭改為簡易向量) -->
+  <!-- 14. 相機 App (精準焦距位置、簡易向量閃電與切換鏡頭) -->
   <div id="app-camera" class="app-screen">
     <div class="cam-top-controls">
       <!-- 閃電向量圖示 -->
       <span style="display:flex; align-items:center; gap:4px; cursor:pointer;">
         <svg viewBox="0 0 24 24" style="width:14px; height:14px; fill:#fff;"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-        <span>關閉</span>
+        <span id="cam-txt-flash">關閉</span>
       </span>
-      <span>Live 關閉</span>
+      <span id="cam-txt-live">Live 關閉</span>
       <span>RAW 12M</span>
     </div>
 
@@ -2655,6 +2553,7 @@
         <div class="cam-grid-line"></div><div class="cam-grid-line"></div><div class="cam-grid-line"></div>
       </div>
 
+      <!-- 焦距切換列貼近快門上方 -->
       <div class="cam-zoom-row">
         <div class="zoom-pill">.5</div>
         <div class="zoom-pill active">1x</div>
@@ -2697,7 +2596,7 @@
   function playAlertSound() {
     try {
       if (navigator.vibrate) {
-        navigator.vibrate([250, 100, 250]); // 觸發真實手機震動
+        navigator.vibrate([250, 100, 250]);
       }
       const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       const osc = audioCtx.createOscillator();
@@ -2791,7 +2690,9 @@
       previewGiselle: "昨天逛街看的那件黑色外套真的超燒",
       albumTitle10: "2026年10月",
       albumTitle9: "2026年9月",
-      albumTitle8: "2026年8月"
+      albumTitle8: "2026年8月",
+      camFlash: "關閉",
+      camLive: "Live 關閉"
     },
     en: {
       langName: "English",
@@ -2849,7 +2750,9 @@
       previewGiselle: "That black jacket we saw in Shibuya yesterday was so stunning",
       albumTitle10: "October 2026",
       albumTitle9: "September 2026",
-      albumTitle8: "August 2026"
+      albumTitle8: "August 2026",
+      camFlash: "Off",
+      camLive: "Live Off"
     }
   };
 
@@ -2985,6 +2888,8 @@
     document.getElementById('album-sec-title-10').textContent = t.albumTitle10;
     document.getElementById('album-sec-title-9').textContent = t.albumTitle9;
     document.getElementById('album-sec-title-8').textContent = t.albumTitle8;
+    document.getElementById('cam-txt-flash').textContent = t.camFlash;
+    document.getElementById('cam-txt-live').textContent = t.camLive;
 
     if (currentLanguage === 'en') {
       document.getElementById('cam-mode-cinematic').textContent = 'CINEMATIC';
@@ -3438,6 +3343,7 @@
     closeNoteEditor();
   }
 
+  // 電話通話腳本與邏輯
   const phoneCallScriptsZh = {
     'Winter': [
       { sender: '旼冬', text: '在幹嘛' },
@@ -3518,7 +3424,8 @@
     callScreen.style.display = 'flex';
   }
 
-  function startCallDirect(name, avatar) {
+  function startCallDirect(name, avatar, event) {
+    if (event) event.stopPropagation();
     currentCallerName = name;
     document.getElementById('incoming-caller-title').textContent = (currentLanguage === 'en') ? name : ((name === 'Winter') ? '金旼炡' : ((name === 'Giselle') ? '內永枝利' : ((name === 'Ningning') ? '寧藝卓' : name)));
     document.getElementById('incoming-call-avatar-img').src = avatar;
@@ -3534,7 +3441,7 @@
       sec++;
       const mm = String(Math.floor(sec / 60)).padStart(2, '0');
       const ss = String(sec % 60).padStart(2, '0');
-      document.getElementById('incoming-caller-status').textContent = `${i18n[currentLanguage].callingStatus} ${mm}:${ss}`;
+      document.getElementById('incoming-call-status').textContent = `${i18n[currentLanguage].callingStatus} ${mm}:${ss}`;
     }, 1000);
 
     const scripts = currentLanguage === 'en' ? phoneCallScriptsEn : phoneCallScriptsZh;
