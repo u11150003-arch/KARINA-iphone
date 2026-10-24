@@ -83,8 +83,7 @@
     .status.black-theme {
       color: #000 !important;
     }
-    .status.black-theme .c-bar,
-    .status.black-theme .wifi-dot {
+    .status.black-theme .c-bar {
       background: #000 !important;
     }
     .status.black-theme .wifi-svg path {
@@ -133,7 +132,13 @@
       background: #fff;
       border-radius: 1px;
     }
-    /* 標準原生 Wi-Fi 圖示 */
+    .wifi-icon-box {
+      width: 15px;
+      height: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
     .wifi-svg {
       width: 15px;
       height: 12px;
@@ -180,7 +185,7 @@
       border-radius: 22px;
     }
 
-    /* 頂部橫幅通知 */
+    /* 頂部下拉橫幅通知 */
     #top-notification-banner {
       position: absolute;
       top: -90px;
@@ -613,6 +618,7 @@
       transform-origin: top center;
     }
 
+    /* Instagram 嵌入 */
     #app-instagram {
       background: #000;
       padding-top: 0;
@@ -685,7 +691,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
-    /* ================= 6. X (Twitter) App (更多真實內容) ================= */
+    /* ================= 6. X (Twitter) App (指定慶生文案與多推文) ================= */
     #app-x {
       background: #000;
       color: #fff;
@@ -737,8 +743,9 @@
     }
     .x-text {
       font-size: 13px;
-      line-height: 1.45;
+      line-height: 1.5;
       margin-bottom: 8px;
+      white-space: pre-wrap;
     }
     .x-tweet-img {
       border-radius: 14px;
@@ -898,12 +905,13 @@
       cursor: pointer;
     }
 
-    /* ================= 8. 設定 App (豐富選項、低飽和圖示) ================= */
+    /* ================= 8. 設定 App (低飽和極簡圖示、修復裁切) ================= */
     #app-settings {
       background: #000;
       color: #fff;
       padding-top: 46px;
       overflow-y: auto;
+      padding-bottom: 40px;
     }
     .settings-title {
       font-size: 24px;
@@ -941,7 +949,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 11px 16px;
+      padding: 12px 16px;
       border-bottom: 0.5px solid #28282b;
       font-size: 13.5px;
     }
@@ -953,15 +961,16 @@
       align-items: center;
       gap: 12px;
     }
-    .settings-icon {
+    .settings-icon-simple {
       width: 26px;
       height: 26px;
       border-radius: 6px;
+      background: #2c2c2e;
       display: flex;
       align-items: center;
       justify-content: center;
       font-size: 13px;
-      filter: saturate(0.65);
+      color: #8e8e93;
     }
 
     /* ================= 9. KakaoTalk ================= */
@@ -1159,7 +1168,7 @@
       cursor: pointer;
     }
 
-    /* ================= 10. 電話 App (純白主題、下排按鍵、撥號鍵盤可通話) ================= */
+    /* ================= 10. 電話 App (保證可撥出、保留三大標籤) ================= */
     #app-phone {
       background: #fff;
       color: #000;
@@ -1267,7 +1276,7 @@
       cursor: pointer;
     }
 
-    /* 底部導覽欄 (個人收藏、通訊錄、撥號鍵盤，低飽和灰度) */
+    /* 底部導覽欄 (個人收藏、通訊錄、撥號鍵盤) */
     .phone-bottom-nav {
       position: absolute;
       bottom: 0;
@@ -1302,7 +1311,7 @@
       position: absolute;
       inset: 0;
       background: radial-gradient(circle at 50% 25%, #2a2a35 0%, #0d0d12 85%);
-      z-index: 2500;
+      z-index: 4000;
       display: none;
       flex-direction: column;
       justify-content: space-between;
@@ -1381,7 +1390,7 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.4);
     }
 
-    /* ================= 11. 相簿 App (低飽和細線條功能列) ================= */
+    /* ================= 11. 相簿 App ================= */
     #app-photos {
       background: #fff;
       color: #000;
@@ -1530,7 +1539,6 @@
       height: 100%;
       object-fit: cover;
     }
-    /* 低飽和度原生細線條功能列 */
     .viewer-bottom-bar {
       height: 46px;
       display: flex;
@@ -1548,7 +1556,7 @@
       color: #fff;
     }
 
-    /* ================= 12. 相機 App (無裁切滿版取景) ================= */
+    /* ================= 12. 相機 App (無裁切) ================= */
     #app-camera {
       background: #000;
       position: absolute;
@@ -1704,7 +1712,7 @@
 <body>
 
 <div id="phone">
-  <!-- 頂部狀態列 (標準 Wi-Fi 圖示) -->
+  <!-- 頂部狀態列 -->
   <div class="status" id="phone-status-bar">
     <div class="status-left">
       <span class="now-time" id="clock-status-txt">12:41</span>
@@ -1720,7 +1728,6 @@
         <div class="c-bar" style="height:7.5px;"></div>
         <div class="c-bar" style="height:10px;"></div>
       </div>
-      <!-- 乾淨三段弧形 Wi-Fi -->
       <div class="wifi-icon-box">
         <svg class="wifi-svg" viewBox="0 0 24 18">
           <path d="M12 3C7.3 3 3.1 4.9 0 8l2.2 2.2C4.7 7.7 8.1 6.2 12 6.2s7.3 1.5 9.8 4L24 8c-3.1-3.1-7.3-5-12-5zm0 5.4c-3.3 0-6.3 1.3-8.5 3.5l2.2 2.2c1.6-1.6 3.9-2.5 6.3-2.5s4.7.9 6.3 2.5l2.2-2.2c-2.2-2.2-5.2-3.5-8.5-3.5zm0 5.4c-1.8 0-3.3.7-4.4 1.9L12 20.2l4.4-4.5c-1.1-1.2-2.6-1.9-4.4-1.9z"/>
@@ -1821,7 +1828,6 @@
   <!-- 3. 主畫面 (Home) -->
   <div id="home" class="scr">
     <div class="widgets-row">
-      <!-- 點擊進入日曆 App (solo彩排) -->
       <div class="ios-widget cal-widget" data-target="calendar">
         <div>
           <div class="day-name">星期五</div>
@@ -1832,7 +1838,6 @@
           <div>solo彩排</div>
         </div>
       </div>
-      <!-- Playlist 莫蘭迪低飽和質感綠 -->
       <div class="ios-widget music-widget" data-target="playlist">
         <div class="m-top">
           <span style="font-size:11px; font-weight:700;">PLAYLIST</span>
@@ -1962,7 +1967,7 @@
           </svg>
         </div>
       </div>
-      <!-- 相機 (經典黑機身金鏡頭 Icon) -->
+      <!-- 相機 -->
       <div class="icon" data-target="camera">
         <div class="img" style="background:#e5e5ea;">
           <svg viewBox="0 0 100 100">
@@ -1993,7 +1998,7 @@
     <iframe 
       id="iframe-instagram"
       src="https://u11150003-arch.github.io/karina_ig/"
-      allow="autoplay *; camera; microphone; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allow="autoplay; camera; microphone; clipboard-write; encrypted-media; gyroscope; picture-in-picture; speaker"
       sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
     ></iframe>
   </div>
@@ -2022,7 +2027,7 @@
     </div>
   </div>
 
-  <!-- 7. X (Twitter) App -->
+  <!-- 7. X (Twitter) App (修正專屬文案) -->
   <div id="app-x" class="app-screen">
     <div class="x-app-topbar">
       <span style="border-bottom: 2px solid #fff; padding-bottom: 6px;">為你推薦</span>
@@ -2037,9 +2042,12 @@
           <span class="x-name">aespa</span>
           <span class="x-handle">@aespa_official • 1小時</span>
         </div>
-        <div class="x-text">KARINA 'UP' Special Stage 🖤✨<br>어디서든 빛나는 블루의 순간 💙 #aespa #KARINA #카리나 #UP</div>
+        <!-- 修正為專屬文案 -->
+        <div class="x-text">KARINA B-day PARTY MEMORY BOX
+260324
+#aespa #KARINA #카리나</div>
         <div class="x-tweet-img">
-          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/%E4%BF%AEkarina%20(163%E6%B5%AE%E6%B0%B4%E5%8D%B0).jpeg" alt="UP">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/%E4%BF%AEkarina%20(163%E6%B5%AE%E6%B0%B4%E5%8D%B0).jpeg" alt="Bday">
         </div>
         <div class="x-tweet-actions">
           <span>💬 1,420</span>
@@ -2050,7 +2058,7 @@
     </div>
   </div>
 
-  <!-- 8. 備忘錄 App (完整讀書心得與金句收錄) -->
+  <!-- 8. 備忘錄 App -->
   <div id="app-notes" class="app-screen">
     <div class="notes-header">
       <div class="notes-title">所有 iCloud 備忘錄</div>
@@ -2115,7 +2123,7 @@
     </div>
   </div>
 
-  <!-- 9. 設定 App (豐富詳細設定、低飽和圖示) -->
+  <!-- 9. 設定 App (低飽和極簡圖示、修復 Face ID 裁切) -->
   <div id="app-settings" class="app-screen">
     <div class="settings-title">設定</div>
     <div class="settings-profile-card">
@@ -2128,75 +2136,75 @@
       </div>
     </div>
 
-    <!-- 設定群組 1 -->
+    <!-- 群組 1 -->
     <div class="settings-group">
       <div class="settings-item">
         <div class="settings-item-left">
-          <div class="settings-icon" style="background:#e09334;">✈️</div>
+          <div class="settings-icon-simple">✈</div>
           <span>飛航模式</span>
         </div>
         <input type="checkbox" style="transform:scale(1.15);">
       </div>
       <div class="settings-item">
         <div class="settings-item-left">
-          <div class="settings-icon" style="background:#4078c0;">📶</div>
+          <div class="settings-icon-simple">📶</div>
           <span>Wi-Fi</span>
         </div>
         <span style="color:#8e8e93; font-size:12px;">karina&lt;3 ›</span>
       </div>
       <div class="settings-item">
         <div class="settings-item-left">
-          <div class="settings-icon" style="background:#4078c0;">🎧</div>
+          <div class="settings-icon-simple">🎧</div>
           <span>藍牙</span>
         </div>
         <span style="color:#8e8e93; font-size:12px;">開啟 ›</span>
       </div>
     </div>
 
-    <!-- 設定群組 2 (新增內容) -->
+    <!-- 群組 2 (完整顯示 Face ID 不截斷) -->
     <div class="settings-group">
       <div class="settings-item">
         <div class="settings-item-left">
-          <div class="settings-icon" style="background:#8e8e93;">⚙️</div>
+          <div class="settings-icon-simple">⚙</div>
           <span>一般</span>
         </div>
         <span style="color:#8e8e93; font-size:12px;">›</span>
       </div>
       <div class="settings-item">
         <div class="settings-item-left">
-          <div class="settings-icon" style="background:#4078c0;">♿</div>
+          <div class="settings-icon-simple">♿</div>
           <span>輔助使用</span>
         </div>
         <span style="color:#8e8e93; font-size:12px;">›</span>
       </div>
       <div class="settings-item">
         <div class="settings-item-left">
-          <div class="settings-icon" style="background:#4078c0;">🔆</div>
+          <div class="settings-icon-simple">🔆</div>
           <span>螢幕顯示與亮度</span>
         </div>
         <span style="color:#8e8e93; font-size:12px;">›</span>
       </div>
       <div class="settings-item">
         <div class="settings-item-left">
-          <div class="settings-icon" style="background:#34c759;">🟢</div>
+          <div class="settings-icon-simple">🔒</div>
           <span>Face ID 與密碼</span>
         </div>
         <span style="color:#8e8e93; font-size:12px;">›</span>
       </div>
     </div>
 
-    <!-- 設定群組 3 -->
-    <div class="settings-group">
+    <!-- 群組 3 -->
+    <div class="settings-group" style="margin-bottom:40px;">
       <div class="settings-item">
         <div class="settings-item-left">
-          <div class="settings-icon" style="background:#c94d42;">🔔</div>
+          <div class="settings-icon-simple">🔔</div>
           <span>通知</span>
         </div>
         <span style="color:#8e8e93; font-size:12px;">›</span>
       </div>
       <div class="settings-item">
         <div class="settings-item-left">
-          <div class="settings-icon" style="background:#6a5996;">🌙</div>
+          <div class="settings-icon-simple">🌙</div>
           <span>專注模式</span>
         </div>
         <span style="color:#8e8e93; font-size:12px;">›</span>
@@ -2288,7 +2296,7 @@
     </div>
   </div>
 
-  <!-- 11. 電話 App (純白主題、無「手機」二字、撥號鍵盤可通話) -->
+  <!-- 11. 電話 App (純白主題、保證點擊撥通) -->
   <div id="app-phone" class="app-screen">
     <!-- 最近通話 -->
     <div class="phone-subpage" id="phone-sub-recents" style="display:block;">
@@ -2359,7 +2367,7 @@
       </div>
     </div>
 
-    <!-- 底部導覽列 (保留個人收藏、通訊錄、撥號鍵盤) -->
+    <!-- 底部導覽列 -->
     <div class="phone-bottom-nav">
       <div class="p-nav-item" onclick="switchPhoneTab('favorites', this)"><span class="p-nav-icon">★</span><span>個人收藏</span></div>
       <div class="p-nav-item active" onclick="switchPhoneTab('recents', this)"><span class="p-nav-icon">🕒</span><span>最近通話</span></div>
@@ -2414,7 +2422,7 @@
     </div>
   </div>
 
-  <!-- 相片單張檢視器 (帶下方膠卷縮圖，支援滑動切換) -->
+  <!-- 相片單張檢視器 (帶下方膠卷縮圖) -->
   <div id="photo-viewer-page">
     <div class="viewer-top-bar">
       <span class="viewer-back" onclick="closePhotoViewer()">‹ 圖庫</span>
@@ -2425,7 +2433,6 @@
       <img id="viewer-img" alt="view">
     </div>
     <div class="viewer-filmstrip" id="viewer-filmstrip-bar"></div>
-    <!-- 低飽和細線條功能列 (分享、愛心、垃圾桶) -->
     <div class="viewer-bottom-bar">
       <span>⬆</span>
       <span>♡</span>
@@ -2479,7 +2486,7 @@
     </div>
   </div>
 
-  <!-- 底部 Home 條 -->
+  <!-- 底部 Home 條 (限制極小高度防止誤觸閃退) -->
   <div class="home-touch-area" id="home-indicator">
     <div class="bar"></div>
   </div>
@@ -2651,7 +2658,7 @@
     hideKeyboard();
   }
 
-  // 左右滑動退出
+  // 左右邊緣滑動退出 App
   let touchStartX = 0;
   window.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
@@ -2685,7 +2692,7 @@
     }
   }, { passive: true });
 
-  // 7. KakaoTalk
+  // 7. KakaoTalk 專屬劇情
   const memberScripts = {
     '旼冬🐶': {
       initial: '練完舞要不要一起去吃火鍋 看好一家麻辣鍋了',
@@ -2881,7 +2888,7 @@
     closeNoteEditor();
   }
 
-  // 9. 電話 App 功能與撥號鍵盤通話
+  // 9. 電話通話管理 (切換分頁、撥號鍵盤通話)
   function switchPhoneTab(tab, el) {
     document.querySelectorAll('.phone-subpage').forEach(p => p.style.display = 'none');
     document.querySelectorAll('.p-nav-item').forEach(i => i.classList.remove('active'));
@@ -2944,11 +2951,15 @@
   let callSecondCounter = null;
   let callDialogueTimer = null;
 
-  // 降低頻率：每 320 秒隨機選一位成員來電
+  // 40秒後啟動第一次來電，之後每 180 秒隨機撥入
+  setTimeout(() => {
+    triggerIncomingCall('金旼炡', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg');
+  }, 40000);
+
   setInterval(() => {
     const randomCaller = callerList[Math.floor(Math.random() * callerList.length)];
     triggerIncomingCall(randomCaller.name, randomCaller.avatar);
-  }, 320000);
+  }, 180000);
 
   function triggerIncomingCall(name, avatar) {
     currentCallerName = name;
@@ -3004,7 +3015,7 @@
     callScreen.style.display = 'none';
   }
 
-  // 10. 相簿清單 (純照片無影片、年月分組)
+  // 10. 相簿清單
   const albumData = {
     '10': [
       'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg',
