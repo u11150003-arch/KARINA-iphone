@@ -33,7 +33,7 @@
       color: #fff;
     }
 
-    /* 手機機身容器 (手機端滿版；電腦端保留外框) */
+    /* 手機機身容器 (手機端滿版貼合螢幕；電腦端保留外框) */
     #phone {
       position: relative;
       width: 100vw;
@@ -52,7 +52,7 @@
       }
     }
 
-    /* 頂部狀態列 (含 Wi-Fi 圖示) */
+    /* 頂部狀態列 */
     .status {
       position: absolute;
       top: 0;
@@ -70,6 +70,21 @@
       color: #fff;
       font-variant-numeric: tabular-nums;
     }
+    .status.black-theme {
+      color: #000 !important;
+    }
+    .status.black-theme .c-bar,
+    .status.black-theme .wifi-svg {
+      background: #000 !important;
+      fill: #000 !important;
+    }
+    .status.black-theme .bat {
+      border-color: #000 !important;
+    }
+    .status.black-theme .bat:after {
+      background: #000 !important;
+    }
+
     .status-left {
       display: flex;
       align-items: center;
@@ -147,6 +162,66 @@
       width: 240px;
       height: 44px;
       border-radius: 22px;
+    }
+
+    /* 頂部下拉橫幅通知 (Banner Notification 比照 wonbin-phone) */
+    #top-notification-banner {
+      position: absolute;
+      top: -90px;
+      left: 12px;
+      right: 12px;
+      background: rgba(45, 45, 50, 0.88);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border-radius: 22px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      border: 0.5px solid rgba(255,255,255,0.18);
+      z-index: 2800;
+      transition: transform 0.45s cubic-bezier(0.18, 0.89, 0.32, 1.15);
+      cursor: pointer;
+    }
+    #top-notification-banner.show {
+      transform: translateY(98px);
+    }
+    .top-banner-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .top-banner-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .top-banner-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .top-banner-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .top-banner-title {
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .top-banner-msg {
+      font-size: 11.5px;
+      color: #efeff1;
+    }
+    .top-banner-time {
+      font-size: 10px;
+      color: #aaa;
+      align-self: flex-start;
+      margin-top: 2px;
     }
 
     .scr {
@@ -284,7 +359,7 @@
       cursor: pointer;
     }
 
-    /* ================= 2. 密碼解鎖頁面 (含取消與刪除鍵) ================= */
+    /* ================= 2. 密碼解鎖頁面 (含真實刪除/取消反應) ================= */
     #pass {
       z-index: 350;
       background: rgba(10, 10, 15, 0.7);
@@ -527,7 +602,7 @@
       transform-origin: top center;
     }
 
-    /* Instagram 嵌入 (提升至最高層級防止被遮擋) */
+    /* Instagram 嵌入 */
     #app-instagram {
       background: #000;
       padding-top: 0;
@@ -675,13 +750,14 @@
       max-width: 85%;
     }
 
-    /* ================= 7. 備忘錄 App (豐富內容) ================= */
+    /* ================= 7. 備忘錄 App (支援點擊查看內文詳情) ================= */
     #app-notes {
       background: #000;
       color: #fff;
       padding-top: 44px;
       display: flex;
       flex-direction: column;
+      position: relative;
     }
     .notes-header {
       display: flex;
@@ -712,6 +788,10 @@
       background: #1c1c1e;
       border-radius: 12px;
       padding: 12px 14px;
+      cursor: pointer;
+    }
+    .note-item:active {
+      background: #252528;
     }
     .note-item-title {
       font-weight: 700;
@@ -729,6 +809,47 @@
       cursor: pointer;
       font-weight: 600;
     }
+
+    /* 備忘錄內文詳細檢視頁面 */
+    #note-detail-view {
+      position: absolute;
+      inset: 0;
+      background: #1c1c1e;
+      z-index: 560;
+      display: none;
+      flex-direction: column;
+      padding: 44px 16px 20px;
+    }
+    .note-detail-nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 12px;
+      border-bottom: 0.5px solid #2c2c2e;
+    }
+    .note-detail-back {
+      color: #d99a26;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .note-detail-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 4px;
+    }
+    .note-detail-title-txt {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .note-detail-content-txt {
+      font-size: 14px;
+      color: #ddd;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
     #notes-modal {
       position: absolute;
       inset: 0;
@@ -1035,65 +1156,127 @@
       cursor: pointer;
     }
 
-    /* ================= 10. 電話 App ================= */
+    /* ================= 10. 電話 App (純白主題設計，完全比照 wonbin-phone 範例) ================= */
     #app-phone {
-      background: #000;
-      color: #fff;
-      padding-top: 46px;
+      background: #fff;
+      color: #000;
+      padding-top: 44px;
       display: flex;
       flex-direction: column;
     }
-    .phone-header {
-      padding: 10px 16px;
-      font-size: 19px;
-      font-weight: 700;
-      border-bottom: 0.5px solid #222;
+    .phone-top-bar {
+      padding: 10px 16px 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
-    .contacts-list {
+    .phone-edit-btn {
+      color: #0a84ff;
+      font-size: 14px;
+      font-weight: 500;
+    }
+    .phone-switch-tab {
+      background: #e5e5ea;
+      border-radius: 8px;
+      padding: 2px;
+      display: flex;
+    }
+    .phone-tab-btn {
+      padding: 3px 12px;
+      font-size: 11.5px;
+      font-weight: 600;
+      border-radius: 6px;
+      color: #000;
+    }
+    .phone-tab-btn.active {
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+    }
+    .phone-page-title {
+      font-size: 28px;
+      font-weight: 700;
+      padding: 4px 16px 8px;
+      letter-spacing: -0.5px;
+    }
+    .phone-search-input {
+      background: #e3e3e8;
+      border-radius: 10px;
+      padding: 7px 12px;
+      margin: 0 16px 10px;
+      font-size: 13px;
+      color: #8e8e93;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .recents-list {
       flex: 1;
       overflow-y: auto;
-      padding: 10px 16px;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+      padding-bottom: 60px;
     }
-    .contact-item {
+    .recent-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 12px 14px;
-      background: #1c1c1e;
-      border-radius: 12px;
+      padding: 12px 16px;
+      border-bottom: 0.5px solid #e5e5ea;
       cursor: pointer;
     }
-    .contact-info {
+    .recent-row:active {
+      background: #f2f2f7;
+    }
+    .recent-left {
       display: flex;
-      align-items: center;
-      gap: 12px;
+      flex-direction: column;
+      gap: 2px;
     }
-    .contact-avatar {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #333;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-    .contact-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .contact-name {
-      font-size: 13.5px;
+    .recent-name {
+      font-size: 15px;
       font-weight: 600;
+      color: #000;
     }
-    .contact-sub {
-      font-size: 10.5px;
+    .recent-type {
+      font-size: 11.5px;
       color: #8e8e93;
     }
+    .recent-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: #8e8e93;
+    }
+    .phone-bottom-nav {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 52px;
+      background: #f8f8fa;
+      border-top: 0.5px solid #d1d1d6;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      z-index: 10;
+    }
+    .p-nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2px;
+      font-size: 9.5px;
+      color: #8e8e93;
+      cursor: pointer;
+    }
+    .p-nav-item.active {
+      color: #0a84ff;
+    }
+    .p-nav-icon {
+      font-size: 16px;
+    }
 
-    #incoming-call-screen {
+    /* 經典撥通頁面 (比照 wonbin-phone 範例) */
+    #calling-screen {
       position: absolute;
       inset: 0;
       background: radial-gradient(circle at 50% 25%, #2a2a35 0%, #0d0d12 85%);
@@ -1176,7 +1359,7 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.4);
     }
 
-    /* ================= 11. 相簿 App (完全還原 wonbin-phone 範例) ================= */
+    /* ================= 11. 相簿 App ================= */
     #app-photos {
       background: #fff;
       color: #000;
@@ -1234,7 +1417,6 @@
       display: block;
     }
 
-    /* 底部磨砂切換膠囊 (年 / 月 / 所有照片) */
     .album-dock-capsule {
       position: absolute;
       bottom: 22px;
@@ -1264,7 +1446,6 @@
       box-shadow: 0 1px 4px rgba(0,0,0,0.1);
     }
 
-    /* 原生相片單張檢視器 (支援滑動切換) */
     #photo-viewer-page {
       position: absolute;
       inset: 0;
@@ -1310,7 +1491,7 @@
       border-top: 0.5px solid #222;
     }
 
-    /* ================= 12. 相機 App (真實取景框、輔助白線、變焦標籤) ================= */
+    /* ================= 12. 相機 App ================= */
     #app-camera {
       background: #000;
       display: flex;
@@ -1349,7 +1530,6 @@
       position: absolute;
       inset: 0;
     }
-    /* 九宮格輔助白線 */
     .cam-grid-overlay {
       position: absolute;
       inset: 0;
@@ -1361,7 +1541,6 @@
     .cam-grid-line {
       border: 0.5px solid rgba(255,255,255,0.18);
     }
-    /* 變焦切換輪 (.5 1x 2 4 8) */
     .cam-zoom-row {
       position: absolute;
       bottom: 120px;
@@ -1390,7 +1569,6 @@
       color: #ffd60a;
       background: rgba(0,0,0,0.6);
     }
-    /* 拍照模式文字滑塊 */
     .cam-modes-row {
       display: flex;
       justify-content: center;
@@ -1411,7 +1589,6 @@
       justify-content: space-around;
       padding: 0 24px;
     }
-    /* 相簿縮圖按鍵：點擊跳至相簿 */
     .cam-gallery-thumbnail {
       width: 44px;
       height: 44px;
@@ -1470,8 +1647,8 @@
 <body>
 
 <div id="phone">
-  <!-- 頂部狀態列 (含 Wi-Fi 圖示) -->
-  <div class="status">
+  <!-- 頂部狀態列 -->
+  <div class="status" id="phone-status-bar">
     <div class="status-left">
       <span class="now-time" id="clock-status-txt">12:41</span>
       <div class="status-back" id="status-back-btn" onclick="goHome()">
@@ -1480,19 +1657,31 @@
     </div>
     <div class="island" id="dynamic-island"></div>
     <div class="status-right">
-      <!-- 蜂窩訊號四格 -->
       <div class="cellular-icon">
         <div class="c-bar" style="height:3px;"></div>
         <div class="c-bar" style="height:5px;"></div>
         <div class="c-bar" style="height:7.5px;"></div>
         <div class="c-bar" style="height:10px;"></div>
       </div>
-      <!-- Wi-Fi 向量圖示 -->
       <svg class="wifi-svg" viewBox="0 0 24 24">
         <path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21L24 8.98C20.93 5.9 16.69 4 12 4zm0 3.5c3.67 0 7 1.45 9.47 3.84L12 19.34 2.53 11.34C5 8.95 8.33 7.5 12 7.5zm0 4.5c2.35 0 4.47.95 6.03 2.48L12 17.68 5.97 14.48C7.53 12.95 9.65 12 12 12z"/>
       </svg>
       <div class="bat"></div>
     </div>
+  </div>
+
+  <!-- 頂部彈出式橫幅通知 (Banner Notification 比照 wonbin-phone) -->
+  <div id="top-notification-banner" onclick="openBannerChat()">
+    <div class="top-banner-left">
+      <div class="top-banner-avatar">
+        <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_0578.jpeg" alt="旼冬">
+      </div>
+      <div class="top-banner-text">
+        <div class="top-banner-title">旼冬🐶</div>
+        <div class="top-banner-msg">練完舞要不要一起去吃火鍋 看好一家麻辣鍋了</div>
+      </div>
+    </div>
+    <div class="top-banner-time">現在</div>
   </div>
 
   <!-- 1. 鎖定畫面 -->
@@ -1563,10 +1752,8 @@
       <div class="k-btn" onclick="pressKey('7')"><span class="n">7</span><span class="sub">PQRS</span></div>
       <div class="k-btn" onclick="pressKey('8')"><span class="n">8</span><span class="sub">TUV</span></div>
       <div class="k-btn" onclick="pressKey('9')"><span class="n">9</span><span class="sub">WXYZ</span></div>
-      <!-- 左下角：緊急服務 -->
-      <div class="pass-footer-btn" style="font-size:12px; opacity:0.8;">緊急服務</div>
+      <div class="pass-footer-btn" style="font-size:12px; opacity:0.8;">緊急情況</div>
       <div class="k-btn" onclick="pressKey('0')"><span class="n">0</span><span class="sub">&nbsp;</span></div>
-      <!-- 右下角：取消 / 刪除鍵 -->
       <div class="pass-footer-btn" id="pass-del-cancel-btn" onclick="handlePassAction()">取消</div>
     </div>
   </div>
@@ -1574,7 +1761,7 @@
   <!-- 3. 主畫面 (Home) -->
   <div id="home" class="scr">
     <div class="widgets-row">
-      <!-- 點擊進入日曆 App (更新為 solo彩排) -->
+      <!-- 點擊進入日曆 App (solo彩排) -->
       <div class="ios-widget cal-widget" data-target="calendar">
         <div>
           <div class="day-name">星期五</div>
@@ -1613,7 +1800,7 @@
         <span class="name">備忘錄</span>
       </div>
 
-      <!-- 相簿 (範例立體花瓣 Icon) -->
+      <!-- 相簿 -->
       <div class="icon" data-target="photos">
         <div class="img" style="background:#fff;">
           <svg viewBox="0 0 100 100">
@@ -1741,7 +1928,7 @@
     ></iframe>
   </div>
 
-  <!-- 5. Instagram 視窗 (獨立頂層，絕不露出桌面破綻) -->
+  <!-- 5. Instagram 視窗 (獨立頂層圖層) -->
   <div id="app-instagram" class="app-screen">
     <iframe 
       id="iframe-instagram"
@@ -1803,34 +1990,47 @@
     </div>
   </div>
 
-  <!-- 8. 備忘錄 App (擴充清單) -->
+  <!-- 8. 備忘錄 App (支援點擊查看內文詳情) -->
   <div id="app-notes" class="app-screen">
     <div class="notes-header">
       <div class="notes-title">所有 iCloud 備忘錄</div>
       <div class="notes-add-btn" onclick="openNoteEditor()">＋</div>
     </div>
     <div class="notes-list" id="notes-container">
-      <div class="note-item">
+      <div class="note-item" onclick="viewNoteDetail('⚠️ 系統操作指引', '若介面操作不順，請聯繫 @kelly_lee_805', true)">
         <div class="note-item-title">⚠️ 系統操作指引</div>
         <div class="note-item-desc">
           若介面操作不順，請聯繫 
           <a class="threads-link" href="https://www.threads.com/@kelly_lee_805" target="_blank" rel="noopener noreferrer">@kelly_lee_805</a>
         </div>
       </div>
-      <div class="note-item">
+      <div class="note-item" onclick="viewNoteDetail('UP Solo 舞台確認事項', '開場走位與麥克風音量調整\n第二段副歌延伸舞台\n結尾 Pose 燈光固定')">
         <div class="note-item-title">UP Solo 舞台確認事項</div>
         <div class="note-item-desc">開場走位與麥克風音量調整 第二段副歌延伸舞台</div>
       </div>
-      <div class="note-item">
+      <div class="note-item" onclick="viewNoteDetail('宿舍採購清單', '波妞飼料\n零食肉乾\n燕麥奶\n卸妝棉\n維他命C')">
         <div class="note-item-title">宿舍採購清單</div>
         <div class="note-item-desc">波妞飼料 零食肉乾 燕麥奶 卸妝棉</div>
       </div>
-      <div class="note-item">
+      <div class="note-item" onclick="viewNoteDetail('冬冬約吃火鍋', '排舞結束後出發\n記得先吃胃藥\n點老油條跟鴨血')">
         <div class="note-item-title">冬冬約吃火鍋</div>
         <div class="note-item-desc">排舞結束後出發 記得帶胃藥</div>
       </div>
     </div>
 
+    <!-- 備忘錄詳細內文頁面 -->
+    <div id="note-detail-view">
+      <div class="note-detail-nav">
+        <span class="note-detail-back" onclick="closeNoteDetail()">‹ 備忘錄</span>
+        <span style="color:#8e8e93; font-size:12px;">完成</span>
+      </div>
+      <div class="note-detail-body">
+        <div class="note-detail-title-txt" id="detail-title-txt"></div>
+        <div class="note-detail-content-txt" id="detail-content-txt"></div>
+      </div>
+    </div>
+
+    <!-- 新增備忘錄彈窗 -->
     <div id="notes-modal">
       <input type="text" id="note-input-title" placeholder="備忘錄標題...">
       <textarea id="note-input-body" placeholder="輸入專案內容或文字..."></textarea>
@@ -1963,52 +2163,65 @@
     </div>
   </div>
 
-  <!-- 11. 電話 App -->
+  <!-- 11. 電話 App (純白主題設計，完全比照 wonbin-phone 範例) -->
   <div id="app-phone" class="app-screen">
-    <div class="phone-header">聯絡人</div>
-    <div class="contacts-list">
-      <div class="contact-item" onclick="startCall('金旼炡', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg')">
-        <div class="contact-info">
-          <div class="contact-avatar">
-            <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg" alt="金旼炡">
-          </div>
-          <div>
-            <div class="contact-name">金旼炡</div>
-            <div class="contact-sub">旼冬</div>
-          </div>
+    <div class="phone-top-bar">
+      <span class="phone-edit-btn">編輯</span>
+      <div class="phone-switch-tab">
+        <span class="phone-tab-btn active">全部</span>
+        <span class="phone-tab-btn">未接來電</span>
+      </div>
+    </div>
+    <div class="phone-page-title">最近通話</div>
+    <div class="phone-search-input">🔍 搜尋</div>
+
+    <!-- 通話清單列表 (點擊撥通) -->
+    <div class="recents-list">
+      <div class="recent-row" onclick="startCall('金旼炡', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg')">
+        <div class="recent-left">
+          <span class="recent-name">金旼炡</span>
+          <span class="recent-type">旼冬 • 手機</span>
         </div>
-        <span style="font-size:18px; color:#44b069;">📞</span>
+        <div class="recent-right">
+          <span>昨天</span>
+          <span style="color:#0a84ff;">ⓘ</span>
+        </div>
       </div>
 
-      <div class="contact-item" onclick="startCall('內永枝利', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png')">
-        <div class="contact-info">
-          <div class="contact-avatar">
-            <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png" alt="內永枝利">
-          </div>
-          <div>
-            <div class="contact-name">內永枝利</div>
-            <div class="contact-sub">欸哩</div>
-          </div>
+      <div class="recent-row" onclick="startCall('內永枝利', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png')">
+        <div class="recent-left">
+          <span class="recent-name">內永枝利</span>
+          <span class="recent-type">欸哩 • 手機</span>
         </div>
-        <span style="font-size:18px; color:#44b069;">📞</span>
+        <div class="recent-right">
+          <span>星期五</span>
+          <span style="color:#0a84ff;">ⓘ</span>
+        </div>
       </div>
 
-      <div class="contact-item" onclick="startCall('寧藝卓', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg')">
-        <div class="contact-info">
-          <div class="contact-avatar">
-            <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg" alt="寧藝卓">
-          </div>
-          <div>
-            <div class="contact-name">寧藝卓</div>
-            <div class="contact-sub">寧</div>
-          </div>
+      <div class="recent-row" onclick="startCall('寧藝卓', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg')">
+        <div class="recent-left">
+          <span class="recent-name">寧藝卓</span>
+          <span class="recent-type">寧 • 手機</span>
         </div>
-        <span style="font-size:18px; color:#44b069;">📞</span>
+        <div class="recent-right">
+          <span>星期四</span>
+          <span style="color:#0a84ff;">ⓘ</span>
+        </div>
       </div>
+    </div>
+
+    <!-- 底部導覽列 -->
+    <div class="phone-bottom-nav">
+      <div class="p-nav-item"><span class="p-nav-icon">★</span><span>個人收藏</span></div>
+      <div class="p-nav-item active"><span class="p-nav-icon">🕒</span><span>最近通話</span></div>
+      <div class="p-nav-item"><span class="p-nav-icon">👤</span><span>通訊錄</span></div>
+      <div class="p-nav-item"><span class="p-nav-icon">ⵌ</span><span>撥號鍵盤</span></div>
+      <div class="p-nav-item"><span class="p-nav-icon">➿</span><span>語音留言</span></div>
     </div>
   </div>
 
-  <!-- 12. 全螢幕來電彈窗 (通話全程無表情符號) -->
+  <!-- 12. 全螢幕撥通畫面 (無表情符號、合理對話) -->
   <div id="incoming-call-screen">
     <div>
       <div class="call-head-avatar">
@@ -2026,7 +2239,7 @@
     </div>
   </div>
 
-  <!-- 13. 相簿 App (純照片無影片、含年月分組、比照 wonbin-phone 範例) -->
+  <!-- 13. 相簿 App (純照片無影片、含年月分組、完全比照 wonbin-phone 範例) -->
   <div id="app-photos" class="app-screen">
     <div class="photos-main-scroll">
       <div class="photos-top-bar">
@@ -2075,9 +2288,8 @@
     </div>
   </div>
 
-  <!-- 14. 相機 App (真實取景框、輔助白線、變焦標籤、相簿跳轉) -->
+  <!-- 14. 相機 App (九宮格白線、變焦標籤、相簿跳轉) -->
   <div id="app-camera" class="app-screen">
-    <!-- 頂部控制列 -->
     <div class="cam-top-controls">
       <span>⚡ 關閉</span>
       <span>Live 關閉</span>
@@ -2089,14 +2301,12 @@
       <img id="camera-preview" alt="Preview">
       <canvas id="camera-canvas" style="display:none;"></canvas>
       
-      <!-- 九宮格白線 -->
       <div class="cam-grid-overlay">
         <div class="cam-grid-line"></div><div class="cam-grid-line"></div><div class="cam-grid-line"></div>
         <div class="cam-grid-line"></div><div class="cam-grid-line"></div><div class="cam-grid-line"></div>
         <div class="cam-grid-line"></div><div class="cam-grid-line"></div><div class="cam-grid-line"></div>
       </div>
 
-      <!-- 變焦按鈕輪 (.5 1x 2 4 8) -->
       <div class="cam-zoom-row">
         <div class="zoom-pill">.5</div>
         <div class="zoom-pill active">1x</div>
@@ -2106,7 +2316,6 @@
       </div>
     </div>
 
-    <!-- 模式滑塊 -->
     <div class="cam-modes-row">
       <span>電影級</span>
       <span>錄影</span>
@@ -2114,9 +2323,7 @@
       <span>人像</span>
     </div>
 
-    <!-- 底部控制列 -->
     <div class="cam-bottom-bar">
-      <!-- 點擊相簿縮圖直接進入相簿 App -->
       <div class="cam-gallery-thumbnail" onclick="openApp('photos')">
         <img src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg" alt="Gallery">
       </div>
@@ -2125,7 +2332,7 @@
     </div>
   </div>
 
-  <!-- 底部 Home 條 (限制極小高度防止誤觸閃退) -->
+  <!-- 底部 Home 條 -->
   <div class="home-touch-area" id="home-indicator">
     <div class="bar"></div>
   </div>
@@ -2146,7 +2353,7 @@
   setInterval(updateClock, 1000);
   updateClock();
 
-  // 2. 密碼解鎖頁面：取消與刪除鍵
+  // 2. 密碼解鎖頁面：取消與刪除實時反應 (比照 wonbin-phone)
   const lock = document.getElementById('lock');
   const pass = document.getElementById('pass');
   let passCode = [];
@@ -2166,7 +2373,7 @@
   }, { passive: true });
 
   lock.addEventListener('touchend', (e) => {
-    if (lockStartY - e.changedTouches[0].clientY > 30) {
+    if (lockStartY - e.changedTouches[0].clientY > 25) {
       openPasscode();
     }
   }, { passive: true });
@@ -2182,16 +2389,18 @@
         lock.classList.add('off');
         passCode = [];
         updatePassDots();
+        // 進入主畫面後 8 秒跳出頂部橫幅通知
+        triggerBannerNotice();
       }, 160);
     }
   }
 
   function handlePassAction() {
     if (passCode.length > 0) {
-      passCode.pop(); // 刪除最後一個數字
+      passCode.pop(); // 刪除最後一位
       updatePassDots();
     } else {
-      pass.classList.remove('on'); // 取消解鎖退回鎖定
+      pass.classList.remove('on'); // 取消解鎖返回鎖定頁
     }
   }
 
@@ -2200,7 +2409,7 @@
       if (idx < passCode.length) dot.classList.add('filled');
       else dot.classList.remove('filled');
     });
-    // 依據是否有輸入數字切換文字
+    // 未輸入顯示「取消」，輸入後變為「刪除」
     if (passCode.length > 0) {
       delCancelBtn.textContent = '刪除';
     } else {
@@ -2208,7 +2417,24 @@
     }
   }
 
-  // 3. 通知點擊
+  // 3. 頂部橫幅通知 (Banner Notification)
+  function triggerBannerNotice() {
+    setTimeout(() => {
+      const banner = document.getElementById('top-notification-banner');
+      banner.classList.add('show');
+      setTimeout(() => {
+        banner.classList.remove('show');
+      }, 6000);
+    }, 8000);
+  }
+
+  function openBannerChat() {
+    document.getElementById('top-notification-banner').classList.remove('show');
+    openApp('chat');
+    enterRoom('旼冬🐶');
+  }
+
+  // 4. 通知點擊
   document.getElementById('notif-ig').addEventListener('click', () => {
     lock.classList.add('off');
     openApp('instagram');
@@ -2219,7 +2445,7 @@
     enterRoom('旼冬🐶');
   });
 
-  // 4. App 視窗管理核心
+  // 5. App 視窗管理核心
   const screens = {
     playlist: document.getElementById('app-playlist'),
     instagram: document.getElementById('app-instagram'),
@@ -2235,6 +2461,7 @@
 
   const backBtn = document.getElementById('status-back-btn');
   const clockStatusTxt = document.getElementById('clock-status-txt');
+  const phoneStatusBar = document.getElementById('phone-status-bar');
 
   function openApp(appKey) {
     Object.values(screens).forEach(s => s.classList.remove('active'));
@@ -2243,6 +2470,13 @@
       screens[appKey].classList.add('active');
       backBtn.style.display = 'flex';
       clockStatusTxt.style.display = 'none';
+
+      // 若進入白色主題 App (電話、日曆、相簿)，狀態列自動切換為黑色文字
+      if (appKey === 'phone' || appKey === 'calendar' || appKey === 'photos') {
+        phoneStatusBar.classList.add('black-theme');
+      } else {
+        phoneStatusBar.classList.remove('black-theme');
+      }
 
       if (appKey === 'camera') startCamera();
     }
@@ -2256,21 +2490,23 @@
     });
   });
 
-  // 5. 返回主畫面
+  // 6. 返回主畫面
   function goHome() {
     Object.values(screens).forEach(s => s.classList.remove('active'));
     backBtn.style.display = 'none';
     clockStatusTxt.style.display = 'inline';
+    phoneStatusBar.classList.remove('black-theme');
     const island = document.getElementById('dynamic-island');
     if (island.classList.contains('expand')) island.classList.remove('expand');
 
     stopCamera();
     leaveRoom();
     closePhotoViewer();
+    closeNoteDetail();
     hideKeyboard();
   }
 
-  // 左右滑動退出 App
+  // 左右邊緣滑動退出 App
   let touchStartX = 0;
   window.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
@@ -2304,7 +2540,7 @@
     }
   }, { passive: true });
 
-  // 6. KakaoTalk：隨興短句、去表情化、冬約吃火鍋
+  // 7. KakaoTalk：隨興短句、去表情化、冬約吃火鍋
   const memberScripts = {
     '旼冬🐶': {
       initial: '練完舞要不要一起去吃火鍋 看好一家麻辣鍋了',
@@ -2399,7 +2635,21 @@
     }
   }
 
-  // 7. 備忘錄新增專案
+  // 8. 備忘錄詳細檢視邏輯
+  function viewNoteDetail(title, content, isSystemLink = false) {
+    document.getElementById('detail-title-txt').textContent = title;
+    const contentEl = document.getElementById('detail-content-txt');
+    if (isSystemLink) {
+      contentEl.innerHTML = `若介面操作不順，請聯繫 <a class="threads-link" href="https://www.threads.com/@kelly_lee_805" target="_blank" rel="noopener noreferrer">@kelly_lee_805</a>`;
+    } else {
+      contentEl.textContent = content;
+    }
+    document.getElementById('note-detail-view').style.display = 'flex';
+  }
+  function closeNoteDetail() {
+    document.getElementById('note-detail-view').style.display = 'none';
+  }
+
   function openNoteEditor() {
     document.getElementById('notes-modal').style.display = 'flex';
   }
@@ -2414,6 +2664,7 @@
     const container = document.getElementById('notes-container');
     const newNote = document.createElement('div');
     newNote.className = 'note-item';
+    newNote.onclick = () => viewNoteDetail(title, body);
     newNote.innerHTML = `
       <div class="note-item-title">${title}</div>
       <div class="note-item-desc">${body}</div>
@@ -2422,7 +2673,7 @@
     closeNoteEditor();
   }
 
-  // 8. 電話通話管理 (通話全程無表情符號、內容與訊息完全區隔)
+  // 9. 電話通話管理 (通話內容完全區隔、全程無表情符號)
   const phoneCallScripts = {
     '金旼炡': [
       { sender: '旼冬', text: '在幹嘛' },
@@ -2433,10 +2684,10 @@
       { sender: 'Karina', text: '收到 等等練完舞我就回去餵牠' }
     ],
     '內永枝利': [
-      { sender: '欸哩', text: '知珉 昨晚在涉谷買的那件黑色外套妳覺得怎樣' },
-      { sender: 'Karina', text: '版型很帥 穿在妳身上超好看' },
-      { sender: '欸哩', text: '下次放假再一起去吃那家可麗餅' },
-      { sender: 'Karina', text: '好 下次放假排進去' }
+      { sender: '欸哩', text: '知珉 妳上次說想吃涉谷那家可麗餅 我們休假要不要去' },
+      { sender: 'Karina', text: '好啊 那天順便去逛街買衣服' },
+      { sender: '欸哩', text: '沒問題 到時候涉谷站見' },
+      { sender: 'Karina', text: '好 休假見' }
     ],
     '寧藝卓': [
       { sender: '寧', text: '喂 有看到我的耳機嗎' },
@@ -2458,7 +2709,6 @@
   let callSecondCounter = null;
   let callDialogueTimer = null;
 
-  // 降低來電頻率：每 260 秒輪流隨機選一位來電
   setInterval(() => {
     const randomCaller = callerList[Math.floor(Math.random() * callerList.length)];
     triggerIncomingCall(randomCaller.name, randomCaller.avatar);
@@ -2517,7 +2767,7 @@
     callScreen.style.display = 'none';
   }
 
-  // 9. 相簿清單 (純照片無影片、含年月分組、完全比照 wonbin-phone 範例)
+  // 10. 相簿清單 (純照片無影片、年月分組、完全比照 wonbin-phone 範例)
   const albumData = {
     '10': [
       'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg',
@@ -2536,7 +2786,6 @@
     ]
   };
 
-  // 展平成完整相片陣列供單張檢視滑動
   const allPhotos = [
     ...albumData['10'].map(url => ({ url, date: '2026年 10月' })),
     ...albumData['9'].map(url => ({ url, date: '2026年 9月' })),
@@ -2602,7 +2851,7 @@
     }
   }, { passive: true });
 
-  // 10. 相機功能 (鏡頭取景與拍完自動存入縮圖)
+  // 11. 相機功能 (鏡頭取景與拍完自動存入縮圖)
   let currentStream = null;
   let useFacingMode = 'user';
 
