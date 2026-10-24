@@ -33,7 +33,7 @@
       color: #fff;
     }
 
-    /* 手機機身容器 (手機端滿版貼合螢幕；電腦端保留外框) */
+    /* 手機機身容器 (手機端滿版；電腦端保留外框) */
     #phone {
       position: relative;
       width: 100vw;
@@ -337,14 +337,15 @@
       opacity: 0.8;
     }
 
-    /* ================= 3. 主畫面 (Home) ================= */
+    /* ================= 3. 主畫面 (Home 底色更淺更透氣) ================= */
     #home {
       z-index: 100;
       padding: 54px 16px 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      background: radial-gradient(circle at 50% 15%, #2a2b36 0%, #1c1c24 60%, #15151b 100%);
+      /* 調整為更淺、微透光的灰冷漸層背景 */
+      background: radial-gradient(circle at 50% 20%, #30313d 0%, #22232c 60%, #1a1a22 100%);
     }
     .widgets-row {
       display: grid;
@@ -356,7 +357,7 @@
       aspect-ratio: 1;
       border-radius: 20px;
       padding: 12px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.28);
+      box-shadow: 0 6px 18px rgba(0,0,0,0.25);
       cursor: pointer;
       overflow: hidden;
     }
@@ -438,7 +439,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 4px 14px rgba(0,0,0,0.32);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.25);
       position: relative;
     }
     .icon .img svg, .icon .img img {
@@ -456,7 +457,7 @@
     }
 
     .dock {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.22);
       backdrop-filter: blur(35px);
       -webkit-backdrop-filter: blur(35px);
       border-radius: 30px;
@@ -464,8 +465,8 @@
       display: flex;
       justify-content: space-around;
       align-items: center;
-      box-shadow: 0 4px 25px rgba(0,0,0,0.35);
-      border: 0.5px solid rgba(255,255,255,0.18);
+      box-shadow: 0 4px 25px rgba(0,0,0,0.3);
+      border: 0.5px solid rgba(255,255,255,0.2);
     }
     .dock .icon {
       width: 52px;
@@ -489,7 +490,6 @@
       transform: translateY(0%);
     }
 
-    /* PLAYLIST */
     #app-playlist {
       background: #0d0e12;
       padding-top: 42px;
@@ -502,7 +502,7 @@
       transform-origin: top center;
     }
 
-    /* Instagram 嵌入 (徹底修復裁切與黑屏) */
+    /* Instagram 嵌入 (徹底修復黑屏) */
     #app-instagram {
       background: #000;
       padding-top: 0;
@@ -516,7 +516,7 @@
       padding-top: 40px;
     }
 
-    /* ================= 5. 日曆 App (2027年 4月、無下方多餘中文字) ================= */
+    /* ================= 5. 日曆 App ================= */
     #app-calendar {
       background: #fff;
       color: #000;
@@ -746,7 +746,7 @@
       cursor: pointer;
     }
 
-    /* ================= 8. 設定 App (IMG_7494.jpeg 圖示) ================= */
+    /* ================= 8. 設定 App ================= */
     #app-settings {
       background: #000;
       color: #fff;
@@ -812,7 +812,7 @@
       filter: saturate(0.65);
     }
 
-    /* ================= 9. KakaoTalk (波妞與AirPods劇情、更新成員頭貼) ================= */
+    /* ================= 9. KakaoTalk (隨興聊天無標點符號) ================= */
     #app-chat {
       background: #191919;
       color: #fff;
@@ -963,7 +963,7 @@
       cursor: pointer;
     }
 
-    /* ================= 10. 電話 App (移除劉知珉、維持對話) ================= */
+    /* ================= 10. 電話 App (成員名稱更新) ================= */
     #app-phone {
       background: #000;
       color: #fff;
@@ -1187,7 +1187,7 @@
       background: #fff;
     }
 
-    /* 底部細長手勢條 */
+    /* 底部手勢條 */
     .home-touch-area {
       position: absolute;
       bottom: 0;
@@ -1236,7 +1236,7 @@
       <div class="t now-time">12:41</div>
     </div>
 
-    <!-- 鎖定通知 -->
+    <!-- 鎖定通知 (更新為旼冬🐶) -->
     <div class="lock-notifs">
       <div class="notif-card" id="notif-ig">
         <div class="notif-left">
@@ -1245,7 +1245,7 @@
           </div>
           <div class="notif-text">
             <div class="notif-title">Instagram</div>
-            <div class="notif-desc">imwinter 和其他人在你的貼文說讚。</div>
+            <div class="notif-desc">imwinter 和其他人在你的貼文說讚</div>
           </div>
         </div>
         <div class="notif-time">現在</div>
@@ -1257,8 +1257,8 @@
             TALK
           </div>
           <div class="notif-text">
-            <div class="notif-title">冬冬 🐶</div>
-            <div class="notif-desc">歐膩！波妞昨晚太興奮了啦...</div>
+            <div class="notif-title">旼冬🐶</div>
+            <div class="notif-desc">波妞昨晚太興奮了啦 🐶</div>
           </div>
         </div>
         <div class="notif-time">現在</div>
@@ -1303,7 +1303,7 @@
     </div>
   </div>
 
-  <!-- 3. 主畫面 (Home) -->
+  <!-- 3. 主畫面 (Home 底色淺一點更透氣) -->
   <div id="home" class="scr">
     <div class="widgets-row">
       <div class="ios-widget cal-widget" data-target="calendar">
@@ -1328,7 +1328,7 @@
       </div>
     </div>
 
-    <!-- 桌面 Apps -->
+    <!-- 桌面 Apps (更新為範例 Icon：立體相片花瓣、雙層齒輪設定) -->
     <div class="grid">
       <!-- 備忘錄 -->
       <div class="icon" data-target="notes">
@@ -1343,27 +1343,35 @@
         <span class="name">備忘錄</span>
       </div>
 
-      <!-- 相簿 -->
+      <!-- 相簿 (更換為範例經典立體花瓣 Icon) -->
       <div class="icon" data-target="photos">
-        <div class="img" style="background:#fbfbfb;">
-          <svg viewBox="0 0 100 100" style="filter:saturate(0.7);">
-            <circle cx="50" cy="28" r="13" fill="#e0536c"/>
-            <circle cx="68" cy="38" r="13" fill="#e58945"/>
-            <circle cx="68" cy="62" r="13" fill="#d4a728"/>
-            <circle cx="50" cy="72" r="13" fill="#44b069"/>
-            <circle cx="32" cy="62" r="13" fill="#299bb3"/>
-            <circle cx="32" cy="38" r="13" fill="#7d5fb8"/>
+        <div class="img" style="background:#fff;">
+          <svg viewBox="0 0 100 100">
+            <!-- 經典 8 瓣透明交疊立體彩色花瓣 -->
+            <ellipse cx="50" cy="28" rx="10" ry="17" fill="#ff9500" opacity="0.85"/>
+            <ellipse cx="66" cy="35" rx="10" ry="17" fill="#ffcc00" opacity="0.85" transform="rotate(45 66 35)"/>
+            <ellipse cx="72" cy="50" rx="10" ry="17" fill="#34c759" opacity="0.85" transform="rotate(90 72 50)"/>
+            <ellipse cx="66" cy="65" rx="10" ry="17" fill="#30b0c7" opacity="0.85" transform="rotate(135 66 65)"/>
+            <ellipse cx="50" cy="72" rx="10" ry="17" fill="#007aff" opacity="0.85"/>
+            <ellipse cx="34" cy="65" rx="10" ry="17" fill="#5856d6" opacity="0.85" transform="rotate(45 34 65)"/>
+            <ellipse cx="28" cy="50" rx="10" ry="17" fill="#af52de" opacity="0.85" transform="rotate(90 28 50)"/>
+            <ellipse cx="34" cy="35" rx="10" ry="17" fill="#ff2d55" opacity="0.85" transform="rotate(135 34 35)"/>
           </svg>
         </div>
         <span class="name">照片</span>
       </div>
 
-      <!-- 設定 -->
+      <!-- 設定 (更換為範例精緻雙層金屬齒輪 Icon) -->
       <div class="icon" data-target="settings">
-        <div class="img" style="background:#77777c;">
+        <div class="img" style="background:#8e8e93;">
           <svg viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="32" fill="none" stroke="#eee" stroke-width="8" stroke-dasharray="14 5"/>
-            <circle cx="50" cy="50" r="14" fill="#77777c" stroke="#eee" stroke-width="6"/>
+            <!-- 外層齒輪 -->
+            <circle cx="50" cy="50" r="34" fill="none" stroke="#f2f2f7" stroke-width="7" stroke-dasharray="8 3.5"/>
+            <!-- 內層細齒輪與軸心 -->
+            <circle cx="50" cy="50" r="23" fill="none" stroke="#e5e5ea" stroke-width="4" stroke-dasharray="5 2.5"/>
+            <!-- 三角輻條 -->
+            <circle cx="50" cy="50" r="14" fill="#8e8e93" stroke="#fff" stroke-width="4.5"/>
+            <circle cx="50" cy="50" r="4.5" fill="#545458"/>
           </svg>
         </div>
         <span class="name">設定</span>
@@ -1411,7 +1419,7 @@
         <span class="name">PLAYLIST</span>
       </div>
 
-      <!-- 日曆 App -->
+      <!-- 日曆 App (更新為乾淨經典 Icon) -->
       <div class="icon" data-target="calendar">
         <div class="img" style="background:#fff; border: 1px solid #e5e5ea;">
           <svg viewBox="0 0 100 100">
@@ -1424,7 +1432,7 @@
       </div>
     </div>
 
-    <!-- 底部 Dock 欄位 -->
+    <!-- 底部 Dock 欄位 (電話、KakaoTalk、相機) -->
     <div class="dock">
       <div class="icon" data-target="phone-app">
         <div class="img" style="background:#32a852; filter:saturate(0.75);">
@@ -1442,12 +1450,18 @@
           </svg>
         </div>
       </div>
+      <!-- 相機 (更換為範例經典黑機身金鏡頭 Icon) -->
       <div class="icon" data-target="camera">
-        <div class="img" style="background:#e8e8ed;">
+        <div class="img" style="background:#e5e5ea;">
           <svg viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="38" fill="#202024" stroke="#777" stroke-width="3"/>
-            <circle cx="50" cy="50" r="28" fill="#2c2c31"/>
-            <circle cx="44" cy="44" r="6" fill="#fff" opacity="0.6"/>
+            <rect x="20" y="28" width="60" height="46" rx="8" fill="#1c1c1e"/>
+            <path d="M36 28 L42 22 L58 22 L64 28 Z" fill="#1c1c1e"/>
+            <!-- 鏡頭圈與光澤 -->
+            <circle cx="50" cy="51" r="16" fill="#3a3a3c"/>
+            <circle cx="50" cy="51" r="12" fill="#000"/>
+            <circle cx="48" cy="49" r="4" fill="#0a84ff" opacity="0.6"/>
+            <!-- 黃色感光小點 -->
+            <circle cx="68" cy="36" r="3.5" fill="#ffd60a"/>
           </svg>
         </div>
       </div>
@@ -1556,7 +1570,7 @@
     </div>
   </div>
 
-  <!-- 9. 設定 App (IMG_7494.jpeg 圖示) -->
+  <!-- 9. 設定 App -->
   <div id="app-settings" class="app-screen">
     <div class="settings-title">設定</div>
     <div class="settings-profile-card">
@@ -1594,52 +1608,52 @@
     </div>
   </div>
 
-  <!-- 10. KakaoTalk (指定波妞與AirPods劇情、更新頭貼) -->
+  <!-- 10. KakaoTalk (隨興對話、無標點、無歐膩、更新頭貼) -->
   <div id="app-chat" class="app-screen">
     <div class="kt-header">
       <span>聊天</span>
       <span style="font-size:16px;">🔍 ⚙️</span>
     </div>
     <div id="kt-list-view">
-      <!-- 冬冬 (IMG_0578.jpeg) -->
-      <div class="kt-user-item" onclick="enterRoom('冬冬 🐶')">
+      <!-- 旼冬🐶 -->
+      <div class="kt-user-item" onclick="enterRoom('旼冬🐶')">
         <div class="kt-user-avatar">
-          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_0578.jpeg" alt="冬冬">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_0578.jpeg" alt="旼冬">
         </div>
         <div class="kt-user-content">
           <div class="kt-user-top">
-            <span class="kt-user-name">冬冬 🐶</span>
+            <span class="kt-user-name">旼冬🐶</span>
             <span class="kt-user-time">剛剛</span>
           </div>
-          <div class="kt-user-preview">歐膩！波妞昨晚太興奮了啦...</div>
+          <div class="kt-user-preview">波妞昨晚太興奮了啦 🐶</div>
         </div>
       </div>
 
-      <!-- 寧寧 (IMG_8043.jpeg) -->
-      <div class="kt-user-item" onclick="enterRoom('Ningning 🦋')">
+      <!-- 寧 -->
+      <div class="kt-user-item" onclick="enterRoom('寧')">
         <div class="kt-user-avatar">
-          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg" alt="Ningning">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg" alt="寧">
         </div>
         <div class="kt-user-content">
           <div class="kt-user-top">
-            <span class="kt-user-name">Ningning 🦋</span>
+            <span class="kt-user-name">寧</span>
             <span class="kt-user-time">上午 11:20</span>
           </div>
-          <div class="kt-user-preview">歐膩，妳有看到我的 AirPods 嗎？😭</div>
+          <div class="kt-user-preview">妳有看到我的 AirPods 嗎 😭</div>
         </div>
       </div>
 
-      <!-- Giselle (IMG_8042.png) -->
-      <div class="kt-user-item" onclick="enterRoom('Giselle 🌙')">
+      <!-- 欸哩 -->
+      <div class="kt-user-item" onclick="enterRoom('欸哩')">
         <div class="kt-user-avatar">
-          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png" alt="Giselle">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png" alt="欸哩">
         </div>
         <div class="kt-user-content">
           <div class="kt-user-top">
-            <span class="kt-user-name">Giselle 🌙</span>
+            <span class="kt-user-name">欸哩</span>
             <span class="kt-user-time">昨天</span>
           </div>
-          <div class="kt-user-preview">照片已經傳到雲端囉，妳看一下！</div>
+          <div class="kt-user-preview">照片已經傳到雲端囉 妳看一下 ✨</div>
         </div>
       </div>
     </div>
@@ -1648,7 +1662,7 @@
     <div id="kt-room-view">
       <div class="kt-room-header">
         <span class="kt-back-btn" onclick="leaveRoom()">‹</span>
-        <span id="kt-target-name">冬冬 🐶</span>
+        <span id="kt-target-name">旼冬🐶</span>
       </div>
       <div class="kt-messages" id="kt-messages-box"></div>
       <div class="kt-input-bar">
@@ -1658,47 +1672,47 @@
     </div>
   </div>
 
-  <!-- 11. 電話 App (去除劉知珉，全成員頭貼更新) -->
+  <!-- 11. 電話 App -->
   <div id="app-phone" class="app-screen">
     <div class="phone-header">聯絡人</div>
     <div class="contacts-list">
-      <!-- 冬冬 (IMG_5038.jpeg) -->
-      <div class="contact-item" onclick="startCall('金旼炡 (Winter)')">
+      <!-- 金旼炡 (旼冬) -->
+      <div class="contact-item" onclick="startCall('金旼炡 (旼冬)')">
         <div class="contact-info">
           <div class="contact-avatar">
             <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg" alt="Winter">
           </div>
           <div>
             <div class="contact-name">金旼炡</div>
-            <div class="contact-sub">aespa • 冬冬</div>
+            <div class="contact-sub">aespa • 旼冬</div>
           </div>
         </div>
         <span style="font-size:18px; color:#44b069;">📞</span>
       </div>
 
-      <!-- Giselle (IMG_8042.png) -->
-      <div class="contact-item" onclick="startCall('內永枝利 (Giselle)')">
+      <!-- 內永枝利 (欸哩) -->
+      <div class="contact-item" onclick="startCall('內永枝利 (欸哩)')">
         <div class="contact-info">
           <div class="contact-avatar">
             <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png" alt="Giselle">
           </div>
           <div>
             <div class="contact-name">內永枝利</div>
-            <div class="contact-sub">aespa • GISELLE</div>
+            <div class="contact-sub">aespa • 欸哩</div>
           </div>
         </div>
         <span style="font-size:18px; color:#44b069;">📞</span>
       </div>
 
-      <!-- 寧藝卓 (IMG_8043.jpeg) -->
-      <div class="contact-item" onclick="startCall('寧藝卓 (Ningning)')">
+      <!-- 寧藝卓 (寧) -->
+      <div class="contact-item" onclick="startCall('寧藝卓 (寧)')">
         <div class="contact-info">
           <div class="contact-avatar">
             <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg" alt="Ningning">
           </div>
           <div>
             <div class="contact-name">寧藝卓</div>
-            <div class="contact-sub">aespa • NINGNING</div>
+            <div class="contact-sub">aespa • 寧</div>
           </div>
         </div>
         <span style="font-size:18px; color:#44b069;">📞</span>
@@ -1706,7 +1720,7 @@
     </div>
   </div>
 
-  <!-- 12. 全螢幕來電彈窗 (IMG_5038.jpeg) -->
+  <!-- 12. 全螢幕來電彈窗 -->
   <div id="incoming-call-screen">
     <div>
       <div class="call-head-avatar">
@@ -1831,7 +1845,7 @@
   document.getElementById('notif-chat').addEventListener('click', () => {
     lock.classList.add('off');
     openApp('chat');
-    enterRoom('冬冬 🐶');
+    enterRoom('旼冬🐶');
   });
 
   // 5. App 視窗管理核心
@@ -1912,34 +1926,34 @@
     }
   }, { passive: true });
 
-  // 7. KakaoTalk 專屬劇情 (波妞顧狗 + AirPods 尋找)
+  // 7. KakaoTalk 隨興真實對話 (無標點符號、移除歐膩)
   const memberScripts = {
-    '冬冬 🐶': {
-      initial: '歐膩！波妞昨晚太興奮了啦... 讓偶整夜顧狗狗都沒睡 😭',
+    '旼冬🐶': {
+      initial: '波妞昨晚太興奮了啦 🐶 咬著球一直暴衝 我整夜顧牠都沒睡 😭',
       flow: [
-        { me: '哈哈哈哈！波妞又在客廳暴衝了嗎？🐶', reply: '對啊！一直叼著玩具要我陪牠玩，我真的快睏扁了…' },
-        { me: '辛苦啦～那今天換我當波妞的保姆，妳去好好補眠！', reply: '哇嗚嗚謝謝知珉歐膩最好了！肉乾我放在電視櫃上面喔 💖' },
-        { me: '收到！等等練完舞我就回家餵牠～', reply: '好～波妞今天就交給妳照顧囉 🐶✨' }
+        { me: '哈哈哈哈波妞又發瘋了嗎 🐶', reply: '對啊一直要我陪牠玩 真的快睏扁了 今天換妳當波妞保姆 🥹' },
+        { me: '好啦辛苦了 今天波妞交給我 妳好好補眠 💖', reply: '哇嗚嗚知珉最好了 肉乾我放在客廳電視櫃上喔 🐕✨' },
+        { me: '收到 等等練完舞我就回去餵牠', reply: '好 那我先去睡了 醒來再跟妳說 🐶' }
       ]
     },
-    'Ningning 🦋': {
-      initial: '歐膩，妳在家有看到我的 AirPods 嗎？我找一個早上了 😭',
+    '寧': {
+      initial: '妳在家有看到我的 AirPods 嗎 😭 我找一個早上了',
       flow: [
-        { me: '是不是又掉在客廳沙發的夾縫裡面了？', reply: '啊！我昨天好像真的躺在沙發上聽歌耶…！' },
-        { me: '我剛剛幫妳翻了一下，真的在沙發抱枕下面啦～', reply: '嗚哇！太感謝歐膩了～出門前幫我放桌上好嗎！☕' },
-        { me: '好，幫妳收在化妝台上了，別再弄丟囉！', reply: '知道了～等等練習室見！愛妳 🦋' }
+        { me: '是不是又掉在客廳沙發夾縫了 每次都塞在那邊 🛋️', reply: '啊 我昨天好像真的躺在沙發上聽歌耶' },
+        { me: '幫妳翻了一下 真的在抱枕下面啦 找到囉', reply: '嗚哇救星 出門前幫我放桌上好嗎 ☕' },
+        { me: '放化妝台上了 別再弄丟囉 🦋', reply: '知道啦 等等練習室見 愛妳 💖' }
       ]
     },
-    'Giselle 🌙': {
-      initial: '照片已經傳到雲端囉，妳看一下！',
+    '欸哩': {
+      initial: '照片已經傳到雲端囉 妳看一下 ✨',
       flow: [
-        { me: '收到了！照片調色超漂亮 ✨', reply: '對吧！我就說那套黑色衣服很適合妳 🖤' },
-        { me: '明天去涉谷逛逛嗎？', reply: '好啊，我想去買上次看中的那件外套！' }
+        { me: '收到了 調色超漂亮 ✨', reply: '對吧 就說那套黑色的很適合妳 🖤' },
+        { me: '明天去涉谷逛街嗎', reply: '好啊 想去買上次看中的那件外套 🛍️' }
       ]
     }
   };
 
-  let currentChatMember = '冬冬 🐶';
+  let currentChatMember = '旼冬🐶';
   let memberStep = 0;
 
   function enterRoom(name) {
@@ -1949,7 +1963,7 @@
     const msgBox = document.getElementById('kt-messages-box');
     msgBox.innerHTML = '';
 
-    const script = memberScripts[name] || memberScripts['冬冬 🐶'];
+    const script = memberScripts[name] || memberScripts['旼冬🐶'];
     const initBubble = document.createElement('div');
     initBubble.className = 'kt-bubble them';
     initBubble.textContent = script.initial;
@@ -1963,7 +1977,7 @@
   }
 
   function handleAutoChat() {
-    const script = memberScripts[currentChatMember] || memberScripts['冬冬 🐶'];
+    const script = memberScripts[currentChatMember] || memberScripts['旼冬🐶'];
     if (memberStep < script.flow.length) {
       const current = script.flow[memberStep];
       const msgBox = document.getElementById('kt-messages-box');
@@ -2034,11 +2048,11 @@
   }
 
   const phoneDialogueScript = [
-    { sender: '冬冬', text: '歐膩，在幹嘛？' },
-    { sender: 'Karina', text: '剛練完舞呢～妳呢？' },
-    { sender: '冬冬', text: '我也是，我有話想跟妳說…' },
-    { sender: 'Karina', text: '嗯？什麼事呀？' },
-    { sender: '冬冬', text: '等等一起去吃好吃的火鍋吧！哈哈哈哈！' }
+    { sender: '冬冬', text: '在幹嘛 🐶' },
+    { sender: 'Karina', text: '剛練完舞呢 妳呢' },
+    { sender: '冬冬', text: '我也是 有話想跟妳說…' },
+    { sender: 'Karina', text: '嗯？什麼事呀' },
+    { sender: '冬冬', text: '等等一起去吃火鍋啦 哈哈哈哈 🍲' }
   ];
 
   function acceptCall() {
