@@ -65,7 +65,7 @@
       align-items: center;
       font-weight: 600;
       font-size: 13px;
-      z-index: 1200;
+      z-index: 3000;
       pointer-events: none;
       color: #fff;
       font-variant-numeric: tabular-nums;
@@ -153,7 +153,7 @@
       height: 25px;
       background: #000;
       border-radius: 20px;
-      z-index: 1201;
+      z-index: 3001;
       pointer-events: auto;
       cursor: pointer;
       transition: width 0.3s cubic-bezier(0.3, 0, 0, 1.3), height 0.3s cubic-bezier(0.3, 0, 0, 1.3);
@@ -164,13 +164,13 @@
       border-radius: 22px;
     }
 
-    /* 頂部下拉橫幅通知 (Banner Notification 比照 wonbin-phone) */
+    /* 頂部下拉橫幅通知 */
     #top-notification-banner {
       position: absolute;
       top: -90px;
       left: 12px;
       right: 12px;
-      background: rgba(45, 45, 50, 0.88);
+      background: rgba(45, 45, 50, 0.92);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
       border-radius: 22px;
@@ -180,7 +180,7 @@
       justify-content: space-between;
       box-shadow: 0 10px 30px rgba(0,0,0,0.5);
       border: 0.5px solid rgba(255,255,255,0.18);
-      z-index: 2800;
+      z-index: 3500;
       transition: transform 0.45s cubic-bezier(0.18, 0.89, 0.32, 1.15);
       cursor: pointer;
     }
@@ -232,7 +232,7 @@
 
     /* ================= 1. 鎖定畫面 ================= */
     #lock {
-      z-index: 300;
+      z-index: 500;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -282,7 +282,7 @@
       margin-bottom: 16px;
     }
     .notif-card {
-      background: rgba(30, 30, 34, 0.75);
+      background: rgba(30, 30, 34, 0.78);
       backdrop-filter: blur(28px);
       -webkit-backdrop-filter: blur(28px);
       border-radius: 16px;
@@ -359,10 +359,10 @@
       cursor: pointer;
     }
 
-    /* ================= 2. 密碼解鎖頁面 (含真實刪除/取消反應) ================= */
+    /* ================= 2. 密碼解鎖頁面 ================= */
     #pass {
-      z-index: 350;
-      background: rgba(10, 10, 15, 0.7);
+      z-index: 600;
+      background: rgba(10, 10, 15, 0.75);
       backdrop-filter: blur(40px);
       display: flex;
       flex-direction: column;
@@ -572,22 +572,17 @@
       width: 52px;
     }
 
-    /* ================= 4. App 視窗容器 ================= */
+    /* ================= 4. App 視窗通用 (100% 滿版遮蔽底層，絕不露出桌面破綻) ================= */
     .app-screen {
       position: absolute;
       inset: 0;
       background: #000;
-      z-index: 500;
+      z-index: 2000;
       display: none;
-      opacity: 0;
-      transform: translateY(100%);
-      transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.3, 1), opacity 0.25s ease;
       flex-direction: column;
     }
     .app-screen.active {
       display: flex;
-      opacity: 1;
-      transform: translateY(0%);
     }
 
     #app-playlist {
@@ -606,7 +601,6 @@
     #app-instagram {
       background: #000;
       padding-top: 0;
-      z-index: 1500;
     }
     #app-instagram iframe {
       width: 100%;
@@ -750,14 +744,15 @@
       max-width: 85%;
     }
 
-    /* ================= 7. 備忘錄 App (支援點擊查看內文詳情) ================= */
+    /* ================= 7. 備忘錄 App (點擊查看詳細內文) ================= */
     #app-notes {
       background: #000;
       color: #fff;
       padding-top: 44px;
       display: flex;
       flex-direction: column;
-      position: relative;
+      position: absolute;
+      inset: 0;
     }
     .notes-header {
       display: flex;
@@ -810,7 +805,6 @@
       font-weight: 600;
     }
 
-    /* 備忘錄內文詳細檢視頁面 */
     #note-detail-view {
       position: absolute;
       inset: 0;
@@ -1156,7 +1150,7 @@
       cursor: pointer;
     }
 
-    /* ================= 10. 電話 App (純白主題設計，完全比照 wonbin-phone 範例) ================= */
+    /* ================= 10. 電話 App (純白主題最近通話) ================= */
     #app-phone {
       background: #fff;
       color: #000;
@@ -1275,7 +1269,7 @@
       font-size: 16px;
     }
 
-    /* 經典撥通頁面 (比照 wonbin-phone 範例) */
+    /* 撥通畫面 (無表情符號、純淨語音文字) */
     #calling-screen {
       position: absolute;
       inset: 0;
@@ -1359,7 +1353,7 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.4);
     }
 
-    /* ================= 11. 相簿 App ================= */
+    /* ================= 11. 相簿 App (含下方照片膠卷縮圖 Bar) ================= */
     #app-photos {
       background: #fff;
       color: #000;
@@ -1446,6 +1440,7 @@
       box-shadow: 0 1px 4px rgba(0,0,0,0.1);
     }
 
+    /* 原生相片單張檢視器 (帶下方膠卷縮圖) */
     #photo-viewer-page {
       position: absolute;
       inset: 0;
@@ -1481,8 +1476,38 @@
       max-height: 100%;
       object-fit: contain;
     }
+    /* 下方相片膠卷縮圖欄 (Filmstrip Thumbnail Bar) */
+    .viewer-filmstrip {
+      height: 48px;
+      background: #111;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0 10px;
+      overflow-x: auto;
+    }
+    .filmstrip-thumb {
+      width: 34px;
+      height: 38px;
+      border-radius: 4px;
+      overflow: hidden;
+      opacity: 0.5;
+      cursor: pointer;
+      flex-shrink: 0;
+      border: 1px solid transparent;
+    }
+    .filmstrip-thumb.active {
+      opacity: 1;
+      border-color: #fff;
+      transform: scale(1.05);
+    }
+    .filmstrip-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
     .viewer-bottom-bar {
-      height: 50px;
+      height: 46px;
       display: flex;
       justify-content: space-around;
       align-items: center;
@@ -1619,7 +1644,7 @@
       background: #fff;
     }
 
-    /* 底部 Home 條 (限制極小高度防止誤觸閃退) */
+    /* 底部 Home 條 */
     .home-touch-area {
       position: absolute;
       bottom: 0;
@@ -1670,7 +1695,7 @@
     </div>
   </div>
 
-  <!-- 頂部彈出式橫幅通知 (Banner Notification 比照 wonbin-phone) -->
+  <!-- 頂部彈出式橫幅通知 -->
   <div id="top-notification-banner" onclick="openBannerChat()">
     <div class="top-banner-left">
       <div class="top-banner-avatar">
@@ -1733,7 +1758,7 @@
     </div>
   </div>
 
-  <!-- 2. PIN 密碼解鎖頁面 (包含取消與刪除鍵) -->
+  <!-- 2. PIN 密碼解鎖頁面 -->
   <div id="pass" class="scr">
     <div class="pass-title">輸入密碼</div>
     <div class="pass-dots">
@@ -1902,7 +1927,6 @@
           </svg>
         </div>
       </div>
-      <!-- 相機 (經典黑機身金鏡頭 Icon) -->
       <div class="icon" data-target="camera">
         <div class="img" style="background:#e5e5ea;">
           <svg viewBox="0 0 100 100">
@@ -1928,7 +1952,7 @@
     ></iframe>
   </div>
 
-  <!-- 5. Instagram 視窗 (獨立頂層圖層) -->
+  <!-- 5. Instagram 視窗 (獨立頂層圖層，絕不露出底層破綻) -->
   <div id="app-instagram" class="app-screen">
     <iframe 
       id="iframe-instagram"
@@ -1990,7 +2014,7 @@
     </div>
   </div>
 
-  <!-- 8. 備忘錄 App (支援點擊查看內文詳情) -->
+  <!-- 8. 備忘錄 App (支援點擊查看詳細內文) -->
   <div id="app-notes" class="app-screen">
     <div class="notes-header">
       <div class="notes-title">所有 iCloud 備忘錄</div>
@@ -2079,7 +2103,7 @@
     </div>
   </div>
 
-  <!-- 10. KakaoTalk (約火鍋、無過度表情符號、彈出鍵盤打字) -->
+  <!-- 10. KakaoTalk (約火鍋、無過度符號、彈出式注音鍵盤) -->
   <div id="app-chat" class="app-screen">
     <div class="kt-header">
       <span>聊天</span>
@@ -2163,7 +2187,7 @@
     </div>
   </div>
 
-  <!-- 11. 電話 App (純白主題設計，完全比照 wonbin-phone 範例) -->
+  <!-- 11. 電話 App (純白主題最近通話) -->
   <div id="app-phone" class="app-screen">
     <div class="phone-top-bar">
       <span class="phone-edit-btn">編輯</span>
@@ -2175,7 +2199,7 @@
     <div class="phone-page-title">最近通話</div>
     <div class="phone-search-input">🔍 搜尋</div>
 
-    <!-- 通話清單列表 (點擊撥通) -->
+    <!-- 通話清單列表 -->
     <div class="recents-list">
       <div class="recent-row" onclick="startCall('金旼炡', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg')">
         <div class="recent-left">
@@ -2221,7 +2245,7 @@
     </div>
   </div>
 
-  <!-- 12. 全螢幕撥通畫面 (無表情符號、合理對話) -->
+  <!-- 12. 全螢幕撥通畫面 (無表情符號、純淨通話) -->
   <div id="incoming-call-screen">
     <div>
       <div class="call-head-avatar">
@@ -2239,7 +2263,7 @@
     </div>
   </div>
 
-  <!-- 13. 相簿 App (純照片無影片、含年月分組、完全比照 wonbin-phone 範例) -->
+  <!-- 13. 相簿 App (純照片無影片、含下方照片膠卷縮圖 Bar) -->
   <div id="app-photos" class="app-screen">
     <div class="photos-main-scroll">
       <div class="photos-top-bar">
@@ -2263,7 +2287,7 @@
       <div class="album-grid-row" id="album-grid-8"></div>
     </div>
 
-    <!-- 底部切換膠囊 (年 / 月 / 所有照片) -->
+    <!-- 底部切換膠囊 -->
     <div class="album-dock-capsule">
       <div class="capsule-btn">年</div>
       <div class="capsule-btn">月</div>
@@ -2271,7 +2295,7 @@
     </div>
   </div>
 
-  <!-- 相片單張檢視器 (支援左右滑動切換) -->
+  <!-- 相片單張檢視器 (帶下方膠卷縮圖列，支援左右滑動切換) -->
   <div id="photo-viewer-page">
     <div class="viewer-top-bar">
       <span class="viewer-back" onclick="closePhotoViewer()">‹ 圖庫</span>
@@ -2281,6 +2305,8 @@
     <div class="viewer-content" id="viewer-content-box">
       <img id="viewer-img" alt="view">
     </div>
+    <!-- 下方相片膠卷縮圖欄 -->
+    <div class="viewer-filmstrip" id="viewer-filmstrip-bar"></div>
     <div class="viewer-bottom-bar">
       <span>⬆</span>
       <span>♡</span>
@@ -2288,7 +2314,7 @@
     </div>
   </div>
 
-  <!-- 14. 相機 App (九宮格白線、變焦標籤、相簿跳轉) -->
+  <!-- 14. 相機 App (九宮格白線、變焦標籤、點相簿直接跳轉) -->
   <div id="app-camera" class="app-screen">
     <div class="cam-top-controls">
       <span>⚡ 關閉</span>
@@ -2353,7 +2379,7 @@
   setInterval(updateClock, 1000);
   updateClock();
 
-  // 2. 密碼解鎖頁面：取消與刪除實時反應 (比照 wonbin-phone)
+  // 2. 密碼解鎖頁面：取消與刪除實時反應
   const lock = document.getElementById('lock');
   const pass = document.getElementById('pass');
   let passCode = [];
@@ -2373,7 +2399,7 @@
   }, { passive: true });
 
   lock.addEventListener('touchend', (e) => {
-    if (lockStartY - e.changedTouches[0].clientY > 25) {
+    if (lockStartY - e.changedTouches[0].clientY > 20) {
       openPasscode();
     }
   }, { passive: true });
@@ -2389,7 +2415,6 @@
         lock.classList.add('off');
         passCode = [];
         updatePassDots();
-        // 進入主畫面後 8 秒跳出頂部橫幅通知
         triggerBannerNotice();
       }, 160);
     }
@@ -2397,10 +2422,10 @@
 
   function handlePassAction() {
     if (passCode.length > 0) {
-      passCode.pop(); // 刪除最後一位
+      passCode.pop();
       updatePassDots();
     } else {
-      pass.classList.remove('on'); // 取消解鎖返回鎖定頁
+      pass.classList.remove('on');
     }
   }
 
@@ -2409,7 +2434,6 @@
       if (idx < passCode.length) dot.classList.add('filled');
       else dot.classList.remove('filled');
     });
-    // 未輸入顯示「取消」，輸入後變為「刪除」
     if (passCode.length > 0) {
       delCancelBtn.textContent = '刪除';
     } else {
@@ -2417,7 +2441,7 @@
     }
   }
 
-  // 3. 頂部橫幅通知 (Banner Notification)
+  // 3. 頂部橫幅通知
   function triggerBannerNotice() {
     setTimeout(() => {
       const banner = document.getElementById('top-notification-banner');
@@ -2445,7 +2469,7 @@
     enterRoom('旼冬🐶');
   });
 
-  // 5. App 視窗管理核心
+  // 5. App 視窗管理核心 (徹底防透底)
   const screens = {
     playlist: document.getElementById('app-playlist'),
     instagram: document.getElementById('app-instagram'),
@@ -2471,7 +2495,6 @@
       backBtn.style.display = 'flex';
       clockStatusTxt.style.display = 'none';
 
-      // 若進入白色主題 App (電話、日曆、相簿)，狀態列自動切換為黑色文字
       if (appKey === 'phone' || appKey === 'calendar' || appKey === 'photos') {
         phoneStatusBar.classList.add('black-theme');
       } else {
@@ -2483,7 +2506,8 @@
   }
 
   document.querySelectorAll('[data-target]').forEach(el => {
-    el.addEventListener('click', () => {
+    el.addEventListener('click', (e) => {
+      e.stopPropagation();
       const target = el.dataset.target;
       if (target === 'phone-app') openApp('phone');
       else openApp(target);
@@ -2535,23 +2559,23 @@
   }, { passive: true });
 
   homeBar.addEventListener('touchend', (e) => {
-    if (barStartY - e.changedTouches[0].clientY > 12) {
+    if (barStartY - e.changedTouches[0].clientY > 10) {
       goHome();
     }
   }, { passive: true });
 
-  // 7. KakaoTalk：隨興短句、去表情化、冬約吃火鍋
+  // 7. KakaoTalk 專屬劇情 (旼冬更親近、欸哩日常隨興)
   const memberScripts = {
     '旼冬🐶': {
       initial: '練完舞要不要一起去吃火鍋 看好一家麻辣鍋了',
       flow: [
-        { me: '好啊 等我把最後一段 Solo 練完就走', reply: '太棒了 那我先去佔位子' },
-        { me: '那家要點老油條跟鴨血', reply: '知道 已經在菜單畫好了' },
-        { me: '大概二十分鐘後到', reply: '好 慢慢走' }
+        { me: '好啊 等我把最後一段 Solo 練完就走', reply: '太棒了 那我先去佔位子 點妳最愛的鴨血' },
+        { me: '那家要點老油條 記得多煮一下', reply: '知道 已經在菜單畫好了 回家幫我抱抱波妞' },
+        { me: '大概二十分鐘後到 等我喔', reply: '好 慢慢走 路上小心' }
       ]
     },
     '寧': {
-      initial: '妳有看到我的 AirPods 嗎 我找一個早上了',
+      initial: '妳在家有看到我的 AirPods 嗎 我找一個早上了',
       flow: [
         { me: '是不是又掉在客廳沙發夾縫了 每次都塞在那', reply: '啊 我昨天好像真的躺在沙發上' },
         { me: '幫妳翻了一下 真的在抱枕下面', reply: '嗚哇救星 出門前幫我放桌上' },
@@ -2673,7 +2697,7 @@
     closeNoteEditor();
   }
 
-  // 9. 電話通話管理 (通話內容完全區隔、全程無表情符號)
+  // 9. 電話通話管理 (通話全程無表情符號、內容完全區隔)
   const phoneCallScripts = {
     '金旼炡': [
       { sender: '旼冬', text: '在幹嘛' },
@@ -2767,7 +2791,7 @@
     callScreen.style.display = 'none';
   }
 
-  // 10. 相簿清單 (純照片無影片、年月分組、完全比照 wonbin-phone 範例)
+  // 10. 相簿清單 (含下方真實膠卷縮圖橫條)
   const albumData = {
     '10': [
       'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg',
@@ -2807,6 +2831,21 @@
         grid.appendChild(cell);
       });
     });
+
+    // 渲染下方小縮圖膠卷列
+    const filmstrip = document.getElementById('viewer-filmstrip-bar');
+    filmstrip.innerHTML = '';
+    allPhotos.forEach((item, idx) => {
+      const thumb = document.createElement('div');
+      thumb.className = 'filmstrip-thumb';
+      thumb.id = `filmstrip-${idx}`;
+      thumb.onclick = () => {
+        currentPhotoIndex = idx;
+        updateViewerPhoto();
+      };
+      thumb.innerHTML = `<img src="${item.url}" alt="thumb">`;
+      filmstrip.appendChild(thumb);
+    });
   }
   renderAlbums();
 
@@ -2823,6 +2862,12 @@
     document.getElementById('viewer-date-title').textContent = item.date;
     const img = document.getElementById('viewer-img');
     img.src = item.url;
+
+    // 更新膠卷縮圖高亮
+    document.querySelectorAll('.filmstrip-thumb').forEach((el, idx) => {
+      if (idx === currentPhotoIndex) el.classList.add('active');
+      else el.classList.remove('active');
+    });
   }
 
   function closePhotoViewer() {
@@ -2851,7 +2896,7 @@
     }
   }, { passive: true });
 
-  // 11. 相機功能 (鏡頭取景與拍完自動存入縮圖)
+  // 11. 相機功能 (取景與拍照存入縮圖)
   let currentStream = null;
   let useFacingMode = 'user';
 
