@@ -337,14 +337,13 @@
       opacity: 0.8;
     }
 
-    /* ================= 3. 主畫面 (Home 底色更淺更透氣) ================= */
+    /* ================= 3. 主畫面 (Home) ================= */
     #home {
       z-index: 100;
       padding: 54px 16px 20px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      /* 調整為更淺、微透光的灰冷漸層背景 */
       background: radial-gradient(circle at 50% 20%, #30313d 0%, #22232c 60%, #1a1a22 100%);
     }
     .widgets-row {
@@ -502,10 +501,11 @@
       transform-origin: top center;
     }
 
-    /* Instagram 嵌入 (徹底修復黑屏) */
+    /* Instagram 嵌入 (全面開放影音硬體加速與點擊穿透) */
     #app-instagram {
       background: #000;
       padding-top: 0;
+      position: relative;
     }
     #app-instagram iframe {
       width: 100%;
@@ -812,7 +812,7 @@
       filter: saturate(0.65);
     }
 
-    /* ================= 9. KakaoTalk (隨興聊天無標點符號) ================= */
+    /* ================= 9. KakaoTalk ================= */
     #app-chat {
       background: #191919;
       color: #fff;
@@ -963,7 +963,7 @@
       cursor: pointer;
     }
 
-    /* ================= 10. 電話 App (成員名稱更新) ================= */
+    /* ================= 10. 電話 App ================= */
     #app-phone {
       background: #000;
       color: #fff;
@@ -1104,7 +1104,7 @@
       box-shadow: 0 6px 20px rgba(0,0,0,0.4);
     }
 
-    /* ================= 11. 相簿 & 相機 ================= */
+    /* ================= 11. 相簿 App (照片與影片交叉擺放) ================= */
     #app-photos {
       background: #000;
       color: #fff;
@@ -1124,13 +1124,57 @@
       overflow-y: auto;
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
+      gap: 2.5px;
       padding-bottom: 40px;
     }
-    .photos-grid img {
+    .gallery-item {
+      position: relative;
       width: 100%;
       aspect-ratio: 1;
+      background: #111;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .gallery-item img, .gallery-item video {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
+      display: block;
+    }
+    .video-play-tag {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      background: rgba(0,0,0,0.6);
+      border-radius: 4px;
+      font-size: 10px;
+      padding: 1px 4px;
+      color: #fff;
+    }
+
+    /* 點擊多媒體彈窗預覽 */
+    #media-modal {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 2600;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    #media-modal img, #media-modal video {
+      max-width: 92%;
+      max-height: 75%;
+      border-radius: 12px;
+    }
+    .modal-close-btn {
+      margin-top: 18px;
+      padding: 6px 18px;
+      background: rgba(255,255,255,0.25);
+      border-radius: 16px;
+      font-size: 12px;
+      cursor: pointer;
     }
 
     #app-camera {
@@ -1187,7 +1231,7 @@
       background: #fff;
     }
 
-    /* 底部手勢條 */
+    /* 底部細長手勢條 */
     .home-touch-area {
       position: absolute;
       bottom: 0;
@@ -1236,7 +1280,7 @@
       <div class="t now-time">12:41</div>
     </div>
 
-    <!-- 鎖定通知 (更新為旼冬🐶) -->
+    <!-- 鎖定通知 -->
     <div class="lock-notifs">
       <div class="notif-card" id="notif-ig">
         <div class="notif-left">
@@ -1303,7 +1347,7 @@
     </div>
   </div>
 
-  <!-- 3. 主畫面 (Home 底色淺一點更透氣) -->
+  <!-- 3. 主畫面 (Home 底色微透淺色漸層) -->
   <div id="home" class="scr">
     <div class="widgets-row">
       <div class="ios-widget cal-widget" data-target="calendar">
@@ -1328,7 +1372,7 @@
       </div>
     </div>
 
-    <!-- 桌面 Apps (更新為範例 Icon：立體相片花瓣、雙層齒輪設定) -->
+    <!-- 桌面 Apps -->
     <div class="grid">
       <!-- 備忘錄 -->
       <div class="icon" data-target="notes">
@@ -1347,7 +1391,6 @@
       <div class="icon" data-target="photos">
         <div class="img" style="background:#fff;">
           <svg viewBox="0 0 100 100">
-            <!-- 經典 8 瓣透明交疊立體彩色花瓣 -->
             <ellipse cx="50" cy="28" rx="10" ry="17" fill="#ff9500" opacity="0.85"/>
             <ellipse cx="66" cy="35" rx="10" ry="17" fill="#ffcc00" opacity="0.85" transform="rotate(45 66 35)"/>
             <ellipse cx="72" cy="50" rx="10" ry="17" fill="#34c759" opacity="0.85" transform="rotate(90 72 50)"/>
@@ -1361,17 +1404,13 @@
         <span class="name">照片</span>
       </div>
 
-      <!-- 設定 (更換為範例精緻雙層金屬齒輪 Icon) -->
+      <!-- 設定 (簡潔低飽和單層金屬光澤齒輪) -->
       <div class="icon" data-target="settings">
         <div class="img" style="background:#8e8e93;">
           <svg viewBox="0 0 100 100">
-            <!-- 外層齒輪 -->
-            <circle cx="50" cy="50" r="34" fill="none" stroke="#f2f2f7" stroke-width="7" stroke-dasharray="8 3.5"/>
-            <!-- 內層細齒輪與軸心 -->
-            <circle cx="50" cy="50" r="23" fill="none" stroke="#e5e5ea" stroke-width="4" stroke-dasharray="5 2.5"/>
-            <!-- 三角輻條 -->
-            <circle cx="50" cy="50" r="14" fill="#8e8e93" stroke="#fff" stroke-width="4.5"/>
-            <circle cx="50" cy="50" r="4.5" fill="#545458"/>
+            <circle cx="50" cy="50" r="32" fill="none" stroke="#f2f2f7" stroke-width="7" stroke-dasharray="10 4"/>
+            <circle cx="50" cy="50" r="14" fill="#8e8e93" stroke="#fff" stroke-width="5"/>
+            <circle cx="50" cy="50" r="5" fill="#444"/>
           </svg>
         </div>
         <span class="name">設定</span>
@@ -1419,7 +1458,7 @@
         <span class="name">PLAYLIST</span>
       </div>
 
-      <!-- 日曆 App (更新為乾淨經典 Icon) -->
+      <!-- 日曆 App -->
       <div class="icon" data-target="calendar">
         <div class="img" style="background:#fff; border: 1px solid #e5e5ea;">
           <svg viewBox="0 0 100 100">
@@ -1432,7 +1471,7 @@
       </div>
     </div>
 
-    <!-- 底部 Dock 欄位 (電話、KakaoTalk、相機) -->
+    <!-- 底部 Dock 欄位 -->
     <div class="dock">
       <div class="icon" data-target="phone-app">
         <div class="img" style="background:#32a852; filter:saturate(0.75);">
@@ -1450,17 +1489,15 @@
           </svg>
         </div>
       </div>
-      <!-- 相機 (更換為範例經典黑機身金鏡頭 Icon) -->
+      <!-- 相機 (經典黑機身金鏡頭 Icon) -->
       <div class="icon" data-target="camera">
         <div class="img" style="background:#e5e5ea;">
           <svg viewBox="0 0 100 100">
             <rect x="20" y="28" width="60" height="46" rx="8" fill="#1c1c1e"/>
             <path d="M36 28 L42 22 L58 22 L64 28 Z" fill="#1c1c1e"/>
-            <!-- 鏡頭圈與光澤 -->
             <circle cx="50" cy="51" r="16" fill="#3a3a3c"/>
             <circle cx="50" cy="51" r="12" fill="#000"/>
             <circle cx="48" cy="49" r="4" fill="#0a84ff" opacity="0.6"/>
-            <!-- 黃色感光小點 -->
             <circle cx="68" cy="36" r="3.5" fill="#ffd60a"/>
           </svg>
         </div>
@@ -1478,12 +1515,12 @@
     ></iframe>
   </div>
 
-  <!-- 5. Instagram 視窗 (防黑屏配置) -->
+  <!-- 5. Instagram 視窗 -->
   <div id="app-instagram" class="app-screen">
     <iframe 
       id="iframe-instagram"
       src="https://u11150003-arch.github.io/karina_ig/"
-      allow="autoplay; camera; microphone; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allow="autoplay *; camera; microphone; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
       sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
     ></iframe>
   </div>
@@ -1520,7 +1557,7 @@
     </div>
     <div class="x-tweet-card">
       <div class="x-author-avatar">
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" alt="aespa">
+        <img src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg" alt="aespa">
       </div>
       <div class="x-tweet-body">
         <div class="x-tweet-header">
@@ -1608,7 +1645,7 @@
     </div>
   </div>
 
-  <!-- 10. KakaoTalk (隨興對話、無標點、無歐膩、更新頭貼) -->
+  <!-- 10. KakaoTalk (隨興短句、無標點、無歐膩) -->
   <div id="app-chat" class="app-screen">
     <div class="kt-header">
       <span>聊天</span>
@@ -1672,47 +1709,47 @@
     </div>
   </div>
 
-  <!-- 11. 電話 App -->
+  <!-- 11. 電話 App (純名、去掉 aespa) -->
   <div id="app-phone" class="app-screen">
     <div class="phone-header">聯絡人</div>
     <div class="contacts-list">
-      <!-- 金旼炡 (旼冬) -->
-      <div class="contact-item" onclick="startCall('金旼炡 (旼冬)')">
+      <!-- 金旼炡 -->
+      <div class="contact-item" onclick="startCall('金旼炡', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg')">
         <div class="contact-info">
           <div class="contact-avatar">
-            <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg" alt="Winter">
+            <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg" alt="金旼炡">
           </div>
           <div>
             <div class="contact-name">金旼炡</div>
-            <div class="contact-sub">aespa • 旼冬</div>
+            <div class="contact-sub">旼冬</div>
           </div>
         </div>
         <span style="font-size:18px; color:#44b069;">📞</span>
       </div>
 
-      <!-- 內永枝利 (欸哩) -->
-      <div class="contact-item" onclick="startCall('內永枝利 (欸哩)')">
+      <!-- 內永枝利 -->
+      <div class="contact-item" onclick="startCall('內永枝利', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png')">
         <div class="contact-info">
           <div class="contact-avatar">
-            <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png" alt="Giselle">
+            <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png" alt="內永枝利">
           </div>
           <div>
             <div class="contact-name">內永枝利</div>
-            <div class="contact-sub">aespa • 欸哩</div>
+            <div class="contact-sub">欸哩</div>
           </div>
         </div>
         <span style="font-size:18px; color:#44b069;">📞</span>
       </div>
 
-      <!-- 寧藝卓 (寧) -->
-      <div class="contact-item" onclick="startCall('寧藝卓 (寧)')">
+      <!-- 寧藝卓 -->
+      <div class="contact-item" onclick="startCall('寧藝卓', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg')">
         <div class="contact-info">
           <div class="contact-avatar">
-            <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg" alt="Ningning">
+            <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg" alt="寧藝卓">
           </div>
           <div>
             <div class="contact-name">寧藝卓</div>
-            <div class="contact-sub">aespa • 寧</div>
+            <div class="contact-sub">寧</div>
           </div>
         </div>
         <span style="font-size:18px; color:#44b069;">📞</span>
@@ -1720,13 +1757,13 @@
     </div>
   </div>
 
-  <!-- 12. 全螢幕來電彈窗 -->
+  <!-- 12. 全螢幕來電彈窗 (各成員不同對話氣泡) -->
   <div id="incoming-call-screen">
     <div>
       <div class="call-head-avatar">
-        <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg" alt="金旼炡">
+        <img id="incoming-call-avatar-img" src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg" alt="Caller">
       </div>
-      <div class="call-title-name" id="incoming-caller-title">金旼炡 🐶</div>
+      <div class="call-title-name" id="incoming-caller-title">金旼炡</div>
       <div class="call-subtitle" id="incoming-call-status">iPhone 來電...</div>
     </div>
 
@@ -1738,22 +1775,72 @@
     </div>
   </div>
 
-  <!-- 13. 相簿 & 相機 -->
+  <!-- 13. 相簿 App (照片與影片交叉擺放) -->
   <div id="app-photos" class="app-screen">
     <div class="photos-header">
       <div class="photos-title">圖庫</div>
-      <div style="font-size:11px; color:#8e8e93;">3,470 個項目</div>
+      <div style="font-size:11px; color:#8e8e93;">精選照片與影片</div>
     </div>
-    <div class="photos-grid">
-      <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=500&auto=format&fit=crop&q=80" alt="p1">
-      <img src="https://picsum.photos/400/400?random=31" alt="p2">
-      <img src="https://picsum.photos/400/400?random=32" alt="p3">
-      <img src="https://picsum.photos/400/400?random=33" alt="p4">
-      <img src="https://picsum.photos/400/400?random=34" alt="p5">
-      <img src="https://picsum.photos/400/400?random=35" alt="p6">
+    <div class="photos-grid" id="photos-grid-box">
+      <!-- 1. 照片 (IMG_4810.jpeg) -->
+      <div class="gallery-item" onclick="openMedia('image', 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg')">
+        <img src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg" alt="p1">
+      </div>
+
+      <!-- 2. 影片 (karina_video_blowflower.mp4) -->
+      <div class="gallery-item" onclick="openMedia('video', 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_blowflower.mp4')">
+        <video src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_blowflower.mp4" muted playsinline></video>
+        <div class="video-play-tag">▶ 影片</div>
+      </div>
+
+      <!-- 3. 照片 (IMG_2050.jpeg) -->
+      <div class="gallery-item" onclick="openMedia('image', 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_2050.jpeg')">
+        <img src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_2050.jpeg" alt="p2">
+      </div>
+
+      <!-- 4. 影片 (karina_video_bowl.mp4) -->
+      <div class="gallery-item" onclick="openMedia('video', 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_bowl.mp4')">
+        <video src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_bowl.mp4" muted playsinline></video>
+        <div class="video-play-tag">▶ 影片</div>
+      </div>
+
+      <!-- 5. 照片 (修karina (328).jpeg) -->
+      <div class="gallery-item" onclick="openMedia('image', 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/%E4%BF%AEkarina%20(328).jpeg')">
+        <img src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/%E4%BF%AEkarina%20(328).jpeg" alt="p3">
+      </div>
+
+      <!-- 6. 影片 (karina_video_christmas.mp4) -->
+      <div class="gallery-item" onclick="openMedia('video', 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_christmas.mp4')">
+        <video src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_christmas.mp4" muted playsinline></video>
+        <div class="video-play-tag">▶ 影片</div>
+      </div>
+
+      <!-- 7. 照片 (IMG_6993.jpeg) -->
+      <div class="gallery-item" onclick="openMedia('image', 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_6993.jpeg')">
+        <img src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_6993.jpeg" alt="p4">
+      </div>
+
+      <!-- 8. 影片 (karina_video_japan.mp4) -->
+      <div class="gallery-item" onclick="openMedia('video', 'https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_japan.mp4')">
+        <video src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/assets/videos/karina_video_japan.mp4" muted playsinline></video>
+        <div class="video-play-tag">▶ 影片</div>
+      </div>
+
+      <!-- 9. 照片 (IMG_7494.jpeg) -->
+      <div class="gallery-item" onclick="openMedia('image', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_7494.jpeg')">
+        <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_7494.jpeg" alt="p5">
+      </div>
     </div>
   </div>
 
+  <!-- 多媒體放大彈窗 -->
+  <div id="media-modal">
+    <img id="media-modal-img" style="display:none;" alt="Zoomed">
+    <video id="media-modal-video" style="display:none;" controls autoplay playsinline></video>
+    <div class="modal-close-btn" onclick="closeMedia()">點擊關閉</div>
+  </div>
+
+  <!-- 14. 相機 App -->
   <div id="app-camera" class="app-screen">
     <div class="camera-viewport">
       <video id="camera-video" autoplay playsinline muted></video>
@@ -1762,7 +1849,7 @@
     </div>
     <div class="cam-bottom-bar">
       <div style="width:38px;height:38px;border-radius:8px;overflow:hidden;border:2px solid #fff;">
-        <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80" style="width:100%;height:100%;object-fit:cover;">
+        <img src="https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_4810.jpeg" style="width:100%;height:100%;object-fit:cover;">
       </div>
       <div class="shutter-btn" onclick="takePhoto()"><div class="shutter-btn-core"></div></div>
       <div style="font-size:20px;cursor:pointer;" onclick="flipCamera()">🔄</div>
@@ -1811,7 +1898,7 @@
     }
   }, { passive: true });
 
-  // 3. 密碼輸入邏輯
+  // 3. 密碼輸入
   let code = [];
   const dots = document.querySelectorAll('.p-dot');
   document.querySelectorAll('.k-btn').forEach(btn => {
@@ -1895,9 +1982,10 @@
 
     stopCamera();
     leaveRoom();
+    closeMedia();
   }
 
-  // 左右邊緣滑動退出 App
+  // 左右滑動退出 App
   let touchStartX = 0;
   window.addEventListener('touchstart', (e) => {
     touchStartX = e.touches[0].clientX;
@@ -1926,7 +2014,7 @@
     }
   }, { passive: true });
 
-  // 7. KakaoTalk 隨興真實對話 (無標點符號、移除歐膩)
+  // 7. KakaoTalk 隨興對話 (無標點符號、移除歐膩)
   const memberScripts = {
     '旼冬🐶': {
       initial: '波妞昨晚太興奮了啦 🐶 咬著球一直暴衝 我整夜顧牠都沒睡 😭',
@@ -2024,18 +2112,51 @@
     closeNoteEditor();
   }
 
-  // 9. 一分鐘 (60秒) 後金旼炡自動來電
+  // 9. 電話通話管理 (各成員專屬不同對話、隨機輪流來電)
+  const phoneCallScripts = {
+    '金旼炡': [
+      { sender: '旼冬', text: '在幹嘛 🐶' },
+      { sender: 'Karina', text: '剛練完舞呢 妳呢' },
+      { sender: '旼冬', text: '我也是 波妞一直在旁邊咬玩具' },
+      { sender: 'Karina', text: '哈哈哈哈 等等回去餵牠肉乾' },
+      { sender: '旼冬', text: '好 那妳回來路上順便買杯可樂啦' }
+    ],
+    '內永枝利': [
+      { sender: '欸哩', text: '知珉 昨天的照片雲端收到沒 ✨' },
+      { sender: 'Karina', text: '收到了 調色真的好好看' },
+      { sender: '欸哩', text: '下次去涉谷要穿那件黑色外套喔' },
+      { sender: 'Karina', text: '沒問題 順便去吃可麗餅 🖤' }
+    ],
+    '寧藝卓': [
+      { sender: '寧', text: '喂喂喂 找到我耳機了嗎 😭' },
+      { sender: 'Karina', text: '在客廳沙發抱枕下面 幫妳放化妝台了' },
+      { sender: '寧', text: '哇知珉姐最棒了 愛死妳 🦋' },
+      { sender: 'Karina', text: '下次別再亂塞了 練習室見' }
+    ]
+  };
+
+  const callerList = [
+    { name: '金旼炡', avatar: 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg' },
+    { name: '內永枝利', avatar: 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8042.png' },
+    { name: '寧藝卓', avatar: 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_8043.jpeg' }
+  ];
+
+  let currentCallerName = '金旼炡';
   const callScreen = document.getElementById('incoming-call-screen');
   const dialogueBox = document.getElementById('call-dialogue-box');
   let callSecondCounter = null;
   let callDialogueTimer = null;
 
-  setTimeout(() => {
-    triggerIncomingCall('金旼炡 🐶');
-  }, 60000);
+  // 降低同成員來電頻率：每 180 秒隨機選一位成員來電
+  setInterval(() => {
+    const randomCaller = callerList[Math.floor(Math.random() * callerList.length)];
+    triggerIncomingCall(randomCaller.name, randomCaller.avatar);
+  }, 180000);
 
-  function triggerIncomingCall(name) {
+  function triggerIncomingCall(name, avatar) {
+    currentCallerName = name;
     document.getElementById('incoming-caller-title').textContent = name;
+    document.getElementById('incoming-call-avatar-img').src = avatar;
     document.getElementById('incoming-call-status').textContent = 'iPhone 來電...';
     document.getElementById('accept-call-btn').style.display = 'flex';
     dialogueBox.style.display = 'none';
@@ -2043,17 +2164,9 @@
     callScreen.style.display = 'flex';
   }
 
-  function startCall(name) {
-    triggerIncomingCall(name);
+  function startCall(name, avatar) {
+    triggerIncomingCall(name, avatar);
   }
-
-  const phoneDialogueScript = [
-    { sender: '冬冬', text: '在幹嘛 🐶' },
-    { sender: 'Karina', text: '剛練完舞呢 妳呢' },
-    { sender: '冬冬', text: '我也是 有話想跟妳說…' },
-    { sender: 'Karina', text: '嗯？什麼事呀' },
-    { sender: '冬冬', text: '等等一起去吃火鍋啦 哈哈哈哈 🍲' }
-  ];
 
   function acceptCall() {
     document.getElementById('accept-call-btn').style.display = 'none';
@@ -2069,11 +2182,12 @@
       document.getElementById('incoming-call-status').textContent = `通話中 ${mm}:${ss}`;
     }, 1000);
 
+    const script = phoneCallScripts[currentCallerName] || phoneCallScripts['金旼炡'];
     let diagIdx = 0;
     clearInterval(callDialogueTimer);
     callDialogueTimer = setInterval(() => {
-      if (diagIdx < phoneDialogueScript.length) {
-        const item = phoneDialogueScript[diagIdx];
+      if (diagIdx < script.length) {
+        const item = script[diagIdx];
         const bubble = document.createElement('div');
         bubble.className = `call-speech-bubble ${item.sender === 'Karina' ? 'me' : 'them'}`;
         bubble.innerHTML = `<b>${item.sender}：</b>${item.text}`;
@@ -2092,7 +2206,34 @@
     callScreen.style.display = 'none';
   }
 
-  // 10. 相機鏡頭取景
+  // 10. 相簿多媒體預覽彈窗
+  function openMedia(type, url) {
+    const modal = document.getElementById('media-modal');
+    const modalImg = document.getElementById('media-modal-img');
+    const modalVideo = document.getElementById('media-modal-video');
+
+    if (type === 'image') {
+      modalVideo.pause();
+      modalVideo.style.display = 'none';
+      modalImg.src = url;
+      modalImg.style.display = 'block';
+    } else {
+      modalImg.style.display = 'none';
+      modalVideo.src = url;
+      modalVideo.style.display = 'block';
+      modalVideo.play();
+    }
+    modal.style.display = 'flex';
+  }
+
+  function closeMedia() {
+    const modal = document.getElementById('media-modal');
+    const modalVideo = document.getElementById('media-modal-video');
+    modalVideo.pause();
+    modal.style.display = 'none';
+  }
+
+  // 11. 相機功能
   let currentStream = null;
   let useFacingMode = 'user';
 
