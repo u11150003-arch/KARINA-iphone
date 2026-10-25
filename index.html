@@ -11,7 +11,7 @@
 
   <!-- Open Graph 網頁縮圖設定 -->
   <meta property="og:title" content="KARINA iPhone">
-  <meta property="og:description" content="KARINA (유지민) 專屬 iPhone 介面模擬器">
+  <meta property="og:description" content="KARINA유지민iPhone">
   <meta property="og:image" content="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_6344.jpeg">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_6344.jpeg">
@@ -23,6 +23,7 @@
 
   <style>
     :root {
+      /* 電腦版統一米白色背景，無色塊差異 */
       --bg: #f4f3ef;
       --font-main: "Montserrat", "Noto Sans TC", "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
     }
@@ -55,14 +56,15 @@
       -ms-overflow-style: none !important;
     }
 
-    /* 電腦版實體外殼包覆層：四邊皆有完整黑色金屬機身殼包圍，絕不被左右裁切 */
+    /* 外殼包覆層：手機模式 0 padding 滿版無米白；電腦模式完整包覆 */
     #phone-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 100%;
-      height: 100%;
-      padding: 20px;
+      width: 100vw;
+      height: 100dvh;
+      padding: 0;
+      background: transparent;
     }
 
     #phone {
@@ -75,9 +77,14 @@
       flex-direction: column;
     }
 
+    /* 電腦版模式：具有完整的上下左右黑色金屬機身殼包圍，絕不被裁切 */
     @media (min-width: 501px) {
+      #phone-wrapper {
+        padding: 24px;
+        background: var(--bg);
+      }
       #phone {
-        width: min(345px, 88vw);
+        width: min(345px, 86vw);
         height: min(730px, 90vh);
         border-radius: 48px;
         border: 11px solid #1c1c1f;
@@ -638,9 +645,9 @@
       padding-left: 5px;
     }
 
-    /* PLAYLIST Widget：灰色半透明毛玻璃質感＋【放大的照片】＋播放鈕 */
+    /* PLAYLIST Widget：灰色半透明毛玻璃質感＋【放大的照片、無白線、UP / KARINA】＋播放鈕 */
     .music-widget {
-      background: linear-gradient(135deg, rgba(110, 120, 130, 0.6) 0%, rgba(60, 70, 80, 0.7) 100%);
+      background: linear-gradient(135deg, rgba(115, 125, 135, 0.6) 0%, rgba(65, 75, 85, 0.7) 100%);
       backdrop-filter: blur(25px);
       -webkit-backdrop-filter: blur(25px);
       border: 0.5px solid rgba(255, 255, 255, 0.35);
@@ -665,26 +672,28 @@
       color: #111;
       font-size: 10px;
     }
-    /* 照片放大設定 */
+    /* 照片放大、無白色邊線 */
     .music-widget-thumb {
-      width: 54px;
-      height: 54px;
-      border-radius: 12px;
+      width: 60px;
+      height: 60px;
+      border-radius: 14px;
       object-fit: cover;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.35);
-      border: 0.5px solid rgba(255,255,255,0.4);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      border: none !important;
     }
     .music-widget .m-info .m-title {
       font-weight: 700;
-      font-size: 11.5px;
+      font-size: 13px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
       margin-top: 4px;
+      letter-spacing: -0.2px;
     }
     .music-widget .m-info .m-sub {
-      font-size: 9.5px;
+      font-size: 10px;
       opacity: 0.85;
+      font-weight: 500;
     }
 
     /* 4×4 桌面 App 網格 (比例與間距最佳化) */
@@ -760,11 +769,15 @@
       display: flex !important;
     }
 
-    /* PLAYLIST 視窗：恢復滿版打開，能看到歌詞與專輯圖，移除多餘的一半小控制條 */
+    /* PLAYLIST 視窗：全螢幕滿版展開，看到完整歌詞與專輯圖，絕不卡頓 */
     #app-playlist {
       background: #0d0e12;
       padding-top: 42px;
-      position: relative;
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2500;
     }
     #app-playlist iframe {
       width: 100%;
@@ -845,7 +858,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
-    /* ================= 6. X (Twitter) App (支援愛心與轉發功能) ================= */
+    /* ================= 6. X (Twitter) App ================= */
     #app-x {
       background: #000;
       color: #fff;
@@ -1150,7 +1163,7 @@
       color: #8e8e93;
     }
 
-    /* ================= 9. KakaoTalk (按鍵格子間距加大、不再黏連) ================= */
+    /* ================= 9. KakaoTalk ================= */
     #app-chat {
       background: #191919;
       color: #fff;
@@ -1319,7 +1332,7 @@
       cursor: pointer;
     }
 
-    /* 鍵盤間距優化：獨立間距、邊界不黏連、按鍵分明 */
+    /* 鍵盤間距優化：獨立間距、邊界不黏連 */
     .ios-keyboard {
       background: #2b2b2e;
       padding: 10px 6px 24px;
@@ -1382,7 +1395,7 @@
       box-shadow: 0 1px 2px rgba(0,0,0,0.35);
     }
 
-    /* ================= 10. 電話 App (白色撥號接聽鍵) ================= */
+    /* ================= 10. 電話 App (純白撥號鍵) ================= */
     #app-phone {
       background: #000;
       color: #fff;
@@ -2071,15 +2084,15 @@
           </div>
         </div>
 
-        <!-- PLAYLIST Widget：灰色半透明毛玻璃質感＋【放大的照片】＋播放鈕 -->
+        <!-- PLAYLIST 最新版 Widget：灰色半透明毛玻璃質感＋【放大的照片、無白線、UP / KARINA】＋播放鈕 -->
         <div class="ios-widget music-widget" data-target="playlist">
           <div class="m-top">
             <img class="music-widget-thumb" src="https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/01Sparkle_cover.jpg" onerror="this.src='https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_6344.jpeg'">
             <div class="play-pill">▶</div>
           </div>
           <div class="m-info">
-            <div class="m-title">UP (KARINA Solo)</div>
-            <div class="m-sub">KARINA • Special Track</div>
+            <div class="m-title">UP</div>
+            <div class="m-sub">KARINA</div>
           </div>
         </div>
       </div>
@@ -2218,7 +2231,7 @@
       </div>
     </div>
 
-    <!-- 4. PLAYLIST 視窗 (恢復滿版打開，能看到歌詞與專輯圖，絕不卡頓) -->
+    <!-- 4. PLAYLIST 視窗 (滿版全展開，絕不被截半，清楚看歌詞與專輯圖) -->
     <div id="app-playlist" class="app-screen">
       <iframe 
         id="iframe-playlist"
@@ -2538,7 +2551,6 @@
               <div class="contact-sub-title" id="p-sub-winter">旼冬</div>
             </div>
           </div>
-          <!-- 純白撥號鍵 -->
           <div class="phone-dial-icon" onclick="event.stopPropagation(); startCallDirect('Winter', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg');">
             <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
           </div>
@@ -3007,7 +3019,6 @@
     renderCalendar();
   }
 
-  // 鍵盤排版渲染（格子間距分明、按鍵獨立不黏連、英文 return 不溢出、中文標準換行）
   function renderKeyboard() {
     const container = document.getElementById('keyboard-keys-container');
     if (!container) return;
