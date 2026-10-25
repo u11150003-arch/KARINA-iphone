@@ -23,7 +23,7 @@
 
   <style>
     :root {
-      /* 電腦版統一的高質感米白色背景，四周留白完全一致 */
+      /* 全域統一的米白色背景，上下左右色調完全一致 */
       --bg: #f4f3ef;
       --font-main: "Montserrat", "Noto Sans TC", "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
     }
@@ -65,14 +65,14 @@
       display: flex;
       flex-direction: column;
     }
-    /* 參照範例圖：電腦版完美呈現具有上下左右黑色外框與精緻圓角的 iPhone 比例尺寸 */
+
+    /* 電腦版實體外殼：確保上下左右皆有完整黑色金屬機身殼包圍，絕不被裁切 */
     @media (min-width: 501px) {
       #phone {
-        width: 330px;
-        height: 715px;
-        max-height: 88vh;
-        border-radius: 46px;
-        box-shadow: 0 0 0 10px #1c1c1f, 0 0 0 12px #28282b, 0 25px 60px rgba(0,0,0,0.18);
+        width: min(340px, 90vw);
+        height: min(730px, 92vh);
+        border-radius: 50px;
+        box-shadow: 0 0 0 10px #1c1c1f, 0 0 0 13px #28282b, 0 25px 65px rgba(0,0,0,0.22);
         margin: auto;
         background: #000;
         flex-shrink: 0;
@@ -274,7 +274,7 @@
       transition: transform 0.38s cubic-bezier(0.25, 1, 0.5, 1), opacity 0.32s ease;
     }
 
-    /* ================= 1. 鎖定畫面 ================= */
+    /* ================= 1. 鎖定畫面 (4月11日 週四) ================= */
     #lock {
       z-index: 500;
       display: flex;
@@ -308,22 +308,21 @@
 
     .lock-top {
       text-align: center;
-      margin-top: 0px;
+      margin-top: 4px;
       transition: opacity 0.2s ease, transform 0.2s ease;
       pointer-events: auto;
     }
     .lock-top .d {
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 600;
       color: rgba(255, 255, 255, 0.98);
-      margin-bottom: 0px;
       text-shadow: 0 2px 8px rgba(0,0,0,0.8);
     }
     .lock-top .t {
-      font-size: 64px;
+      font-size: 68px;
       font-weight: 300;
       letter-spacing: -2px;
-      line-height: 0.9;
+      line-height: 0.95;
       font-variant-numeric: tabular-nums;
       font-family: "Montserrat", sans-serif;
       color: #fff;
@@ -585,20 +584,24 @@
       background-size: cover;
       background-repeat: no-repeat;
     }
+
+    /* 頂部 Widgets 列 */
     .widgets-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 9px;
-      margin-bottom: 6px;
+      gap: 10px;
+      margin-bottom: 12px;
     }
     .ios-widget {
       aspect-ratio: 1;
       border-radius: 20px;
-      padding: 10px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+      padding: 11px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.12);
       cursor: pointer;
       overflow: hidden;
+      position: relative;
     }
+    /* 日曆小組件：4月11日 週四 */
     .cal-widget {
       background: rgba(255, 255, 255, 0.92);
       backdrop-filter: blur(20px);
@@ -610,25 +613,27 @@
     }
     .cal-widget .day-name {
       color: #e0483d;
-      font-size: 10.5px;
+      font-size: 11px;
       font-weight: 700;
     }
     .cal-widget .day-num {
-      font-size: 28px;
+      font-size: 32px;
       font-weight: 300;
       line-height: 1;
     }
     .cal-widget .events {
-      font-size: 9px;
-      color: #666;
+      font-size: 9.5px;
+      color: #555;
       border-left: 2px solid #d9822b;
-      padding-left: 4px;
+      padding-left: 5px;
     }
 
-    /* 音樂 Widget 恢復早上正常設定 */
+    /* PLAYLIST 最新版 Widget：灰色透明通透微毛玻璃＋寫真照＋播放鈕 */
     .music-widget {
-      background: linear-gradient(135deg, rgba(39, 103, 56, 0.95) 0%, rgba(25, 56, 34, 0.95) 100%);
-      backdrop-filter: blur(20px);
+      background: linear-gradient(135deg, rgba(100, 110, 120, 0.55) 0%, rgba(55, 65, 75, 0.65) 100%);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border: 0.5px solid rgba(255, 255, 255, 0.3);
       color: #fff;
       display: flex;
       flex-direction: column;
@@ -643,41 +648,53 @@
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      background: #fff;
+      background: rgba(255,255,255,0.9);
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #276738;
-      font-size: 10px;
+      color: #111;
+      font-size: 9px;
+    }
+    .music-widget-thumb {
+      width: 38px;
+      height: 38px;
+      border-radius: 8px;
+      object-fit: cover;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
     }
     .music-widget .m-info .m-title {
       font-weight: 700;
-      font-size: 12px;
+      font-size: 11px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .music-widget .m-info .m-sub {
-      font-size: 9.5px;
+      font-size: 9px;
       opacity: 0.85;
     }
 
+    /* 4×4 桌面 App 網格：比例適中、間距嚴謹完美 */
     .grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      row-gap: 8px;
-      column-gap: 8px;
+      row-gap: 12px;
+      column-gap: 10px;
       justify-items: center;
+      margin-bottom: 8px;
     }
     .icon {
-      width: 50px;
+      width: 52px;
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 3px;
+      gap: 4px;
       cursor: pointer;
     }
     .icon .img {
-      width: 46px;
-      height: 46px;
-      border-radius: 11px;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -692,8 +709,8 @@
       object-fit: cover;
     }
     .icon .name {
-      font-size: 9px;
-      font-weight: 600;
+      font-size: 10px;
+      font-weight: 500;
       letter-spacing: -0.2px;
       color: #111;
       white-space: nowrap;
@@ -704,17 +721,17 @@
       background: rgba(255, 255, 255, 0.45);
       backdrop-filter: blur(35px);
       -webkit-backdrop-filter: blur(35px);
-      border-radius: 24px;
-      padding: 6px 12px;
+      border-radius: 26px;
+      padding: 7px 14px;
       display: flex;
       justify-content: space-around;
       align-items: center;
       box-shadow: 0 4px 18px rgba(0,0,0,0.15);
       border: 0.5px solid rgba(255,255,255,0.4);
-      margin-bottom: 2px;
+      margin-bottom: 4px;
     }
     .dock .icon {
-      width: 46px;
+      width: 48px;
     }
 
     /* ================= 4. App 視窗通用 ================= */
@@ -730,6 +747,7 @@
       display: flex !important;
     }
 
+    /* PLAYLIST 視窗：完整呈現，絕不裁切，移除多餘的一半暫停鍵 */
     #app-playlist {
       background: #0d0e12;
       padding-top: 42px;
@@ -739,8 +757,7 @@
       width: 100%;
       height: 100%;
       border: none;
-      transform: scale(0.97);
-      transform-origin: top center;
+      display: block;
     }
 
     #app-instagram {
@@ -815,7 +832,7 @@
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
 
-    /* ================= 6. X (Twitter) App ================= */
+    /* ================= 6. X (Twitter) App (支援愛心與轉發點擊) ================= */
     #app-x {
       background: #000;
       color: #fff;
@@ -891,7 +908,7 @@
     .x-action-btn {
       display: flex;
       align-items: center;
-      gap: 4px;
+      gap: 5px;
       cursor: pointer;
     }
     .x-action-btn svg {
@@ -904,11 +921,11 @@
       stroke-linejoin: round;
     }
     .x-action-btn.liked svg {
-      fill: #ff2d55;
-      stroke: #ff2d55;
+      fill: #ff2d55 !important;
+      stroke: #ff2d55 !important;
     }
     .x-action-btn.retweeted svg {
-      stroke: #34c759;
+      stroke: #34c759 !important;
     }
 
     /* ================= 7. 備忘錄 App ================= */
@@ -1120,7 +1137,7 @@
       color: #8e8e93;
     }
 
-    /* ================= 9. KakaoTalk ================= */
+    /* ================= 9. KakaoTalk (按鍵分明不黏連、中英文換行不溢出) ================= */
     #app-chat {
       background: #191919;
       color: #fff;
@@ -1149,9 +1166,6 @@
       stroke-linecap: round;
       stroke-linejoin: round;
       cursor: pointer;
-    }
-    .kt-svg-btn:hover {
-      stroke: #fff;
     }
 
     #kt-list-view {
@@ -1292,42 +1306,42 @@
       cursor: pointer;
     }
 
+    /* 鍵盤間距優化：獨立間距、邊界不溢出 */
     .ios-keyboard {
       background: #2b2b2e;
-      padding: 8px 4px 20px;
+      padding: 8px 6px 20px;
       display: none;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
       z-index: 600;
       border-top: 0.5px solid #3c3c40;
     }
     .kb-row {
       display: flex;
       justify-content: center;
-      gap: 3px;
+      gap: 4px;
     }
     .kb-key {
       flex: 1;
-      max-width: 30px;
+      max-width: 32px;
       height: 36px;
-      margin: 1px;
-      background: #636366;
+      background: #505054;
       border-radius: 5px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
+      font-size: 12.5px;
       color: #fff;
       cursor: pointer;
-      box-shadow: 0 1px 2px rgba(0,0,0,0.35);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.4);
     }
     .kb-key:active {
       background: #8e8e93;
     }
     .kb-space {
       flex: 4;
-      max-width: 120px;
-      background: #636366;
+      max-width: 140px;
+      background: #505054;
       border-radius: 5px;
       display: flex;
       align-items: center;
@@ -1335,8 +1349,23 @@
       font-size: 11px;
       cursor: pointer;
     }
+    .kb-return-btn {
+      flex: 1.5;
+      max-width: 58px;
+      background: #0a84ff !important;
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px !important;
+      color: #fff;
+      cursor: pointer;
+      overflow: hidden;
+      white-space: nowrap;
+      padding: 0 2px;
+    }
 
-    /* ================= 10. 電話 App (低飽和向量撥出圖示、白色接聽按鈕、附底部返回 Bar) ================= */
+    /* ================= 10. 電話 App (接聽按鈕全面改為純白無刺眼紅色) ================= */
     #app-phone {
       background: #000;
       color: #fff;
@@ -1399,19 +1428,23 @@
       font-size: 10.5px;
       color: #8e8e93;
     }
+    /* 接聽電話圖示改為純白極簡風格 */
     .phone-dial-icon {
       cursor: pointer;
       pointer-events: auto !important;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #ffffff;
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 4px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.25);
     }
     .phone-dial-icon svg {
-      width: 20px;
-      height: 20px;
-      fill: #ff2d55;
-      opacity: 0.85;
+      width: 17px;
+      height: 17px;
+      fill: #1c1c1e;
     }
 
     #incoming-call-screen {
@@ -1485,7 +1518,6 @@
       justify-content: space-around;
       padding: 0 16px;
     }
-    /* 接聽按鍵與掛斷按鈕符號改為白色，顏色低飽和柔和 */
     .call-circle-btn {
       width: 60px;
       height: 60px;
@@ -1623,7 +1655,6 @@
       object-fit: contain;
     }
 
-    /* 高通透度向量左右切換按鈕 (僅電腦版顯示，手機版隱藏) */
     .viewer-nav-btn {
       position: absolute;
       top: 50%;
@@ -1714,9 +1745,6 @@
       stroke-width: 1.8;
       stroke-linecap: round;
       stroke-linejoin: round;
-    }
-    .viewer-bar-btn:active svg {
-      stroke: #fff;
     }
 
     /* ================= 12. 相機 App ================= */
@@ -1914,10 +1942,10 @@
     <div class="top-banner-time" id="banner-caller-time">現在</div>
   </div>
 
-  <!-- 1. 鎖定畫面 -->
+  <!-- 1. 鎖定畫面 (精準固定：4月11日 週四) -->
   <div id="lock" class="scr">
     <div class="lock-top" id="lock-top-group">
-      <div class="d" id="lock-date">10月23日週五</div>
+      <div class="d" id="lock-date">4月11日週四</div>
       <div class="t now-time">12:41</div>
     </div>
 
@@ -1950,7 +1978,7 @@
       </div>
     </div>
 
-    <!-- 語言膠囊按鈕放置在解鎖文字正上方 -->
+    <!-- 語言膠囊按鈕 -->
     <div class="lock-bottom" id="lock-bottom-group">
       <div class="lang-pill-container" id="lang-pill-wrapper">
         <div class="lang-pill-btn" onclick="openLangModal()">
@@ -2011,8 +2039,9 @@
 
   <!-- 3. 主畫面 (Home) -->
   <div id="home" class="scr">
-    <!-- 最上排保留日曆 Widget 與 恢復早上正常的音樂 Widget -->
+    <!-- 頂部 Widgets 列 -->
     <div class="widgets-row">
+      <!-- 日曆小組件：4月11日 週四 -->
       <div class="ios-widget cal-widget" data-target="calendar">
         <div>
           <div class="day-name" id="txt-widget-cal-day">星期四</div>
@@ -2024,9 +2053,10 @@
         </div>
       </div>
 
+      <!-- PLAYLIST 最新版 Widget：灰色透明通透微毛玻璃質感＋照片＋播放鈕 -->
       <div class="ios-widget music-widget" data-target="playlist">
         <div class="m-top">
-          <span style="font-size:11px; font-weight:700;">PLAYLIST</span>
+          <img class="music-widget-thumb" src="https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/01Sparkle_cover.jpg" onerror="this.src='https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_6344.jpeg'">
           <div class="play-pill">▶</div>
         </div>
         <div class="m-info">
@@ -2036,9 +2066,9 @@
       </div>
     </div>
 
-    <!-- 桌面 Apps -->
+    <!-- 4×4 桌面 App 網格 (比例與間距最佳化) -->
     <div class="grid">
-      <!-- KARINA Library (低飽和藍色書籍圖示，點擊跳轉 Notion 網頁) -->
+      <!-- KARINA Library -->
       <div class="icon" onclick="window.open('https://typical-silverfish-34e.notion.site/KARINA-Library-3f88ad958c938009a32ccf6cb0786079', '_blank')">
         <div class="img" style="background:#5a7b9c;">
           <svg viewBox="0 0 100 100">
@@ -2130,7 +2160,7 @@
       <!-- KARINA PLAYLIST -->
       <div class="icon" data-target="playlist">
         <div class="img" style="background:#18181c;">
-          <img src="https://lh3.googleusercontent.com/d/1fG9UaD9-esqpRciez-87e-q_ZuTSwoSH" alt="PLAYLIST">
+          <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/01Sparkle_cover.jpg" onerror="this.src='https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_6344.jpeg'" alt="PLAYLIST">
         </div>
         <span class="name">PLAYLIST</span>
       </div>
@@ -2170,7 +2200,7 @@
     </div>
   </div>
 
-  <!-- 4. PLAYLIST 視窗 -->
+  <!-- 4. PLAYLIST 視窗 (恢復完整全開比例，無被卡無多餘截斷按鈕) -->
   <div id="app-playlist" class="app-screen">
     <iframe 
       id="iframe-playlist"
@@ -2212,7 +2242,7 @@
     </div>
   </div>
 
-  <!-- 7. X (Twitter) App -->
+  <!-- 7. X (Twitter) App (支援愛心與轉發功能) -->
   <div id="app-x" class="app-screen">
     <div class="x-app-topbar">
       <span style="border-bottom: 2px solid #fff; padding-bottom: 6px;" id="txt-x-for-you">為你推薦</span>
@@ -2408,7 +2438,7 @@
     </div>
   </div>
 
-  <!-- 10. KakaoTalk -->
+  <!-- 10. KakaoTalk (鍵盤按鍵分明不黏連、中英文換行不溢出) -->
   <div id="app-chat" class="app-screen">
     <div class="kt-header">
       <span id="txt-kt-header">聊天</span>
@@ -2416,10 +2446,6 @@
         <svg class="kt-svg-btn" viewBox="0 0 24 24">
           <circle cx="11" cy="11" r="7"></circle>
           <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <svg class="kt-svg-btn" viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="3"></circle>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l-.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06-.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
         </svg>
       </div>
     </div>
@@ -2482,7 +2508,7 @@
     </div>
   </div>
 
-  <!-- 11. 電話 App (完美可撥出、低飽和向量撥出圖示、附底部返回 Bar) -->
+  <!-- 11. 電話 App (接聽撥出按鈕全面改為純白極簡風格) -->
   <div id="app-phone" class="app-screen">
     <div class="phone-header-title" id="phone-header-main-title">聯絡人</div>
     <div class="phone-contacts-container">
@@ -2494,6 +2520,7 @@
             <div class="contact-sub-title" id="p-sub-winter">旼冬</div>
           </div>
         </div>
+        <!-- 純白撥號鍵 -->
         <div class="phone-dial-icon" onclick="event.stopPropagation(); startCallDirect('Winter', 'https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_5038.jpeg');">
           <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
         </div>
@@ -2527,7 +2554,7 @@
     </div>
   </div>
 
-  <!-- 12. 全螢幕撥通畫面 (低飽和柔和接聽/掛斷按鈕) -->
+  <!-- 12. 全螢幕撥通畫面 (純白接聽按鍵) -->
   <div id="incoming-call-screen">
     <div>
       <div class="call-head-avatar">
@@ -2540,11 +2567,11 @@
     <div class="call-dialogue-box" id="call-dialogue-box" style="display:none;"></div>
 
     <div class="call-actions-row">
-      <div class="call-circle-btn" style="background: rgba(220, 50, 50, 0.75); border: 0.5px solid rgba(255,100,100,0.4);" onclick="declineCall()">
+      <div class="call-circle-btn" style="background: rgba(220, 50, 50, 0.85); border: 0.5px solid rgba(255,100,100,0.4);" onclick="declineCall()">
         <svg viewBox="0 0 24 24"><path d="M12 9c-1.6 0-3.15.25-4.6.72v3.1c0 .39-.23.74-.56.9-.98.49-1.87 1.12-2.66 1.85-.18.18-.43.28-.7.28-.28 0-.53-.11-.71-.29L.29 13.08c-.18-.17-.29-.42-.29-.7 0-.28.11-.53.29-.71C3.34 8.78 7.46 7 12 7s8.66 1.78 11.71 4.67c.18.18.29.43.29.71 0 .28-.11.53-.29.7l-2.48 2.48c-.18.18-.43.29-.71.29-.27 0-.52-.11-.7-.28-.79-.73-1.68-1.36-2.66-1.85-.33-.16-.56-.51-.56-.9v-3.1C15.15 9.25 13.6 9 12 9z"/></svg>
       </div>
-      <div class="call-circle-btn" style="background: rgba(40, 180, 80, 0.75); border: 0.5px solid rgba(100,220,130,0.4);" id="accept-call-btn" onclick="acceptCall()">
-        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+      <div class="call-circle-btn" style="background: #ffffff; border: 0.5px solid rgba(255,255,255,0.4);" id="accept-call-btn" onclick="acceptCall()">
+        <svg viewBox="0 0 24 24" style="fill:#28b450;"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
       </div>
     </div>
   </div>
@@ -2672,7 +2699,7 @@
   let currentLanguage = 'zh';
   let pendingAppAfterUnlock = null;
 
-  // Web Audio API 提示音與震動引擎
+  // Web Audio 提示聲
   function playAlertSound() {
     try {
       if (navigator.vibrate) {
@@ -2701,35 +2728,12 @@
     {
       title: '你盡全力了嗎？',
       desc: '只要盡了全力，無論結果如何，所有過程都很精彩。',
-      content: `你盡全力了嗎？
-只要盡了全力，無論結果如何，所有過程都很精彩。
-Did you do your best?
-If you do your best, no matter what the result is.
-All of the processes were amazing.
-230107`
+      content: `你盡全力了嗎？\n只要盡了全力，無論結果如何，所有過程都很精彩。\nDid you do your best?\nIf you do your best, no matter what the result is.\nAll of the processes were amazing.\n230107`
     },
     {
       title: '如果什麼都不做的話，那什麼都不會好轉。',
       desc: '應該是需要去做些什麼。如果自己都不相信自己，誰會相信你呢？',
-      content: `如果什麼都不做的話，那什麼都不會好轉。
-應該是需要去做些什麼。
-如果自己都不相信自己，誰會相信你呢？
-甚至是自己也要相信自己…
-但是希望你能盡我所能做到最好，不管是甚麼事情。
-那也可以是物理上的努力，
-不對，也可以是學習，
-運動可以增強體力，
-也有可能是這樣的事情。
-我不知道你是什麼專業的…
-但我會為你應援的。
-If you don’t do anything, nothing will get better.
-You really need to do something.
-If you don’t believe in yourself, who will?
-You have to believe in yourself, even if it’s just for yourself…
-But I hope you’ll do your very best, no matter what it is.
-That could mean physical effort,it could also mean studying,exercise can build stamina,or it could be something like that.
-I don’t know what you’re majoring in…
-But I’ll be rooting for you.`
+      content: `如果什麼都不做的話，那什麼都不會好轉。\n應該是需要去做些什麼。\n如果自己都不相信自己，誰會相信你呢？\n甚至是自己也要相信自己…\n但是希望你能盡我所能做到最好，不管是甚麼事情。\n那也可以是物理上的努力，\n不對，也可以是學習，\n運動可以增強體力，\n也有可能是這樣的事情。\n我不知道你是什麼專業的…\n但我會為你應援的。\nIf you don’t do anything, nothing will get better.\nYou really need to do something.\nIf you don’t believe in yourself, who will?\nYou have to believe in yourself, even if it’s just for yourself…\nBut I hope you’ll do your very best, no matter what it is.\nThat could mean physical effort,it could also mean studying,exercise can build stamina,or it could be something like that.\nI don’t know what you’re majoring in…\nBut I’ll be rooting for you.`
     },
     { title: 'UP Solo 舞台與 16bit 排舞事項', desc: '開場走位與麥克風音量確認 16bit 碎步點位校正', content: '開場走位與麥克風音量確認\n第二段副歌延伸舞台 16bit 碎步點位校正\n結尾 Pose 聚光燈鎖定' },
     { title: '宿舍採購清單', desc: '波妞飼料 零食肉乾 燕麥奶 卸妝棉', content: '波妞飼料\n零食肉乾\n燕麥奶\n卸妝棉\n維他命C' },
@@ -2744,35 +2748,12 @@ But I’ll be rooting for you.`
     {
       title: 'Did you do your best?',
       desc: 'If you do your best, no matter what the result is. All of the processes were amazing.',
-      content: `你盡全力了嗎？
-只要盡了全力，無論結果如何，所有過程都很精彩。
-Did you do your best?
-If you do your best, no matter what the result is.
-All of the processes were amazing.
-230107`
+      content: `你盡全力了嗎？\n只要盡了全力，無論結果如何，所有過程都很精彩。\nDid you do your best?\nIf you do your best, no matter what the result is.\nAll of the processes were amazing.\n230107`
     },
     {
       title: "If you don’t do anything, nothing will get better.",
       desc: "You really need to do something. If you don’t believe in yourself, who will?",
-      content: `如果什麼都不做的話，那什麼都不會好轉。
-應該是需要去做些什麼。
-如果自己都不相信自己，誰會相信你呢？
-甚至是自己也要相信自己…
-但是希望你能盡我所能做到最好，不管是甚麼事情。
-那也可以是物理上的努力，
-不對，也可以是學習，
-運動可以增強體力，
-也有可能是這樣的事情。
-我不知道你是什麼專業的…
-但我會為你應援的。
-If you don’t do anything, nothing will get better.
-You really need to do something.
-If you don’t believe in yourself, who will?
-You have to believe in yourself, even if it’s just for yourself…
-But I hope you’ll do your very best, no matter what it is.
-That could mean physical effort,it could also mean studying,exercise can build stamina,or it could be something like that.
-I don’t know what you’re majoring in…
-But I’ll be rooting for you.`
+      content: `如果什麼都不做的話，那什麼都不會好轉。\n應該是需要去做些什麼。\n如果自己都不相信自己，誰會相信你呢？\n甚至是自己也要相信自己…\n但是希望你能盡我所能做到最好，不管是甚麼事情。\n那也可以是物理上的努力，\n不對，也可以是學習，\n運動可以增強體力，\n也有可能是這樣的事情。\n我不知道你是什麼專業的…\n但我會為你應援的。\nIf you don’t do anything, nothing will get better.\nYou really need to do something.\nIf you don’t believe in yourself, who will?\nYou have to believe in yourself, even if it’s just for yourself…\nBut I hope you’ll do your very best, no matter what it is.\nThat could mean physical effort,it could also mean studying,exercise can build stamina,or it could be something like that.\nI don’t know what you’re majoring in…\nBut I’ll be rooting for you.`
     },
     { title: 'UP Solo Stage & 16bit Rehearsal', desc: 'Verify opening marks and mic volume; adjust 16bit steps', content: 'Verify opening marks and mic volume\nExtend stage marks for second chorus 16bit dance\nLock final spotlight pose' },
     { title: 'Dorm Shopping List', desc: 'Pponyo food, jerky treats, oat milk, makeup remover', content: 'Pponyo food\nJerky treats\nOat milk\nMakeup remover\nVitamin C' },
@@ -2942,7 +2923,7 @@ But I’ll be rooting for you.`
     }
   }
 
-  // 日曆切換邏輯
+  // 日曆邏輯 (4月11日週四)
   let currentYear = 2027;
   let currentMonth = 4;
 
@@ -2998,27 +2979,18 @@ But I’ll be rooting for you.`
   }
 
   function prevMonth() {
-    if (currentYear === 2027 && currentMonth === 4) {
-      currentYear = 2026;
-      currentMonth = 3;
-    } else {
-      currentYear = 2026;
-      currentMonth = 3;
-    }
+    currentYear = 2026;
+    currentMonth = 3;
     renderCalendar();
   }
 
   function nextMonth() {
-    if (currentYear === 2026 && currentMonth === 3) {
-      currentYear = 2027;
-      currentMonth = 4;
-    } else {
-      currentYear = 2027;
-      currentMonth = 4;
-    }
+    currentYear = 2027;
+    currentMonth = 4;
     renderCalendar();
   }
 
+  // 鍵盤排版渲染（格子嚴格間距、英文 return 不溢出、中文標準換行）
   function renderKeyboard() {
     const container = document.getElementById('keyboard-keys-container');
     if (!container) return;
@@ -3033,12 +3005,12 @@ But I’ll be rooting for you.`
           <div class="kb-key" onclick="typeNextChar()">A</div><div class="kb-key" onclick="typeNextChar()">S</div><div class="kb-key" onclick="typeNextChar()">D</div><div class="kb-key" onclick="typeNextChar()">F</div><div class="kb-key" onclick="typeNextChar()">G</div><div class="kb-key" onclick="typeNextChar()">H</div><div class="kb-key" onclick="typeNextChar()">J</div><div class="kb-key" onclick="typeNextChar()">K</div><div class="kb-key" onclick="typeNextChar()">L</div>
         </div>
         <div class="kb-row">
-          <div class="kb-key" style="flex:1.2;" onclick="typeNextChar()">⇧</div><div class="kb-key" onclick="typeNextChar()">Z</div><div class="kb-key" onclick="typeNextChar()">X</div><div class="kb-key" onclick="typeNextChar()">C</div><div class="kb-key" onclick="typeNextChar()">V</div><div class="kb-key" onclick="typeNextChar()">B</div><div class="kb-key" onclick="typeNextChar()">N</div><div class="kb-key" onclick="typeNextChar()">M</div><div class="kb-key" style="flex:1.2;" onclick="hideKeyboard()">⌫</div>
+          <div class="kb-key" style="max-width:38px;" onclick="typeNextChar()">⇧</div><div class="kb-key" onclick="typeNextChar()">Z</div><div class="kb-key" onclick="typeNextChar()">X</div><div class="kb-key" onclick="typeNextChar()">C</div><div class="kb-key" onclick="typeNextChar()">V</div><div class="kb-key" onclick="typeNextChar()">B</div><div class="kb-key" onclick="typeNextChar()">N</div><div class="kb-key" onclick="typeNextChar()">M</div><div class="kb-key" style="max-width:38px;" onclick="hideKeyboard()">⌫</div>
         </div>
         <div class="kb-row">
-          <div class="kb-key" style="flex:1.5;" onclick="hideKeyboard()">123</div>
+          <div class="kb-key" style="max-width:44px;" onclick="hideKeyboard()">123</div>
           <div class="kb-space" onclick="triggerSend()">space</div>
-          <div class="kb-key" style="flex:1.5; background:#0a84ff;" onclick="triggerSend()">return</div>
+          <div class="kb-return-btn" onclick="triggerSend()">return</div>
         </div>
       `;
     } else {
@@ -3053,9 +3025,9 @@ But I’ll be rooting for you.`
           <div class="kb-key" onclick="typeNextChar()">ㄇ</div><div class="kb-key" onclick="typeNextChar()">ㄋ</div><div class="kb-key" onclick="typeNextChar()">ㄎ</div><div class="kb-key" onclick="typeNextChar()">ㄑ</div><div class="kb-key" onclick="typeNextChar()">ㄕ</div><div class="kb-key" onclick="typeNextChar()">ㄖ</div><div class="kb-key" onclick="typeNextChar()">ㄨ</div><div class="kb-key" onclick="typeNextChar()">ㄜ</div><div class="kb-key" onclick="typeNextChar()">ㄠ</div><div class="kb-key" onclick="typeNextChar()">ㄤ</div>
         </div>
         <div class="kb-row">
-          <div class="kb-key" style="flex:1.5;" onclick="hideKeyboard()">123</div>
+          <div class="kb-key" style="max-width:44px;" onclick="hideKeyboard()">123</div>
           <div class="kb-space" onclick="triggerSend()">空白鍵</div>
-          <div class="kb-key" style="flex:1.5; background:#0a84ff;" onclick="triggerSend()">return</div>
+          <div class="kb-return-btn" onclick="triggerSend()">換行</div>
         </div>
       `;
     }
@@ -3163,6 +3135,7 @@ But I’ll be rooting for you.`
     }
   }
 
+  // 鎖定畫面精準鎖定 4月11日週四
   function updateClock() {
     const d = new Date();
     const hh = d.getHours();
@@ -3170,14 +3143,39 @@ But I’ll be rooting for you.`
     const timeStr = `${hh}:${mm}`;
     document.querySelectorAll('.now-time').forEach(el => el.textContent = timeStr);
 
-    const locale = currentLanguage === 'en' ? 'en-US' : 'zh-TW';
-    const opts = { month: 'long', day: 'numeric', weekday: 'short' };
-    document.getElementById('lock-date').textContent = d.toLocaleDateString(locale, opts);
+    if (currentLanguage === 'en') {
+      document.getElementById('lock-date').textContent = 'Thursday, April 11';
+    } else {
+      document.getElementById('lock-date').textContent = '4月11日週四';
+    }
   }
   setInterval(updateClock, 1000);
   updateClock();
 
-  // 鎖定畫面滑動漸變
+  // X (Twitter) 互動愛心與轉發
+  function toggleLike(btn) {
+    const countEl = btn.querySelector('.like-count');
+    if (!btn.classList.contains('liked')) {
+      btn.classList.add('liked');
+      if (countEl) countEl.textContent = '38.7K';
+    } else {
+      btn.classList.remove('liked');
+      if (countEl) countEl.textContent = '38.6K';
+    }
+  }
+
+  function toggleRetweet(btn) {
+    const countEl = btn.querySelector('.retweet-count');
+    if (!btn.classList.contains('retweeted')) {
+      btn.classList.add('retweeted');
+      if (countEl) countEl.textContent = '12.9K';
+    } else {
+      btn.classList.remove('retweeted');
+      if (countEl) countEl.textContent = '12.8K';
+    }
+  }
+
+  // 鎖定畫面滑動解鎖邏輯
   const lock = document.getElementById('lock');
   const pass = document.getElementById('pass');
   const topGroup = document.getElementById('lock-top-group');
@@ -3791,7 +3789,7 @@ But I’ll be rooting for you.`
     document.getElementById('photo-viewer-page').style.display = 'none';
   }
 
-  // 手機相簿滑動觸控支援
+  // 手機相簿滑動支援
   let photoTouchStartX = 0;
   const viewerPage = document.getElementById('photo-viewer-page');
   viewerPage.addEventListener('touchstart', (e) => {
