@@ -23,7 +23,7 @@
 
   <style>
     :root {
-      /* 電腦版統一的高質感米白色背景 */
+      /* 電腦版統一米白色背景，無色塊差異 */
       --bg: #f4f3ef;
       --font-main: "Montserrat", "Noto Sans TC", "Noto Sans KR", -apple-system, BlinkMacSystemFont, sans-serif;
     }
@@ -56,7 +56,7 @@
       -ms-overflow-style: none !important;
     }
 
-    /* 手機外殼外包覆層 */
+    /* 外殼包覆層：手機模式 0 padding 滿版無米白；電腦模式完整包覆 */
     #phone-wrapper {
       display: flex;
       align-items: center;
@@ -64,7 +64,7 @@
       width: 100vw;
       height: 100dvh;
       padding: 0;
-      background: transparent;
+      background: var(--bg);
     }
 
     #phone {
@@ -77,16 +77,16 @@
       flex-direction: column;
     }
 
-    /* 電腦版模式：具有完整的上下左右黑色金屬機身殼包圍，絕不被裁切且比例修長 */
+    /* 電腦版模式：具有完整的上下左右黑色金屬機身殼包圍，絕不被裁切 */
     @media (min-width: 501px) {
       #phone-wrapper {
-        padding: 20px;
+        padding: 24px;
         background: var(--bg);
       }
       #phone {
-        width: 330px;
+        width: 335px;
         height: 715px;
-        max-height: 90vh;
+        max-height: 88vh;
         border-radius: 48px;
         border: 11px solid #1c1c1f;
         outline: 3px solid #28282b;
@@ -760,6 +760,7 @@
       transform-origin: top center;
     }
 
+    /* 電腦版 IG 隱藏白色滾輪條且字體微小 */
     #app-instagram {
       background: #000;
       padding-top: 0;
@@ -1167,9 +1168,6 @@
       stroke-linejoin: round;
       cursor: pointer;
     }
-    .kt-svg-btn:hover {
-      stroke: #fff;
-    }
 
     #kt-list-view {
       flex: 1;
@@ -1309,32 +1307,31 @@
       cursor: pointer;
     }
 
-    /* 鍵盤間距優化：獨立間距、邊界不黏連、按鈕不超出框 */
+    /* 鍵盤間距優化：獨立間距、邊界不黏連 */
     .ios-keyboard {
       background: #2b2b2e;
-      padding: 8px 4px 20px;
+      padding: 10px 6px 24px;
       display: none;
       flex-direction: column;
-      gap: 5px;
+      gap: 6px;
       z-index: 600;
       border-top: 0.5px solid #3c3c40;
     }
     .kb-row {
       display: flex;
       justify-content: center;
-      gap: 3px;
+      gap: 5px;
     }
     .kb-key {
       flex: 1;
-      max-width: 29px;
-      height: 36px;
-      margin: 1px;
+      max-width: 32px;
+      height: 38px;
       background: #505054;
-      border-radius: 5px;
+      border-radius: 7px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 12.5px;
+      font-size: 13px;
       color: #fff;
       cursor: pointer;
       box-shadow: 0 1px 2px rgba(0,0,0,0.35);
@@ -1344,32 +1341,32 @@
     }
     .kb-space {
       flex: 4;
-      max-width: 110px;
-      height: 36px;
+      max-width: 140px;
+      height: 38px;
       background: #505054;
-      border-radius: 5px;
+      border-radius: 7px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px;
+      font-size: 11.5px;
       cursor: pointer;
       box-shadow: 0 1px 2px rgba(0,0,0,0.35);
     }
     .kb-return-btn {
       flex: 1.5;
-      max-width: 55px;
-      height: 36px;
+      max-width: 60px;
+      height: 38px;
       background: #0a84ff !important;
-      border-radius: 5px;
+      border-radius: 7px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 11px !important;
+      font-size: 11.5px !important;
       color: #fff;
       cursor: pointer;
       overflow: hidden;
       white-space: nowrap;
-      padding: 0 2px;
+      padding: 0 4px;
       box-shadow: 0 1px 2px rgba(0,0,0,0.35);
     }
 
@@ -1436,6 +1433,7 @@
       font-size: 10.5px;
       color: #8e8e93;
     }
+    /* 接聽電話圖示改為純白風格 */
     .phone-dial-icon {
       cursor: pointer;
       pointer-events: auto !important;
@@ -1662,7 +1660,6 @@
       object-fit: contain;
     }
 
-    /* 高通透度向量左右切換按鈕 (僅電腦版顯示，手機版隱藏) */
     .viewer-nav-btn {
       position: absolute;
       top: 50%;
@@ -2168,7 +2165,7 @@
         <!-- KARINA PLAYLIST -->
         <div class="icon" data-target="playlist">
           <div class="img" style="background:#18181c;">
-            <img src="https://lh3.googleusercontent.com/d/1fG9UaD9-esqpRciez-87e-q_ZuTSwoSH" alt="PLAYLIST">
+            <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-PLAYLIST/main/01Sparkle_cover.jpg" onerror="this.src='https://raw.githubusercontent.com/u11150003-arch/karina_ig/main/IMG_6344.jpeg'" alt="PLAYLIST">
           </div>
           <span class="name">PLAYLIST</span>
         </div>
@@ -2218,7 +2215,7 @@
       ></iframe>
     </div>
 
-    <!-- 5. Instagram 視窗 -->
+    <!-- 5. Instagram 視窗 (電腦版不顯示白色滾輪條且字體微小) -->
     <div id="app-instagram" class="app-screen">
       <iframe 
         id="iframe-instagram"
@@ -2331,7 +2328,7 @@
       </div>
     </div>
 
-    <!-- 8. 備忘錄 App (已更新最新版金句內容) -->
+    <!-- 8. 備忘錄 App (已更新為最新版金句內容) -->
     <div id="app-notes" class="app-screen">
       <div class="notes-header">
         <div class="notes-title" id="txt-notes-header-title">所有 iCloud 備忘錄</div>
@@ -2565,7 +2562,7 @@
       </div>
     </div>
 
-    <!-- 12. 全螢幕撥通畫面 (純白接聽按鍵) -->
+    <!-- 12. 全螢幕撥通畫面 -->
     <div id="incoming-call-screen">
       <div>
         <div class="call-head-avatar">
@@ -2739,19 +2736,7 @@
     {
       title: '首先，你盡全力了嗎？',
       desc: '為了沒有遺憾的結果，努力奔跑直至最後吧',
-      content: `首先，你盡全力了嗎？
-你正在盡全力了嗎？
-只要盡了全力
-無論結果如何，所有過程都很精彩
-為了沒有遺憾的結果
-努力奔跑直至最後吧
-First, did you do your best?
-Did you do your best?
-If you do your best, no matter what the result is.
-All of the processes were amazing.
-To ensure you have no regrets,
-Keep running your hardest until the very end.
-230701`
+      content: `首先，你盡全力了嗎？\n你正在盡全力了嗎？\n只要盡了全力\n無論結果如何，所有過程都很精彩\n為了沒有遺憾的結果\n努力奔跑直至最後吧\nFirst, did you do your best?\nDid you do your best?\nIf you do your best, no matter what the result is.\nAll of the processes were amazing.\nTo ensure you have no regrets,\nKeep running your hardest until the very end.\n230701`
     },
     { title: 'UP Solo 舞台與 16bit 排舞事項', desc: '開場走位與麥克風音量確認 16bit 碎步點位校正', content: '開場走位與麥克風音量確認\n第二段副歌延伸舞台 16bit 碎步點位校正\n結尾 Pose 聚光燈鎖定' },
     { title: '宿舍採購清單', desc: '波妞飼料 零食肉乾 燕麥奶 卸妝棉', content: '波妞飼料\n零食肉乾\n燕麥奶\n卸妝棉\n維他命C' },
@@ -2766,19 +2751,7 @@ Keep running your hardest until the very end.
     {
       title: 'First, did you do your best?',
       desc: 'To ensure you have no regrets, Keep running your hardest until the very end.',
-      content: `首先，你盡全力了嗎？
-你正在盡全力了嗎？
-只要盡了全力
-無論結果如何，所有過程都很精彩
-為了沒有遺憾的結果
-努力奔跑直至最後吧
-First, did you do your best?
-Did you do your best?
-If you do your best, no matter what the result is.
-All of the processes were amazing.
-To ensure you have no regrets,
-Keep running your hardest until the very end.
-230701`
+      content: `首先，你盡全力了嗎？\n你正在盡全力了嗎？\n只要盡了全力\n無論結果如何，所有過程都很精彩\n為了沒有遺憾的結果\n努力奔跑直至最後吧\nFirst, did you do your best?\nDid you do your best?\nIf you do your best, no matter what the result is.\nAll of the processes were amazing.\nTo ensure you have no regrets,\nKeep running your hardest until the very end.\n230701`
     },
     { title: 'UP Solo Stage & 16bit Rehearsal', desc: 'Verify opening marks and mic volume; adjust 16bit steps', content: 'Verify opening marks and mic volume\nExtend stage marks for second chorus 16bit dance\nLock final spotlight pose' },
     { title: 'Dorm Shopping List', desc: 'Pponyo food, jerky treats, oat milk, makeup remover', content: 'Pponyo food\nJerky treats\nOat milk\nMakeup remover\nVitamin C' },
@@ -2948,7 +2921,6 @@ Keep running your hardest until the very end.
     }
   }
 
-  // 日曆切換邏輯
   let currentYear = 2027;
   let currentMonth = 4;
 
@@ -3004,24 +2976,14 @@ Keep running your hardest until the very end.
   }
 
   function prevMonth() {
-    if (currentYear === 2027 && currentMonth === 4) {
-      currentYear = 2026;
-      currentMonth = 3;
-    } else {
-      currentYear = 2026;
-      currentMonth = 3;
-    }
+    currentYear = 2026;
+    currentMonth = 3;
     renderCalendar();
   }
 
   function nextMonth() {
-    if (currentYear === 2026 && currentMonth === 3) {
-      currentYear = 2027;
-      currentMonth = 4;
-    } else {
-      currentYear = 2027;
-      currentMonth = 4;
-    }
+    currentYear = 2027;
+    currentMonth = 4;
     renderCalendar();
   }
 
@@ -3039,10 +3001,10 @@ Keep running your hardest until the very end.
           <div class="kb-key" onclick="typeNextChar()">A</div><div class="kb-key" onclick="typeNextChar()">S</div><div class="kb-key" onclick="typeNextChar()">D</div><div class="kb-key" onclick="typeNextChar()">F</div><div class="kb-key" onclick="typeNextChar()">G</div><div class="kb-key" onclick="typeNextChar()">H</div><div class="kb-key" onclick="typeNextChar()">J</div><div class="kb-key" onclick="typeNextChar()">K</div><div class="kb-key" onclick="typeNextChar()">L</div>
         </div>
         <div class="kb-row">
-          <div class="kb-key" style="max-width:36px;" onclick="typeNextChar()">⇧</div><div class="kb-key" onclick="typeNextChar()">Z</div><div class="kb-key" onclick="typeNextChar()">X</div><div class="kb-key" onclick="typeNextChar()">C</div><div class="kb-key" onclick="typeNextChar()">V</div><div class="kb-key" onclick="typeNextChar()">B</div><div class="kb-key" onclick="typeNextChar()">N</div><div class="kb-key" onclick="typeNextChar()">M</div><div class="kb-key" style="max-width:36px;" onclick="hideKeyboard()">⌫</div>
+          <div class="kb-key" style="max-width:38px;" onclick="typeNextChar()">⇧</div><div class="kb-key" onclick="typeNextChar()">Z</div><div class="kb-key" onclick="typeNextChar()">X</div><div class="kb-key" onclick="typeNextChar()">C</div><div class="kb-key" onclick="typeNextChar()">V</div><div class="kb-key" onclick="typeNextChar()">B</div><div class="kb-key" onclick="typeNextChar()">N</div><div class="kb-key" onclick="typeNextChar()">M</div><div class="kb-key" style="max-width:38px;" onclick="hideKeyboard()">⌫</div>
         </div>
         <div class="kb-row">
-          <div class="kb-key" style="max-width:42px;" onclick="hideKeyboard()">123</div>
+          <div class="kb-key" style="max-width:44px;" onclick="hideKeyboard()">123</div>
           <div class="kb-space" onclick="triggerSend()">space</div>
           <div class="kb-return-btn" onclick="triggerSend()">return</div>
         </div>
@@ -3059,7 +3021,7 @@ Keep running your hardest until the very end.
           <div class="kb-key" onclick="typeNextChar()">ㄇ</div><div class="kb-key" onclick="typeNextChar()">ㄋ</div><div class="kb-key" onclick="typeNextChar()">ㄎ</div><div class="kb-key" onclick="typeNextChar()">ㄑ</div><div class="kb-key" onclick="typeNextChar()">ㄕ</div><div class="kb-key" onclick="typeNextChar()">ㄖ</div><div class="kb-key" onclick="typeNextChar()">ㄨ</div><div class="kb-key" onclick="typeNextChar()">ㄜ</div><div class="kb-key" onclick="typeNextChar()">ㄠ</div><div class="kb-key" onclick="typeNextChar()">ㄤ</div>
         </div>
         <div class="kb-row">
-          <div class="kb-key" style="max-width:42px;" onclick="hideKeyboard()">123</div>
+          <div class="kb-key" style="max-width:44px;" onclick="hideKeyboard()">123</div>
           <div class="kb-space" onclick="triggerSend()">空白鍵</div>
           <div class="kb-return-btn" onclick="triggerSend()">換行</div>
         </div>
@@ -3135,13 +3097,11 @@ Keep running your hardest until the very end.
       document.getElementById('cam-mode-video').textContent = 'VIDEO';
       document.getElementById('cam-mode-photo').textContent = 'PHOTO';
       document.getElementById('cam-mode-portrait').textContent = 'PORTRAIT';
-      document.getElementById('lock-date').textContent = 'Thursday, April 11';
     } else {
       document.getElementById('cam-mode-cinematic').textContent = '電影級';
       document.getElementById('cam-mode-video').textContent = '錄影';
       document.getElementById('cam-mode-photo').textContent = '拍照';
       document.getElementById('cam-mode-portrait').textContent = '人像';
-      document.getElementById('lock-date').textContent = '4月11日週四';
     }
 
     renderKeyboard();
@@ -3177,6 +3137,12 @@ Keep running your hardest until the very end.
     const mm = String(d.getMinutes()).padStart(2, '0');
     const timeStr = `${hh}:${mm}`;
     document.querySelectorAll('.now-time').forEach(el => el.textContent = timeStr);
+
+    if (currentLanguage === 'en') {
+      document.getElementById('lock-date').textContent = 'Thursday, April 11';
+    } else {
+      document.getElementById('lock-date').textContent = '4月11日週四';
+    }
   }
   setInterval(updateClock, 1000);
   updateClock();
