@@ -269,6 +269,18 @@
       background-repeat: no-repeat;
       pointer-events: auto !important;
     }
+    #lock::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.18);
+      pointer-events: none;
+      z-index: 1;
+    }
+    #lock > * {
+      position: relative;
+      z-index: 2;
+    }
     #lock.off {
       transform: translateY(-100%);
       opacity: 0;
@@ -321,7 +333,19 @@
       cursor: pointer;
       box-shadow: 0 4px 16px rgba(0,0,0,0.35);
       border: 0.5px solid rgba(255,255,255,0.15);
+      transform: translateY(25px);
+      opacity: 0;
+      animation: notifSlideUp 0.55s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
       pointer-events: auto;
+    }
+    .notif-card:nth-child(1) {
+      animation-delay: 0.3s;
+    }
+    .notif-card:nth-child(2) {
+      animation-delay: 0.85s;
+    }
+    @keyframes notifSlideUp {
+      to { transform: translateY(0); opacity: 1; }
     }
     .notif-left {
       display: flex;
@@ -551,7 +575,7 @@
     /* ================= 3. 主畫面 (Home) ================= */
     #home {
       z-index: 100;
-      padding: 54px 16px 20px;
+      padding: 50px 16px 16px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -563,8 +587,8 @@
     .widgets-row {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 8px;
+      gap: 10px;
+      margin-bottom: 6px;
     }
     .ios-widget {
       aspect-ratio: 1;
@@ -589,58 +613,79 @@
       font-weight: 700;
     }
     .cal-widget .day-num {
-      font-size: 32px;
+      font-size: 30px;
       font-weight: 300;
       line-height: 1;
     }
     .cal-widget .events {
-      font-size: 9.5px;
+      font-size: 9px;
       color: #666;
       border-left: 2px solid #d9822b;
-      padding-left: 5px;
+      padding-left: 4px;
     }
-    .music-widget {
-      background: linear-gradient(135deg, rgba(39, 103, 56, 0.95) 0%, rgba(25, 56, 34, 0.95) 100%);
-      backdrop-filter: blur(20px);
-      color: #fff;
+
+    /* 全新 Spotify 灰底通透質感音樂 Widget（對應圖片設計） */
+    .music-widget-spotify {
+      background: rgba(30, 30, 32, 0.85);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(25px);
+      border-radius: 20px;
+      padding: 12px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      cursor: pointer;
+      position: relative;
     }
-    .music-widget .m-top {
+    .spotify-top-row {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
     }
-    .music-widget .play-pill {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #fff;
+    .spotify-album-cover {
+      width: 58px;
+      height: 58px;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+    .spotify-album-cover img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .spotify-icon-svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+    }
+    .spotify-info-row {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #276738;
-      font-size: 9px;
+      flex-direction: column;
+      gap: 1px;
     }
-    .music-widget .m-info .m-title {
+    .spotify-title {
+      font-size: 13.5px;
       font-weight: 700;
-      font-size: 11.5px;
+      color: #fff;
+      letter-spacing: -0.2px;
     }
-    .music-widget .m-info .m-sub {
-      font-size: 9px;
-      opacity: 0.85;
+    .spotify-sub {
+      font-size: 10px;
+      color: rgba(255,255,255,0.65);
     }
 
     .grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      row-gap: 10px;
+      row-gap: 8px;
       column-gap: 8px;
       justify-items: center;
     }
     .icon {
-      width: 54px;
+      width: 52px;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -648,9 +693,9 @@
       cursor: pointer;
     }
     .icon .img {
-      width: 50px;
-      height: 50px;
-      border-radius: 12px;
+      width: 48px;
+      height: 48px;
+      border-radius: 11.5px;
       overflow: hidden;
       display: flex;
       align-items: center;
@@ -665,7 +710,7 @@
       object-fit: cover;
     }
     .icon .name {
-      font-size: 10px;
+      font-size: 9.5px;
       font-weight: 600;
       letter-spacing: -0.2px;
       color: #111;
@@ -677,17 +722,17 @@
       background: rgba(255, 255, 255, 0.45);
       backdrop-filter: blur(35px);
       -webkit-backdrop-filter: blur(35px);
-      border-radius: 28px;
-      padding: 8px 14px;
+      border-radius: 26px;
+      padding: 7px 12px;
       display: flex;
       justify-content: space-around;
       align-items: center;
       box-shadow: 0 4px 20px rgba(0,0,0,0.15);
       border: 0.5px solid rgba(255,255,255,0.4);
-      margin-bottom: 4px;
+      margin-bottom: 2px;
     }
     .dock .icon {
-      width: 50px;
+      width: 48px;
     }
 
     /* ================= 4. App 視窗通用 ================= */
@@ -728,7 +773,7 @@
       padding-top: 40px;
     }
 
-    /* ================= 5. 日曆 App ================= */
+    /* ================= 5. 日曆 App (支援 2026/03 與 2027/04 切換) ================= */
     #app-calendar {
       background: #fff;
       color: #000;
@@ -1300,7 +1345,7 @@
       cursor: pointer;
     }
 
-    /* ================= 10. 電話 App (百分之百保證撥通) ================= */
+    /* ================= 10. 電話 App (完美保證點擊撥出與返回條) ================= */
     #app-phone {
       background: #000;
       color: #fff;
@@ -1321,6 +1366,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
+      padding-bottom: 20px;
     }
     .contact-item-row {
       display: flex;
@@ -1917,7 +1963,7 @@
 
   <!-- 3. 主畫面 (Home) -->
   <div id="home" class="scr">
-    <!-- 最上排完美重現日曆與音樂 Widget（如範例圖） -->
+    <!-- 最上排保留日曆 Widget 與 全新 Spotify 質感音樂 Widget -->
     <div class="widgets-row">
       <div class="ios-widget cal-widget" data-target="calendar">
         <div>
@@ -1929,19 +1975,25 @@
           <div id="txt-widget-cal-event">solo彩排</div>
         </div>
       </div>
-      <div class="ios-widget music-widget" data-target="playlist">
-        <div class="m-top">
-          <span style="font-size:11px; font-weight:700;">PLAYLIST</span>
-          <div class="play-pill">▶</div>
+
+      <!-- Spotify 灰色通透音樂 Widget（照範例設計：照片 IMG_6344.jpeg，標題 UP，小字 KARINA，右上角 Spotify 圖示） -->
+      <div class="ios-widget music-widget-spotify" data-target="playlist">
+        <div class="spotify-top-row">
+          <div class="spotify-album-cover">
+            <img src="https://raw.githubusercontent.com/u11150003-arch/KARINA-iphone/main/IMG_6344.jpeg" alt="Album">
+          </div>
+          <svg class="spotify-icon-svg" viewBox="0 0 24 24">
+            <path d="M12 0C5.4 0 0 5.4 0 12s5.4 12 12 12 12-5.4 12-12S18.6 0 12 0zm5.521 17.34c-.24.359-.66.48-1.021.24-2.82-1.74-6.36-2.101-10.561-1.141-.418.122-.779-.179-.899-.599-.12-.42.18-.78.6-.9 4.56-1.02 8.52-.6 11.76 1.44.36.18.48.66.24 1.02zm1.44-3.84c-.301.48-.9.601-1.381.3-3.24-1.98-8.16-2.58-11.94-1.41-.54.18-1.14-.12-1.32-.66-.18-.54.12-1.14.66-1.32 4.2-1.26 9.6-0.6 13.44 1.8.48.3.6 0.9.24 1.399zm.12-4.08C15.24 7.32 8.88 7.08 5.16 8.22c-.66.21-1.38-.15-1.59-.81-.21-.66.15-1.38.81-1.59 4.38-1.32 11.52-1.02 16.02 1.62.6.36.78 1.14.42 1.74-.36.6-1.14.78-1.74.42z"/>
+          </svg>
         </div>
-        <div class="m-info">
-          <div class="m-title">UP (KARINA Solo)</div>
-          <div class="m-sub">KARINA • Special Track</div>
+        <div class="spotify-info-row">
+          <div class="spotify-title">UP</div>
+          <div class="spotify-sub">KARINA</div>
         </div>
       </div>
     </div>
 
-    <!-- 桌面 Apps (Library 替換原日曆位置) -->
+    <!-- 桌面 Apps 網格 -->
     <div class="grid">
       <!-- KARINA Library (低飽和藍色書籍圖示，點擊跳轉 Notion 網頁) -->
       <div class="icon" onclick="window.open('https://typical-silverfish-34e.notion.site/KARINA-Library-3f88ad958c938009a32ccf6cb0786079', '_blank')">
@@ -2095,26 +2147,24 @@
     ></iframe>
   </div>
 
-  <!-- 6. 日曆 App -->
+  <!-- 6. 日曆 App (支援 2026/03 與 2027/04 左右切換檢視) -->
   <div id="app-calendar" class="app-screen">
     <div class="cal-app-header">
       <span class="cal-app-month" id="cal-month-title">2027年 4月</span>
-      <span style="font-size:18px; color:#ff3b30; cursor:pointer;">+</span>
+      <div style="display:flex; gap:12px; align-items:center;">
+        <span onclick="prevMonth()" style="font-size:18px; cursor:pointer; color:#007aff; font-weight:700;">‹</span>
+        <span onclick="nextMonth()" style="font-size:18px; cursor:pointer; color:#007aff; font-weight:700;">›</span>
+        <span style="font-size:18px; color:#ff3b30; cursor:pointer;">+</span>
+      </div>
     </div>
     <div class="cal-days-grid" id="cal-grid-labels">
       <div class="cal-day-label">日</div><div class="cal-day-label">一</div><div class="cal-day-label">二</div><div class="cal-day-label">三</div><div class="cal-day-label">四</div><div class="cal-day-label">五</div><div class="cal-day-label">六</div>
-      <div class="cal-date-cell" style="opacity:0.3;">28</div><div class="cal-date-cell" style="opacity:0.3;">29</div><div class="cal-date-cell" style="opacity:0.3;">30</div><div class="cal-date-cell" style="opacity:0.3;">31</div>
-      <div class="cal-date-cell">1</div><div class="cal-date-cell">2</div><div class="cal-date-cell">3</div>
-      <div class="cal-date-cell">4</div><div class="cal-date-cell">5</div><div class="cal-date-cell">6</div><div class="cal-date-cell">7</div><div class="cal-date-cell">8</div><div class="cal-date-cell">9</div><div class="cal-date-cell">10</div>
-      <div class="cal-date-cell special">11</div>
-      <div class="cal-date-cell">12</div><div class="cal-date-cell">13</div><div class="cal-date-cell">14</div><div class="cal-date-cell">15</div><div class="cal-date-cell">16</div><div class="cal-date-cell">17</div>
-      <div class="cal-date-cell">18</div><div class="cal-date-cell">19</div><div class="cal-date-cell">20</div><div class="cal-date-cell">21</div><div class="cal-date-cell">22</div><div class="cal-date-cell">23</div><div class="cal-date-cell">24</div>
-      <div class="cal-date-cell">25</div><div class="cal-date-cell">26</div><div class="cal-date-cell">27</div><div class="cal-date-cell">28</div><div class="cal-date-cell">29</div><div class="cal-date-cell">30</div>
     </div>
+    <div class="cal-days-grid" id="cal-days-body" style="padding-top:0;"></div>
     <div class="cal-events-list">
       <div class="cal-event-card">
         <div style="font-size:12px; color:#ff3b30; font-weight:700;" id="txt-cal-bday-time">4月11日 全天</div>
-        <div style="font-size:16px; font-weight:700; margin-top:3px;">🎂 KARINA bday</div>
+        <div style="font-size:16px; font-weight:700; margin-top:3px;" id="txt-cal-bday-title">🎂 KARINA bday</div>
       </div>
     </div>
   </div>
@@ -2315,7 +2365,7 @@
     </div>
   </div>
 
-  <!-- 10. KakaoTalk (寧打來訊息更新為「姐姐 有看到我的 AirPods 嗎」) -->
+  <!-- 10. KakaoTalk -->
   <div id="app-chat" class="app-screen">
     <div class="kt-header">
       <span id="txt-kt-header">聊天</span>
@@ -2326,7 +2376,7 @@
         </svg>
         <svg class="kt-svg-btn" viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="3"></circle>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06-.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
         </svg>
       </div>
     </div>
@@ -2389,7 +2439,7 @@
     </div>
   </div>
 
-  <!-- 11. 電話 App (保證完美撥通、點擊聯絡人或電話圖示立刻撥出) -->
+  <!-- 11. 電話 App (完美保證點擊聯絡人或按鈕直接撥通) -->
   <div id="app-phone" class="app-screen">
     <div class="phone-header-title" id="phone-header-main-title">聯絡人</div>
     <div class="phone-contacts-container">
@@ -2428,7 +2478,7 @@
     </div>
   </div>
 
-  <!-- 12. 全螢幕撥通畫面 (帶語音對話泡泡) -->
+  <!-- 12. 全螢幕撥通畫面 -->
   <div id="incoming-call-screen">
     <div>
       <div class="call-head-avatar">
@@ -2588,7 +2638,7 @@
     { title: '⚠️ 系統操作指引', desc: '若介面操作不順，請聯繫 @kelly_lee_805', isGuide: true },
     { title: '《在樹下傳達神諭的貓》青山美智子', desc: '那些猛烈的不甘心與焦躁，跑完後將隨汗水滑落...', content: `[第一片] 朝西\n朝大地用力一蹬，衝破迎面而來的風。我的雙腿愈是用力，視野就以愈快的速度往後飛逝。將眼前的建築、行道樹和人群不斷抛在腦後。過去了，過去了，都過去了。\n那些猛烈的不甘心與焦躁，跑完後將隨汗水滑落，大部分都變得無所謂。如果想過平穩的人生，這種「怎樣都無所謂」的感覺就很重要。\n因為無所謂所以忘得掉。討厭的事對自己而言，多半是怎樣都無所謂的事。\n那些無法讓我擁有幸福心情的事沒有記住的價值。p9\n\n[第六片] 正中間\n柔軟強韌的毛，下面是一層薄薄的肉，再下面有骨頭。我感受著這一團溫暖的生命。貓不會說謊。我沒必要硬逼自己笑。也不用顧慮無謂的事。誠實的貓陪在誠實的我身邊，這件事帶給我非常安詳平靜的心情。p216\n\n[第六片] 正中間\n「會認為道路兩邊是角落的只有人類吧。苔蘚說不定認為自己活在地球的中心。」\n自己所在的地方就是正中間。自己真正認為的事情就是正中間。自己心裡的正中間。那就是這個世界的正中間。p246` },
     { title: '《私人信箱一一○號的郵件》李到禹', desc: '涼爽拂面的風，揚起了真率的髮絲。顯高的秋天天空...', content: `涼爽拂面的風，揚起了真率的髮絲。顯高的秋天天空，蔚藍得耀眼。不見絲毫瑕疵，不禁令人錯覺首爾的天空沒有結界。在這裏生活了十二年，始終認為首爾是異鄉的真率，今天第一次感覺置身首爾天空下的自己，有了容身之處，恰似第二個故鄉一樣。很快，她便領悟，那是因為愛情找上了自己。\n偶爾.…出乎意料的話語，總能戰勝人的意志，浮出水面。真率懷抱內心氾濫的遺憾，注視著建。感受她的目光的建，不以為意地轉頭看著真率。建疑惑地挑眉，真率情不自禁地凝望著他，開口說道：\n「我…有話想說。」\n他只是默不作聲地看著真率，「我……愛你。」\n唉，即使是這種不可置信的瞬間，為什麼山上的空氣依然如此清爽？為什麼風依然如此沁涼？為什麼秋天的氣息依然使人心曠种怡？儘管心臟撲通、撲通地跳，雙手緊緊交扣，真率卻不感畏懼地站在原地。是啊，那是她的真心話。真心話鼓吹著自己告白，真心話影響著自己的生活。無論聽到什麼答案，她都不會後悔。不定，他早就知道了…我的心。\n他靜靜看了看她，淡然地開口：「或許只是轉瞬即逝的風。」\n雖然真率的內心一隅有些灼痛，卻又不氣餒地低聲說道：\n「或許是吧…不過…我想，只有我最清楚自己的心。此刻的我的心…每次面對你的我心…我想，就是愛。」。— p.213-214\n\n「可以多給我一點時間嗎？多一點……整理的時間。我….會好好正視自己的心。」「……好。」\n不發一語點著頭的真率，也將目光轉向下方的街道。數之不盡的念頭，如洶湧波濤在她心底無聲翻湧。即使不形於色，沿著山脊吹拂而下的風，早已陣陣安撫著內在悄然沸騰的情緒。\n對現在她而言，根本無從預測未來會發生什麼事。真率只是在心裏暗自呢喃，無論結果如何，自己再也不會討厭首爾，不會否定這座城市帶給自己的任何回憶。無論是多麼孤單、辛苦時光，這裏始終是認識那個男子的城市，自己絕不會恨它。某個秋日週未的上午，被豔陽輝映得亮白的山城郭前。— p.215\n\n不發一語的建靠著她的額頭，自驚自地陷入沉思。經過片刻，借不自禁的情緒，引領著他親吩眼前不敢大聲呼吸的她的頭頂、額頭.….由上至下的暖和氣息，重新找上了她的雙唇。不過，這次並沒有就此離開。一個甚至能感受嘴唇內側的溫潤觸感，緩慢卻溫柔的吻。終於，真率紅唇微張，他環抱她的雙頰，長驅直入她的口中。她心臟瘋也似跳動，扶著樓梯的手也無意識地開始用力。一股溫熱的觸感，從輕托自己下巴的建的手湧現。\n這是愛嗎？\n真率的心悄悄問著。第二次的吻，是你的愛嗎？如果不是.….難道只是如結界般存在的夜故宮，釀造而成的剎那嗎？\n建緩緩停下親吻，抬起頭。置身連月光也無從感知的漆黑之中，真率噙著疑惑的目光，仰望著他。既清楚現在不是詢問他心時機，卻又驅逐不了漫溢心底的可悲疑問。建神色凝重地俯視她：\n「..還記得我之前說過話嗎？我啊，如果有了自己愛的人…….一定不會錯過對方，只會使盡全力握緊她的手，牢牢抱在懷裏。對自己的女人，我一定會這麼做。」\n真率似懂非懂地點點頭，「我不是個心存非分之想的傢伙.…今天，我觸摸了妳一整天，在仁寺洞茶館搭妳的肩，在這裹擁抱妳..我的手，總是不由自主朝妳而去。」\n建低聲嘆了一口氣，稍微拉開與真率的距離後，用手指撥撥自己的頭髮。\n「雖然我不知道愛是什麼...如果這不是愛，那是什麼？」— p.229-230` },
-    { title: '《五十人：得到與失去，始終會成為一種平衡》鄭世朗', desc: '[李煥毅] [文宇南] [韓圭翼] 摘錄金句集', content: `[李煥毅]\n煥毅從來沒有如此害怕過，如今他卻感到害怕了，他怕自己是和如此難以理解的人結婚的事實，要是有發明出某種特殊的攝影器材可以拍出尹娜複雜的內心世界，煥毅應該會埋首學習如何操作那台機器，只要能讓他一目瞭然地看穿尹娜內心哪裡受傷、哪裡被摧毀就好……煥毅想著想著，在沙發上睡著了，他睡得很淺，感覺床頭邊隨時會開出邪惡的花朵。\n凌晨醒來時，他發現尹娜傳了簡訊給他。\n煥毅看完簡訊以後準備重新入睡，他下意識地擺動著手指，只為了撫摸尹娜的髮絲。\n看來他的手指忘記了尹娜不在身旁的事實，而任意擺動著。\n最後，他摸到了 X光婚紗照的相框邊角。\n\n[文宇南]\n善美把宇南拉起身，雙腳踩在宇南的腳背上。這已經不是第一次了。宇南覺得善美剛洗完澡還有些濕氣、輕巧、白皙的那雙腳簡直完美無瑕，雖然當初也不是特別因為腳而結婚，但是能夠每天看見對方美麗的部分依然是很偷快的事情。善美踩著宇南的腳背，兩人開始在音樂中漫舞。\n兩名早已熟透的中年人士各自回想著兒時踩在父親腳背上共舞的畫面，並試著去想像對方的童年，有點感傷也有點懷念，所以他們一直跳到善美的腳徹底乾爽沒有濕氣為止。\n宇南親吻了善美的眼角，由於低頭低得太用力,導致耳朵有點拉扯到的感覺。宇南心想，就算哪天善美的雙眼皮變成了五摺或六摺，應該也會美麗依舊。\n\n[韓圭翼]\n今天的豆漿冷麵味道還會和平常一樣嗎？圭翼小心翼翼地嚐了一口，當內心被人用亂刀砍過導致傷痕累累，就連查看狀態都於心不忍時，就必須依賴單純的感覺系統來對自己進行診斷，而現在這碗豆漿冷麵就是圭翼的診斷用藥，他細細咀嚼麵條，然後捧起碗來喝下香醇濃郁的冰涼豆漿。\n嗯，是一樣的味道，這樣就表示自己沒事。` },
+    { title: '《五十人：得到與失去，始終會成為一種平衡》鄭世朗', desc: '[李煥毅] [文宇南] [韓圭翼] 摘錄金句集', content: `[李煥毅]\n煥毅從來沒有如此害怕過，如今他卻感到害怕了，他怕自己是和如此難以理解的人結婚的事實，要是有發明出某種特殊的攝影器材可以拍出尹娜複雜的內心世界，煥毅應該會埋首學習如何操作那台機器，只要能讓他一目瞭然地看穿尹娜內心哪裡受傷,哪裡被摧毀就好……煥毅想著想著，在沙發上睡著了，他睡得很淺，感覺床頭邊隨時會開出邪惡的花朵。\n凌晨醒來時，他發現尹娜傳了簡訊給他。\n煥毅看完簡訊以後準備重新入睡，他下意識地擺動著手指，只為了撫摸尹娜的髮絲。\n看來他的手指忘記了尹娜不在身旁的事實，而任意擺動著。\n最後，他摸到了 X光婚紗照的相框邊角。\n\n[文宇南]\n善美把宇南拉起身，雙腳踩在宇南的腳背上。這已經不是第一次了。宇南覺得善美剛洗完澡還有些濕氣、輕巧、白皙的那雙腳簡直完美無瑕，雖然當初也不是特別因為腳而結婚，但是能夠每天看見對方美麗的部分依然是很偷快的事情。善美踩著宇南的腳背，兩人開始在音樂中漫舞。\n兩名早已熟透的中年人士各自回想著兒時踩在父親腳背上共舞的畫面，並試著去想像對方的童年，有點感傷也有點懷念，所以他們一直跳到善美的腳徹底乾爽沒有濕氣為止。\n宇南親吻了善美的眼角，由於低頭低得太用力，導致耳朵有點拉扯到的感覺。宇南心想，就算哪天善美的雙眼皮變成了五摺或六摺，應該也會美麗依舊。\n\n[韓圭翼]\n今天的豆漿冷麵味道還會和平常一樣嗎？圭翼小心翼翼地嚐了一口，當內心被人用亂刀砍過導致傷痕累累，就連查看狀態都於心不忍時，就必須依賴單純的感覺系統來對自己進行診斷，而現在這碗豆漿冷麵就是圭翼的診斷用藥，他細細咀嚼麵條，然後捧起碗來喝下香醇濃郁的冰涼豆漿。\n嗯，是一樣的味道，這樣就表示自己沒事。` },
     { title: 'UP Solo 舞台與 16bit 排舞事項', desc: '開場走位與麥克風音量確認 16bit 碎步點位校正', content: '開場走位與麥克風音量確認\n第二段副歌延伸舞台 16bit 碎步點位校正\n結尾 Pose 聚光燈鎖定' },
     { title: '宿舍採購清單', desc: '波妞飼料 零食肉乾 燕麥奶 卸妝棉', content: '波妞飼料\n零食肉乾\n燕麥奶\n卸妝棉\n維他命C' },
     { title: '跟冬約好吃飯', desc: '排舞結束後出發 去吃麻辣鍋 記得先吃胃藥', content: '排舞結束後出發 去吃麻辣鍋 記得先吃胃藥' }
@@ -2753,6 +2803,81 @@
 
   let currentPhotoIndex = 0;
 
+  // 日曆切換邏輯 (支援 2026年3月 與 2027年4月)
+  let currentYear = 2027;
+  let currentMonth = 4; // 1-12
+
+  function renderCalendar() {
+    const titleEl = document.getElementById('cal-month-title');
+    const bodyEl = document.getElementById('cal-days-body');
+    const bdayTitleEl = document.getElementById('txt-cal-bday-title');
+    const bdayTimeEl = document.getElementById('txt-cal-bday-time');
+
+    if (!titleEl || !bodyEl) return;
+
+    titleEl.textContent = `${currentYear}年 ${currentMonth}月`;
+    bodyEl.innerHTML = '';
+
+    let firstDay = new Date(currentYear, currentMonth - 1, 1).getDay();
+    let totalDays = new Date(currentYear, currentMonth, 0).getDate();
+    let prevTotalDays = new Date(currentYear, currentMonth - 1, 0).getDate();
+
+    // 渲染上個月尾數
+    for (let i = firstDay - 1; i >= 0; i--) {
+      const cell = document.createElement('div');
+      cell.className = 'cal-date-cell';
+      cell.style.opacity = '0.3';
+      cell.textContent = prevTotalDays - i;
+      bodyEl.appendChild(cell);
+    }
+
+    // 渲染當月天數
+    for (let d = 1; d <= totalDays; d++) {
+      const cell = document.createElement('div');
+      cell.className = 'cal-date-cell';
+      cell.textContent = d;
+
+      // 註記特殊日期
+      if (currentYear === 2027 && currentMonth === 4 && d === 11) {
+        cell.classList.add('special');
+      } else if (currentYear === 2026 && currentMonth === 3 && d === 24) {
+        cell.classList.add('special');
+      }
+      bodyEl.appendChild(cell);
+    }
+
+    // 更新底部活動卡片資訊
+    if (currentYear === 2026 && currentMonth === 3) {
+      if (bdayTimeEl) bdayTimeEl.textContent = '3月24日 全天';
+      if (bdayTitleEl) bdayTitleEl.textContent = '🎂 KARINA bday PARTY MEMORY BOX';
+    } else {
+      if (bdayTimeEl) bdayTimeEl.textContent = '4月11日 全天';
+      if (bdayTitleEl) bdayTitleEl.textContent = '🎂 KARINA bday';
+    }
+  }
+
+  function prevMonth() {
+    if (currentYear === 2027 && currentMonth === 4) {
+      currentYear = 2026;
+      currentMonth = 3;
+    } else {
+      currentYear = 2026;
+      currentMonth = 3;
+    }
+    renderCalendar();
+  }
+
+  function nextMonth() {
+    if (currentYear === 2026 && currentMonth === 3) {
+      currentYear = 2027;
+      currentMonth = 4;
+    } else {
+      currentYear = 2027;
+      currentMonth = 4;
+    }
+    renderCalendar();
+  }
+
   function renderKeyboard() {
     const container = document.getElementById('keyboard-keys-container');
     if (!container) return;
@@ -2858,25 +2983,10 @@
     document.getElementById('cam-txt-flash').textContent = t.camFlash;
     document.getElementById('cam-txt-live').textContent = t.camLive;
 
-    if (currentLanguage === 'en') {
-      document.getElementById('cam-mode-cinematic').textContent = 'CINEMATIC';
-      document.getElementById('cam-mode-video').textContent = 'VIDEO';
-      document.getElementById('cam-mode-photo').textContent = 'PHOTO';
-      document.getElementById('cam-mode-portrait').textContent = 'PORTRAIT';
-      document.getElementById('cal-month-title').textContent = 'April 2027';
-      document.getElementById('txt-cal-bday-time').textContent = 'April 11 • All Day';
-    } else {
-      document.getElementById('cam-mode-cinematic').textContent = '電影級';
-      document.getElementById('cam-mode-video').textContent = '錄影';
-      document.getElementById('cam-mode-photo').textContent = '拍照';
-      document.getElementById('cam-mode-portrait').textContent = '人像';
-      document.getElementById('cal-month-title').textContent = '2027年 4月';
-      document.getElementById('txt-cal-bday-time').textContent = '4月11日 全天';
-    }
-
     renderKeyboard();
     renderNotesList();
     renderAlbums();
+    renderCalendar();
     updateClock();
     closeLangModal();
   }
@@ -3080,7 +3190,7 @@
     clockStatusTxt.style.display = 'inline';
     phoneStatusBar.classList.remove('black-theme');
     const island = document.getElementById('dynamic-island');
-    if (island.classList.contains('expand')) island.classList.expand = false;
+    if (island.classList.contains('expand')) island.classList.remove('expand');
 
     stopCamera();
     leaveRoom();
@@ -3310,7 +3420,7 @@
     closeNoteEditor();
   }
 
-  // 電話通話腳本與邏輯 (金旼炡台詞：「知道了 等等練完舞我就回去餵波妞」，發話人改為「劉知珉」)
+  // 電話通話腳本與邏輯
   const phoneCallScriptsZh = {
     'Winter': [
       { sender: '旼冬', text: '在幹嘛' },
@@ -3369,20 +3479,20 @@
   let callSecondCounter = null;
   let callDialogueTimer = null;
 
-  // 來電頻率降低，間隔延長至 3 分鐘 (180 秒)，三位成員輪流撥來一次
+  // 來電頻率大幅拉長，每位成員輪流撥來一次
   let callerIndex = 0;
   setTimeout(() => {
     playAlertSound();
     triggerIncomingCall(callerList[callerIndex].name, callerList[callerIndex].avatar);
     callerIndex = (callerIndex + 1) % callerList.length;
-  }, 120000);
+  }, 180000);
 
   setInterval(() => {
     playAlertSound();
     const targetCaller = callerList[callerIndex];
     triggerIncomingCall(targetCaller.name, targetCaller.avatar);
     callerIndex = (callerIndex + 1) % callerList.length;
-  }, 300000);
+  }, 360000);
 
   function triggerIncomingCall(name, avatar) {
     currentCallerName = name;
@@ -3608,6 +3718,7 @@
   // 安全啟動流程初始化
   renderNotesList();
   renderAlbums();
+  renderCalendar();
   updateLanguageTexts();
 </script>
 
