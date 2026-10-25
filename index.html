@@ -333,19 +333,7 @@
       cursor: pointer;
       box-shadow: 0 4px 16px rgba(0,0,0,0.35);
       border: 0.5px solid rgba(255,255,255,0.15);
-      transform: translateY(25px);
-      opacity: 0;
-      animation: notifSlideUp 0.55s cubic-bezier(0.2, 0.9, 0.3, 1) forwards;
       pointer-events: auto;
-    }
-    .notif-card:nth-child(1) {
-      animation-delay: 0.3s;
-    }
-    .notif-card:nth-child(2) {
-      animation-delay: 0.85s;
-    }
-    @keyframes notifSlideUp {
-      to { transform: translateY(0); opacity: 1; }
     }
     .notif-left {
       display: flex;
@@ -618,25 +606,26 @@
       line-height: 1;
     }
     .cal-widget .events {
-      font-size: 9px;
+      font-size: 9.5px;
       color: #666;
       border-left: 2px solid #d9822b;
       padding-left: 4px;
     }
 
-    /* 全新 Spotify 灰底通透質感音樂 Widget（對應圖片設計） */
+    /* Spotify 灰底高通透度音樂 Widget（照截圖設計：照片 IMG_6344.jpeg 比例更大，通透度更高） */
     .music-widget-spotify {
-      background: rgba(30, 30, 32, 0.85);
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
+      background: rgba(45, 45, 48, 0.68);
+      backdrop-filter: blur(30px);
+      -webkit-backdrop-filter: blur(30px);
       border-radius: 20px;
-      padding: 12px;
+      padding: 10px;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.25);
       cursor: pointer;
       position: relative;
+      border: 0.5px solid rgba(255,255,255,0.12);
     }
     .spotify-top-row {
       display: flex;
@@ -644,11 +633,11 @@
       align-items: flex-start;
     }
     .spotify-album-cover {
-      width: 58px;
-      height: 58px;
-      border-radius: 8px;
+      width: 64px;
+      height: 64px;
+      border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.5);
     }
     .spotify-album-cover img {
       width: 100%;
@@ -657,8 +646,8 @@
       display: block;
     }
     .spotify-icon-svg {
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       fill: #fff;
     }
     .spotify-info-row {
@@ -667,7 +656,7 @@
       gap: 1px;
     }
     .spotify-title {
-      font-size: 13.5px;
+      font-size: 14px;
       font-weight: 700;
       color: #fff;
       letter-spacing: -0.2px;
@@ -773,7 +762,7 @@
       padding-top: 40px;
     }
 
-    /* ================= 5. 日曆 App (支援 2026/03 與 2027/04 切換) ================= */
+    /* ================= 5. 日曆 App ================= */
     #app-calendar {
       background: #fff;
       color: #000;
@@ -1345,7 +1334,7 @@
       cursor: pointer;
     }
 
-    /* ================= 10. 電話 App (完美保證點擊撥出與返回條) ================= */
+    /* ================= 10. 電話 App (完美可撥通、附底部返回 Bar) ================= */
     #app-phone {
       background: #000;
       color: #fff;
@@ -1353,6 +1342,8 @@
       display: flex;
       flex-direction: column;
       z-index: 2800 !important;
+      position: absolute;
+      inset: 0;
     }
     .phone-header-title {
       font-size: 26px;
@@ -1366,7 +1357,7 @@
       display: flex;
       flex-direction: column;
       gap: 8px;
-      padding-bottom: 20px;
+      padding-bottom: 30px;
     }
     .contact-item-row {
       display: flex;
@@ -1882,7 +1873,7 @@
           </div>
           <div class="notif-text">
             <div class="notif-title">Instagram</div>
-            <div class="notif-desc" id="txt-notif-ig-desc">imwinter 和其他人在你的貼文說讚</div>
+            <div class="notif-desc" id="txt-notif-ig-desc">imwinter 和 other人在你的貼文說讚</div>
           </div>
         </div>
         <div class="notif-time" id="txt-notif-time-1">現在</div>
@@ -1963,12 +1954,12 @@
 
   <!-- 3. 主畫面 (Home) -->
   <div id="home" class="scr">
-    <!-- 最上排保留日曆 Widget 與 全新 Spotify 質感音樂 Widget -->
+    <!-- 最上排保留日曆 Widget (星期四 11) 與全新 Spotify 灰色高通透音樂 Widget -->
     <div class="widgets-row">
       <div class="ios-widget cal-widget" data-target="calendar">
         <div>
-          <div class="day-name" id="txt-widget-cal-day">星期五</div>
-          <div class="day-num">23</div>
+          <div class="day-name" id="txt-widget-cal-day">星期四</div>
+          <div class="day-num">11</div>
         </div>
         <div class="events">
           <div style="font-weight:700;">10:00 AM</div>
@@ -1976,7 +1967,7 @@
         </div>
       </div>
 
-      <!-- Spotify 灰色通透音樂 Widget（照範例設計：照片 IMG_6344.jpeg，標題 UP，小字 KARINA，右上角 Spotify 圖示） -->
+      <!-- Spotify 灰底通透音樂 Widget (照截圖設計：封面 IMG_6344.jpeg 放大，通透度更高，標題 UP，小字 KARINA) -->
       <div class="ios-widget music-widget-spotify" data-target="playlist">
         <div class="spotify-top-row">
           <div class="spotify-album-cover">
@@ -2147,7 +2138,7 @@
     ></iframe>
   </div>
 
-  <!-- 6. 日曆 App (支援 2026/03 與 2027/04 左右切換檢視) -->
+  <!-- 6. 日曆 App -->
   <div id="app-calendar" class="app-screen">
     <div class="cal-app-header">
       <span class="cal-app-month" id="cal-month-title">2027年 4月</span>
@@ -2439,7 +2430,7 @@
     </div>
   </div>
 
-  <!-- 11. 電話 App (完美保證點擊聯絡人或按鈕直接撥通) -->
+  <!-- 11. 電話 App (完美保證點擊撥出與返回條) -->
   <div id="app-phone" class="app-screen">
     <div class="phone-header-title" id="phone-header-main-title">聯絡人</div>
     <div class="phone-contacts-container">
@@ -2638,7 +2629,7 @@
     { title: '⚠️ 系統操作指引', desc: '若介面操作不順，請聯繫 @kelly_lee_805', isGuide: true },
     { title: '《在樹下傳達神諭的貓》青山美智子', desc: '那些猛烈的不甘心與焦躁，跑完後將隨汗水滑落...', content: `[第一片] 朝西\n朝大地用力一蹬，衝破迎面而來的風。我的雙腿愈是用力，視野就以愈快的速度往後飛逝。將眼前的建築、行道樹和人群不斷抛在腦後。過去了，過去了，都過去了。\n那些猛烈的不甘心與焦躁，跑完後將隨汗水滑落，大部分都變得無所謂。如果想過平穩的人生，這種「怎樣都無所謂」的感覺就很重要。\n因為無所謂所以忘得掉。討厭的事對自己而言，多半是怎樣都無所謂的事。\n那些無法讓我擁有幸福心情的事沒有記住的價值。p9\n\n[第六片] 正中間\n柔軟強韌的毛，下面是一層薄薄的肉，再下面有骨頭。我感受著這一團溫暖的生命。貓不會說謊。我沒必要硬逼自己笑。也不用顧慮無謂的事。誠實的貓陪在誠實的我身邊，這件事帶給我非常安詳平靜的心情。p216\n\n[第六片] 正中間\n「會認為道路兩邊是角落的只有人類吧。苔蘚說不定認為自己活在地球的中心。」\n自己所在的地方就是正中間。自己真正認為的事情就是正中間。自己心裡的正中間。那就是這個世界的正中間。p246` },
     { title: '《私人信箱一一○號的郵件》李到禹', desc: '涼爽拂面的風，揚起了真率的髮絲。顯高的秋天天空...', content: `涼爽拂面的風，揚起了真率的髮絲。顯高的秋天天空，蔚藍得耀眼。不見絲毫瑕疵，不禁令人錯覺首爾的天空沒有結界。在這裏生活了十二年，始終認為首爾是異鄉的真率，今天第一次感覺置身首爾天空下的自己，有了容身之處，恰似第二個故鄉一樣。很快，她便領悟，那是因為愛情找上了自己。\n偶爾.…出乎意料的話語，總能戰勝人的意志，浮出水面。真率懷抱內心氾濫的遺憾，注視著建。感受她的目光的建，不以為意地轉頭看著真率。建疑惑地挑眉，真率情不自禁地凝望著他，開口說道：\n「我…有話想說。」\n他只是默不作聲地看著真率，「我……愛你。」\n唉，即使是這種不可置信的瞬間，為什麼山上的空氣依然如此清爽？為什麼風依然如此沁涼？為什麼秋天的氣息依然使人心曠种怡？儘管心臟撲通、撲通地跳，雙手緊緊交扣，真率卻不感畏懼地站在原地。是啊，那是她的真心話。真心話鼓吹著自己告白，真心話影響著自己的生活。無論聽到什麼答案，她都不會後悔。不定，他早就知道了…我的心。\n他靜靜看了看她，淡然地開口：「或許只是轉瞬即逝的風。」\n雖然真率的內心一隅有些灼痛，卻又不氣餒地低聲說道：\n「或許是吧…不過…我想，只有我最清楚自己的心。此刻的我的心…每次面對你的我心…我想，就是愛。」。— p.213-214\n\n「可以多給我一點時間嗎？多一點……整理的時間。我….會好好正視自己的心。」「……好。」\n不發一語點著頭的真率，也將目光轉向下方的街道。數之不盡的念頭，如洶湧波濤在她心底無聲翻湧。即使不形於色，沿著山脊吹拂而下的風，早已陣陣安撫著內在悄然沸騰的情緒。\n對現在她而言，根本無從預測未來會發生什麼事。真率只是在心裏暗自呢喃，無論結果如何，自己再也不會討厭首爾，不會否定這座城市帶給自己的任何回憶。無論是多麼孤單、辛苦時光，這裏始終是認識那個男子的城市，自己絕不會恨它。某個秋日週未的上午，被豔陽輝映得亮白的山城郭前。— p.215\n\n不發一語的建靠著她的額頭，自驚自地陷入沉思。經過片刻，借不自禁的情緒，引領著他親吩眼前不敢大聲呼吸的她的頭頂、額頭.….由上至下的暖和氣息，重新找上了她的雙唇。不過，這次並沒有就此離開。一個甚至能感受嘴唇內側的溫潤觸感，緩慢卻溫柔的吻。終於，真率紅唇微張，他環抱她的雙頰，長驅直入她的口中。她心臟瘋也似跳動，扶著樓梯的手也無意識地開始用力。一股溫熱的觸感，從輕托自己下巴的建的手湧現。\n這是愛嗎？\n真率的心悄悄問著。第二次的吻，是你的愛嗎？如果不是.….難道只是如結界般存在的夜故宮，釀造而成的剎那嗎？\n建緩緩停下親吻，抬起頭。置身連月光也無從感知的漆黑之中，真率噙著疑惑的目光，仰望著他。既清楚現在不是詢問他心時機，卻又驅逐不了漫溢心底的可悲疑問。建神色凝重地俯視她：\n「..還記得我之前說過話嗎？我啊，如果有了自己愛的人…….一定不會錯過對方，只會使盡全力握緊她的手，牢牢抱在懷裏。對自己的女人，我一定會這麼做。」\n真率似懂非懂地點點頭，「我不是個心存非分之想的傢伙.…今天，我觸摸了妳一整天，在仁寺洞茶館搭妳的肩，在這裹擁抱妳..我的手，總是不由自主朝妳而去。」\n建低聲嘆了一口氣，稍微拉開與真率的距離後，用手指撥撥自己的頭髮。\n「雖然我不知道愛是什麼...如果這不是愛，那是什麼？」— p.229-230` },
-    { title: '《五十人：得到與失去，始終會成為一種平衡》鄭世朗', desc: '[李煥毅] [文宇南] [韓圭翼] 摘錄金句集', content: `[李煥毅]\n煥毅從來沒有如此害怕過，如今他卻感到害怕了，他怕自己是和如此難以理解的人結婚的事實，要是有發明出某種特殊的攝影器材可以拍出尹娜複雜的內心世界，煥毅應該會埋首學習如何操作那台機器，只要能讓他一目瞭然地看穿尹娜內心哪裡受傷,哪裡被摧毀就好……煥毅想著想著，在沙發上睡著了，他睡得很淺，感覺床頭邊隨時會開出邪惡的花朵。\n凌晨醒來時，他發現尹娜傳了簡訊給他。\n煥毅看完簡訊以後準備重新入睡，他下意識地擺動著手指，只為了撫摸尹娜的髮絲。\n看來他的手指忘記了尹娜不在身旁的事實，而任意擺動著。\n最後，他摸到了 X光婚紗照的相框邊角。\n\n[文宇南]\n善美把宇南拉起身，雙腳踩在宇南的腳背上。這已經不是第一次了。宇南覺得善美剛洗完澡還有些濕氣、輕巧、白皙的那雙腳簡直完美無瑕，雖然當初也不是特別因為腳而結婚，但是能夠每天看見對方美麗的部分依然是很偷快的事情。善美踩著宇南的腳背，兩人開始在音樂中漫舞。\n兩名早已熟透的中年人士各自回想著兒時踩在父親腳背上共舞的畫面，並試著去想像對方的童年，有點感傷也有點懷念，所以他們一直跳到善美的腳徹底乾爽沒有濕氣為止。\n宇南親吻了善美的眼角，由於低頭低得太用力，導致耳朵有點拉扯到的感覺。宇南心想，就算哪天善美的雙眼皮變成了五摺或六摺，應該也會美麗依舊。\n\n[韓圭翼]\n今天的豆漿冷麵味道還會和平常一樣嗎？圭翼小心翼翼地嚐了一口，當內心被人用亂刀砍過導致傷痕累累，就連查看狀態都於心不忍時，就必須依賴單純的感覺系統來對自己進行診斷，而現在這碗豆漿冷麵就是圭翼的診斷用藥，他細細咀嚼麵條，然後捧起碗來喝下香醇濃郁的冰涼豆漿。\n嗯，是一樣的味道，這樣就表示自己沒事。` },
+    { title: '《五十人：得到與失去，始終會成為一種平衡》鄭世朗', desc: '[李煥毅] [文宇南] [韓圭翼] 摘錄金句集', content: `[李煥毅]\n煥毅從來沒有如此害怕過，如今他卻感到害怕了，他怕自己是和如此難以理解的人結婚的事實，要是有發明出某種特殊的攝影器材可以拍出尹娜複雜的內心世界，煥毅應該會埋首學習如何操作那台機器，只要能讓他一目瞭然地看穿尹娜內心哪裡受傷、哪裡被摧毀就好……煥毅想著想著，在沙發上睡著了，他睡得很淺，感覺床頭邊隨時會開出邪惡的花朵。\n凌晨醒來時，他發現尹娜傳了簡訊給他。\n煥毅看完簡訊以後準備重新入睡，他下意識地擺動著手指，只為了撫摸尹娜的髮絲。\n看來他的手指忘記了尹娜不在身旁的事實，而任意擺動著。\n最後，他摸到了 X光婚紗照的相框邊角。\n\n[文宇南]\n善美把宇南拉起身，雙腳踩在宇南的腳背上。這已經不是第一次了。宇南覺得善美剛洗完澡還有些濕氣、輕巧、白皙的那雙腳簡直完美無瑕，雖然當初也不是特別因為腳而結婚，但是能夠每天看見對方美麗的部分依然是很偷快的事情。善美踩著宇南的腳背，兩人開始在音樂中漫舞。\n兩名早已熟透的中年人士各自回想著兒時踩在父親腳背上共舞的畫面，並試著去想像對方的童年，有點感傷也有點懷念，所以他們一直跳到善美的腳徹底乾爽沒有濕氣為止。\n宇南親吻了善美的眼角，由於低頭低得太用力，導致耳朵有點拉扯到的感覺。宇南心想，就算哪天善美的雙眼皮變成了五摺或六摺，應該也會美麗依舊。\n\n[韓圭翼]\n今天的豆漿冷麵味道還會和平常一樣嗎？圭翼小心翼翼地嚐了一口，當內心被人用亂刀砍過導致傷痕累累，就連查看狀態都於心不忍時，就必須依賴單純的感覺系統來對自己進行診斷，而現在這碗豆漿冷麵就是圭翼的診斷用藥，他細細咀嚼麵條，然後捧起碗來喝下香醇濃郁的冰涼豆漿。\n嗯，是一樣的味道，這樣就表示自己沒事。` },
     { title: 'UP Solo 舞台與 16bit 排舞事項', desc: '開場走位與麥克風音量確認 16bit 碎步點位校正', content: '開場走位與麥克風音量確認\n第二段副歌延伸舞台 16bit 碎步點位校正\n結尾 Pose 聚光燈鎖定' },
     { title: '宿舍採購清單', desc: '波妞飼料 零食肉乾 燕麥奶 卸妝棉', content: '波妞飼料\n零食肉乾\n燕麥奶\n卸妝棉\n維他命C' },
     { title: '跟冬約好吃飯', desc: '排舞結束後出發 去吃麻辣鍋 記得先吃胃藥', content: '排舞結束後出發 去吃麻辣鍋 記得先吃胃藥' }
@@ -2663,7 +2654,7 @@
       passEmergency: "緊急情況",
       passCancel: "取消",
       passDelete: "刪除",
-      calDay: "星期五",
+      calDay: "星期四",
       calEvent: "solo彩排",
       nameNotes: "備忘錄",
       namePhotos: "照片",
@@ -2723,7 +2714,7 @@
       passEmergency: "Emergency",
       passCancel: "Cancel",
       passDelete: "Delete",
-      calDay: "Friday",
+      calDay: "Thursday",
       calEvent: "Solo Rehearsal",
       nameNotes: "Notes",
       namePhotos: "Photos",
@@ -2983,10 +2974,25 @@
     document.getElementById('cam-txt-flash').textContent = t.camFlash;
     document.getElementById('cam-txt-live').textContent = t.camLive;
 
+    if (currentLanguage === 'en') {
+      document.getElementById('cam-mode-cinematic').textContent = 'CINEMATIC';
+      document.getElementById('cam-mode-video').textContent = 'VIDEO';
+      document.getElementById('cam-mode-photo').textContent = 'PHOTO';
+      document.getElementById('cam-mode-portrait').textContent = 'PORTRAIT';
+      document.getElementById('cal-month-title').textContent = 'April 2027';
+      document.getElementById('txt-cal-bday-time').textContent = 'April 11 • All Day';
+    } else {
+      document.getElementById('cam-mode-cinematic').textContent = '電影級';
+      document.getElementById('cam-mode-video').textContent = '錄影';
+      document.getElementById('cam-mode-photo').textContent = '拍照';
+      document.getElementById('cam-mode-portrait').textContent = '人像';
+      document.getElementById('cal-month-title').textContent = '2027年 4月';
+      document.getElementById('txt-cal-bday-time').textContent = '4月11日 全天';
+    }
+
     renderKeyboard();
     renderNotesList();
     renderAlbums();
-    renderCalendar();
     updateClock();
     closeLangModal();
   }
@@ -3479,7 +3485,7 @@
   let callSecondCounter = null;
   let callDialogueTimer = null;
 
-  // 來電頻率大幅拉長，每位成員輪流撥來一次
+  // 來電頻率延長
   let callerIndex = 0;
   setTimeout(() => {
     playAlertSound();
@@ -3509,7 +3515,7 @@
     playAlertSound();
     currentCallerName = name;
     document.getElementById('incoming-caller-title').textContent = (currentLanguage === 'en') ? name : ((name === 'Winter') ? '金旼炡' : ((name === 'Giselle') ? '內永枝利' : ((name === 'Ningning') ? '寧藝卓' : name)));
-    document.getElementById('incoming-caller-avatar-img').src = avatar;
+    document.getElementById('incoming-call-avatar-img').src = avatar;
     document.getElementById('accept-call-btn').style.display = 'none';
     dialogueBox.style.display = 'flex';
     dialogueBox.innerHTML = '';
