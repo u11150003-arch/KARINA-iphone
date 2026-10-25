@@ -1829,7 +1829,7 @@
     </div>
   </div>
 
-  <!-- 頂部彈出式橫幅通知 -->
+  <!-- 頂部下拉橫幅通知 -->
   <div id="top-notification-banner" onclick="openBannerChat()">
     <div class="top-banner-left">
       <div class="top-banner-avatar">
@@ -1941,17 +1941,7 @@
   <!-- 3. 主畫面 (Home) -->
   <div id="home" class="scr">
     <div class="widgets-row">
-      <div class="ios-widget cal-widget" data-target="calendar">
-        <div>
-          <div class="day-name" id="txt-widget-cal-day">星期五</div>
-          <div class="day-num">23</div>
-        </div>
-        <div class="events">
-          <div style="font-weight:700;">10:00 AM</div>
-          <div id="txt-widget-cal-event">solo彩排</div>
-        </div>
-      </div>
-      <div class="ios-widget music-widget" data-target="playlist">
+      <div class="ios-widget music-widget" data-target="playlist" style="grid-column: span 2;">
         <div class="m-top">
           <span style="font-size:11px; font-weight:700;">PLAYLIST</span>
           <div class="play-pill">▶</div>
@@ -1963,10 +1953,10 @@
       </div>
     </div>
 
-    <!-- 桌面 Apps -->
+    <!-- 桌面 Apps (Library 替換原日曆位置) -->
     <div class="grid">
-      <!-- KARINA Library (低飽和藍色書本圖示，點擊直接打開 Notion 網頁) -->
-      <div class="icon" onclick="openLibrary()">
+      <!-- KARINA Library (飽和度低藍色書籍圖示，點擊直接跳轉 Notion 網頁) -->
+      <div class="icon" onclick="window.open('https://typical-silverfish-34e.notion.site/KARINA-Library-3f88ad958c938009a32ccf6cb0786079', '_blank')">
         <div class="img" style="background:#4a7298;">
           <svg viewBox="0 0 100 100">
             <rect x="22" y="28" width="56" height="44" rx="4" fill="#d0dce5"/>
@@ -2117,30 +2107,6 @@
     ></iframe>
   </div>
 
-  <!-- 6. 日曆 App -->
-  <div id="app-calendar" class="app-screen">
-    <div class="cal-app-header">
-      <span class="cal-app-month" id="cal-month-title">2027年 4月</span>
-      <span style="font-size:18px; color:#ff3b30; cursor:pointer;">+</span>
-    </div>
-    <div class="cal-days-grid" id="cal-grid-labels">
-      <div class="cal-day-label">日</div><div class="cal-day-label">一</div><div class="cal-day-label">二</div><div class="cal-day-label">三</div><div class="cal-day-label">四</div><div class="cal-day-label">五</div><div class="cal-day-label">六</div>
-      <div class="cal-date-cell" style="opacity:0.3;">28</div><div class="cal-date-cell" style="opacity:0.3;">29</div><div class="cal-date-cell" style="opacity:0.3;">30</div><div class="cal-date-cell" style="opacity:0.3;">31</div>
-      <div class="cal-date-cell">1</div><div class="cal-date-cell">2</div><div class="cal-date-cell">3</div>
-      <div class="cal-date-cell">4</div><div class="cal-date-cell">5</div><div class="cal-date-cell">6</div><div class="cal-date-cell">7</div><div class="cal-date-cell">8</div><div class="cal-date-cell">9</div><div class="cal-date-cell">10</div>
-      <div class="cal-date-cell special">11</div>
-      <div class="cal-date-cell">12</div><div class="cal-date-cell">13</div><div class="cal-date-cell">14</div><div class="cal-date-cell">15</div><div class="cal-date-cell">16</div><div class="cal-date-cell">17</div>
-      <div class="cal-date-cell">18</div><div class="cal-date-cell">19</div><div class="cal-date-cell">20</div><div class="cal-date-cell">21</div><div class="cal-date-cell">22</div><div class="cal-date-cell">23</div><div class="cal-date-cell">24</div>
-      <div class="cal-date-cell">25</div><div class="cal-date-cell">26</div><div class="cal-date-cell">27</div><div class="cal-date-cell">28</div><div class="cal-date-cell">29</div><div class="cal-date-cell">30</div>
-    </div>
-    <div class="cal-events-list">
-      <div class="cal-event-card">
-        <div style="font-size:12px; color:#ff3b30; font-weight:700;" id="txt-cal-bday-time">4月11日 全天</div>
-        <div style="font-size:16px; font-weight:700; margin-top:3px;">🎂 KARINA bday</div>
-      </div>
-    </div>
-  </div>
-
   <!-- 7. X (Twitter) App -->
   <div id="app-x" class="app-screen">
     <div class="x-app-topbar">
@@ -2175,7 +2141,7 @@
           </div>
           <div class="x-action-btn">
             <svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-            <span>38.6K</span>
+            <span>45.2K</span>
           </div>
           <div class="x-action-btn">
             <svg viewBox="0 0 24 24"><path d="M18 20V10"></path><path d="M12 20V4"></path><path d="M6 20v-6"></path></svg>
@@ -2348,7 +2314,7 @@
         </svg>
         <svg class="kt-svg-btn" viewBox="0 0 24 24">
           <circle cx="12" cy="12" r="3"></circle>
-          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06-.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06-.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
         </svg>
       </div>
     </div>
@@ -2375,7 +2341,7 @@
             <span class="kt-user-name" id="kt-row-name-ning">寧</span>
             <span class="kt-user-time">11:20 AM</span>
           </div>
-          <div class="kt-user-preview" id="kt-row-preview-ning">妳昨天在練習室有看到我的 AirPods 嗎</div>
+          <div class="kt-user-preview" id="kt-row-preview-ning">姐姐 有看到我的 AirPods 嗎</div>
         </div>
       </div>
 
@@ -2679,7 +2645,7 @@
       chatNotifDesc: "練完舞要不要一起去吃火鍋 看好一家麻辣鍋了",
       bannerMsg: "練完舞要不要一起去吃火鍋 看好一家麻辣鍋了",
       previewWinter: "練完舞要不要一起去吃火鍋 看好一家麻辣鍋了",
-      previewNing: "妳昨天在練習室有看到我的 AirPods 嗎",
+      previewNing: "姐姐 有看到我的 AirPods 嗎",
       previewGiselle: "昨天逛街看的那件黑色外套真的超燒",
       albumTitle10: "2026年10月",
       albumTitle9: "2026年9月",
@@ -2739,7 +2705,7 @@
       chatNotifDesc: "Hotpot after dance rehearsal? Found a great place",
       bannerMsg: "Hotpot after dance rehearsal? Found a great place",
       previewWinter: "Hotpot after dance rehearsal? Found a great place",
-      previewNing: "Did you see my AirPods in the rehearsal room yesterday?",
+      previewNing: "Sister, did you see my AirPods?",
       previewGiselle: "That black jacket we saw in Shibuya yesterday was so stunning",
       albumTitle10: "October 2026",
       albumTitle9: "September 2026",
@@ -2829,12 +2795,9 @@
     document.getElementById('hint').textContent = t.hint;
     document.getElementById('txt-pass-title').textContent = t.passTitle;
     document.getElementById('txt-pass-emergency').textContent = t.passEmergency;
-    document.getElementById('txt-widget-cal-day').textContent = t.calDay;
-    document.getElementById('txt-widget-cal-event').textContent = t.calEvent;
     document.getElementById('name-notes').textContent = t.nameNotes;
     document.getElementById('name-photos').textContent = t.namePhotos;
     document.getElementById('name-settings').textContent = t.nameSettings;
-    document.getElementById('name-calendar').textContent = t.nameCalendar;
     document.getElementById('txt-x-for-you').textContent = t.xForYou;
     document.getElementById('txt-x-following').textContent = t.xFollowing;
     document.getElementById('txt-notes-header-title').textContent = t.notesTitle;
@@ -2873,9 +2836,6 @@
     document.getElementById('kt-row-name-winter').textContent = t.chatNotifTitle;
     document.getElementById('kt-row-name-giselle').textContent = t.memberGiselle;
     document.getElementById('kt-row-name-ning').textContent = t.memberNing;
-    document.getElementById('kt-row-time-winter').textContent = t.winterTime;
-    document.getElementById('kt-row-time-giselle').textContent = t.giselleTime;
-    document.getElementById('kt-row-preview-winter').textContent = t.previewWinter;
     document.getElementById('kt-row-preview-ning').textContent = t.previewNing;
     document.getElementById('kt-row-preview-giselle').textContent = t.previewGiselle;
     document.getElementById('album-sec-title-10').textContent = t.albumTitle10;
@@ -2883,24 +2843,6 @@
     document.getElementById('album-sec-title-8').textContent = t.albumTitle8;
     document.getElementById('cam-txt-flash').textContent = t.camFlash;
     document.getElementById('cam-txt-live').textContent = t.camLive;
-
-    if (currentLanguage === 'en') {
-      document.getElementById('cam-mode-cinematic').textContent = 'CINEMATIC';
-      document.getElementById('cam-mode-video').textContent = 'VIDEO';
-      document.getElementById('cam-mode-photo').textContent = 'PHOTO';
-      document.getElementById('cam-mode-portrait').textContent = 'PORTRAIT';
-      document.getElementById('cal-month-title').textContent = 'April 2027';
-      document.getElementById('cal-icon-month').textContent = 'APR';
-      document.getElementById('txt-cal-bday-time').textContent = 'April 11 • All Day';
-    } else {
-      document.getElementById('cam-mode-cinematic').textContent = '電影級';
-      document.getElementById('cam-mode-video').textContent = '錄影';
-      document.getElementById('cam-mode-photo').textContent = '拍照';
-      document.getElementById('cam-mode-portrait').textContent = '人像';
-      document.getElementById('cal-month-title').textContent = '2027年 4月';
-      document.getElementById('cal-icon-month').textContent = '4月';
-      document.getElementById('txt-cal-bday-time').textContent = '4月11日 全天';
-    }
 
     renderKeyboard();
     renderNotesList();
@@ -3061,7 +3003,6 @@
   const screens = {
     playlist: document.getElementById('app-playlist'),
     instagram: document.getElementById('app-instagram'),
-    calendar: document.getElementById('app-calendar'),
     x: document.getElementById('app-x'),
     notes: document.getElementById('app-notes'),
     settings: document.getElementById('app-settings'),
@@ -3083,7 +3024,7 @@
       backBtn.style.display = 'flex';
       clockStatusTxt.style.display = 'none';
 
-      if (appKey === 'calendar' || appKey === 'photos') {
+      if (appKey === 'photos') {
         phoneStatusBar.classList.add('black-theme');
       } else {
         phoneStatusBar.classList.remove('black-theme');
@@ -3101,11 +3042,6 @@
       else openApp(target);
     });
   });
-
-  // Library App 直接在瀏覽器新分頁完美開啟 Notion 網頁
-  function openLibrary() {
-    window.open('https://typical-silverfish-34e.notion.site/KARINA-Library-3f88ad958c938009a32ccf6cb0786079', '_blank');
-  }
 
   function goHome() {
     Object.values(screens).forEach(s => s.classList.remove('active'));
@@ -3134,8 +3070,8 @@
     const deltaY = Math.abs(e.changedTouches[0].clientY - touchStartY);
     if (document.getElementById('photo-viewer-page').style.display !== 'flex') {
       if (deltaX > 85 && deltaY < 35 && touchStartX < 60) {
-        const isAnyAppOpen = Object.values(screens).some(s => s.classList.contains('active'));
-        if (isAnyAppOpen) goHome();
+        const isAnyAnyOpen = Object.values(screens).some(s => s.classList.contains('active'));
+        if (isAnyAnyOpen) goHome();
       }
     }
   }, { passive: true });
@@ -3167,7 +3103,7 @@
       ]
     },
     'Ningning': {
-      initial: '妳昨天在練習室有看到我的 AirPods 嗎 我找一個早上了',
+      initial: '姐姐 有看到我的 AirPods 嗎 我找一個早上了',
       flow: [
         { me: '是不是掉在休息室沙發夾縫 每次都塞在那', reply: '啊 我昨天好像真的躺在沙發上' },
         { me: '剛剛幫妳翻了一下 真的在抱枕下面', reply: '嗚哇救星 出門前幫我放桌上' },
@@ -3193,7 +3129,7 @@
       ]
     },
     'Ningning': {
-      initial: 'Did you see my AirPods in the rehearsal room yesterday? Been looking all morning',
+      initial: 'Sister, did you see my AirPods? Been looking all morning',
       flow: [
         { me: 'Did you drop it in the lounge sofa gap again?', reply: 'Ah! I remember lying on that sofa yesterday' },
         { me: 'Just checked for you, it really was under the pillow', reply: 'You\'re a lifesaver! Leave it on the desk before heading out' },
@@ -3280,54 +3216,113 @@
     }
   }
 
-  // 初始化與渲染
-  renderNotesList();
-  renderAlbums();
+  function renderNotesList() {
+    const listContainer = document.getElementById('notes-container');
+    if (!listContainer) return;
+    listContainer.innerHTML = '';
+    const data = currentLanguage === 'en' ? notesDataEn : notesDataZh;
 
-  // 電話通話腳本與邏輯 (謝謝姐姐)[span_1](start_span)[span_1](end_span)
+    data.forEach(item => {
+      const div = document.createElement('div');
+      div.className = 'note-item';
+      div.onclick = () => {
+        if (item.isGuide) openSystemGuide();
+        else viewNoteDetail(item.title, item.content);
+      };
+      div.innerHTML = `
+        <div class="note-item-title">${item.title}</div>
+        <div class="note-item-desc">${item.desc}</div>
+      `;
+      listContainer.appendChild(div);
+    });
+  }
+
+  function openSystemGuide() {
+    document.getElementById('detail-title-txt').textContent = (currentLanguage === 'en') ? '⚠️ System Guide' : '⚠️ 系統操作指引';
+    const contactText = (currentLanguage === 'en') ? 'If issues occur, contact' : '若介面操作不順，請聯繫';
+    document.getElementById('detail-content-txt').innerHTML = `${contactText} <a class="threads-link" href="https://www.threads.com/@kelly_lee_805" target="_blank" rel="noopener noreferrer">@kelly_lee_805</a>\n\n` +
+      `KARINA iphone : <a class="threads-link" href="https://karina-iphone.netlify.app" target="_blank" rel="noopener noreferrer">https://karina-iphone.netlify.app</a>\n\n` +
+      `KARINA PLAYLIST : <a class="threads-link" href="https://karinaplaylist.netlify.app" target="_blank" rel="noopener noreferrer">https://karinaplaylist.netlify.app</a>`;
+    document.getElementById('note-detail-view').style.display = 'flex';
+  }
+
+  function viewNoteDetail(title, content) {
+    document.getElementById('detail-title-txt').textContent = title;
+    document.getElementById('detail-content-txt').textContent = content;
+    document.getElementById('note-detail-view').style.display = 'flex';
+  }
+
+  function closeNoteDetail() {
+    document.getElementById('note-detail-view').style.display = 'none';
+  }
+
+  function openNoteEditor() {
+    document.getElementById('notes-modal').style.display = 'flex';
+  }
+  function closeNoteEditor() {
+    document.getElementById('notes-modal').style.display = 'none';
+    document.getElementById('note-input-title').value = '';
+    document.getElementById('note-input-body').value = '';
+  }
+  function saveNote() {
+    const title = document.getElementById('note-input-title').value.trim() || 'New Note';
+    const body = document.getElementById('note-input-body').value.trim() || '';
+    const container = document.getElementById('notes-container');
+    const newNote = document.createElement('div');
+    newNote.className = 'note-item';
+    newNote.onclick = () => viewNoteDetail(title, body);
+    newNote.innerHTML = `
+      <div class="note-item-title">${title}</div>
+      <div class="note-item-desc">${body}</div>
+    `;
+    container.prepend(newNote);
+    closeNoteEditor();
+  }
+
+  // 電話通話腳本與邏輯 (金旼炡最後一句改為「知道了 等等練完舞我就回去餵波妞」，泡泡人名改為「劉知珉」)
   const phoneCallScriptsZh = {
     'Winter': [
       { sender: '旼冬', text: '在幹嘛' },
-      { sender: 'Karina', text: '剛練完舞 妳呢' },
+      { sender: '劉知珉', text: '剛練完舞 妳呢' },
       { sender: '旼冬', text: '波妞昨晚太興奮一直暴衝 我整夜顧牠都沒睡' },
-      { sender: 'Karina', text: '辛苦了 今天換我當保姆 妳好好補眠' },
+      { sender: '劉知珉', text: '辛苦了 今天換我當保姆 妳好好補眠' },
       { sender: '旼冬', text: '謝謝姐姐 肉乾我放在客廳電視櫃上' },
-      { sender: 'Karina', text: '收到 等等練完舞我就回去餵牠' }
+      { sender: '劉知珉', text: '知道了 等等練完舞我就回去餵波妞' }
     ],
     'Giselle': [
       { sender: '欸哩', text: '知珉 妳上次說想吃涉谷那家可麗餅 我們休假要不要去' },
-      { sender: 'Karina', text: '好啊 那天順便去逛街買衣服' },
+      { sender: '劉知珉', text: '好啊 那天順便去逛街買衣服' },
       { sender: '欸哩', text: '沒問題 到時候涉谷站見' },
-      { sender: 'Karina', text: '好 休假見' }
+      { sender: '劉知珉', text: '好 休假見' }
     ],
     'Ningning': [
       { sender: '寧', text: '喂 有看到我的耳機嗎' },
-      { sender: 'Karina', text: '在休息室沙發夾縫 幫妳放化妝台了' },
+      { sender: '劉知珉', text: '在休息室沙發夾縫 幫妳放化妝台了' },
       { sender: '寧', text: '太感謝了 找了一整個早上' },
-      { sender: 'Karina', text: '下次別亂塞 練習室見' }
+      { sender: '劉知珉', text: '下次別亂塞 練習室見' }
     ]
   };
 
   const phoneCallScriptsEn = {
     'Winter': [
       { sender: 'Winter', text: 'What are you doing?' },
-      { sender: 'Karina', text: 'Just finished dance rehearsal, you?' },
+      { sender: 'Liu Jimin', text: 'Just finished dance rehearsal, you?' },
       { sender: 'Winter', text: 'Pponyo was so hyper last night, I stayed up all night watching him' },
-      { sender: 'Karina', text: 'You worked hard. My turn to babysit today, get some rest' },
+      { sender: 'Liu Jimin', text: 'You worked hard. My turn to babysit today, get some rest' },
       { sender: 'Winter', text: 'Thanks sister! Jerky treats are on the TV stand' },
-      { sender: 'Karina', text: 'Got it, heading back to feed him after rehearsal' }
+      { sender: 'Liu Jimin', text: 'Got it, heading back to feed Pponyo after rehearsal' }
     ],
     'Giselle': [
       { sender: 'Giselle', text: 'Karina, want to get those Shibuya crepes next break?' },
-      { sender: 'Karina', text: 'Sure! Let\'s go shopping for jackets too' },
+      { sender: 'Liu Jimin', text: 'Sure! Let\'s go shopping for jackets too' },
       { sender: 'Giselle', text: 'Great, meet at Shibuya station then' },
-      { sender: 'Karina', text: 'See you on our break' }
+      { sender: 'Liu Jimin', text: 'See you on our break' }
     ],
     'Ningning': [
       { sender: 'Ningning', text: 'Hey, did you find my earbuds?' },
-      { sender: 'Karina', text: 'Found it in the lounge sofa cushion, left it on your vanity' },
+      { sender: 'Liu Jimin', text: 'Found it in the lounge sofa cushion, left it on your vanity' },
       { sender: 'Ningning', text: 'Thank you so much! Was searching all morning' },
-      { sender: 'Karina', text: 'Don\'t misplace it again. See you at practice' }
+      { sender: 'Liu Jimin', text: 'Don\'t misplace it again. See you at practice' }
     ]
   };
 
@@ -3369,7 +3364,7 @@
     playAlertSound();
     currentCallerName = name;
     document.getElementById('incoming-caller-title').textContent = (currentLanguage === 'en') ? name : ((name === 'Winter') ? '金旼炡' : ((name === 'Giselle') ? '內永枝利' : ((name === 'Ningning') ? '寧藝卓' : name)));
-    document.getElementById('incoming-call-avatar-img').src = avatar;
+    document.getElementById('incoming-caller-avatar-img').src = avatar;
     document.getElementById('accept-call-btn').style.display = 'none';
     dialogueBox.style.display = 'flex';
     dialogueBox.innerHTML = '';
@@ -3393,7 +3388,7 @@
       if (diagIdx < script.length) {
         const item = script[diagIdx];
         const bubble = document.createElement('div');
-        bubble.className = `call-speech-bubble ${item.sender === 'Karina' ? 'me' : 'them'}`;
+        bubble.className = `call-speech-bubble ${item.sender === 'Liu Jimin' || item.sender === '劉知珉' ? 'me' : 'them'}`;
         bubble.innerHTML = `<b>${item.sender}:</b> ${item.text}`;
         dialogueBox.appendChild(bubble);
         dialogueBox.scrollTop = dialogueBox.scrollHeight;
@@ -3426,7 +3421,7 @@
       if (diagIdx < script.length) {
         const item = script[diagIdx];
         const bubble = document.createElement('div');
-        bubble.className = `call-speech-bubble ${item.sender === 'Karina' ? 'me' : 'them'}`;
+        bubble.className = `call-speech-bubble ${item.sender === 'Liu Jimin' || item.sender === '劉知珉' ? 'me' : 'them'}`;
         bubble.innerHTML = `<b>${item.sender}:</b> ${item.text}`;
         dialogueBox.appendChild(bubble);
         dialogueBox.scrollTop = dialogueBox.scrollHeight;
@@ -3441,6 +3436,39 @@
     clearInterval(callSecondCounter);
     clearInterval(callDialogueTimer);
     callScreen.style.display = 'none';
+  }
+
+  function renderAlbums() {
+    ['10', '9', '8'].forEach(month => {
+      const grid = document.getElementById(`album-grid-${month}`);
+      if (!grid) return;
+      grid.innerHTML = '';
+      albumData[month].forEach(url => {
+        const cell = document.createElement('div');
+        cell.className = 'album-cell';
+        cell.onclick = () => {
+          const index = allPhotos.findIndex(p => p.url === url);
+          openPhotoViewer(index);
+        };
+        cell.innerHTML = `<img src="${url}" alt="photo">`;
+        grid.appendChild(cell);
+      });
+    });
+
+    const filmstrip = document.getElementById('viewer-filmstrip-bar');
+    if (!filmstrip) return;
+    filmstrip.innerHTML = '';
+    allPhotos.forEach((item, idx) => {
+      const thumb = document.createElement('div');
+      thumb.className = 'filmstrip-thumb';
+      thumb.id = `filmstrip-${idx}`;
+      thumb.onclick = () => {
+        currentPhotoIndex = idx;
+        updateViewerPhoto();
+      };
+      thumb.innerHTML = `<img src="${item.url}" alt="thumb">`;
+      filmstrip.appendChild(thumb);
+    });
   }
 
   function openPhotoViewer(idx) {
@@ -3542,6 +3570,9 @@
     document.getElementById('dynamic-island').classList.toggle('expand');
   });
 
+  // 初始化與渲染
+  renderNotesList();
+  renderAlbums();
   updateLanguageTexts();
 </script>
 
